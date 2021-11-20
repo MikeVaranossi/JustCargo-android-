@@ -1,0 +1,2 @@
+rootProject.name = "JustCargo"
+include ':app'
