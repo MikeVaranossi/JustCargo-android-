@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_user_photo_profile">64dp</dimen>
+    <dimen name="margin_top_profile">32dp</dimen>
+    <dimen name="margin_top_left">24dp</dimen>
+    <dimen name="corner_radius_edittext">10dp</dimen>
+    <dimen name="margin_top_into_profile">16dp</dimen>
+    <dimen name="drawable_tv_padding">16dp</dimen>
+</resources>
