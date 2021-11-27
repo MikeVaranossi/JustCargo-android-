@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.App
 import com.uzlov.valitova.justcargo.app.lastToPower
 import com.uzlov.valitova.justcargo.di.modules.LocalModule
+import com.uzlov.valitova.justcargo.ui.activity.RegistrationActivity
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
@@ -30,6 +32,11 @@ class HostActivity : AppCompatActivity() {
         bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main_action-> {
+
+                    val intent = Intent(this, RegistrationActivity::class.java)
+// To pass any data to next activity
+// start your next activity
+                    startActivity(intent)
                     true
                 }
                 R.id.search_action-> {

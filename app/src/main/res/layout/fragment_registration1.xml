@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Registration1Fragment">
+
+
+    <TextView
+        android:id="@+id/text_view_fio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:text="ФИО"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_fio"
+        style="@style/MyOutlinedBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_view_fio"
+        android:hint="Иванов Иван Иванович"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_fio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_view_activity_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Выберите профиль"
+        app:layout_constraintTop_toBottomOf="@id/textfield_fio"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_activity_profile"
+        style="@style/MyExposedDropdownMenuStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Профиль деятельности"
+        app:layout_constraintTop_toBottomOf="@id/text_view_activity_profile"
+        app:endIconMode="dropdown_menu"
+       >
+
+        <AutoCompleteTextView
+            android:id="@+id/productCategoryDropdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:paddingEnd="10dp"
+            android:paddingRight="10dp"
+            android:textCursorDrawable="@null" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_view_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Телефон"
+        app:layout_constraintTop_toBottomOf="@id/textfield_activity_profile"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_phone"
+        style="@style/MyOutlinedBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_view_phone"
+        android:hint="+7"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_view_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="E-mail"
+        app:layout_constraintTop_toBottomOf="@id/textfield_phone"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_email"
+        style="@style/MyOutlinedBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/text_view_email"
+        android:hint="E-mail"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/text_view_driver_doc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Водительское удостоверение №"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/textfield_email"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_driver_doc"
+        style="@style/MyOutlinedBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/text_view_driver_doc"
+        android:hint="№"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_driver_doc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности"
+        app:layout_constraintBottom_toTopOf="@id/btn_send_sms"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_sms"
+        style="@style/MyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выслать SMS с кодом"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="10dp"
+       />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
