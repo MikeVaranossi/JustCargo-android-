@@ -7,4 +7,6 @@
     <string name="continue_subscribtion">Продлить подписку</string>
     <string name="my_deliveries">Мои доставки</string>
     <string name="self_data">Личные данные</string>
+    <string name="self_data_personal">Личные данные</string>
+    <string name="my_profile">Мой профиль</string>
 </resources>
