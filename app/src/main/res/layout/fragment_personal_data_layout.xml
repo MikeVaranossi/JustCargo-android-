@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.HostActivity">
+
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/ic_account_big"
+        android:layout_marginTop="@dimen/margin_top_profile"
+        android:layout_marginStart="@dimen/margin_top_left"
+        android:layout_width="@dimen/size_user_photo_profile"
+        android:layout_height="@dimen/size_user_photo_profile"/>
+
+    <TextView
+        android:id="@+id/tvProfileFullName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintTop_toTopOf="@id/ivProfile"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+        app:layout_constraintLeft_toRightOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="@tools:sample/full_names"/>
+
+    <TextView
+        android:id="@+id/tvLabelPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone"
+        android:textColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_profile"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/dark_primary_color"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelPhone"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvLabelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/e_mail"
+        android:textColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@id/tiLayout" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLayoutEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        app:boxStrokeColor="@color/dark_primary_color"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelEmail"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmailProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tvLabelDriverDocument"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/driver_document_number"
+        android:textColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLayoutDriverDocument"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        app:boxStrokeColor="@color/dark_primary_color"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelDriverDocument"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDriverDocProfile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
