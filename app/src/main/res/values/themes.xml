@@ -13,4 +13,18 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="SubheaderText" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/dark_primary_color</item>
+        <item name="android:textSize">@dimen/text_subheader</item>
+    </style>
+
+    <style name="MyStyleButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/background_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="cornerRadius">@dimen/m_margin</item>
+        <item name="android:layout_marginStart">@dimen/l_margin</item>
+        <item name="android:layout_marginEnd">@dimen/l_margin</item>
+        <item name="android:layout_marginBottom">@dimen/m_margin</item>
+    </style>
 </resources>
