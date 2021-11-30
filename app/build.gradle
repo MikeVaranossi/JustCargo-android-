@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -70,6 +71,7 @@ dependencies {
 
     // di
     implementation 'com.google.dagger:dagger:2.24'
+    implementation 'com.google.firebase:firebase-database:20.0.2'
     kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // room

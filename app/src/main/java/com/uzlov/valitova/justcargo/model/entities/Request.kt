@@ -5,7 +5,10 @@ import java.time.OffsetTime
 data class Request(
     var id: Long?,
     var requestTime: OffsetTime?,
-    var deliverTime: OffsetTime?,
+    var deliveryTime: OffsetTime?,
+    var cost: Int?,
+    var departure: String?,
+    var destination: String?,
     var shortInfo: String?,
     var description: String?,
     var packagesNumber: Int?,
