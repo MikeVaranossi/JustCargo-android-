@@ -4,4 +4,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
     <string name="button_add_cargo_text">Добавить груз</string>
+    <string name="text_add_name_cargo">Введите название груза</string>
+    <string name="hint_name_cargo">ТНП</string>
+    <string name="text_address_from">Адрес, откуда следует забрать груз</string>
+    <string name="hint_address_from">Москва, Ленинский пр-т, д. 5</string>
+    <string name="text_address_to">Адрес, куда следует доставить груз</string>
+    <string name="hint_address_to">Ставрополь, ул. Советская, д. 1</string>
+    <string name="text_button_next_step">Следующий шаг</string>
 </resources>
