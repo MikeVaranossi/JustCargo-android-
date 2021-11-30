@@ -24,4 +24,7 @@
     <string name="hint_height">1,5</string>
     <string name="text_add_comment">+ ДОБАВИТЬ КОММЕНТАРИЙ</string>
     <string name="text_button_create_request">Создать заявку</string>
+    <string name="text_great">Отлично!</string>
+    <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
+    <string name="text_can_edit">Вы можете ее редактировать</string>
 </resources>

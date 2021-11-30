@@ -14,10 +14,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="SubheaderText" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/dark_primary_color</item>
         <item name="android:textSize">@dimen/text_title</item>
     </style>
+
     <style name="StandartText" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/dark_primary_color</item>
         <item name="android:textSize">@dimen/text_standart</item>
@@ -46,8 +48,12 @@
         <item name="android:textSize">@dimen/text_button</item>
         <item name="android:focusedMonthDateColor">@color/dark_primary_color</item>
         <item name="android:weekDayTextAppearance">@style/SubheaderText</item>
+    </style>
 
-
+    <style name="TextHeader">
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/dark_primary_color</item>
     </style>
 
 </resources>
