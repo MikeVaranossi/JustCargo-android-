@@ -39,4 +39,15 @@
         <item name="android:layout_marginStart">@dimen/m_margin</item>
         <item name="android:layout_marginEnd">@dimen/m_margin</item>
     </style>
+
+    <style name="MyStyleCalendar" parent="Widget.MaterialComponents.MaterialCalendar">
+        <item name="android:background">@drawable/backgound_calendar</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:focusedMonthDateColor">@color/dark_primary_color</item>
+        <item name="android:weekDayTextAppearance">@style/SubheaderText</item>
+
+
+    </style>
+
 </resources>
