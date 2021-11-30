@@ -1,6 +1,5 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
-import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeBinding
-import java.util.*
 
 class HomeFragment : Fragment() {
 
@@ -27,7 +25,13 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadImage(R.drawable.image_home_fragment, viewBinding.imageViewMain )
+        loadImage(R.drawable.image_home_fragment, viewBinding.imageViewMain)
+
+        viewBinding.buttonAddCargo.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, OrderStepOneFragment.newInstance())
+                .commit()
+        }
 
     }
 
@@ -45,7 +49,7 @@ class HomeFragment : Fragment() {
             }
     }
 
-    fun loadImage(image: Int, container: ImageView){
+    private fun loadImage(image: Int, container: ImageView) {
         Glide.with(view!!.context)
             .load(image)
             .into(container)
