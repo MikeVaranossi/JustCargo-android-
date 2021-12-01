@@ -2,7 +2,7 @@ package com.uzlov.valitova.justcargo.di.modules
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.uzlov.valitova.justcargo.repo.net.ServerApi
+import com.uzlov.valitova.justcargo.repo.api.ServerApi
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">JustCargo</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="phone">Телефон</string>
+    <string name="e_mail">E-mail</string>
+    <string name="driver_document_number">Водительское удостоверение №</string>
+    <string name="datetime_end_subscription">Срок вашей подписки истекает через 30 дней</string>
+    <string name="continue_subscribtion">Продлить подписку</string>
+    <string name="my_deliveries">Мои доставки</string>
+    <string name="self_data">Личные данные</string>
+    <string name="self_data_personal">Личные данные</string>
+    <string name="my_profile">Мой профиль</string>
+
     <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
     <string name="button_add_cargo_text">Добавить груз</string>
     <string name="text_add_name_cargo">Введите название груза</string>
@@ -27,4 +37,5 @@
     <string name="text_great">Отлично!</string>
     <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
     <string name="text_can_edit">Вы можете ее редактировать</string>
+
 </resources>

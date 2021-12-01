@@ -1,16 +1,12 @@
 package com.uzlov.valitova.justcargo.ui
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.app.App
-import com.uzlov.valitova.justcargo.app.lastToPower
-import com.uzlov.valitova.justcargo.di.modules.LocalModule
-import okhttp3.OkHttpClient
-import javax.inject.Inject
-
+import com.uzlov.valitova.justcargo.ui.fragments.ProfileFragment
 
 class HostActivity : AppCompatActivity() {
 
@@ -21,9 +17,12 @@ class HostActivity : AppCompatActivity() {
         setContentView(R.layout.host_acivity_content)
 
 
+        findViewById<MaterialToolbar>(R.id.rootToolbar).let {
+            setSupportActionBar(it)
+            it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
+            it.setNavigationIconTint(resources.getColor(R.color.white_color))
 
-        val tv = findViewById<TextView>(R.id.textView)
-        val tv2 = findViewById<TextView>(R.id.textView2)
+        }
 
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
@@ -42,12 +41,17 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile_action-> {
+                    setFragment(ProfileFragment.newInstance())
                     true
                 }
                 else -> false
             }
         }
+    }
 
-
+    private fun setFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .commit()
     }
 }
