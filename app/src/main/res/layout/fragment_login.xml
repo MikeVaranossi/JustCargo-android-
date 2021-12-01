@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginFragment">
+
+
+
+    <TextView
+        android:id="@+id/text_view_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Телефон"
+        app:layout_constraintBottom_toTopOf="@id/textfield_phone"
+        />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textfield_phone"
+        style="@style/MyOutlinedBoxStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/xx_margin"
+        app:layout_constraintBottom_toTopOf="@id/textview_agreement"
+        app:hintEnabled="false"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/text_input_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="+7"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <TextView
+        android:id="@+id/textview_agreement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        android:text="Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности"
+        app:layout_constraintBottom_toTopOf="@id/btn_send_sms"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_send_sms"
+        style="@style/MyButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выслать SMS с кодом"
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@+id/textview_not_account"
+        tools:layout_editor_absoluteX="10dp"
+        />
+
+    <TextView
+        android:id="@+id/textview_not_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/xx_margin"
+        style="@style/TextXX"
+        android:text="Нет аккаунта?"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_new_account"
+        style="@style/ButtonTransparentBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Зарегистрироваться"
+        android:layout_marginTop="@dimen/xx_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_not_account"
+        tools:layout_editor_absoluteX="10dp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

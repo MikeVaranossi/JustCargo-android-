@@ -7,9 +7,8 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.uzlov.valitova.justcargo.ui.fragments.Registration1Fragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_registration1">
+        android:name="com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationFragment"
+        tools:layout="@layout/fragment_registration">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +16,8 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.uzlov.valitova.justcargo.ui.fragments.Registration2Fragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_registration2">
+        android:name="com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment"
+        tools:layout="@layout/fragment_registration_sms">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

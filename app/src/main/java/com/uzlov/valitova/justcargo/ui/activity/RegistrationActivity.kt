@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.ActivityRegistrationBinding
-import com.uzlov.valitova.justcargo.ui.fragments.Registration1Fragment
-import com.uzlov.valitova.justcargo.ui.fragments.Registration2Fragment
+import com.uzlov.valitova.justcargo.ui.fragments.registration.LoginFragment
+import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationFragment
+import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment
 
 class RegistrationActivity : AppCompatActivity() {
 
@@ -24,7 +25,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         supportFragmentManager.apply {
             beginTransaction()
-                .replace(R.id.container, Registration1Fragment.newInstance())
+                .replace(R.id.container, WelcomeScreenFragment.newInstance())
                 .addToBackStack("")
                 .commitAllowingStateLoss()
         }

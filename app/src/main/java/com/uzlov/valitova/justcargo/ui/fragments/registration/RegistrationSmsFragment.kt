@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
 import android.text.Editable
@@ -7,23 +7,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.databinding.FragmentRegistration2Binding
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class Registration2Fragment : Fragment() {
+class RegistrationSmsFragment : Fragment() {
 
-    private var viewBinding: FragmentRegistration2Binding? = null
+    private var viewBinding: FragmentRegistrationSmsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewBinding = FragmentRegistration2Binding.inflate(inflater, container, false)
+        viewBinding = FragmentRegistrationSmsBinding.inflate(inflater, container, false)
         return viewBinding!!.root
 
     }
@@ -43,10 +42,10 @@ class Registration2Fragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.length == 4){
-                    val manager = activity?.supportFragmentManager
-                    manager?.apply {
+                    val manager = requireActivity().supportFragmentManager
+                    manager.apply {
                         beginTransaction()
-                            .replace(R.id.container, Registration3Fragment.newInstance())
+                            .replace(R.id.container, RegistrationCompleteFragment.newInstance())
                             .addToBackStack("")
                             .commitAllowingStateLoss()
                     }
@@ -61,6 +60,6 @@ class Registration2Fragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = Registration2Fragment()
+        fun newInstance() = RegistrationSmsFragment()
     }
 }

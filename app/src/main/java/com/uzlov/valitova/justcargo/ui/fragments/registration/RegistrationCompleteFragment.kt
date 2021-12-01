@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,25 +6,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.uzlov.valitova.justcargo.databinding.FragmentRegistration3Binding
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationCompleteBinding
 
-class Registration3Fragment : Fragment() {
+class RegistrationCompleteFragment : Fragment() {
 
-    private var viewBinding: FragmentRegistration3Binding? = null
+    private var viewBinding: FragmentRegistrationCompleteBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewBinding = FragmentRegistration3Binding.inflate(inflater, container, false)
+        viewBinding = FragmentRegistrationCompleteBinding.inflate(inflater, container, false)
         return viewBinding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding?.btnNext?.setOnClickListener() {
+        viewBinding?.btnNext?.setOnClickListener {
             btnNextClicked()
         }
     }
@@ -42,6 +42,6 @@ class Registration3Fragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = Registration3Fragment()
+        fun newInstance() = RegistrationCompleteFragment()
     }
 }

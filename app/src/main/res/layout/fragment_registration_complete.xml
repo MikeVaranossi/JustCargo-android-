@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Registration3Fragment">
+    tools:context=".RegistrationCompleteFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_complete"
@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_next"
-       >
+        >
 
         <TextView
             android:id="@+id/textview_header"

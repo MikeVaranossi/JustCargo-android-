@@ -1,44 +1,40 @@
- package com.uzlov.valitova.justcargo.ui.fragments
+ package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.databinding.FragmentRegistration1Binding
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 
-/**
+
+ /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class Registration1Fragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
-    private var viewBinding: FragmentRegistration1Binding? = null
+    private var viewBinding: FragmentRegistrationBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
-        viewBinding = FragmentRegistration1Binding.inflate(inflater, container, false)
+        viewBinding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return viewBinding!!.root
 
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
-    private fun sendSmsClicked(){
-        val manager = activity?.supportFragmentManager
-        manager?.apply {
+     private fun sendSmsClicked(){
+        val manager = requireActivity().supportFragmentManager
+        manager.apply {
             beginTransaction()
-                .replace(R.id.container, Registration2Fragment.newInstance())
+                .replace(R.id.container, RegistrationSmsFragment.newInstance())
                 .addToBackStack("")
                 .commitAllowingStateLoss()
         }
@@ -49,7 +45,7 @@ class Registration1Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding?.btnSendSms?.setOnClickListener() {
+        viewBinding?.btnSendSms?.setOnClickListener {
             sendSmsClicked()
         }
 
@@ -107,18 +103,12 @@ class Registration1Fragment : Fragment() {
     }
 
     private fun verifyEmptyEditText() {
-        var buttonEnable = true
-        if (viewBinding?.textInputFio?.text.isNullOrEmpty())
-            buttonEnable = false
-        if (viewBinding?.productCategoryDropdown?.text.isNullOrEmpty())
-            buttonEnable = false
-        if (viewBinding?.textInputPhone?.text.isNullOrEmpty())
-            buttonEnable = false
-        if (viewBinding?.textInputEmail?.text.isNullOrEmpty())
-            buttonEnable = false
-        if (viewBinding?.textfieldActivityProfile?.editText?.text.toString()  == "Грузоперевозчик")
-            if (viewBinding?.textInputDriverDoc?.text.isNullOrEmpty())
-                buttonEnable = false
+        val buttonEnable = !(viewBinding?.textInputFio?.text.isNullOrEmpty() ||
+                viewBinding?.productCategoryDropdown?.text.isNullOrEmpty() ||
+                viewBinding?.textInputPhone?.text.isNullOrEmpty() ||
+                viewBinding?.textInputEmail?.text.isNullOrEmpty() ||
+                (viewBinding?.textfieldActivityProfile?.editText?.text.toString()  == "Грузоперевозчик" &&
+                        viewBinding?.textInputDriverDoc?.text.isNullOrEmpty()))
 
         viewBinding?.btnSendSms?.isEnabled = buttonEnable
     }
@@ -129,6 +119,6 @@ class Registration1Fragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = Registration1Fragment()
+        fun newInstance() = RegistrationFragment()
     }
 }
