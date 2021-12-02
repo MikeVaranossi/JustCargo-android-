@@ -11,15 +11,16 @@ import com.uzlov.valitova.justcargo.databinding.FragmentWelcomeScreenBinding
 
 
 class WelcomeScreenFragment : Fragment() {
-    private var viewBinding: FragmentWelcomeScreenBinding? = null
+    private var _viewBinding: FragmentWelcomeScreenBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewBinding = FragmentWelcomeScreenBinding.inflate(inflater, container, false)
-        return viewBinding!!.root
+        _viewBinding = FragmentWelcomeScreenBinding.inflate(inflater, container, false)
+        return viewBinding.root
 
     }
 
@@ -27,38 +28,32 @@ class WelcomeScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val manager = requireActivity().supportFragmentManager
-        viewBinding?.btnLogin?.setOnClickListener {
+        viewBinding.btnLogin.setOnClickListener {
             manager.apply {
                 beginTransaction()
-                    .replace(R.id.container, LoginFragment.newInstance())
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
+                    .replace(R.id.container, LoginFragment())
+                    .commit()
             }
         }
-        viewBinding?.btnRegistration?.setOnClickListener {
+        viewBinding.btnRegistration.setOnClickListener {
             manager.apply {
                 beginTransaction()
-                    .replace(R.id.container, RegistrationFragment.newInstance())
-                    .addToBackStack("")
-                    .commitAllowingStateLoss()
+                    .replace(R.id.container, RegistrationFragment())
+                    .commit()
             }
         }
 
-        viewBinding?.let {
+        viewBinding.let {
             Glide.with(this).load(R.drawable.image_start).into(
                 it.imageview)
-        };
+        }
     }
 
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding = null
-    }
-
-    companion object {
-        fun newInstance() = WelcomeScreenFragment()
+        _viewBinding = null
     }
 
 }

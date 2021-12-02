@@ -12,15 +12,16 @@ import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
 
 class RegistrationSmsFragment : Fragment() {
 
-    private var viewBinding: FragmentRegistrationSmsBinding? = null
+    private var _viewBinding: FragmentRegistrationSmsBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewBinding = FragmentRegistrationSmsBinding.inflate(inflater, container, false)
-        return viewBinding!!.root
+        _viewBinding = FragmentRegistrationSmsBinding.inflate(inflater, container, false)
+        return viewBinding.root
 
     }
 
@@ -31,7 +32,7 @@ class RegistrationSmsFragment : Fragment() {
     }
 
     private fun addTextChangedListener(){
-        viewBinding?.editTextPin?.addTextChangedListener(object : TextWatcher {
+        viewBinding.editTextPin.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable) {}
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -39,9 +40,8 @@ class RegistrationSmsFragment : Fragment() {
                     val manager = requireActivity().supportFragmentManager
                     manager.apply {
                         beginTransaction()
-                            .replace(R.id.container, RegistrationCompleteFragment.newInstance())
-                            .addToBackStack("")
-                            .commitAllowingStateLoss()
+                            .replace(R.id.container, RegistrationCompleteFragment())
+                            .commit()
                     }
                 }
             }
@@ -50,10 +50,6 @@ class RegistrationSmsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding = null
-    }
-
-    companion object {
-        fun newInstance() = RegistrationSmsFragment()
+        _viewBinding = null
     }
 }

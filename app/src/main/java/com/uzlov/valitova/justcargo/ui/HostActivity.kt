@@ -1,11 +1,13 @@
 package com.uzlov.valitova.justcargo.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.ui.activity.RegistrationActivity
 import com.uzlov.valitova.justcargo.ui.fragments.ProfileFragment
 
 class HostActivity : AppCompatActivity() {
@@ -29,6 +31,8 @@ class HostActivity : AppCompatActivity() {
         bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main_action-> {
+                    val intent = Intent(this, RegistrationActivity::class.java)
+                    startActivity(intent)
                     true
                 }
                 R.id.search_action-> {
