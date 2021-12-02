@@ -41,7 +41,6 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile_action-> {
-                    setFragment(ProfileFragment.newInstance())
                     true
                 }
                 else -> false

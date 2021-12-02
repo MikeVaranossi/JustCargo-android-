@@ -16,4 +16,8 @@
     <dimen name="l_margin">30dp</dimen>
     <dimen name="xxl_margin">100dp</dimen>
     <dimen name="icon_button_padding">100dp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="xx_margin">10dp</dimen>
+
 </resources>

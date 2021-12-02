@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Disabled state-->
+    <item android:state_enabled="false"
+        android:color="@color/secondary_color">
+    </item>
+    <!-- pressed -->
+    <item android:state_pressed="true"
+        android:alpha="0.75"
+        android:color="@color/primary_second_color"/>
+    <!-- Default state-->
+    <item
+        android:color="@color/primary_second_color">
+    </item>
+</selector>

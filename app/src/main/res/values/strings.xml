@@ -38,4 +38,12 @@
     <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
     <string name="text_can_edit">Вы можете ее редактировать</string>
 
+    <string name="title_activity_registration">Регистрация</string>
+     <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="Carrier">Грузоперевозчик</string>
+    <string name="Shipper">Грузоотправитель</string>
 </resources>
