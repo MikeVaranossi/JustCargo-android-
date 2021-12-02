@@ -53,49 +53,19 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun addTextChangedListener(){
-        viewBinding?.textInputFio?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                verifyEmptyEditText()
-            }
-        })
-        viewBinding?.textfieldActivityProfile?.editText?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+        viewBinding?.textInputFio?.addTextChangedListener(TextFieldValidation())
+        viewBinding?.textfieldActivityProfile?.editText?.addTextChangedListener(TextFieldValidation())
+        viewBinding?.textInputPhone?.addTextChangedListener(TextFieldValidation())
+        viewBinding?.textInputEmail?.addTextChangedListener(TextFieldValidation())
+        viewBinding?.textInputDriverDoc?.addTextChangedListener(TextFieldValidation())
+    }
 
-                if (viewBinding?.textfieldActivityProfile?.editText?.text.toString() == "Грузоперевозчик"){
-                    viewBinding?.textfieldDriverDoc?.visibility = View.VISIBLE
-                    viewBinding?.textViewDriverDoc?.visibility = View.VISIBLE
-                }else{
-                    viewBinding?.textfieldDriverDoc?.visibility = View.INVISIBLE
-                    viewBinding?.textViewDriverDoc?.visibility = View.INVISIBLE
-                }
-                verifyEmptyEditText()
-            }
-        })
-        viewBinding?.textInputPhone?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                verifyEmptyEditText()
-            }
-        })
-        viewBinding?.textInputEmail?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                verifyEmptyEditText()
-            }
-        })
-        viewBinding?.textInputDriverDoc?.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                verifyEmptyEditText()
-            }
-        })
+    inner class TextFieldValidation() : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            verifyEmptyEditText()
+        }
     }
 
     private fun verifyEmptyEditText() {
@@ -112,9 +82,5 @@ class RegistrationFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
-    }
-
-    companion object {
-        fun newInstance() = RegistrationFragment()
     }
 }

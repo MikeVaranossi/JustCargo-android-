@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
+import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextWatcher
 import androidx.fragment.app.Fragment
@@ -37,9 +38,9 @@ class LoginFragment : Fragment() {
             val manager = requireActivity().supportFragmentManager
             manager.apply {
                 beginTransaction()
-                    .replace(R.id.container, RegistrationFragment.newInstance())
+                    .replace(R.id.container, RegistrationFragment())
                     .addToBackStack("")
-                    .commitAllowingStateLoss()
+                    .commit()
             }
         }
     }
@@ -69,9 +70,5 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         viewBinding = null
-    }
-
-    companion object {
-        fun newInstance() = LoginFragment()
     }
 }

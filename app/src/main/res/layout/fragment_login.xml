@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/l_margin"
         app:layout_constraintBottom_toTopOf="@id/textview_agreement"
+        app:errorEnabled="true"
         app:hintEnabled="false"
         >
 
