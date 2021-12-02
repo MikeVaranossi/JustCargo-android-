@@ -27,7 +27,7 @@
 
         <TextView
             android:id="@+id/textview"
-            style="@style/TextXX"
+            style="@style/StandartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,7 +70,7 @@
 
         <TextView
             android:id="@+id/textview2"
-            style="@style/TextXX"
+            style="@style/StandartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
@@ -99,7 +99,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
-        style="@style/MyButton"
+        style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Продолжить"

@@ -12,8 +12,8 @@
         android:id="@+id/text_view_fio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/xx_margin"
-        android:layout_marginStart="@dimen/xx_margin"
+        android:layout_marginTop="@dimen/l_margin"
+        android:layout_marginStart="@dimen/l_margin"
         android:text="ФИО"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -38,8 +38,8 @@
         android:id="@+id/text_view_activity_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/xx_margin"
-        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
         android:text="Выберите профиль"
         app:layout_constraintTop_toBottomOf="@id/textfield_fio"
         />
@@ -72,8 +72,8 @@
         android:id="@+id/text_view_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/xx_margin"
-        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
         android:text="Телефон"
         app:layout_constraintTop_toBottomOf="@id/textfield_activity_profile"
         />
@@ -99,8 +99,8 @@
         android:id="@+id/text_view_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/xx_margin"
-        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
         android:text="E-mail"
         app:layout_constraintTop_toBottomOf="@id/textfield_phone"
         />
@@ -126,8 +126,8 @@
         android:id="@+id/text_view_driver_doc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/xx_margin"
-        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
         android:text="Водительское удостоверение №"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/textfield_email"/>
@@ -154,14 +154,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/xx_margin"
-        android:layout_marginTop="@dimen/xx_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginTop="@dimen/l_margin"
         android:text="Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности"
         app:layout_constraintBottom_toTopOf="@id/btn_send_sms"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_send_sms"
-        style="@style/MyButton"
+        style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Выслать SMS с кодом"

@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class RegistrationSmsFragment : Fragment() {
 
     private var viewBinding: FragmentRegistrationSmsBinding? = null
@@ -31,9 +28,6 @@ class RegistrationSmsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         addTextChangedListener()
-        /*binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-        }*/
     }
 
     private fun addTextChangedListener(){

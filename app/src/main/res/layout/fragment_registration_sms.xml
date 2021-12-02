@@ -39,7 +39,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_repeat_pin"
-        style="@style/MyButton"
+        style="@style/MyStyleButton"
         android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

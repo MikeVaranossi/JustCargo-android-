@@ -11,7 +11,6 @@ import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragm
 
 class RegistrationActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var viewBinding: ActivityRegistrationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,17 +28,5 @@ class RegistrationActivity : AppCompatActivity() {
                 .addToBackStack("")
                 .commitAllowingStateLoss()
         }
-
-      /*  val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)*/
-
-
     }
-
-    /*override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }*/
 }

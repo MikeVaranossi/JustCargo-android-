@@ -71,6 +71,9 @@ dependencies {
     // di
     implementation 'com.google.dagger:dagger:2.24'
     implementation 'com.google.firebase:firebase-database:20.0.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // room

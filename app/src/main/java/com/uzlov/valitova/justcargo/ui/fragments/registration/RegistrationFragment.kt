@@ -12,10 +12,6 @@ import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 
-
- /**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
 class RegistrationFragment : Fragment() {
 
     private var viewBinding: FragmentRegistrationBinding? = null
