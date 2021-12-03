@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
@@ -37,6 +38,11 @@ import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = getString(R.string.text_registration)
+            it.setDisplayHomeAsUpEnabled(false)
+        }
 
         viewBinding.btnSendSms.setOnClickListener {
             sendSmsClicked()
