@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
 }
 
@@ -54,6 +55,9 @@ dependencies {
 
     // pref
     implementation 'androidx.preference:preference-ktx:1.1.1'
+
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    implementation 'com.google.firebase:firebase-database-ktx'
 
     //location
     implementation 'com.google.android.gms:play-services-location:18.0.0'
