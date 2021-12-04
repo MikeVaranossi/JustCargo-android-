@@ -1,4 +1,4 @@
- package com.uzlov.valitova.justcargo.ui.fragments.registration
+package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
 import android.text.Editable
@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 
- class RegistrationFragment : Fragment() {
+class RegistrationFragment : Fragment() {
 
-     private var _viewBinding: FragmentRegistrationBinding? = null
-     private val viewBinding get() = _viewBinding!!
+    private var _viewBinding: FragmentRegistrationBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,11 +27,11 @@ import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
         return viewBinding.root
     }
 
-     private fun sendSmsClicked(){
+    private fun sendSmsClicked(){
         val manager = requireActivity().supportFragmentManager
         manager.apply {
             beginTransaction()
-                .replace(R.id.container, RegistrationSmsFragment())
+                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString()))
                 .commit()
         }
     }
