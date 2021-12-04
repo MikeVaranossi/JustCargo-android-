@@ -31,8 +31,6 @@ class HostActivity : AppCompatActivity() {
         bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main_action-> {
-                    val intent = Intent(this, RegistrationActivity::class.java)
-                    startActivity(intent)
                     true
                 }
                 R.id.search_action-> {
