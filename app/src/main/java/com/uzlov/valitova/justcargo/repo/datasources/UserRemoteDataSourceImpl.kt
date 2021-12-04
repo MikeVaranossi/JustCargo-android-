@@ -10,7 +10,7 @@ import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.model.entities.User
 
-class UserRemoteDataSourceImpl : UsersRemoteDataSource {
+class UserRemoteDataSourceImpl : IUsersRemoteDataSource {
 
     private val mDatabase by lazy {
         FirebaseDatabase.getInstance()

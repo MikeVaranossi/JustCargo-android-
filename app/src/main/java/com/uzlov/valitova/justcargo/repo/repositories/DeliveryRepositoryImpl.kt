@@ -1,16 +1,12 @@
 package com.uzlov.valitova.justcargo.repo.repositories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.FirebaseDatabase
-import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.model.entities.Delivery
-import com.uzlov.valitova.justcargo.model.entities.Request
-import com.uzlov.valitova.justcargo.repo.datasources.DeliveryRemoteDataSource
+import com.uzlov.valitova.justcargo.repo.datasources.IDeliveryRemoteDataSource
 import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import javax.inject.Inject
 
-class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: DeliveryRemoteDataSource) :
+class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: IDeliveryRemoteDataSource) :
     IDeliveryRepository {
 
     override fun getDelivery(): LiveData<List<Delivery>> = remoteDataSource.getDelivery()
