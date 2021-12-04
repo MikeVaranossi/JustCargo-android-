@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height_card"
+    android:layout_margin="@dimen/m_margin"
+    android:elevation="@dimen/s_margin"
+    app:cardCornerRadius="@dimen/l_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_view_name_cargo"
+            style="@style/SubheaderText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/l_margin"
+            android:layout_marginTop="@dimen/l_margin"
+            app:layout_constraintEnd_toStartOf="@+id/checkbox_favourite"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="СТРОЙМАТЕРИАЛЫ 20Т/82м³" />
+
+        <CheckBox
+            android:id="@+id/checkbox_favourite"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginTop="@dimen/l_margin"
+            android:layout_marginEnd="@dimen/m_margin"
+            android:button="@drawable/sl_favorite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/text_view_name_cargo"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_date"
+            style="@style/SubheaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/l_margin"
+            android:paddingTop="@dimen/s_margin"
+            android:textColor="@color/grey_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_name_cargo"
+            tools:text="24.10.21" />
+
+        <TextView
+            android:id="@+id/text_view_cost"
+            style="@style/SubheaderText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/l_margin"
+            android:paddingTop="@dimen/s_margin"
+            android:textColor="@color/primary_color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_name_cargo"
+            tools:text="35000₽" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_from_to"
+            style="@style/SubheaderText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/l_margin"
+            android:layout_marginTop="@dimen/s_margin"
+            android:layout_marginEnd="@dimen/l_margin"
+            android:background="@drawable/background_text_card_view"
+            android:gravity="center"
+            android:paddingTop="@dimen/xs_padding"
+            android:paddingBottom="@dimen/xs_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_date"
+            tools:text="Москва - Воронеж" />
+
+        <TextView
+            android:id="@+id/text_view_to_details"
+            style="@style/StandartText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/l_margin"
+            android:layout_marginTop="@dimen/s_margin"
+            android:layout_marginBottom="@dimen/s_margin"
+            android:textColor="@color/primary_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_from_to"
+            tools:text="ПОДРОБНЕЕ" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
