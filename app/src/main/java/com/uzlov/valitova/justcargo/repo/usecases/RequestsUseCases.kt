@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RequestsUseCases @Inject constructor(var requestRepository: IRequestsRepository) {
     suspend fun getRequests() = requestRepository.getRequests()
-    suspend fun getRequests(id: Long) = requestRepository.getRequest(id)
-    suspend fun removeRequests(id: Long) = requestRepository.removeRequest(id)
+    suspend fun getRequests(id: String) = requestRepository.getRequest(id)
+    suspend fun removeRequests(id: String) = requestRepository.removeRequest(id)
     suspend fun putRequest(request: Request) = requestRepository.putRequest(request)
 }
