@@ -12,18 +12,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ввести код из sms"
-        app:layout_constraintBottom_toTopOf="@id/edit_text_pin"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/edit_text_pin"
-        android:layout_width="50dp"
+        android:id="@+id/edit_text_code"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textview_time"
-        android:hint="****"
+        android:hint="******"
         android:textAlignment="center"
         />
     <TextView
