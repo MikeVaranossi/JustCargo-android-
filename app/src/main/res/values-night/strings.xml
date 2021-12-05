@@ -15,4 +15,7 @@
     <string name="comments">Комментарии</string>
     <string name="incorrect_phone_number">Некорректный номер телефона</string>
     <string name="where_is_chat">Здесь будет чат с клиентом</string>
+    <string name="template_email">igor@mail.com</string>
+    <string name="template_phone">+7</string>
+    <string name="email_is_incorrect">Неверный Email</string>
 </resources>
