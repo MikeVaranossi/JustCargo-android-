@@ -36,6 +36,7 @@ class MyDeliveriesFragment private constructor(): Fragment() {
             it.setDisplayHomeAsUpEnabled(true)
         }
     }
+
     override fun onDestroyView() {
         _viewBinding = null
         super.onDestroyView()

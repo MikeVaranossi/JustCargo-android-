@@ -7,6 +7,9 @@ import com.uzlov.valitova.justcargo.repo.net.IUserRepository
 import com.uzlov.valitova.justcargo.repo.repositories.DeliveryRepositoryImpl
 import com.uzlov.valitova.justcargo.repo.repositories.RequestRepositoryImpl
 import com.uzlov.valitova.justcargo.repo.repositories.UserRepositoryImpl
+import com.uzlov.valitova.justcargo.repo.usecases.DeliveryUseCases
+import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
+import com.uzlov.valitova.justcargo.repo.usecases.UsersUseCase
 import dagger.Module
 import dagger.Provides
 
@@ -15,23 +18,32 @@ class RepositoriesModule {
 
     // USERS
     @Provides
-    fun provideUserRemoteDataSource() : UsersRemoteDataSource = UserRemoteDataSourceImpl()
+    fun provideUserRemoteDataSource() : IUsersRemoteDataSource = UserRemoteDataSourceImpl()
 
     @Provides
-    fun provideUserRepository(remoteDataSource: UsersRemoteDataSource) : IUserRepository = UserRepositoryImpl(remoteDataSource)
+    fun provideUserRepository(remoteDataSource: IUsersRemoteDataSource) : IUserRepository = UserRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideUserUseCase(userRepository: IUserRepository) : UsersUseCase = UsersUseCase(userRepository)
 
     // DELIVERIES
     @Provides
-    fun provideDeliveriesRemoteDataSource() : DeliveryRemoteDataSource = DeliveryRemoteDataSourceImpl()
+    fun provideDeliveriesRemoteDataSource() : IDeliveryRemoteDataSource = DeliveryRemoteDataSourceImpl()
 
     @Provides
-    fun provideDeliveriesRepository(remoteDataSource: DeliveryRemoteDataSource) : IDeliveryRepository = DeliveryRepositoryImpl(remoteDataSource)
+    fun provideDeliveriesRepository(remoteDataSource: IDeliveryRemoteDataSource) : IDeliveryRepository = DeliveryRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideDeliveryUseCase(deliveryRepository: IDeliveryRepository) : DeliveryUseCases = DeliveryUseCases(deliveryRepository)
 
     // REQUESTS
     @Provides
-    fun provideRequestRemoteDataSource() : RequestsRemoteDataSource = RequestsRemoteDataSourceImpl()
+    fun provideRequestRemoteDataSource() : IRequestsRemoteDataSource = RequestsRemoteDataSourceImpl()
 
     @Provides
-    fun provideRequestRepository(remoteDataSource: RequestsRemoteDataSource) : IRequestsRepository = RequestRepositoryImpl(remoteDataSource)
+    fun provideRequestRepository(remoteDataSource: IRequestsRemoteDataSource) : IRequestsRepository = RequestRepositoryImpl(remoteDataSource)
+
+    @Provides
+    fun provideRequestsUseCase(requestsRepository: IRequestsRepository) : RequestsUseCases = RequestsUseCases(requestsRepository)
 
 }
