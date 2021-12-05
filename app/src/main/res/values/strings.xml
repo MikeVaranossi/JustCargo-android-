@@ -42,4 +42,10 @@
 
     <string name="Carrier">Грузоперевозчик</string>
     <string name="Shipper">Грузоотправитель</string>
+    <string name="cost_delivery">Стоимость перевозки</string>
+    <string name="cargo">Груз</string>
+    <string name="additional_param_cargo">Дополнительные параметры груза</string>
+    <string name="comments">Комментарии</string>
+    <string name="incorrect_phone_number">Некорректный номер телефона</string>
+    <string name="where_is_chat">Здесь будет чат с клиентом</string>
 </resources>
