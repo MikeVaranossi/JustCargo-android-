@@ -1,10 +1,16 @@
 package com.uzlov.valitova.justcargo.viemodels
 
-import androidx.lifecycle.ViewModel
+import com.uzlov.valitova.justcargo.model.entities.Delivery
+import com.uzlov.valitova.justcargo.repo.usecases.DeliveryUseCases
+import javax.inject.Inject
 
-class DeliveryViewModel : ViewModel() {
+class DeliveryViewModel @Inject constructor(private var deliveryUseCases: DeliveryUseCases?)  : BaseViewModel() {
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+    fun getDeliveries() = deliveryUseCases?.getDelivery()
+
+    fun getDelivery(id: String) = deliveryUseCases?.getDelivery(id)
+
+    fun addDelivery(delivery: Delivery) = deliveryUseCases?.putDelivery(delivery)
+
+    fun removeDelivery(id: String) = deliveryUseCases?.removeDelivery(id)
 }
