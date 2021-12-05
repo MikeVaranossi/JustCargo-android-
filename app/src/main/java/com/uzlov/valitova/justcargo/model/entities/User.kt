@@ -1,6 +1,9 @@
 package com.uzlov.valitova.justcargo.model.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class User(
     var id: Long? = 0,
     var login: String? = "",
@@ -12,5 +15,5 @@ data class User(
     var email: String? = "",
     var userType: UserType? = null,
     var userClass: UserClass? = null,
-) {
+) : Parcelable {
 }
