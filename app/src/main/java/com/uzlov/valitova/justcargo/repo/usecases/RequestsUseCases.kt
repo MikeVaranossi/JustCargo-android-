@@ -5,8 +5,8 @@ import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
 import javax.inject.Inject
 
 class RequestsUseCases @Inject constructor(var requestRepository: IRequestsRepository) {
-    suspend fun getRequests() = requestRepository.getRequests()
-    suspend fun getRequests(id: String) = requestRepository.getRequest(id)
-    suspend fun removeRequests(id: String) = requestRepository.removeRequest(id)
-    suspend fun putRequest(request: Request) = requestRepository.putRequest(request)
+    fun getRequests() = requestRepository.getRequests()
+    fun getRequests(id: String) = requestRepository.getRequest(id)
+    fun removeRequests(id: String) = requestRepository.removeRequest(id)
+    fun putRequest(request: Request) = requestRepository.putRequest(request)
 }
