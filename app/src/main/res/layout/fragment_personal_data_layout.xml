@@ -58,8 +58,12 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPhoneProfile"
+            android:inputType="phone"
+            android:drawableEnd="@drawable/ic_baseline_create"
+            app:drawableTint="@color/accent_color"
+            android:hint="@string/template_phone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -89,6 +93,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etEmailProfile"
+            android:inputType="textEmailAddress"
+            android:drawableEnd="@drawable/ic_baseline_create"
+            app:drawableTint="@color/accent_color"
+            android:hint="@string/template_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
@@ -121,6 +129,9 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDriverDocProfile"
+            android:inputType="number"
+            android:drawableEnd="@drawable/ic_baseline_create"
+            app:drawableTint="@color/accent_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>

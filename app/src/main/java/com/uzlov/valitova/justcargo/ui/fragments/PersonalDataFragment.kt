@@ -1,39 +1,28 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentPersonalDataLayoutBinding
 
-class PersonalDataFragment private constructor(): Fragment() {
+class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
+    FragmentPersonalDataLayoutBinding::inflate) {
 
     companion object {
         fun newInstance(): PersonalDataFragment {
             return PersonalDataFragment()
         }
     }
-
-    private var _viewBinding: FragmentPersonalDataLayoutBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentPersonalDataLayoutBinding.inflate(layoutInflater, container, false).also {
-        _viewBinding = it
-    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,10 +31,33 @@ class PersonalDataFragment private constructor(): Fragment() {
             it.title = getString(R.string.self_data_personal)
             it.setDisplayHomeAsUpEnabled(true)
         }
+
+        addListeners()
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
+    private fun addListeners() {
+        with(viewBinding) {
+            etEmailProfile.addTextChangedListener(EmailTextChecker())
+        }
+    }
+
+    inner class EmailTextChecker : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+            if (!TextUtils.isEmpty(viewBinding.etEmailProfile.text) &&
+                Patterns.EMAIL_ADDRESS.matcher(viewBinding.etEmailProfile.text.toString()).matches()
+            ) {
+                viewBinding.etEmailProfile.error = null
+            } else {
+                viewBinding.etEmailProfile.error = getString(R.string.email_is_incorrect)
+            }
+        }
     }
 }

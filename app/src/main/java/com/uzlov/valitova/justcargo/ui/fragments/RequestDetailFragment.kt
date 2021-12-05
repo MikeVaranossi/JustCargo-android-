@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.MY_PERMISSIONS_REQUEST_CALL_PHONE
@@ -23,10 +22,9 @@ import com.uzlov.valitova.justcargo.model.entities.Request
 /*
 * Фрагмент отображает детальную информацию о заявке на перевозку груза.
 * */
-class RequestDetailFragment private constructor() : Fragment() {
+class RequestDetailFragment :
+    BaseFragment<FragmentDetailLayoutBinding>(FragmentDetailLayoutBinding::inflate) {
 
-    private var _viewBinding: FragmentDetailLayoutBinding? = null
-    private val viewBinding get() = _viewBinding!!
     private var request: Request? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,23 +33,13 @@ class RequestDetailFragment private constructor() : Fragment() {
         if (savedInstanceState != null && savedInstanceState.isEmpty) {
             request = savedInstanceState.getParcelable(Constant.KEY_DELIVERY_OBJECT)
         }
-
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ) = FragmentDetailLayoutBinding.inflate(layoutInflater, container, false).also {
-        _viewBinding = it
-    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initListeners()
         updateUI(request)
-
     }
 
     private fun updateUI(delivery: Request?) {
@@ -128,12 +116,9 @@ class RequestDetailFragment private constructor() : Fragment() {
     companion object {
         fun newInstance(request: Request) =
             HomeFragment().apply {
-                arguments = bundleOf(Constant.KEY_REQUESTS_OBJECT to request)
+                arguments = Bundle().apply {
+                    putParcelable(Constant.KEY_REQUESTS_OBJECT, request)
+                }
             }
-    }
-
-    override fun onDestroyView() {
-        _viewBinding = null
-        super.onDestroyView()
     }
 }
