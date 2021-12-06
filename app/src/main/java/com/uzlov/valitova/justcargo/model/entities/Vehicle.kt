@@ -1,5 +1,9 @@
 package com.uzlov.valitova.justcargo.model.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Vehicle(
     var id: Long? = 0,
     var name: String? = "",
@@ -12,4 +16,4 @@ data class Vehicle(
     var width: Int? = 0,
     var height: Int? = 0,
     var volume: Float? = 0F,
-)
+) : Parcelable

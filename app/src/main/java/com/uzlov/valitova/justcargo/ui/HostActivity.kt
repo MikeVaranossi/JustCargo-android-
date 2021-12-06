@@ -8,6 +8,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
+import com.uzlov.valitova.justcargo.ui.activity.RegistrationActivity
 import com.uzlov.valitova.justcargo.ui.fragments.ProfileFragment
 
 class HostActivity : AppCompatActivity() {
