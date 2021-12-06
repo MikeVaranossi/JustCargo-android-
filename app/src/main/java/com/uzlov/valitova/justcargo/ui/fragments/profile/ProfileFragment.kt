@@ -1,13 +1,12 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentProfileLayoutBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 
 class ProfileFragment : BaseFragment<FragmentProfileLayoutBinding>(
 FragmentProfileLayoutBinding::inflate) {

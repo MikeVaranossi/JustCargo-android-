@@ -58,4 +58,69 @@
         app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
         app:layout_constraintTop_toBottomOf="@id/tvMyDeliveries" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvHistoryData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:drawableStartCompat="@drawable/ic_baseline_history_24"
+        app:drawableTint="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
+        android:text="@string/history_deliveries"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintTop_toBottomOf="@id/tvSelfData" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvNotifications"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:drawableStartCompat="@drawable/ic_baseline_notifications"
+        app:drawableTint="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
+        android:text="@string/notifications"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintTop_toBottomOf="@id/tvHistoryData" />
+
+    <View
+        android:id="@+id/dividerView"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/secondary_color"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintEnd_toEndOf="@id/tvHistoryData"
+        app:layout_constraintTop_toBottomOf="@id/tvNotifications"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvSendEmailUs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:drawableStartCompat="@drawable/ic_invite_user"
+        app:drawableTint="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
+        android:text="@string/send_email_us"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintTop_toBottomOf="@id/dividerView" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvInviteFrineds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:drawableStartCompat="@drawable/ic_outline_email_24"
+        app:drawableTint="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
+        android:text="@string/invite_friends"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintTop_toBottomOf="@id/tvSendEmailUs" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
