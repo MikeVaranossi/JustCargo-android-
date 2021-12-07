@@ -11,6 +11,10 @@
     <string name="self_data">Личные данные</string>
     <string name="self_data_personal">Личные данные</string>
     <string name="my_profile">Мой профиль</string>
+    <string name="search_cargo">Поиск грузов</string>
+    <string name="label_order_step_one">Заявка Шаг1</string>
+    <string name="label_order_step_two">Заявка Шаг2</string>
+
 
     <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
     <string name="button_add_cargo_text">Добавить груз</string>
@@ -37,9 +41,35 @@
     <string name="text_great">Отлично!</string>
     <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
     <string name="text_can_edit">Вы можете ее редактировать</string>
+    <string name="for_date">%1$d.%2$d.%3$d</string>
 
     <string name="title_activity_registration">Регистрация</string>
 
     <string name="Carrier">Грузоперевозчик</string>
     <string name="Shipper">Грузоотправитель</string>
+    <string name="find_cargo">Найденные грузы</string>
+    <string name="button_label_search_cargo">Найти груз</string>
+    <string name="label_empty_home_carrier">НАШ СЕРВИС В СТАДИИ РАЗРАБОТКИ \n СКОРО НА ЭТОЙ СТРАНИЦЕ БУДУТ ДОСТУПНЫ ГРУЗЫ</string>
+    <string name="label_more">ПОДРОБНЕЕ</string>
+    <string name="text_from">Откуда</string>
+    <string name="hint_edit_text_from">Москва</string>
+    <string name="text_radius">Радиус, км.</string>
+    <string name="hint_edit_text_radius">200</string>
+    <string name="text_to">Куда</string>
+    <string name="hint_edit_text_to">Ставрополь</string>
+    <string name="text_date_upload">Дата/даты загрузки</string>
+    <string name="hint_date">25.10.2021</string>
+    <string name="text_switch_off">кг.</string>
+    <string name="text_switch_on">т.</string>
+    <string name="text_volume">Объем в м3</string>
+    <string name="text_length_red">Длина в м</string>
+    <string name="text_width_red">Ширина в м</string>
+    <string name="text_height_red">Высота в м</string>
+    <string name="hint_up_to_10">до 10</string>
+    <string name="hint_up_to_3">до 3</string>
+    <string name="hint_up_to_2">до 2</string>
+    <string name="text_button_find_cargo">Найти груз</string>
+    <string name="text_sort_button">По уменьшению стоимости</string>
+    <string name="text_button_filters">Фильтры</string>
+    <string name="text_label_find_cargo">Найдено грузов: 0</string>
 </resources>
