@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.order
 
 import android.os.Bundle
 import android.text.Editable
@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
@@ -46,6 +47,10 @@ class OrderStepOneFragment : Fragment() {
                 verifyEmptyEditText()
             }
         })
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = getString(R.string.label_order_step_one)
+            it.setDisplayHomeAsUpEnabled(true)
+        }
 
         viewBinding.buttonNextStep.setOnClickListener {
             parentFragmentManager.beginTransaction()
