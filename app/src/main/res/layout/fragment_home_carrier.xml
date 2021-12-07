@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_find_cargo"
+        style="@style/MyStyleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/m_margin"
+        android:drawableEnd="@drawable/ic_search"
+        android:paddingStart="@dimen/icon_button_padding"
+        android:paddingTop="@dimen/s_margin"
+        android:paddingEnd="@dimen/icon_button_padding"
+        android:paddingBottom="@dimen/s_margin"
+        android:text="@string/button_label_search_cargo"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_home_carrier"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tex_view_label_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SubheaderText"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/l_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/image_view_carrier_home_empty"
+        android:text="@string/label_empty_home_carrier" />
+
+    <ImageView
+        android:id="@+id/image_view_carrier_home_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/tex_view_label_empty"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/l_margin"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_home_carrier"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/m_margin"
+        android:background="@drawable/background_recycler_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_find_cargo" />
+</androidx.constraintlayout.widget.ConstraintLayout>
