@@ -3,6 +3,7 @@ package com.uzlov.valitova.justcargo.di
 
 import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.ui.HostActivity
+import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 import dagger.Component
 import javax.inject.Singleton
@@ -21,4 +22,5 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(hostActivity: HostActivity)
     fun inject(hostActivity: MyDeliveriesFragment)
+    fun inject(favoritesRequestsFragment: FavoritesRequestsFragment)
 }
