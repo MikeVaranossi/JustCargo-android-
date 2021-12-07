@@ -7,6 +7,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.ui.fragments.ProfileFragment
+import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 
 class HostActivity : AppCompatActivity() {
 
@@ -32,6 +33,7 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.search_action-> {
+                    setFragment(SearchFragment.newInstance())
                     true
                 }
                 R.id.delivery_action-> {
@@ -48,6 +50,7 @@ class HostActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
