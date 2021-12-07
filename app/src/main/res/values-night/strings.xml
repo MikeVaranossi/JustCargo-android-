@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">JustCargo</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="phone">Телефон</string>
     <string name="e_mail">E-mail</string>
     <string name="driver_document_number">Водительское удостоверение №</string>
@@ -9,6 +11,38 @@
     <string name="self_data">Личные данные</string>
     <string name="self_data_personal">Личные данные</string>
     <string name="my_profile">Мой профиль</string>
+
+    <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
+    <string name="button_add_cargo_text">Добавить груз</string>
+    <string name="text_add_name_cargo">Введите название груза</string>
+    <string name="hint_name_cargo">ТНП</string>
+    <string name="text_address_from">Адрес, откуда следует забрать груз</string>
+    <string name="hint_address_from">Москва, Ленинский пр-т, д. 5</string>
+    <string name="text_address_to">Адрес, куда следует доставить груз</string>
+    <string name="hint_address_to">Ставрополь, ул. Советская, д. 1</string>
+    <string name="text_button_next_step">Следующий шаг</string>
+    <string name="text_choose_date">Выберите дату отправления груза</string>
+    <string name="text_add_weight">Введите вес</string>
+    <string name="hint_weight">Вес груза</string>
+    <string name="text_kilograms">кг.</string>
+    <string name="text_tonne">т.</string>
+    <string name="text_length">Длина в метрах</string>
+    <string name="hint_length">3,5</string>
+    <string name="text_width">Ширина в метрах</string>
+    <string name="hint_width">2,5</string>
+    <string name="text_height">Высота в метрах</string>
+    <string name="hint_height">1,5</string>
+    <string name="text_add_comment">+ ДОБАВИТЬ КОММЕНТАРИЙ</string>
+    <string name="text_button_create_request">Создать заявку</string>
+    <string name="text_great">Отлично!</string>
+    <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
+    <string name="text_can_edit">Вы можете ее редактировать</string>
+
+    <string name="title_activity_registration">Регистрация</string>
+    <string name="text_entrance">Вход</string>
+    <string name="text_registration">Регистрация</string>
+    <string name="Carrier">Грузоперевозчик</string>
+    <string name="Shipper">Грузоотправитель</string>
     <string name="cost_delivery">Стоимость перевозки</string>
     <string name="cargo">Груз</string>
     <string name="additional_param_cargo">Дополнительные параметры груза</string>
@@ -18,4 +52,9 @@
     <string name="template_email">igor@mail.com</string>
     <string name="template_phone">+7</string>
     <string name="email_is_incorrect">Неверный Email</string>
+    <string name="history_deliveries">История доставок</string>
+    <string name="notifications">Уведомления</string>
+    <string name="send_email_us">Написать нам</string>
+    <string name="invite_friends">Пригласить друзей</string>
+    <string name="you_does_not_available_deliveries">У вас нет доступных доставок</string>
 </resources>

@@ -11,7 +11,8 @@ import dagger.multibindings.IntoMap
 abstract class ViewModelModule {
     @Binds
     abstract fun viewModelFactory(factory: ViewModelFactory) : ViewModelProvider.Factory
-//
+
+    // TODO(Вылетает, надо чинить)
 //    @Binds
 //    @IntoMap
 //    @ViewModelKey(MainHomeViewModel::class)
@@ -31,4 +32,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RequestsViewModel::class)
     abstract fun requestsViewModel(requestsViewModel: RequestsViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(FavoritesRequestsViewModel::class)
+    abstract fun favoritesRequestsViewModel(favoritesRequestsViewModel: FavoritesRequestsViewModel) : ViewModel
 }

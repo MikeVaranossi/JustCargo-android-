@@ -52,4 +52,9 @@
     <string name="template_email">igor@mail.com</string>
     <string name="template_phone">+7</string>
     <string name="email_is_incorrect">Неверный Email</string>
+    <string name="history_deliveries">История доставок</string>
+    <string name="notifications">Уведомления</string>
+    <string name="send_email_us">Написать нам</string>
+    <string name="invite_friends">Пригласить друзей</string>
+    <string name="you_does_not_available_deliveries">У вас нет доступных доставок</string>
 </resources>

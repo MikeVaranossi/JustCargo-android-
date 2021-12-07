@@ -1,19 +1,15 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.util.Patterns
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentPersonalDataLayoutBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
 class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
     FragmentPersonalDataLayoutBinding::inflate) {
