@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/l_margin"
         android:layout_marginStart="@dimen/l_margin"
-        android:text="ФИО"
+        android:text="@string/fio"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="Иванов Иван Иванович"/>
+            android:hint="@string/hint_fio"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:layout_marginTop="@dimen/s_margin"
-        android:text="Выберите профиль"
+        android:text="@string/select_profile"
         app:layout_constraintTop_toBottomOf="@id/textfield_fio"
         />
 
@@ -64,7 +64,7 @@
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
             android:textCursorDrawable="@null"
-            android:hint="Профиль деятельности"/>
+            android:hint="@string/activity_profile"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:layout_marginTop="@dimen/s_margin"
-        android:text="Телефон"
+        android:text="@string/phone"
         app:layout_constraintTop_toBottomOf="@id/textfield_activity_profile"
         />
 
@@ -92,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="+7" />
+            android:hint="@string/hint_phone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:layout_marginTop="@dimen/s_margin"
-        android:text="E-mail"
+        android:text="@string/e_mail"
         app:layout_constraintTop_toBottomOf="@id/textfield_phone"
         />
 
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
-            android:hint="E-mail"/>
+            android:hint="@string/e_mail"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:layout_marginTop="@dimen/s_margin"
-        android:text="Водительское удостоверение №"
+        android:text="@string/drivers_license"
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@id/textfield_email"/>
 
@@ -147,7 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="№"/>
+            android:hint="@string/hint_documents"/>
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -157,7 +157,7 @@
         android:layout_marginStart="@dimen/l_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:layout_marginTop="@dimen/l_margin"
-        android:text="Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности"
+        android:text="@string/privacy_policy"
         app:layout_constraintBottom_toTopOf="@id/btn_send_sms"/>
 
     <androidx.appcompat.widget.AppCompatButton
@@ -165,7 +165,7 @@
         style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Выслать SMS с кодом"
+        android:text="@string/send_sms_with_code"
         android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp"
