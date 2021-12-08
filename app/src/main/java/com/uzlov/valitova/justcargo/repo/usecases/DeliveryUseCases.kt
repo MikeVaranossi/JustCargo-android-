@@ -5,8 +5,8 @@ import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import javax.inject.Inject
 
 class DeliveryUseCases @Inject constructor(var deliveryRepository: IDeliveryRepository) {
-    suspend fun getDelivery() = deliveryRepository.getDelivery()
-    suspend fun getDelivery(id: Long) = deliveryRepository.getDelivery(id)
-    suspend fun putDelivery(id: Long) = deliveryRepository.removeDelivery(id)
-    suspend fun putDelivery(request: Delivery) = deliveryRepository.putDelivery(request)
+    fun getDelivery() = deliveryRepository.getDelivery()
+    fun getDelivery(id: String) = deliveryRepository.getDelivery(id)
+    fun removeDelivery(id: String) = deliveryRepository.removeDelivery(id)
+    fun putDelivery(delivery: Delivery) = deliveryRepository.putDelivery(delivery)
 }

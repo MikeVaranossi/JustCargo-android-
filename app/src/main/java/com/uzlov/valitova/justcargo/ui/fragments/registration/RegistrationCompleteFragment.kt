@@ -5,43 +5,46 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationCompleteBinding
 
 class RegistrationCompleteFragment : Fragment() {
 
-    private var viewBinding: FragmentRegistrationCompleteBinding? = null
+    private var _viewBinding: FragmentRegistrationCompleteBinding? = null
+    private val viewBinding get() = _viewBinding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        viewBinding = FragmentRegistrationCompleteBinding.inflate(inflater, container, false)
-        return viewBinding!!.root
+        _viewBinding = FragmentRegistrationCompleteBinding.inflate(inflater, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewBinding?.btnNext?.setOnClickListener {
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = ""
+            it.setDisplayHomeAsUpEnabled(false)
+        }
+
+        viewBinding.btnNext.setOnClickListener {
             btnNextClicked()
         }
     }
 
     private fun btnNextClicked(){
-        if (viewBinding?.layoutComplete?.isVisible == true){
-            viewBinding?.layoutComplete?.visibility = View.INVISIBLE
-            viewBinding?.layoutGift?.visibility = View.VISIBLE
+        if (viewBinding.layoutComplete.isVisible){
+            viewBinding.layoutComplete.visibility = View.INVISIBLE
+            viewBinding.layoutGift.visibility = View.VISIBLE
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewBinding = null
-    }
-
-    companion object {
-        fun newInstance() = RegistrationCompleteFragment()
+        _viewBinding = null
     }
 }

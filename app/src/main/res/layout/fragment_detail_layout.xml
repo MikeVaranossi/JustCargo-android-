@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.HostActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/text_view_from_to"
+        style="@style/SubheaderText"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/l_margin"
+        android:background="@drawable/background_text_card_view"
+        android:gravity="center"
+        android:paddingTop="@dimen/xs_padding"
+        android:paddingBottom="@dimen/xs_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Москва - Воронеж" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabStartChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_outline_mode_comment"
+        android:layout_marginEnd="@dimen/l_margin"
+        app:backgroundTint="@color/primary_second_color"
+        app:layout_constraintTop_toTopOf="@+id/text_view_from_to"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCall"
+        app:srcCompat="@drawable/ic_outline_call_24"
+        app:backgroundTint="@color/primary_second_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintTop_toBottomOf="@id/fabStartChat"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvLabelCostDelivery"
+        android:text="@string/cost_delivery"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_from_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvCostDelivery"
+        tools:text="35000Р"
+        android:textColor="@color/primary_second_color"
+        android:textSize="19sp"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelCostDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvLabelCargo"
+        android:text="@string/cargo"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCostDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvCargoName"
+        tools:text="Стройматериалы 20Т/82M"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvLabelSecondCargoName"
+        android:text="@string/additional_param_cargo"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvCargoName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvHeightCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Высота"
+        android:layout_marginTop="@dimen/margin_detail_screen_8"
+        android:textColor="@color/dark_primary_color"
+        app:drawableTopCompat="@drawable/ic_icone_shipping_box_height"
+        app:layout_constraintLeft_toLeftOf="@+id/tvLabelSecondCargoName"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelSecondCargoName"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvWidthCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ширина"
+        android:textColor="@color/dark_primary_color"
+        app:drawableTopCompat="@drawable/ic_icone_shipping_box_height"
+        app:layout_constraintLeft_toRightOf="@+id/tvHeightCargo"
+        app:layout_constraintRight_toLeftOf="@+id/tvLengthCargo"
+        app:layout_constraintTop_toTopOf="@+id/tvHeightCargo" />
+
+    <TextView
+        android:id="@+id/tvWidthCargoValue"
+        android:textColor="@color/dark_primary_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/tvWidthCargo"
+        app:layout_constraintTop_toTopOf="@+id/tvHeightCargo"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeightCargo"
+        tools:text="1.5m"/>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvLengthCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Длина"
+        android:textColor="@color/dark_primary_color"
+        app:drawableTopCompat="@drawable/ic_icone_shipping_box_height"
+        app:layout_constraintRight_toLeftOf="@id/tvLengthCargoValue"
+        app:layout_constraintTop_toTopOf="@+id/tvWidthCargo" />
+
+    <TextView
+        android:id="@+id/tvLengthCargoValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeightCargo"
+        app:layout_constraintRight_toRightOf="@id/fabStartChat"
+        app:layout_constraintTop_toTopOf="@+id/tvHeightCargo"
+        tools:text="1.5m" />
+
+    <TextView
+        android:id="@+id/tvHeightCargoValue"
+        android:textColor="@color/dark_primary_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@+id/tvHeightCargo"
+        app:layout_constraintTop_toTopOf="@+id/tvHeightCargo"
+        app:layout_constraintBottom_toBottomOf="@+id/tvHeightCargo"
+        tools:text="1.5m"/>
+
+
+    <TextView
+        android:id="@+id/tvLabelCommentCargo"
+        android:text="@string/comments"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvHeightCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvCommentCargo"
+        android:text="@string/comments"
+        android:textColor="@color/dark_primary_color"
+        android:textSize="19sp"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelCommentCargo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Важно забрать вечером"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

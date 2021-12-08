@@ -33,7 +33,7 @@
             android:id="@+id/text_input_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
+            android:inputType="phone"
             android:hint="+7"/>
     </com.google.android.material.textfield.TextInputLayout>
 
