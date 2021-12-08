@@ -93,4 +93,23 @@
     <string name="label_sort_increase">По увеличению стоимости</string>
     <string name="label_sort_update">По обновлению</string>
     <string name="label_sort_date">По дате</string>
+    <string name="privacy_policy">Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности</string>
+    <string name="send_sms_with_code">Выслать SMS с кодом</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="register_now">Зарегистрироваться</string>
+    <string name="fio">ФИО</string>
+    <string name="select_profile">Выберите профиль</string>
+    <string name="hint_fio">Иванов Иван Иванович</string>
+    <string name="activity_profile">Профиль деятельности</string>
+    <string name="hint_phone">+7</string>
+    <string name="e_mail">E-mail</string>
+    <string name="drivers_license">Водительское удостоверение №</string>
+    <string name="hint_documents">№</string>
+    <string name="send_sms_with_code">Выслать SMS с кодом</string>
+    <string name="text_complete_registration">Вы зарегистрированы! \n Для вас будет действовать \n бесплатный период</string>
+    <string name="text_free_period">1 месяц</string>
+    <string name="text_kod_sms">Ввести код из sms</string>
+    <string name="send_again">прислать ещё раз</string>
+    <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
+    <string name="login">Войти</string>
 </resources>
