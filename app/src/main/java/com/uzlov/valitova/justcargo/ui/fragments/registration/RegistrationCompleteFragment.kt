@@ -39,11 +39,6 @@ class RegistrationCompleteFragment : Fragment() {
     }
 
     private fun btnNextClicked(){
-        if (viewBinding.layoutComplete.isVisible){
-            viewBinding.layoutComplete.visibility = View.INVISIBLE
-            viewBinding.layoutGift.visibility = View.VISIBLE
-        }
-
         startActivity(Intent(requireContext(), HostActivity::class.java))
     }
 

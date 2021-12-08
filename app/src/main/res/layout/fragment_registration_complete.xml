@@ -19,6 +19,7 @@
             style="@style/TextHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/s_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/textview"
@@ -30,54 +31,11 @@
             style="@style/StandartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/image_check"
-            android:text="Вы зарегистрированы! "
-            />
-
-        <ImageView
-            android:id="@+id/image_check"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:background="@drawable/ic_check_mark"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_gift"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_next"
-        >
-
-        <TextView
-            style="@style/TextHeader"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/textview2"
-            android:text="Поздравляем!"
-            />
-
-        <TextView
-            android:id="@+id/textview2"
-            style="@style/StandartText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/textview_mount"
-            android:text="Вы зарегистрированы! \n\n Для вас будет действовать \n бесплатный период      "
+            android:text="Вы зарегистрированы! \n Для вас будет действовать \n бесплатный период      "
             />
 
         <TextView
@@ -86,15 +44,26 @@
             android:textColor="@color/primary_second_color"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/l_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/image_check"
             android:text="1 месяц"
             />
 
+        <ImageView
+            android:id="@+id/image_check"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/ic_check_mark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
     <androidx.appcompat.widget.AppCompatButton
