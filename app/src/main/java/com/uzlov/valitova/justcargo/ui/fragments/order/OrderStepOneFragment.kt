@@ -109,7 +109,7 @@ class OrderStepOneFragment :
         val dpd =
             DatePickerDialog(
                 requireContext(),
-                { _, year, monthOfYear, dayOfMonth ->
+                { w, year, monthOfYear, dayOfMonth ->
                     viewBinding.textDate.setText(
                         getString(
                             R.string.for_date,
@@ -118,12 +118,13 @@ class OrderStepOneFragment :
                             year
                         )
                     )
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                        request.deliveryTime =
-                            OffsetDateTime.of(LocalDateTime.of(year, monthOfYear, dayOfMonth, 12, 0, 0), ZoneOffset.UTC)
-                    } else {
-                        // нужна реализация для устройств на версии < 26
-                    }
+
+                    request.deliveryTime = Date(year, monthOfYear, dayOfMonth).time
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                            OffsetDateTime.of(LocalDateTime.of(year, monthOfYear, dayOfMonth, 12, 0, 0), ZoneOffset.UTC)
+//                    } else {
+//                        // нужна реализация для устройств на версии < 26
+//                    }
                 },
                 year,
                 month,

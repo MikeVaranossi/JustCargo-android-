@@ -9,8 +9,8 @@ import java.time.OffsetTime
 @Parcelize
 data class Request(
     var id: Long? = 0,
-    var requestTime: OffsetDateTime? = null,
-    var deliveryTime: OffsetDateTime? = null,
+    var requestTime: Long? = null,
+    var deliveryTime: Long? = null,
     var cost: Int? = 0,
     var departure: String? = "",
     var destination: String? = "",
