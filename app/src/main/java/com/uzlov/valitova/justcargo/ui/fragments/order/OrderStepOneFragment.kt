@@ -1,21 +1,16 @@
 package com.uzlov.valitova.justcargo.ui.fragments.order
 
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.data.net.Request
+import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
-import com.uzlov.valitova.justcargo.model.entities.Request
-import com.uzlov.valitova.justcargo.model.entities.User
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import java.time.LocalDateTime
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
 import java.util.*
 
 

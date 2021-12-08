@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepTwoBinding
-import com.uzlov.valitova.justcargo.model.entities.Request
 import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
