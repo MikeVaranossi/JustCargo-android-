@@ -8,7 +8,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
+import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileFragment
+import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 
 
 class HostActivity : AppCompatActivity() {
@@ -37,9 +39,11 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.search_action-> {
+                    setFragment(FindCargoFragment.newInstance())
                     true
                 }
                 R.id.delivery_action-> {
+                    setFragment(MyDeliveriesFragment.newInstance())
                     true
                 }
                 R.id.favorite_action-> {
