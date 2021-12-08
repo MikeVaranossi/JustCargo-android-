@@ -12,6 +12,7 @@
     <string name="self_data_personal">Личные данные</string>
     <string name="my_profile">Мой профиль</string>
 
+
     <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
     <string name="button_add_cargo_text">Добавить груз</string>
     <string name="text_add_name_cargo">Введите название груза</string>
@@ -37,6 +38,7 @@
     <string name="text_great">Отлично!</string>
     <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
     <string name="text_can_edit">Вы можете ее редактировать</string>
+
 
     <string name="title_activity_registration">Регистрация</string>
     <string name="text_entrance">Вход</string>

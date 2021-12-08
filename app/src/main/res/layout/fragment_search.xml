@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.6" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/text_view_from"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
+        android:text="@string/text_from"
+        app:layout_constraintBottom_toTopOf="@+id/edit_text_from"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/m_margin"
+        android:hint="@string/hint_edit_text_from"
+        app:layout_constraintBottom_toTopOf="@id/text_view_to"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_from" />
+
+    <TextView
+        android:id="@+id/text_view_from_radius"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:text="@string/text_radius"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_from_radius"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_from_radius"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:hint="@string/hint_edit_text_radius"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/text_view_to_radius"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/text_view_from" />
+
+    <TextView
+        android:id="@+id/text_view_to"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:text="@string/text_to"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_to"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_from" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/m_margin"
+        android:hint="@string/hint_edit_text_to"
+        app:layout_constraintBottom_toTopOf="@id/text_view_date"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_to" />
+
+    <TextView
+        android:id="@+id/text_view_to_radius"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:text="@string/text_radius"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_to_radius"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_from_radius" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_to_radius"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:hint="@string/hint_edit_text_radius"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/text_view_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/text_view_to" />
+
+
+    <TextView
+        android:id="@+id/text_view_date"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:text="@string/text_date_upload"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_date"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_to" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/m_margin"
+        android:hint="@string/hint_date"
+        android:inputType="date"
+        app:layout_constraintBottom_toTopOf="@id/slider_kg_t"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_date" />
+
+    <ImageButton
+        android:id="@+id/image_button_calendar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="@dimen/s_margin"
+        android:background="@drawable/ic_icon_calendar"
+        app:layout_constraintStart_toEndOf="@id/edit_text_date"
+        app:layout_constraintTop_toBottomOf="@id/text_view_date" />
+
+    <Switch
+        android:id="@+id/switch_kg_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:checked="true"
+        android:showText="true"
+        android:textColor="@color/white"
+        android:textOff="@string/text_switch_off"
+        android:textOn="@string/text_switch_on"
+        android:thumb="@drawable/thumb"
+        android:track="@drawable/track"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_date" />
+
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider_kg_t"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:valueFrom="10"
+        android:valueTo="100"
+        app:layout_constraintBottom_toTopOf="@id/text_view_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switch_kg_t" />
+
+    <TextView
+        android:id="@+id/text_view_size"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:text="@string/text_volume"
+        app:layout_constraintBottom_toTopOf="@id/slider_m3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slider_kg_t" />
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/slider_m3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:valueFrom="10"
+        android:valueTo="100"
+        app:layout_constraintBottom_toTopOf="@id/text_view_label_length"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_size" />
+
+    <TextView
+        android:id="@+id/text_view_label_length"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_length_red"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_length"
+        app:layout_constraintEnd_toStartOf="@id/text_view_label_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slider_m3" />
+
+    <TextView
+        android:id="@+id/text_view_label_width"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_width_red"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_width"
+        app:layout_constraintEnd_toStartOf="@id/text_view_label_height"
+        app:layout_constraintStart_toEndOf="@+id/text_view_label_length"
+        app:layout_constraintTop_toBottomOf="@id/slider_m3" />
+
+    <TextView
+        android:id="@+id/text_view_label_height"
+        style="@style/StandartText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_height_red"
+        app:layout_constraintBottom_toTopOf="@id/edit_text_height"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_view_label_width"
+        app:layout_constraintTop_toTopOf="@id/text_view_label_width" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_length"
+        style="@style/StandartText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/l_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:background="@drawable/background_text_card_view"
+        android:gravity="center"
+        android:hint="@string/hint_up_to_10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/button_find_cargo"
+        app:layout_constraintEnd_toStartOf="@id/edit_text_width"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_label_length" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_width"
+        style="@style/StandartText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/l_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:background="@drawable/background_text_card_view"
+        android:gravity="center"
+        android:hint="@string/hint_up_to_3"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/button_find_cargo"
+        app:layout_constraintEnd_toStartOf="@id/edit_text_height"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_length"
+        app:layout_constraintTop_toBottomOf="@id/text_view_label_width" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/edit_text_height"
+        style="@style/StandartText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/l_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:background="@drawable/background_text_card_view"
+        android:gravity="center"
+        android:hint="@string/hint_up_to_2"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/button_find_cargo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/edit_text_width"
+        app:layout_constraintTop_toBottomOf="@id/text_view_label_height"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_find_cargo"
+        style="@style/MyStyleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:drawableEnd="@drawable/ic_search"
+        android:paddingStart="110dp"
+        android:paddingEnd="110dp"
+        android:text="@string/text_button_find_cargo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

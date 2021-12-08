@@ -10,6 +10,7 @@ import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileFragment
 
+
 class HostActivity : AppCompatActivity() {
 
     private var bottomNavigation: BottomNavigationView? = null
@@ -53,6 +54,7 @@ class HostActivity : AppCompatActivity() {
             }
         }
     }
+
 
     private fun setFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()

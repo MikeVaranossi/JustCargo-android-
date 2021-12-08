@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/dark_primary_color</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondary">@color/dark_primary_color</item>
         <item name="colorOnError">#F44336</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
@@ -38,8 +38,8 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">@dimen/text_button</item>
         <item name="cornerRadius">@dimen/m_margin</item>
-        <item name="android:paddingStart">@dimen/s_margin</item>
-        <item name="android:paddingEnd">@dimen/s_margin</item>
+        <item name="android:paddingStart">@dimen/xs_padding</item>
+        <item name="android:paddingEnd">@dimen/xs_padding</item>
         <item name="android:layout_marginStart">@dimen/l_margin</item>
         <item name="android:layout_marginEnd">@dimen/l_margin</item>
         <item name="android:layout_marginBottom">@dimen/m_margin</item>
@@ -81,5 +81,11 @@
         <item name="android:layout_marginStart">@dimen/l_margin</item>
         <item name="android:layout_marginEnd">@dimen/l_margin</item>
     </style>
+
+    <style name="MyStyle.PopupMenu" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/dark_primary_color</item>
+        <item name="android:popupBackground">@drawable/background_popup</item>
+    </style>
+
 
 </resources>

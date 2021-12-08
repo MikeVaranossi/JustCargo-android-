@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/layout_find_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/primary_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/text_view_find_cargo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_sort"
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@color/primary_color"
+            android:drawableStart="@drawable/ic_icone_sorter_white"
+            android:paddingStart="@dimen/m_margin"
+            android:paddingEnd="@dimen/m_margin"
+            android:text="@string/text_sort_button"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_filters"
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="2"
+            android:background="@color/primary_color"
+            android:drawableStart="@drawable/ic_icone_filter_white"
+            android:paddingStart="@dimen/m_margin"
+            android:paddingEnd="@dimen/m_margin"
+            android:text="@string/text_button_filters"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/text_view_find_cargo"
+        style="@style/StandartText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginBottom="@dimen/s_margin"
+        android:gravity="center"
+        android:text="@string/text_label_find_cargo"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_find_carrier"
+        app:layout_constraintTop_toBottomOf="@+id/layout_find_buttons" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_find_carrier"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/background_recycler_view"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_find_cargo" />
+</androidx.constraintlayout.widget.ConstraintLayout>
