@@ -89,4 +89,8 @@
     <string name="search_cargo">Поиск грузов</string>
     <string name="label_order_step_one">Заявка Шаг1</string>
     <string name="label_order_step_two">Заявка Шаг2</string>
+    <string name="label_sort_decrease">По уменьшению стоимости</string>
+    <string name="label_sort_increase">По увеличению стоимости</string>
+    <string name="label_sort_update">По обновлению</string>
+    <string name="label_sort_date">По дате</string>
 </resources>
