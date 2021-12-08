@@ -5,6 +5,7 @@ import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.ui.HostActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
+import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -23,4 +24,5 @@ interface AppComponent {
     fun inject(hostActivity: HostActivity)
     fun inject(hostActivity: MyDeliveriesFragment)
     fun inject(favoritesRequestsFragment: FavoritesRequestsFragment)
+    fun inject(orderStepTwoFragment: OrderStepTwoFragment)
 }
