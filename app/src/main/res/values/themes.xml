@@ -46,7 +46,6 @@
     </style>
 
     <style name="MyOutlinedBoxStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxStrokeColor">@color/edit_text_box_border</item>
         <item name="boxStrokeErrorColor">@color/design_default_color_error</item>
         <item name="android:layout_marginStart">@dimen/l_margin</item>
         <item name="android:layout_marginEnd">@dimen/l_margin</item>
@@ -63,6 +62,10 @@
     <style name="TextHeader">
         <item name="android:textSize">@dimen/text_title</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/dark_primary_color</item>
+    </style>
+
+    <style name="TextDefaultColor">
         <item name="android:textColor">@color/dark_primary_color</item>
     </style>
 

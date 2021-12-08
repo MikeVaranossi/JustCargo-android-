@@ -53,8 +53,6 @@ dependencies {
 
     // pref
     implementation 'androidx.preference:preference-ktx:1.1.1'
-
-
     implementation 'com.google.firebase:firebase-database-ktx'
 
     //location
