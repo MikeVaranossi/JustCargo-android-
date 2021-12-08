@@ -102,10 +102,8 @@
     <string name="hint_fio">Иванов Иван Иванович</string>
     <string name="activity_profile">Профиль деятельности</string>
     <string name="hint_phone">+7</string>
-    <string name="e_mail">E-mail</string>
     <string name="drivers_license">Водительское удостоверение №</string>
     <string name="hint_documents">№</string>
-    <string name="send_sms_with_code">Выслать SMS с кодом</string>
     <string name="text_complete_registration">Вы зарегистрированы! \n Для вас будет действовать \n бесплатный период</string>
     <string name="text_free_period">1 месяц</string>
     <string name="text_kod_sms">Ввести код из sms</string>
