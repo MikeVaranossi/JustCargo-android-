@@ -1,7 +1,7 @@
 package com.uzlov.valitova.justcargo.repo.repositories
 
 import androidx.lifecycle.LiveData
-import com.uzlov.valitova.justcargo.model.entities.Request
+import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.datasources.IRequestsRemoteDataSource
 import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
 import javax.inject.Inject

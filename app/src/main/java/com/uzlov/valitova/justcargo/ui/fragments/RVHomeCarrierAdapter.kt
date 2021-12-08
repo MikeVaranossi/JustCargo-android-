@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.model.entities.Request
+import com.uzlov.valitova.justcargo.data.net.Request
 
 class RVHomeCarrierAdapter :
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {

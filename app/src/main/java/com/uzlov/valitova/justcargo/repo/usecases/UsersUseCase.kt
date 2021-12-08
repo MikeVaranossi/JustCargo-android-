@@ -1,6 +1,6 @@
 package com.uzlov.valitova.justcargo.repo.usecases
 
-import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.repo.net.IUserRepository
 import javax.inject.Inject
 
