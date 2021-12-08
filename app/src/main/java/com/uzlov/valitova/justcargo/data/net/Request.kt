@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.model.entities
+package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

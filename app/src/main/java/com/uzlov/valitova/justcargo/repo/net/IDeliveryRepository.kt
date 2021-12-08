@@ -1,7 +1,7 @@
 package com.uzlov.valitova.justcargo.repo.net
 
 import androidx.lifecycle.LiveData
-import com.uzlov.valitova.justcargo.model.entities.Delivery
+import com.uzlov.valitova.justcargo.data.net.Delivery
 
 interface IDeliveryRepository {
     fun getDelivery() : LiveData<List<Delivery>>

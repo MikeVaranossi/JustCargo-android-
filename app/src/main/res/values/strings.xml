@@ -110,6 +110,4 @@
     <string name="send_again">прислать ещё раз</string>
     <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
     <string name="login">Войти</string>
-    <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
-    <string name="incorrect_number">Некорректные цифры</string>
 </resources>

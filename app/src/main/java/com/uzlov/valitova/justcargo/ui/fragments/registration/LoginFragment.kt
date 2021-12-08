@@ -10,20 +10,11 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentLoginBinding
+import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
-class LoginFragment : Fragment() {
-
-    private var _viewBinding: FragmentLoginBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _viewBinding = FragmentLoginBinding.inflate(inflater, container, false)
-        return viewBinding.root
-    }
+class LoginFragment : BaseFragment<FragmentLoginBinding>(
+    FragmentLoginBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -66,10 +57,5 @@ class LoginFragment : Fragment() {
             }
         })
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
     }
 }

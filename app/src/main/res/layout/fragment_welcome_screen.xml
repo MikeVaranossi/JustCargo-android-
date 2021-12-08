@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_registration"
-        android:text="Перевозка грузов по самым низким ценам"
+        android:text="@string/text_welcome"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -35,7 +35,7 @@
         style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Регистрация"
+        android:text="@string/text_registration"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         tools:layout_editor_absoluteX="10dp"
         />
@@ -45,7 +45,7 @@
         style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Войти"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp"
         />

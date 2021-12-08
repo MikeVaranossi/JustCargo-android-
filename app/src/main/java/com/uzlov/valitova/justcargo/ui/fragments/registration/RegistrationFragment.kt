@@ -12,20 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationCompleteBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
-class RegistrationFragment : Fragment() {
-
-    private var _viewBinding: FragmentRegistrationBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _viewBinding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        return viewBinding.root
-    }
+class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
+    FragmentRegistrationBinding::inflate) {
 
     private fun sendSmsClicked(){
         val manager = requireActivity().supportFragmentManager
@@ -82,8 +73,4 @@ class RegistrationFragment : Fragment() {
         viewBinding.btnSendSms.isEnabled = buttonEnable
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
-    }
 }

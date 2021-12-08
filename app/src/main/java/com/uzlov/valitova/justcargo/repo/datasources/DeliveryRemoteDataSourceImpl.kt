@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
-import com.uzlov.valitova.justcargo.model.entities.Delivery
+import com.uzlov.valitova.justcargo.data.net.Delivery
 
 class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
 

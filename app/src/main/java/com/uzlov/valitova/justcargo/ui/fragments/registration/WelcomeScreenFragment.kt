@@ -8,22 +8,13 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentWelcomeScreenBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
 
-class WelcomeScreenFragment : Fragment() {
-    private var _viewBinding: FragmentWelcomeScreenBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _viewBinding = FragmentWelcomeScreenBinding.inflate(inflater, container, false)
-        return viewBinding.root
-
-    }
+class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
+    FragmentWelcomeScreenBinding::inflate){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,14 +41,6 @@ class WelcomeScreenFragment : Fragment() {
             Glide.with(this).load(R.drawable.image_start).into(
                 it.imageview)
         }
-    }
-
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
-        (requireActivity() as AppCompatActivity).supportActionBar?.show()
     }
 
 }

@@ -11,7 +11,7 @@
         style="@style/TextHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ввести код из sms"
+        android:text="@string/text_kod_sms"
         app:layout_constraintBottom_toTopOf="@id/edit_text_code"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -43,7 +43,7 @@
         android:enabled="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="прислать ещё раз"
+        android:text="@string/send_again"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textview_header"

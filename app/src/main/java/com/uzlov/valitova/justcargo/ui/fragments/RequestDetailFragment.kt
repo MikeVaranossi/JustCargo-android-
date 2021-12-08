@@ -5,19 +5,16 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.MY_PERMISSIONS_REQUEST_CALL_PHONE
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 
-import com.uzlov.valitova.justcargo.model.entities.Request
+import com.uzlov.valitova.justcargo.data.net.Request
 
 /*
 * Фрагмент отображает детальную информацию о заявке на перевозку груза.

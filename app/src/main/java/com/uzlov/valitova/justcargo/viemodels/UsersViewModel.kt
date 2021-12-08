@@ -1,6 +1,6 @@
 package com.uzlov.valitova.justcargo.viemodels
 
-import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.repo.usecases.UsersUseCase
 import javax.inject.Inject
 
