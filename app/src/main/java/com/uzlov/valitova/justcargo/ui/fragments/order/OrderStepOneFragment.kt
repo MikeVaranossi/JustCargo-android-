@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui.fragments.order
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
+import java.util.*
 
 
 class OrderStepOneFragment : Fragment() {
@@ -52,6 +54,10 @@ class OrderStepOneFragment : Fragment() {
             it.setDisplayHomeAsUpEnabled(true)
         }
 
+        viewBinding.textDate.setOnClickListener {
+            openDatePicker()
+        }
+
         viewBinding.buttonNextStep.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, OrderStepTwoFragment.newInstance())
@@ -65,9 +71,40 @@ class OrderStepOneFragment : Fragment() {
             viewBinding.textInputName.text.isNullOrEmpty() -> buttonEnable = false
             viewBinding.textInputFrom.text.isNullOrEmpty() -> buttonEnable = false
             viewBinding.textInputTo.text.isNullOrEmpty() -> buttonEnable = false
+            viewBinding.textDate.text.isNullOrEmpty() -> buttonEnable = false
         }
         viewBinding.buttonNextStep.isEnabled = buttonEnable
 
+    }
+
+    private fun openDatePicker() {
+
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+
+        val dpd =
+            context?.let {
+                DatePickerDialog(
+                    it,
+                    { _, year, monthOfYear, dayOfMonth ->
+                        viewBinding.textDate.setText(
+                            getString(
+                                R.string.for_date,
+                                dayOfMonth,
+                                (monthOfYear + 1),
+                                year
+                            )
+                        )
+                    },
+                    year,
+                    month,
+                    day
+                )
+            }
+        dpd?.datePicker?.minDate = System.currentTimeMillis() - 1000
+        dpd?.show()
     }
 
     override fun onDestroyView() {
