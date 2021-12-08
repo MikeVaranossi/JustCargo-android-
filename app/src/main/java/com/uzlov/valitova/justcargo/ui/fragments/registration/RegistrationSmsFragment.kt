@@ -17,31 +17,23 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import java.util.concurrent.TimeUnit
 
-class RegistrationSmsFragment : Fragment() {
+class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
+    FragmentRegistrationSmsBinding::inflate) {
 
-    private var _viewBinding: FragmentRegistrationSmsBinding? = null
-    private val viewBinding get() = _viewBinding!!
     private lateinit var auth: FirebaseAuth
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-        _viewBinding = FragmentRegistrationSmsBinding.inflate(inflater, container, false)
-        auth = Firebase.auth
-        return viewBinding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        auth = Firebase.auth
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = ""
             it.setDisplayHomeAsUpEnabled(true)
@@ -153,12 +145,6 @@ class RegistrationSmsFragment : Fragment() {
                 }
             }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
-    }
-
 
     companion object {
         private const val PHONE_NUMBER = "phone_number"
