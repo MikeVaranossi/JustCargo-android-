@@ -1,6 +1,6 @@
 package com.uzlov.valitova.justcargo.repo.datasources
 
-import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.data.net.User
 
 interface IUsersLocalDataSource {
     fun getUsers() : List<User>

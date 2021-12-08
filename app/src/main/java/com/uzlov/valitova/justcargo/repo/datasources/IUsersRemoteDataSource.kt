@@ -1,7 +1,7 @@
 package com.uzlov.valitova.justcargo.repo.datasources
 
 import androidx.lifecycle.LiveData
-import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.data.net.User
 
 interface IUsersRemoteDataSource {
     fun getUsers() : LiveData<List<User>>
