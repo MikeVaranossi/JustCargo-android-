@@ -33,7 +33,6 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.search_action-> {
-                    setFragment(SearchFragment.newInstance())
                     true
                 }
                 R.id.delivery_action-> {
