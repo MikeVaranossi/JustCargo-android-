@@ -3,12 +3,17 @@ package com.uzlov.valitova.justcargo.ui.fragments
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepThreeBinding
+import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.model.entities.UserClass
+import com.uzlov.valitova.justcargo.model.entities.UserType
+import com.uzlov.valitova.justcargo.repo.datasources.UserRemoteDataSourceImpl
 
 class OrderStepThreeFragment: Fragment() {
     private var _viewBinding: FragmentOrderStepThreeBinding? = null
@@ -56,6 +61,7 @@ class OrderStepThreeFragment: Fragment() {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, OrderCreatedFragment.newInstance())
                 .commit()
+
         }
 
     }

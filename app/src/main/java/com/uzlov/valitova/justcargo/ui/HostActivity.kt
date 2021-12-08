@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.ui.fragments.ProfileFragment
+import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
+import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileFragment
 
 class HostActivity : AppCompatActivity() {
 
@@ -21,14 +23,16 @@ class HostActivity : AppCompatActivity() {
             setSupportActionBar(it)
             it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
             it.setNavigationIconTint(resources.getColor(R.color.white_color))
-
         }
+
+        setFragment(HomeFragment.newInstance())
 
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
         bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main_action-> {
+                    setFragment(HomeFragment.newInstance())
                     true
                 }
                 R.id.search_action-> {
@@ -38,6 +42,7 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.favorite_action-> {
+                    setFragment(FavoritesRequestsFragment.newInstance())
                     true
                 }
                 R.id.profile_action-> {

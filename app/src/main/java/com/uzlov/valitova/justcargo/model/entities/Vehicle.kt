@@ -1,15 +1,19 @@
 package com.uzlov.valitova.justcargo.model.entities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Vehicle(
-    var id: Long?,
-    var name: String?,
-    var description: String?,
+    var id: Long? = 0,
+    var name: String? = "",
+    var description: String? = "",
     var owner: User?,
     var type: VehicleType?,
-    var registrationNumber: String?,
-    var carryingCapacity: Int?,
-    var length: Int?,
-    var width: Int?,
-    var height: Int?,
-    var volume: Float?,
-)
+    var registrationNumber: String? = "",
+    var carryingCapacity: Int? = 0,
+    var length: Int? = 0,
+    var width: Int? = 0,
+    var height: Int? = 0,
+    var volume: Float? = 0F,
+) : Parcelable

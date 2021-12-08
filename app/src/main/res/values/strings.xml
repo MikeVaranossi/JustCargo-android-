@@ -39,7 +39,23 @@
     <string name="text_can_edit">Вы можете ее редактировать</string>
 
     <string name="title_activity_registration">Регистрация</string>
-
+    <string name="text_entrance">Вход</string>
+    <string name="text_registration">Регистрация</string>
     <string name="Carrier">Грузоперевозчик</string>
     <string name="Shipper">Грузоотправитель</string>
+    <string name="cost_delivery">Стоимость перевозки</string>
+    <string name="cargo">Груз</string>
+    <string name="additional_param_cargo">Дополнительные параметры груза</string>
+    <string name="comments">Комментарии</string>
+    <string name="incorrect_phone_number">Некорректный номер телефона</string>
+    <string name="where_is_chat">Здесь будет чат с клиентом</string>
+    <string name="template_email">igor@mail.com</string>
+    <string name="template_phone">+7</string>
+    <string name="email_is_incorrect">Неверный Email</string>
+    <string name="history_deliveries">История доставок</string>
+    <string name="notifications">Уведомления</string>
+    <string name="send_email_us">Написать нам</string>
+    <string name="invite_friends">Пригласить друзей</string>
+    <string name="you_does_not_available_deliveries">У вас нет доступных доставок</string>
+    <string name="favourites_request_is_missing">Избранных заявок пока нет</string>
 </resources>

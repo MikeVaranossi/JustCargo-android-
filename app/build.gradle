@@ -1,7 +1,8 @@
 plugins {
-    id 'com.android.application'
     id 'kotlin-android'
+    id 'com.android.application'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
     id 'kotlin-parcelize'
 }
 
@@ -26,12 +27,10 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
+    kotlinOptions { jvmTarget = '11' }
     buildFeatures {
         viewBinding = true
     }
@@ -55,6 +54,9 @@ dependencies {
     // pref
     implementation 'androidx.preference:preference-ktx:1.1.1'
 
+
+    implementation 'com.google.firebase:firebase-database-ktx'
+
     //location
     implementation 'com.google.android.gms:play-services-location:18.0.0'
 
@@ -70,10 +72,13 @@ dependencies {
 
     // di
     implementation 'com.google.dagger:dagger:2.24'
+    annotationProcessor "com.google.dagger:dagger-android-processor:2.11"
+
     implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
     kapt 'com.google.dagger:dagger-compiler:2.24'
 
     // room
@@ -87,4 +92,13 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.0.1')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+
 }
+apply plugin: 'com.google.gms.google-services'

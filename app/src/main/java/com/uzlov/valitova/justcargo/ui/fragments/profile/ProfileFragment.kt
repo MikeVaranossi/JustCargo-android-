@@ -1,15 +1,15 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentProfileLayoutBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 
-class ProfileFragment private constructor() : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileLayoutBinding>(
+FragmentProfileLayoutBinding::inflate) {
 
     companion object {
         fun newInstance(): ProfileFragment {
@@ -17,20 +17,9 @@ class ProfileFragment private constructor() : Fragment() {
         }
     }
 
-    private var _viewBinding: FragmentProfileLayoutBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?,
-    ) = FragmentProfileLayoutBinding.inflate(layoutInflater, container, false).also {
-        _viewBinding = it
-    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,10 +43,4 @@ class ProfileFragment private constructor() : Fragment() {
 
         }
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _viewBinding = null
-    }
-
 }
