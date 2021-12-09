@@ -1,32 +1,36 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeBinding
+import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
+import javax.inject.Inject
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
-    private var _viewBinding: FragmentHomeBinding? = null
-    private val viewBinding get() = _viewBinding!!
+    private val TAG: String = javaClass.simpleName
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentHomeBinding.inflate(layoutInflater, container, false).also {
-        _viewBinding = it
-    }.root
+    @Inject
+    lateinit var requestsUseCases: RequestsUseCases
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireContext().appComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         loadImage(R.drawable.image_home_fragment, viewBinding.imageViewMain)
+
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = getString(R.string.app_name)
             it.setDisplayHomeAsUpEnabled(false)
@@ -35,23 +39,23 @@ class HomeFragment : Fragment() {
         viewBinding.buttonAddCargo.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, OrderStepOneFragment.newInstance())
+                .addToBackStack(null)
                 .commit()
         }
 
+        loadRequests()
     }
 
-    override fun onDestroyView() {
-        _viewBinding = null
-        super.onDestroyView()
+    private fun loadRequests() {
+        requestsUseCases.getRequests().observe(this, {
+            updateUI(it)
+        })
     }
 
-    companion object {
-        fun newInstance() =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-
-                }
-            }
+    private fun updateUI(result: List<Request>?) {
+        result?.let {
+            Log.e(TAG, "updateUI: $it")
+        }
     }
 
     private fun loadImage(image: Int, container: ImageView) {
@@ -63,4 +67,8 @@ class HomeFragment : Fragment() {
         }
     }
 
+    companion object {
+        fun newInstance() =
+            HomeFragment()
+    }
 }

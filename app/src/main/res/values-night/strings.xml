@@ -58,4 +58,6 @@
     <string name="invite_friends">Пригласить друзей</string>
     <string name="you_does_not_available_deliveries">У вас нет доступных доставок</string>
     <string name="favourites_request_is_missing">Избранных заявок пока нет</string>
+    <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
+    <string name="incorrect_number">Некорректные цифры</string>
 </resources>
