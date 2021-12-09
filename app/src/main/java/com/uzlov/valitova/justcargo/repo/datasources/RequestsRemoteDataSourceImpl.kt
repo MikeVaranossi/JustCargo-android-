@@ -56,15 +56,15 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return resultAll
     }
 
-    override fun getRequest(id: String): LiveData<Request?> {
-        reqReference.child(id).get().addOnSuccessListener {
+    override fun getRequest(id: Int): LiveData<Request?> {
+        reqReference.child(id.toString()).get().addOnSuccessListener {
             resultRequest.value = it.getValue<Request>()
         }
         return resultRequest
     }
 
-    override fun removeRequest(id: String) {
-        reqReference.child(id).removeValue()
+    override fun removeRequest(id: Int) {
+        reqReference.child(id.toString()).removeValue()
     }
 
     override fun putRequest(request: Request) {

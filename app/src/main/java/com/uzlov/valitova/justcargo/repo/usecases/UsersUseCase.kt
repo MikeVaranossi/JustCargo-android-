@@ -6,8 +6,8 @@ import javax.inject.Inject
 
 class UsersUseCase @Inject constructor(var userRepository: IUserRepository) {
      fun getUsers() = userRepository.getUsers()
-     fun getUsers(id: String) = userRepository.getUser(id)
-     fun removeUsers(id: String) = userRepository.removeUsers(id)
+     fun getUsers(id: Int) = userRepository.getUser(id)
+     fun removeUsers(id: Int) = userRepository.removeUsers(id)
      fun putUser(user: User) = userRepository.putUser(user)
 }
 

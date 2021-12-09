@@ -5,7 +5,7 @@ import com.uzlov.valitova.justcargo.data.net.Delivery
 
 interface IDeliveryRepository {
     fun getDelivery() : LiveData<List<Delivery>>
-    fun getDelivery(id: String) : LiveData<Delivery?>
+    fun getDelivery(id: Int) : LiveData<Delivery?>
     fun putDelivery(delivery: Delivery)
-    fun removeDelivery(id: String)
+    fun removeDelivery(id: Int)
 }

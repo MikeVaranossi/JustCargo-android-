@@ -55,7 +55,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     private fun loadRequests() {
-        requestsUseCases.getRequestsWithStatus(1).observe(this, {
+        requestsUseCases.getRequests().observe(this, {
             updateUI(it)
         })
     }

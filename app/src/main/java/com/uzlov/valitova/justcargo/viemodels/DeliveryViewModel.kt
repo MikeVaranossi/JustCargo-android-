@@ -8,9 +8,9 @@ class DeliveryViewModel @Inject constructor(private var deliveryUseCases: Delive
 
     fun getDeliveries() = deliveryUseCases?.getDelivery()
 
-    fun getDelivery(id: String) = deliveryUseCases?.getDelivery(id)
+    fun getDelivery(id: Int) = deliveryUseCases?.getDelivery(id)
 
     fun addDelivery(delivery: Delivery) = deliveryUseCases?.putDelivery(delivery)
 
-    fun removeDelivery(id: String) = deliveryUseCases?.removeDelivery(id)
+    fun removeDelivery(id: Int) = deliveryUseCases?.removeDelivery(id)
 }
