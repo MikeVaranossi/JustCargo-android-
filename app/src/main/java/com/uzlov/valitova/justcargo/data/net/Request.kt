@@ -2,8 +2,6 @@ package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.OffsetDateTime
-import java.time.OffsetTime
 
 // файл запрос на перевозку от грузоотправителя
 @Parcelize
@@ -22,5 +20,5 @@ data class Request(
     var width: Int? = 0,
     var height: Int? = 0,
     var owner: User? = null,
-    var status: RequestStatus? = null,
+    var status: RequestStatus? = RequestStatus(1, "Открыта"),
 ) : Parcelable

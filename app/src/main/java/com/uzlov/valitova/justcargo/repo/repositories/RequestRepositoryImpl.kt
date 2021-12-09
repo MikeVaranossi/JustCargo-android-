@@ -11,6 +11,7 @@ class RequestRepositoryImpl @Inject constructor(var remoteDataSource: IRequestsR
     override fun getRequests(): LiveData<List<Request>> = remoteDataSource.getRequests()
 
     override fun getRequest(id: String): LiveData<Request?> = remoteDataSource.getRequest(id)
+    override fun getRequestsWithStatus(id: Int): LiveData<List<Request>> =remoteDataSource.getRequestsWithStatus(id)
 
     override fun removeRequest(id: String) = remoteDataSource.removeRequest(id)
 

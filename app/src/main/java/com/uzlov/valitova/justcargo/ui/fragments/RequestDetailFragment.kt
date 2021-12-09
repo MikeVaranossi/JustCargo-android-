@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.uzlov.valitova.justcargo.R
@@ -27,8 +28,8 @@ class RequestDetailFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null && savedInstanceState.isEmpty) {
-            request = savedInstanceState.getParcelable(Constant.KEY_DELIVERY_OBJECT)
+        arguments?.let {
+            request = it.getParcelable(Constant.KEY_REQUESTS_OBJECT)
         }
     }
 
@@ -56,14 +57,19 @@ class RequestDetailFragment :
     private fun initListeners() {
         with(viewBinding) {
             fabCall.setOnClickListener {
+                request?.owner?.phone?.let { numberPhone -> callTo(numberPhone) }
+            }
+
+            fabStartChat.setOnClickListener {
                 Toast.makeText(requireContext(),
                     getString(R.string.where_is_chat),
                     Toast.LENGTH_SHORT).show()
             }
+        }
 
-            fabStartChat.setOnClickListener {
-                request?.owner?.phone?.let { numberPhone -> callTo(numberPhone) }
-            }
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = request?.shortInfo
+            it.setDisplayHomeAsUpEnabled(true)
         }
     }
 
@@ -112,7 +118,7 @@ class RequestDetailFragment :
 
     companion object {
         fun newInstance(request: Request) =
-            HomeFragment().apply {
+            RequestDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(Constant.KEY_REQUESTS_OBJECT, request)
                 }

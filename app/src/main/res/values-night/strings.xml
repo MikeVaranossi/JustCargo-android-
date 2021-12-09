@@ -60,4 +60,5 @@
     <string name="favourites_request_is_missing">Избранных заявок пока нет</string>
     <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
     <string name="incorrect_number">Некорректные цифры</string>
+    <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
 </resources>
