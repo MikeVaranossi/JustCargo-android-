@@ -4,16 +4,19 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.uzlov.valitova.justcargo.data.local.RequestLocal
+import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 
 @Dao
 interface FavoriteRequestDao {
-    @Query("SELECT * FROM favoriteRequest")
-    suspend fun getAll(): List<RequestLocal>
+    @Query("SELECT * FROM FavoriteRequestLocal")
+    fun getFavoriteRequests(): List<FavoriteRequestLocal>
+
+    @Query("SELECT * FROM FavoriteRequestLocal WHERE id LIKE :id")
+    fun getFavoriteRequest(id: Long): FavoriteRequestLocal
 
     @Insert
-    suspend fun insertAll(users: List<RequestLocal>)
+    fun insertRequest(favoriteRequests: FavoriteRequestLocal)
 
     @Delete
-    suspend fun delete(requestLocal: RequestLocal)
+    fun removeRequest(favoriteRequests: FavoriteRequestLocal)
 }

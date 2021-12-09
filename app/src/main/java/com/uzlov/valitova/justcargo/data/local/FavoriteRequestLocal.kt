@@ -7,9 +7,9 @@ import com.uzlov.valitova.justcargo.data.net.RequestStatus
 import java.time.OffsetTime
 
 @Entity
-data class RequestLocal (
+data class FavoriteRequestLocal (
     @PrimaryKey var id: Long? = 0,
-    @ColumnInfo(name = "requestTime") var requestTime: OffsetTime? = null,
+    @ColumnInfo(name = "requestTime") var requestTime: Long? = 0,
     @ColumnInfo(name = "cost") var cost: Int? = 0,
     @ColumnInfo(name = "departure") var departure: String? = "",
     @ColumnInfo(name = "destination") var destination: String? = "",
@@ -18,5 +18,5 @@ data class RequestLocal (
     @ColumnInfo(name = "length") var length: Int? = 0,
     @ColumnInfo(name = "width") var width: Int? = 0,
     @ColumnInfo(name = "height") var height: Int? = 0,
-    @ColumnInfo(name = "status") var status: RequestStatus? = null,
+    @ColumnInfo(name = "status") var status: String? = null,
 )
