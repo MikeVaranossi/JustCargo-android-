@@ -4,21 +4,16 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.databinding.FragmentProfileLayoutBinding
+import com.uzlov.valitova.justcargo.databinding.FragmentProfileCarrierLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 
-class ProfileFragment : BaseFragment<FragmentProfileLayoutBinding>(
-FragmentProfileLayoutBinding::inflate) {
+class ProfileCarrierFragment : BaseFragment<FragmentProfileCarrierLayoutBinding>(
+    FragmentProfileCarrierLayoutBinding::inflate) {
 
     companion object {
-        fun newInstance(): ProfileFragment {
-            return ProfileFragment()
+        fun newInstance(): ProfileCarrierFragment {
+            return ProfileCarrierFragment()
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,7 +27,7 @@ FragmentProfileLayoutBinding::inflate) {
 
             tvMyDeliveries.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, MyDeliveriesFragment.newInstance())
+                    .replace(R.id.fragment_container, MyRequestsFragment.newInstance())
                     .addToBackStack(null).commit()
             }
 
@@ -40,7 +35,6 @@ FragmentProfileLayoutBinding::inflate) {
                 it.title = getString(R.string.my_profile)
                 it.setDisplayHomeAsUpEnabled(false)
             }
-
         }
     }
 }

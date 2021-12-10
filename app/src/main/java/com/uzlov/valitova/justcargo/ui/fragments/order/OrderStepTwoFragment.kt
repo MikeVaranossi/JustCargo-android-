@@ -12,7 +12,7 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepTwoBinding
 import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import com.uzlov.valitova.justcargo.ui.fragments.HomeFragment
+import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import java.lang.NumberFormatException
 import javax.inject.Inject
 
@@ -81,7 +81,7 @@ class OrderStepTwoFragment :
 
             // возврат на главный экран
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeFragment.newInstance()).commit()
+                .replace(R.id.fragment_container, HomeSenderFragment.newInstance()).commit()
         }
     }
 

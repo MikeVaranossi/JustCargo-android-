@@ -1,20 +1,16 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.home
 
 import android.os.Bundle
 import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.app.appComponent
-import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeBinding
-import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
-import javax.inject.Inject
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeCarrierFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,13 +25,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 .replace(R.id.fragment_container, OrderStepOneFragment.newInstance())
                 .addToBackStack(null)
                 .commit()
-
         }
-
     }
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = HomeCarrierFragment()
     }
 
     private fun loadImage(image: Int, container: ImageView) {

@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
 import android.view.View
@@ -8,6 +8,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.data.net.Delivery
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import javax.inject.Inject
 

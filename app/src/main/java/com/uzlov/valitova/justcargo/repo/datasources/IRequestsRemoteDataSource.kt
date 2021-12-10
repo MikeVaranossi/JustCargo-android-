@@ -9,4 +9,6 @@ interface IRequestsRemoteDataSource {
     fun removeRequest(id: Int)
     fun putRequest(request: Request)
     fun getRequestsWithStatus(id: Int): LiveData<List<Request>>
+    fun getRequestsWithPhone(phone: String): LiveData<List<Request>>
+    fun getRequestsWithUserID(id: Int): LiveData<List<Request>>
 }
