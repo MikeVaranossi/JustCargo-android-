@@ -110,4 +110,5 @@
     <string name="send_again">прислать ещё раз</string>
     <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
     <string name="login">Войти</string>
+    <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
 </resources>

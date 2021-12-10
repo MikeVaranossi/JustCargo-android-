@@ -11,10 +11,14 @@ import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
 
-class RVHomeCarrierAdapter :
+class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? = null) :
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<Request> = arrayListOf()
+
+    interface OnItemClickListener {
+        fun click(request: Request)
+    }
 
     fun setData(data: List<Request>) {
         this.data = data
@@ -43,32 +47,31 @@ class RVHomeCarrierAdapter :
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.apply {
                     findViewById<TextView>(R.id.text_view_name_cargo).text =
-                        data.status?.name
+                        data.shortInfo
                     findViewById<TextView>(R.id.text_view_date).text =
                         data.requestTime.toString()
                     findViewById<TextView>(R.id.text_view_cost).text =
-                        data.cost.toString()
+                        "${data.cost} ₽"
                     findViewById<TextView>(R.id.text_view_from_to).text =
                         data.departure + " - " + data.destination
                     findViewById<TextView>(R.id.text_view_to_details).setOnClickListener {
-                        // TODO: 06.12.2021  
+                        itemClickListener?.click(data)
                     }
                     findViewById<CheckBox>(R.id.checkbox_favourite).setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
 
                             Snackbar.make(
                                 itemView,
-                                "Данный груз добавлен в избранное",
+                                context.getString(R.string.cargo_is_added_into_cart),
                                 Snackbar.LENGTH_LONG
                             )
-                                .setBackgroundTint(ContextCompat.getColor(context, R.color.dark_primary_color))
+                                .setBackgroundTint(ContextCompat.getColor(context,
+                                    R.color.dark_primary_color))
                                 .show()
 
                         }
                     }
                 }
-
-
             }
         }
     }

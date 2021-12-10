@@ -1,10 +1,10 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
@@ -20,6 +20,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     @Inject
     lateinit var requestsUseCases: RequestsUseCases
+
+    private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
+        override fun click(request: Request) {
+            openFragment(RequestDetailFragment.newInstance(request))
+        }
+    }
+
+    private val requestsAdapter by lazy {
+        RVHomeCarrierAdapter(listenerOnClickCargoItem)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +47,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
         }
 
         viewBinding.buttonAddCargo.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, OrderStepOneFragment.newInstance())
-                .addToBackStack(null)
-                .commit()
+            openFragment(OrderStepOneFragment.newInstance())
         }
 
+        showLoading()
         loadRequests()
     }
 
@@ -54,7 +62,61 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
     private fun updateUI(result: List<Request>?) {
         result?.let {
-            Log.e(TAG, "updateUI: $it")
+            hideLoading()
+            setVisibilityContent(it.isEmpty())
+
+            viewBinding.rvRequests.adapter = requestsAdapter
+            requestsAdapter.setData(it)
+        }
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    private fun setVisibilityContent(isEmptyData: Boolean) {
+        with(viewBinding) {
+            if (isEmptyData) {
+                rvRequests.visibility = View.GONE
+
+                buttonAddCargo.visibility = View.VISIBLE
+                imageViewMain.visibility = View.VISIBLE
+                textViewAddCargoHint.visibility = View.VISIBLE
+            } else {
+                rvRequests.visibility = View.VISIBLE
+
+                buttonAddCargo.visibility = View.GONE
+                imageViewMain.visibility = View.GONE
+                textViewAddCargoHint.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun showLoading() {
+        with(viewBinding) {
+            pbLoading.visibility = View.VISIBLE
+
+            // hide other
+            rvRequests.visibility = View.GONE
+            buttonAddCargo.visibility = View.GONE
+            imageViewMain.visibility = View.GONE
+            textViewAddCargoHint.visibility = View.GONE
+        }
+    }
+
+    private fun hideLoading() {
+        with(viewBinding) {
+            pbLoading.visibility = View.GONE
+
+            // show other
+            rvRequests.visibility = View.VISIBLE
+            buttonAddCargo.visibility = View.VISIBLE
+            imageViewMain.visibility = View.VISIBLE
+            textViewAddCargoHint.visibility = View.VISIBLE
+
         }
     }
 
@@ -68,7 +130,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
     }
 
     companion object {
-        fun newInstance() =
-            HomeFragment()
+        fun newInstance() = HomeFragment()
     }
 }

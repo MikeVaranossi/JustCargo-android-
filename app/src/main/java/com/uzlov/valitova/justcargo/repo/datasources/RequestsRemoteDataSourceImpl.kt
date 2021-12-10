@@ -38,15 +38,33 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return resultAll
     }
 
-    override fun getRequest(id: String): LiveData<Request?> {
-        reqReference.child(id).get().addOnSuccessListener {
+    override fun getRequestsWithStatus(id: Int) : LiveData<List<Request>> {
+        reqReference.orderByChild("status/id").equalTo(id.toDouble()).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // send data
+                val lis = snapshot.children.map {
+                    it.getValue<Request>()!!
+                }
+                resultAll.postValue(lis)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
+
+        return resultAll
+    }
+
+    override fun getRequest(id: Int): LiveData<Request?> {
+        reqReference.child(id.toString()).get().addOnSuccessListener {
             resultRequest.value = it.getValue<Request>()
         }
         return resultRequest
     }
 
-    override fun removeRequest(id: String) {
-        reqReference.child(id).removeValue()
+    override fun removeRequest(id: Int) {
+        reqReference.child(id.toString()).removeValue()
     }
 
     override fun putRequest(request: Request) {

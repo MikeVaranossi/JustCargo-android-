@@ -8,9 +8,9 @@ class RequestsViewModel @Inject constructor(private var requestsUseCases: Reques
 
     fun getRequests() = requestsUseCases?.getRequests()
 
-    fun getRequest(id: String) = requestsUseCases?.getRequests(id)
+    fun getRequest(id: Int) = requestsUseCases?.getRequests(id)
 
     fun addRequest(request: Request) = requestsUseCases?.putRequest(request)
 
-    fun removeRequest(id: String) = requestsUseCases?.removeRequests(id)
+    fun removeRequest(id: Int) = requestsUseCases?.removeRequests(id)
 }

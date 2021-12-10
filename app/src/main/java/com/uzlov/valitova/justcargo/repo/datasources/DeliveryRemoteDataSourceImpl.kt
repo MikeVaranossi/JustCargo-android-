@@ -38,8 +38,8 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
         return deliveryAll
     }
 
-    override fun getDelivery(id: String): LiveData<Delivery?> {
-        deliveryReference.child(id).get().addOnSuccessListener {
+    override fun getDelivery(id: Int): LiveData<Delivery?> {
+        deliveryReference.child(id.toString()).get().addOnSuccessListener {
             resultDelivery.value = it.getValue<Delivery>()
         }
         return resultDelivery
@@ -49,7 +49,7 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
         deliveryReference.child(delivery.id.toString()).setValue(delivery)
     }
 
-    override fun removeDelivery(id: String) {
-        deliveryReference.child(id).removeValue()
+    override fun removeDelivery(id: Int) {
+        deliveryReference.child(id.toString()).removeValue()
     }
 }
