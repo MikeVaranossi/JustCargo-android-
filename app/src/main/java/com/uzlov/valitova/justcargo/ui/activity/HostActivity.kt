@@ -37,7 +37,12 @@ class HostActivity : AppCompatActivity() {
             it.setNavigationIconTint(resources.getColor(R.color.white_color))
         }
 
-        setFragment(HomeSenderFragment.newInstance())
+        if (user.userType?.id == 1L) {
+            setFragment(HomeSenderFragment.newInstance())
+        } else {
+            setFragment(HomeCarrierFragment.newInstance())
+
+        }
 
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
