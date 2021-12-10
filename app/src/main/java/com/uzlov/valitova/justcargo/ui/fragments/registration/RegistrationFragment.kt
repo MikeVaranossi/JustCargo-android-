@@ -13,16 +13,29 @@ import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationCompleteBinding
+import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.model.entities.UserClass
+import com.uzlov.valitova.justcargo.model.entities.UserType
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
     FragmentRegistrationBinding::inflate) {
 
     private fun sendSmsClicked(){
+
+        val newUser = User(1, "", "", true,
+            name = viewBinding.textInputFio.text.toString(),
+            "",
+            phone = viewBinding.textInputPhone.text.toString(),
+            email = viewBinding.textInputEmail.text.toString(),
+            userType = UserType(1, viewBinding.textfieldActivityProfile.editText?.text.toString()),
+            userClass = UserClass(1, " ")
+        )
+
         val manager = requireActivity().supportFragmentManager
         manager.apply {
             beginTransaction()
-                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString()))
+                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString(), newUser))
                 .commit()
         }
     }
@@ -69,6 +82,14 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
                 viewBinding.textInputEmail.text.isNullOrEmpty() ||
                 (viewBinding.textfieldActivityProfile.editText?.text.toString()  == "Грузоперевозчик" &&
                         viewBinding.textInputDriverDoc.text.isNullOrEmpty()))
+
+        if (viewBinding.textfieldActivityProfile.editText?.text.toString()  == "Грузоперевозчик"){
+            viewBinding?.textfieldDriverDoc?.visibility = View.VISIBLE
+            viewBinding?.textViewDriverDoc?.visibility = View.VISIBLE
+        }else{
+            viewBinding?.textfieldDriverDoc?.visibility = View.INVISIBLE
+            viewBinding?.textViewDriverDoc?.visibility = View.INVISIBLE
+        }
 
         viewBinding.btnSendSms.isEnabled = buttonEnable
     }

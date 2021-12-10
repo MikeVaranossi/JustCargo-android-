@@ -15,10 +15,14 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
+import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.model.entities.UserClass
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import java.util.concurrent.TimeUnit
 
@@ -26,6 +30,7 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
     FragmentRegistrationSmsBinding::inflate) {
 
     private lateinit var auth: FirebaseAuth
+    private val mDatabase: DatabaseReference? = null
     private lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     private var storedVerificationId: String? = ""
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
@@ -123,7 +128,16 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "signInWithCredential:success")
-                    val user = task.result?.user
+                    val userPhone = task.result?.user?.phoneNumber
+
+                    val database = FirebaseDatabase.getInstance()
+                    val usersRef = database.getReference("users")
+
+                    var user = arguments?.getParcelable<User>(NEW_USER) as User?
+
+                    if (user != null)
+                        usersRef.child(userPhone.toString()).setValue(user)
+
                     //проверка кода удачная
                     val manager = requireActivity().supportFragmentManager
                     manager.apply {
@@ -148,10 +162,12 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
 
     companion object {
         private const val PHONE_NUMBER = "phone_number"
+        private const val NEW_USER = "user"
 
-        fun newInstance(phoneNumber: String) = RegistrationSmsFragment().apply {
+        fun newInstance(phoneNumber: String, user: User?) = RegistrationSmsFragment().apply {
             arguments = Bundle().apply {
                 putString(PHONE_NUMBER, phoneNumber)
+                putParcelable(NEW_USER, user)
             }
         }
     }

@@ -43,7 +43,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         val manager = requireActivity().supportFragmentManager
         manager.apply {
             beginTransaction()
-                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString()))
+                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString(), null))
                 .commit()
         }
     }
