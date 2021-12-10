@@ -10,4 +10,6 @@ class RequestsUseCases @Inject constructor(var requestRepository: IRequestsRepos
     fun removeRequests(id: Int) = requestRepository.removeRequest(id)
     fun putRequest(request: Request) = requestRepository.putRequest(request)
     fun getRequestsWithStatus(id: Int) = requestRepository.getRequestsWithStatus(id)
+    fun getRequestsWithPhone(phone: String) = requestRepository.getRequestsWithPhone(phone)
+    fun getRequestsWithUserID(id: Int) = requestRepository.getRequestsWithUserID(id)
 }
