@@ -85,7 +85,7 @@
     <string name="text_sort_button">По уменьшению стоимости</string>
     <string name="text_button_filters">Фильтры</string>
     <string name="text_label_find_cargo">Найдено грузов: 0</string>
-    <string name="for_date">%1$d.%2$d.%3$d</string>
+    <string name="for_date">%1$s - %2$s</string>
     <string name="search_cargo">Поиск грузов</string>
     <string name="label_order_step_one">Заявка Шаг1</string>
     <string name="label_order_step_two">Заявка Шаг2</string>
@@ -111,4 +111,6 @@
     <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
     <string name="login">Войти</string>
     <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
+    <string name="label_cost_text">Стоимость отправления груза в рублях</string>
+    <string name="hint_add_cost">Введите сумму</string>
 </resources>

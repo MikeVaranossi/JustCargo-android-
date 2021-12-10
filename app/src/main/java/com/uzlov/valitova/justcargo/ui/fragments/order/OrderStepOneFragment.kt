@@ -1,17 +1,20 @@
 package com.uzlov.valitova.justcargo.ui.fragments.order
 
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import java.util.*
+import java.text.SimpleDateFormat
 
 
 class OrderStepOneFragment :
@@ -59,6 +62,13 @@ class OrderStepOneFragment :
                 verifyEmptyEditText()
             }
         })
+        viewBinding.textInputCost.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
     }
 
     private fun initListeners() {
@@ -73,8 +83,9 @@ class OrderStepOneFragment :
                 request.shortInfo = textInputName.text.toString()
                 request.departure = textInputFrom.text.toString()
                 request.destination = textInputTo.text.toString()
-                request.cost = 10000
-                request.owner = User(phone = "89992008289") // здесь будет браться реальная информация
+                request.cost = textInputCost.text.toString().toInt()
+                request.owner =
+                    User(phone = "89992008289") // здесь будет браться реальная информация
             }
 
             parentFragmentManager.beginTransaction()
@@ -89,44 +100,41 @@ class OrderStepOneFragment :
             buttonNextStep.isEnabled = !textInputName.text.isNullOrEmpty() &&
                     !textInputFrom.text.isNullOrEmpty() &&
                     !textInputTo.text.isNullOrEmpty() &&
-                    !textDate.text.isNullOrEmpty()
+                    !textDate.text.isNullOrEmpty() &&
+                    !textInputCost.text.isNullOrEmpty()
 
         }
     }
 
     private fun openDatePicker() {
-
-        val c = Calendar.getInstance()
-        val year = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-        val dpd =
-            DatePickerDialog(
-                requireContext(),
-                { w, year, monthOfYear, dayOfMonth ->
-                    viewBinding.textDate.setText(
-                        getString(
-                            R.string.for_date,
-                            dayOfMonth,
-                            (monthOfYear + 1),
-                            year
-                        )
-                    )
-
-                    request.deliveryTime = Date(year, monthOfYear, dayOfMonth).time
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                            OffsetDateTime.of(LocalDateTime.of(year, monthOfYear, dayOfMonth, 12, 0, 0), ZoneOffset.UTC)
-//                    } else {
-//                        // нужна реализация для устройств на версии < 26
-//                    }
-                },
-                year,
-                month,
-                day
+        val today = MaterialDatePicker.todayInUtcMilliseconds()
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        calendar.timeInMillis = today
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
+        val dateRangePicker =
+            MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText(getString(R.string.text_choose_date))
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+        dateRangePicker.show(parentFragmentManager, "tag")
+        dateRangePicker.addOnPositiveButtonClickListener {
+            val selectedDates: androidx.core.util.Pair<Long, Long>? = dateRangePicker.selection
+            val (startDate, endDate) = Pair(
+                Date((selectedDates?.first as Long)),
+                Date((selectedDates.second as Long))
             )
-        dpd.datePicker.minDate = System.currentTimeMillis() - 1000
-        dpd.show()
+            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+            viewBinding.textDate.setText(getString(
+                    R.string.for_date,
+                    simpleFormat.format(startDate).toString(),
+                    simpleFormat.format(endDate).toString()
+                ))
+            // в request теперь непонятно как добавлять - в лонг не запихнешь, пока оставила первую дату
+            request.deliveryTime = Date((selectedDates.first as Long)).time
+        }
+
     }
 
 
