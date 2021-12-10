@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
@@ -13,6 +14,7 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import java.lang.NumberFormatException
 import java.util.*
 import java.text.SimpleDateFormat
 
@@ -28,7 +30,6 @@ class OrderStepOneFragment :
             it.title = getString(R.string.label_order_step_one)
             it.setDisplayHomeAsUpEnabled(true)
         }
-
         addTextWatchers()
         initListeners()
     }
@@ -75,7 +76,6 @@ class OrderStepOneFragment :
         viewBinding.textDate.setOnClickListener {
             openDatePicker()
         }
-
         viewBinding.buttonNextStep.setOnClickListener {
 
             with(viewBinding) {
@@ -83,7 +83,13 @@ class OrderStepOneFragment :
                 request.shortInfo = textInputName.text.toString()
                 request.departure = textInputFrom.text.toString()
                 request.destination = textInputTo.text.toString()
-                request.cost = textInputCost.text.toString().toInt()
+                try {
+                    request.cost = textInputCost.text.toString().toInt()
+                } catch (e: NumberFormatException){
+                    request.cost = 0
+                        Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT).show()
+                }
+
                 request.owner =
                     User(phone = "89992008289") // здесь будет браться реальная информация
             }
