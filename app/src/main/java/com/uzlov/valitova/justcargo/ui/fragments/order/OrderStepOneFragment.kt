@@ -62,6 +62,13 @@ class OrderStepOneFragment :
                 verifyEmptyEditText()
             }
         })
+        viewBinding.textInputCost.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
     }
 
     private fun initListeners() {
@@ -76,7 +83,7 @@ class OrderStepOneFragment :
                 request.shortInfo = textInputName.text.toString()
                 request.departure = textInputFrom.text.toString()
                 request.destination = textInputTo.text.toString()
-                request.cost = 10000
+                request.cost = textInputCost.text.toString().toInt()
                 request.owner =
                     User(phone = "89992008289") // здесь будет браться реальная информация
             }
@@ -93,7 +100,8 @@ class OrderStepOneFragment :
             buttonNextStep.isEnabled = !textInputName.text.isNullOrEmpty() &&
                     !textInputFrom.text.isNullOrEmpty() &&
                     !textInputTo.text.isNullOrEmpty() &&
-                    !textDate.text.isNullOrEmpty()
+                    !textDate.text.isNullOrEmpty() &&
+                    !textInputCost.text.isNullOrEmpty()
 
         }
     }
@@ -122,10 +130,11 @@ class OrderStepOneFragment :
                     R.string.for_date,
                     simpleFormat.format(startDate).toString(),
                     simpleFormat.format(endDate).toString()
-                )
-            )
+                ))
+            // в request теперь непонятно как добавлять - в лонг не запихнешь, пока оставила первую дату
+            request.deliveryTime = Date((selectedDates.first as Long)).time
         }
-        // в request теперь непонятно как добавлять - в лонг не запихнешь
+
     }
 
 
