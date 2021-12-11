@@ -1,14 +1,20 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
@@ -23,7 +29,18 @@ import com.uzlov.valitova.justcargo.data.net.Request
 class RequestDetailFragment :
     BaseFragment<FragmentDetailLayoutBinding>(FragmentDetailLayoutBinding::inflate) {
 
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private var request: Request? = null
+
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                Log.e("TAG", "requirePermissionsCallToPhone: $isGranted")
+
+            }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,18 +120,23 @@ class RequestDetailFragment :
     }
 
     private fun requirePermissionsCallToPhone() {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
                 Manifest.permission.CALL_PHONE
-            )
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CALL_PHONE),
-                MY_PERMISSIONS_REQUEST_CALL_PHONE
-            )
+            ) == PackageManager.PERMISSION_GRANTED -> {
+
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
+
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.CALL_PHONE)
+            }
         }
     }
+
 
     companion object {
         fun newInstance(request: Request) =
