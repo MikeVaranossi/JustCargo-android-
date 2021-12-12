@@ -115,4 +115,5 @@
     <string name="hint_add_cost">Введите сумму</string>
     <string name="my_packages">Мои отправления</string>
     <string name="history_packages">История отправлений</string>
+    <string name="you_denied_call_from_app">Вы запретили звонки из приложения!</string>
 </resources>

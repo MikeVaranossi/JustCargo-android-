@@ -5,20 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.app.ActivityCompat.requestPermissions
 import androidx.core.content.ContextCompat
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
-import com.uzlov.valitova.justcargo.app.Constant.Companion.MY_PERMISSIONS_REQUEST_CALL_PHONE
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 
 import com.uzlov.valitova.justcargo.data.net.Request
@@ -32,13 +27,15 @@ class RequestDetailFragment :
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private var request: Request? = null
 
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         requestPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                Log.e("TAG", "requirePermissionsCallToPhone: $isGranted")
-
+                if (isGranted){
+                    callToUser()
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.you_denied_call_from_app), Toast.LENGTH_SHORT).show()
+                }
             }
     }
 
@@ -74,7 +71,7 @@ class RequestDetailFragment :
     private fun initListeners() {
         with(viewBinding) {
             fabCall.setOnClickListener {
-                request?.owner?.phone?.let { numberPhone -> callTo(numberPhone) }
+                request?.owner?.phone?.let { continueCall() }
             }
 
             fabStartChat.setOnClickListener {
@@ -90,32 +87,40 @@ class RequestDetailFragment :
         }
     }
 
-    private fun callTo(number: String) {
-        if (number.trim().isEmpty()) {
-            Toast.makeText(requireContext(),
-                getString(R.string.incorrect_phone_number),
-                Toast.LENGTH_SHORT).show()
-            return
+    private fun continueCall() {
+        request?.owner?.phone?.let {
+            if (it.trim().isEmpty()) {
+                Toast.makeText(requireContext(),
+                    getString(R.string.incorrect_phone_number),
+                    Toast.LENGTH_SHORT).show()
+                return
+            }
         }
 
         if (checkCallToPhonePermissions()) {
             // Разрешение уже есть, звоним
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$number"))
-            startActivity(intent)
+            callToUser()
         } else {
             requirePermissionsCallToPhone()
         }
     }
 
+    private fun callToUser() {
+        request?.owner?.phone?.let {
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
+            startActivity(intent)
+        }
+    }
+
     private fun checkCallToPhonePermissions(): Boolean {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
+        return if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
             != PackageManager.PERMISSION_GRANTED
         ) {
             requirePermissionsCallToPhone()
-            return false
+            false
         } else {
             // Разрешение уже есть, звоним
-            return true
+            true
         }
     }
 
@@ -125,7 +130,7 @@ class RequestDetailFragment :
                 requireContext(),
                 Manifest.permission.CALL_PHONE
             ) == PackageManager.PERMISSION_GRANTED -> {
-
+                callToUser()
             }
             shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
 
@@ -136,7 +141,6 @@ class RequestDetailFragment :
             }
         }
     }
-
 
     companion object {
         fun newInstance(request: Request) =
