@@ -9,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.data.net.User
+import com.uzlov.valitova.justcargo.data.net.UserClass
+import com.uzlov.valitova.justcargo.data.net.UserType
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
-import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationCompleteBinding
-import com.uzlov.valitova.justcargo.model.entities.User
-import com.uzlov.valitova.justcargo.model.entities.UserClass
-import com.uzlov.valitova.justcargo.model.entities.UserType
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(

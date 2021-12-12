@@ -19,10 +19,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
+import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationSmsBinding
-import com.uzlov.valitova.justcargo.model.entities.User
-import com.uzlov.valitova.justcargo.model.entities.UserClass
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import java.util.concurrent.TimeUnit
 

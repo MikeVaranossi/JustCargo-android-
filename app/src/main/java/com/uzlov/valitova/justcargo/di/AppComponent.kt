@@ -8,7 +8,6 @@ import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
-import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment
 import dagger.Component
 import javax.inject.Singleton
