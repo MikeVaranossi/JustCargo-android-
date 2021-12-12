@@ -1,49 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tvLabelStatusSubs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/dark_primary_color"
-        android:lineSpacingExtra="4sp"
-        android:text="@string/datetime_end_subscription"
-        android:layout_marginTop="@dimen/margin_top_profile"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnSubscribe"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_top_left"
-        android:backgroundTint="@color/primary_second_color"
-        android:textColor="@color/white"
-        android:text="@string/continue_subscribtion"
-        app:cornerRadius="@dimen/corner_radius_edittext"
-        android:layout_marginStart="56dp"
-        android:layout_marginEnd="56dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvLabelStatusSubs"/>
-
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvMyDeliveries"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/my_deliveries"
+        android:text="@string/my_packages"
+        android:textColor="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
         app:drawableStartCompat="@drawable/ic_car"
         app:drawableTint="@color/dark_primary_color"
-        android:drawablePadding="@dimen/drawable_tv_padding"
-        android:textColor="@color/dark_primary_color"
-        android:layout_marginTop="@dimen/margin_top_left"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/l_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnSubscribe"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvSelfData"
@@ -66,7 +40,7 @@
         app:drawableStartCompat="@drawable/ic_baseline_history_24"
         app:drawableTint="@color/dark_primary_color"
         android:drawablePadding="@dimen/drawable_tv_padding"
-        android:text="@string/history_deliveries"
+        android:text="@string/history_packages"
         android:textColor="@color/dark_primary_color"
         app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
         app:layout_constraintTop_toBottomOf="@id/tvSelfData" />

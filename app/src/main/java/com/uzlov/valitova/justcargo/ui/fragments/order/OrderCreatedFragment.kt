@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderCreatedBinding
-import com.uzlov.valitova.justcargo.ui.fragments.MyDeliveriesFragment
+import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 
 
 class OrderCreatedFragment: Fragment() {
