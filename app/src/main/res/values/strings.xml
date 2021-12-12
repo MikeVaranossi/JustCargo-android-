@@ -110,4 +110,10 @@
     <string name="send_again">прислать ещё раз</string>
     <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
     <string name="login">Войти</string>
+    <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
+    <string name="label_cost_text">Стоимость отправления груза в рублях</string>
+    <string name="hint_add_cost">Введите сумму</string>
+    <string name="my_packages">Мои отправления</string>
+    <string name="history_packages">История отправлений</string>
+    <string name="you_denied_call_from_app">Вы запретили звонки из приложения!</string>
 </resources>

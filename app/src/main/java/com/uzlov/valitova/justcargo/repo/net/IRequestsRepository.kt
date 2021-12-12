@@ -1,11 +1,14 @@
 package com.uzlov.valitova.justcargo.repo.net
 
 import androidx.lifecycle.LiveData
-import com.uzlov.valitova.justcargo.model.entities.Request
+import com.uzlov.valitova.justcargo.data.net.Request
 
 interface IRequestsRepository {
-    fun getRequests() : LiveData<List<Request>>
-    fun getRequest(id: String) : LiveData<Request?>
-    fun removeRequest(id: String)
+    fun getRequests(): LiveData<List<Request>>
+    fun getRequest(id: Int): LiveData<Request?>
+    fun getRequestsWithStatus(id: Int): LiveData<List<Request>>
+    fun getRequestsWithPhone(phone: String): LiveData<List<Request>>
+    fun getRequestsWithUserID(id: Int): LiveData<List<Request>>
+    fun removeRequest(id: Int)
     fun putRequest(request: Request)
 }

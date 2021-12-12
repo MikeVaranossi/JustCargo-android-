@@ -1,23 +1,22 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
-import com.uzlov.valitova.justcargo.app.Constant.Companion.MY_PERMISSIONS_REQUEST_CALL_PHONE
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 
-import com.uzlov.valitova.justcargo.model.entities.Request
+import com.uzlov.valitova.justcargo.data.net.Request
 
 /*
 * Фрагмент отображает детальную информацию о заявке на перевозку груза.
@@ -25,13 +24,26 @@ import com.uzlov.valitova.justcargo.model.entities.Request
 class RequestDetailFragment :
     BaseFragment<FragmentDetailLayoutBinding>(FragmentDetailLayoutBinding::inflate) {
 
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private var request: Request? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (isGranted){
+                    callToUser()
+                } else {
+                    Toast.makeText(requireContext(), getString(R.string.you_denied_call_from_app), Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState != null && savedInstanceState.isEmpty) {
-            request = savedInstanceState.getParcelable(Constant.KEY_DELIVERY_OBJECT)
+        arguments?.let {
+            request = it.getParcelable(Constant.KEY_REQUESTS_OBJECT)
         }
     }
 
@@ -59,63 +71,80 @@ class RequestDetailFragment :
     private fun initListeners() {
         with(viewBinding) {
             fabCall.setOnClickListener {
+                request?.owner?.phone?.let { continueCall() }
+            }
+
+            fabStartChat.setOnClickListener {
                 Toast.makeText(requireContext(),
                     getString(R.string.where_is_chat),
                     Toast.LENGTH_SHORT).show()
             }
+        }
 
-            fabStartChat.setOnClickListener {
-                request?.owner?.phone?.let { numberPhone -> callTo(numberPhone) }
-            }
+        (requireActivity() as AppCompatActivity).supportActionBar?.let {
+            it.title = request?.shortInfo
+            it.setDisplayHomeAsUpEnabled(true)
         }
     }
 
-    private fun callTo(number: String) {
-        if (number.trim().isEmpty()) {
-            Toast.makeText(requireContext(),
-                getString(R.string.incorrect_phone_number),
-                Toast.LENGTH_SHORT).show()
-            return
+    private fun continueCall() {
+        request?.owner?.phone?.let {
+            if (it.trim().isEmpty()) {
+                Toast.makeText(requireContext(),
+                    getString(R.string.incorrect_phone_number),
+                    Toast.LENGTH_SHORT).show()
+                return
+            }
         }
 
         if (checkCallToPhonePermissions()) {
             // Разрешение уже есть, звоним
-            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$number"))
-            startActivity(intent)
+            callToUser()
         } else {
             requirePermissionsCallToPhone()
+        }
+    }
+
+    private fun callToUser() {
+        request?.owner?.phone?.let {
+            val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
+            startActivity(intent)
         }
     }
 
     private fun checkCallToPhonePermissions(): Boolean {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
+        return if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
             != PackageManager.PERMISSION_GRANTED
         ) {
             requirePermissionsCallToPhone()
-            return false
+            false
         } else {
             // Разрешение уже есть, звоним
-            return true
+            true
         }
     }
 
     private fun requirePermissionsCallToPhone() {
-        if (!ActivityCompat.shouldShowRequestPermissionRationale(
-                requireActivity(),
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
                 Manifest.permission.CALL_PHONE
-            )
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CALL_PHONE),
-                MY_PERMISSIONS_REQUEST_CALL_PHONE
-            )
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                callToUser()
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
+
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.CALL_PHONE)
+            }
         }
     }
 
     companion object {
         fun newInstance(request: Request) =
-            HomeFragment().apply {
+            RequestDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(Constant.KEY_REQUESTS_OBJECT, request)
                 }

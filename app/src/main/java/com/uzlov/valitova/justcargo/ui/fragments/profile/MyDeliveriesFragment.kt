@@ -1,15 +1,14 @@
-package com.uzlov.valitova.justcargo.ui.fragments
+package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
-import android.util.Log
-import android.view.ContextMenu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
-import com.uzlov.valitova.justcargo.model.entities.Delivery
+import com.uzlov.valitova.justcargo.data.net.Delivery
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import javax.inject.Inject
 

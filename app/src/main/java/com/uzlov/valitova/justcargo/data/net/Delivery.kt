@@ -1,4 +1,4 @@
-package com.uzlov.valitova.justcargo.model.entities
+package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
@@ -10,6 +10,6 @@ data class Delivery(
     var id: Long? = 0,
     var request: Request? = null,
     var trip: Trip? = null,
-    var startTime: OffsetTime? = null,
-    var endTime: OffsetTime? = null
+    var startTime: Long? = 0,
+    var endTime: Long? = 0,
 ) : Parcelable

@@ -8,7 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
-import com.uzlov.valitova.justcargo.model.entities.User
+import com.uzlov.valitova.justcargo.data.net.User
 
 class UserRemoteDataSourceImpl : IUsersRemoteDataSource {
 
@@ -39,15 +39,15 @@ class UserRemoteDataSourceImpl : IUsersRemoteDataSource {
         return resultAll
     }
 
-    override fun getUser(id: String): LiveData<User?> {
-        usersReference.child(id).get().addOnSuccessListener {
+    override fun getUser(id: Int): LiveData<User?> {
+        usersReference.child(id.toString()).get().addOnSuccessListener {
             resultUser.value = it.getValue<User>()
         }
         return resultUser
     }
 
-    override fun removeUsers(id: String) {
-        usersReference.child(id).removeValue()
+    override fun removeUsers(id: Int) {
+        usersReference.child(id.toString()).removeValue()
     }
 
     override fun putUser(user: User) {
