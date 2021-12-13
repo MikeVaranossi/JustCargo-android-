@@ -33,7 +33,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
         val manager = requireActivity().supportFragmentManager
         manager.apply {
             beginTransaction()
-                .replace(R.id.container, RegistrationSmsFragment.newInstance( viewBinding.textInputPhone.text.toString(), newUser))
+                .replace(R.id.container, RegistrationSmsFragment.newInstance(newUser))
                 .commit()
         }
     }
