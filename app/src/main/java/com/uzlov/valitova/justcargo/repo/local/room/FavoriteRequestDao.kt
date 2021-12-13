@@ -12,7 +12,7 @@ interface FavoriteRequestDao {
     @Query("SELECT * FROM FavoriteRequestLocal WHERE id LIKE :id")
     fun getFavoriteRequest(id: Long): LiveData<FavoriteRequestLocal?>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertRequest(favoriteRequests: FavoriteRequestLocal)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

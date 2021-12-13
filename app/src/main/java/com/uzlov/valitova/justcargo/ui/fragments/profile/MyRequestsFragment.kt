@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
@@ -37,38 +38,11 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         }
 
         override fun addToFavorite(request: Request) {
-            val localRequest = FavoriteRequestLocal(
-                id = request.id,
-                requestTime = request.requestTime,
-                cost = request.cost,
-                departure = request.departure,
-                destination = request.destination,
-                shortInfo = request.shortInfo,
-                weight = request.weight,
-                length = request.length,
-                width = request.width,
-                height = request.height,
-                status = request.status?.name
-            )
-
-            requestRepository.putRequest(localRequest)
+            requestRepository.putRequest(request.toFavoriteRequestLocal())
         }
 
         override fun removeFromFavorite(request: Request) {
-            val localRequest = FavoriteRequestLocal(
-                id = request.id,
-                requestTime = request.requestTime,
-                cost = request.cost,
-                departure = request.departure,
-                destination = request.destination,
-                shortInfo = request.shortInfo,
-                weight = request.weight,
-                length = request.length,
-                width = request.width,
-                height = request.height,
-                status = request.status?.name
-            )
-            requestRepository.removeRequest(localRequest)
+            requestRepository.removeRequest(request.toFavoriteRequestLocal())
         }
     }
 

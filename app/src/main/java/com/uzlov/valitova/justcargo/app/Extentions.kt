@@ -1,9 +1,12 @@
 package com.uzlov.valitova.justcargo.app
 
+import android.app.DownloadManager
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.SuperscriptSpan
+import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.net.Request
 
 
 fun String.lastToPower(): SpannableStringBuilder =
@@ -20,3 +23,19 @@ fun String.lastToPower(): SpannableStringBuilder =
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
     }
+
+fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
+    return FavoriteRequestLocal(
+        id=this.id,
+        requestTime=this.requestTime,
+        cost=this.cost,
+        departure=this.departure,
+        destination=this.destination,
+        shortInfo=this.shortInfo,
+        weight=this.weight,
+        length = this.length,
+        width = this.width,
+        height=this.height,
+        status = this.status?.name
+    )
+}
