@@ -14,12 +14,16 @@ class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource):
         return localDataSource.getRequest(id)
     }
 
-    override fun removeRequest(id: Long) {
-//        localDataSource.removeRequest(id)
+    override fun removeRequest(request: FavoriteRequestLocal) {
+        localDataSource.removeRequest(request)
     }
 
     override fun putRequest(request: FavoriteRequestLocal) {
         localDataSource.putRequest(request)
+    }
+
+    override fun updateRequest(request: FavoriteRequestLocal) {
+        localDataSource.updateRequest(request)
     }
 
 }

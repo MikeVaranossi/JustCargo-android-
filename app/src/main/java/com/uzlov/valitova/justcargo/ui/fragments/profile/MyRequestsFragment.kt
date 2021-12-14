@@ -7,8 +7,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
+import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
+import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
+import com.uzlov.valitova.justcargo.repo.net.IUserRepository
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.RequestDetailFragment
@@ -16,7 +21,7 @@ import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
 
 class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
-    MyRequestsProfileLayoutBinding::inflate){
+    MyRequestsProfileLayoutBinding::inflate) {
 
     private val TAG: String = javaClass.simpleName
 
@@ -24,9 +29,20 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: RequestsViewModel
 
+    @Inject
+    lateinit var requestRepository: IRequestsLocalDataSource
+
     private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
         override fun click(request: Request) {
             openFragment(RequestDetailFragment.newInstance(request))
+        }
+
+        override fun addToFavorite(request: Request) {
+            requestRepository.putRequest(request.toFavoriteRequestLocal())
+        }
+
+        override fun removeFromFavorite(request: Request) {
+            requestRepository.removeRequest(request.toFavoriteRequestLocal())
         }
     }
 

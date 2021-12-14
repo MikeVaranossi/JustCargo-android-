@@ -18,6 +18,8 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
 
     interface OnItemClickListener {
         fun click(request: Request)
+        fun addToFavorite(request: Request)
+        fun removeFromFavorite(request: Request)
     }
 
     fun setData(data: List<Request>) {
@@ -59,7 +61,6 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
                     }
                     findViewById<CheckBox>(R.id.checkbox_favourite).setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
-
                             Snackbar.make(
                                 itemView,
                                 context.getString(R.string.cargo_is_added_into_cart),
@@ -68,7 +69,9 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
                                 .setBackgroundTint(ContextCompat.getColor(context,
                                     R.color.dark_primary_color))
                                 .show()
-
+                            itemClickListener?.addToFavorite(data)
+                        } else {
+                            itemClickListener?.removeFromFavorite(data)
                         }
                     }
                 }
