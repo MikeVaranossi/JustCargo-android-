@@ -8,16 +8,28 @@ import android.util.Patterns
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.auth.AuthService
+import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentPersonalDataLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import javax.inject.Inject
 
 class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
     FragmentPersonalDataLayoutBinding::inflate) {
+
+    @Inject
+    lateinit var authService: AuthService
 
     companion object {
         fun newInstance(): PersonalDataFragment {
             return PersonalDataFragment()
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireContext().appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -29,6 +41,15 @@ class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
         }
 
         addListeners()
+        updateUI(authService.currentUser())
+    }
+
+    private fun updateUI(currentUser: User?) {
+        currentUser?.let {
+            viewBinding.tvProfileFullName.text = it.name
+            viewBinding.etEmailProfile.setText(it.email)
+            viewBinding.etPhoneProfile.setText(it.phone)
+        }
     }
 
     private fun addListeners() {

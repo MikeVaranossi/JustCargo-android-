@@ -1,15 +1,14 @@
 package com.uzlov.valitova.justcargo.viemodels
 
 import androidx.lifecycle.LiveData
-import com.uzlov.valitova.justcargo.data.net.Request
-import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
+import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import javax.inject.Inject
 
 // ViewModel для взаимодествия с данными из БД (заявками добавленным ив избранное)
-class FavoritesRequestsViewModel @Inject constructor(var favIRequestsRepository: IRequestsRepository) : BaseViewModel() {
+class FavoritesRequestsViewModel @Inject constructor(var favIRequestsRepository: IRequestsLocalDataSource) : BaseViewModel() {
 
-    fun getRequests() : LiveData<List<Request>> = favIRequestsRepository.getRequests()
-    fun getRequestsByID(id: Int) : LiveData<Request?> = favIRequestsRepository.getRequest(id)
-    fun putRequest(request: Request)  = favIRequestsRepository.putRequest(request)
-    fun removeRequest(id: Int)  = favIRequestsRepository.removeRequest(id)
+    fun getRequests() : LiveData<List<FavoriteRequestLocal>> = favIRequestsRepository.getRequests()
+    fun putRequest(request: FavoriteRequestLocal)  = favIRequestsRepository.putRequest(request)
+    fun removeRequest(request: FavoriteRequestLocal)  = favIRequestsRepository.removeRequest(request)
 }
