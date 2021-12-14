@@ -19,6 +19,9 @@ import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
     FragmentRegistrationBinding::inflate) {
 
+    //пока оставим здесь в дальнейшем будем получать с сервера
+    private val items = listOf("Грузоотправитель", "Грузоперевозчик" )
+
     private fun sendSmsClicked(){
 
         val newUser = User(1, "", "", true,
@@ -26,7 +29,9 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
             "",
             phone = viewBinding.textInputPhone.text.toString(),
             email = viewBinding.textInputEmail.text.toString(),
-            userType = UserType(1, viewBinding.textfieldActivityProfile.editText?.text.toString()),
+            userType = UserType(
+                items.indexOf(viewBinding.textfieldActivityProfile.editText?.text.toString()) + 1L,
+                viewBinding.textfieldActivityProfile.editText?.text.toString()),
             userClass = UserClass(1, " ")
         )
 
@@ -52,7 +57,6 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
 
         addTextChangedListener()
 
-        val items = listOf("Грузоперевозчик", "Грузоотправитель")
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_activity_profile, items)
         (viewBinding.textfieldActivityProfile.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }

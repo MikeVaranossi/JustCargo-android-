@@ -7,18 +7,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.Reusable
 import javax.inject.Inject
+import javax.inject.Singleton
 
 @Module
 class AuthModule {
 
-
-    /*@Reusable
-    @Provides
-    fun currentUser(): User = User(phone = "89992008289", userType = UserType(2, "Грузоперевозчик"))
-*/
-
+    @Singleton
     @Provides
     fun authService() : AuthService = AuthService()
-
-
 }

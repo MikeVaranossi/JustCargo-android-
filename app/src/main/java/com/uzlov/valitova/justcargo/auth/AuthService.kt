@@ -84,7 +84,7 @@ class AuthService () {
         }
     }
 
-    public fun checkUserIsAuth(): String? {
+    fun checkUserIsAuth(): String? {
         return auth.currentUser?.phoneNumber
     }
 

@@ -24,6 +24,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textview_time"
         android:hint="******"
+        android:inputType="numberPassword"
+        android:maxLength="6"
         android:textAlignment="center"
         />
     <TextView
