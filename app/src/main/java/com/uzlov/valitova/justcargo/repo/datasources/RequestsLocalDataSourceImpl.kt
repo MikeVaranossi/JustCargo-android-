@@ -6,31 +6,29 @@ import androidx.room.Room
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.repo.local.room.RoomFavoritesRequestDB
 import com.uzlov.valitova.justcargo.app.App
+import com.uzlov.valitova.justcargo.repo.local.room.FavoriteRequestDao
+import javax.inject.Inject
+import javax.inject.Named
 
-class RequestsLocalDataSourceImpl: IRequestsLocalDataSource {
-    private val db = Room.databaseBuilder(
-        App.applicationContext(),
-        RoomFavoritesRequestDB::class.java, "favoriteRequest"
-    ).build()
-    private val resultAll = MutableLiveData<List<FavoriteRequestLocal>>()
-    private val resultRequest = MutableLiveData<FavoriteRequestLocal>()
-
+class RequestsLocalDataSourceImpl @Inject constructor(var dao: FavoriteRequestDao): IRequestsLocalDataSource {
 
     override fun getRequests(): LiveData<List<FavoriteRequestLocal>> {
-        resultAll.value = db.favoriteRequestDao.getFavoriteRequests()
-        return resultAll
+        return dao.getFavoriteRequests()
     }
 
     override fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {
-        resultRequest.value = db.favoriteRequestDao.getFavoriteRequest(id)
-        return resultRequest
+        return dao.getFavoriteRequest(id)
     }
 
-    override fun removeRequest(id: Long) {
-//        db.favoriteRequestDao.removeRequest(id)
+    override fun removeRequest(request: FavoriteRequestLocal) {
+        dao.removeRequest(request)
     }
 
     override fun putRequest(request: FavoriteRequestLocal) {
-        db.favoriteRequestDao.insertRequest(request)
+        dao.insertRequest(request)
+    }
+
+    override fun updateRequest(request: FavoriteRequestLocal) {
+        dao.updateRequest(request)
     }
 }
