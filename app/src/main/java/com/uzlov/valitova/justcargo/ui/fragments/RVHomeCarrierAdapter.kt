@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? = null) :
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {
@@ -48,8 +50,9 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
                 itemView.apply {
                     findViewById<TextView>(R.id.text_view_name_cargo).text =
                         data.shortInfo
+                    val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
                     findViewById<TextView>(R.id.text_view_date).text =
-                        data.requestTime.toString()
+                        simpleFormat.format(data.deliveryTime).toString()
                     findViewById<TextView>(R.id.text_view_cost).text =
                         "${data.cost} ₽"
                     findViewById<TextView>(R.id.text_view_from_to).text =
