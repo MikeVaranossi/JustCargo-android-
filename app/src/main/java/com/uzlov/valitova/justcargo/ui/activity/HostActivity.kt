@@ -7,6 +7,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
@@ -23,7 +24,7 @@ class HostActivity : AppCompatActivity() {
     private var bottomNavigation: BottomNavigationView? = null
 
     @Inject
-    lateinit var user: User
+    lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +38,7 @@ class HostActivity : AppCompatActivity() {
             it.setNavigationIconTint(resources.getColor(R.color.white_color))
         }
 
-        if (user.userType?.id == 1L) {
+        if (authService.currentUser()?.userType?.id == 1L) {
             setFragment(HomeSenderFragment.newInstance())
         } else {
             setFragment(HomeCarrierFragment.newInstance())
@@ -50,7 +51,7 @@ class HostActivity : AppCompatActivity() {
         bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.main_action-> {
-                    if (user.userType?.id == 1L) {
+                    if (authService.currentUser()?.userType?.id == 1L) {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
                     } else {
@@ -71,7 +72,7 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.profile_action-> {
-                    if (user.userType?.id == 1L) {
+                    if (authService.currentUser()?.userType?.id == 1L) {
                         setFragment(ProfileSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
                     } else {

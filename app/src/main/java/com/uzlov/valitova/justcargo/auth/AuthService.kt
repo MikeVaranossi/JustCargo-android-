@@ -2,7 +2,6 @@ package com.uzlov.valitova.justcargo.auth
 
 import android.app.Activity
 import android.content.ContentValues
-import android.content.Context
 import android.util.Log
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -10,10 +9,7 @@ import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.data.net.User
-import com.uzlov.valitova.justcargo.data.net.UserClass
-import com.uzlov.valitova.justcargo.data.net.UserType
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 class AuthService () {
 
@@ -22,10 +18,12 @@ class AuthService () {
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private var activity: Activity? = null
 
+    private var registration: Boolean = false
+    private var user: User? = null
+
     interface IStateAuth {
         fun registered(user: User)
         fun login(user: User)
-        fun success()
         fun logout()
     }
 
@@ -47,7 +45,6 @@ class AuthService () {
     }
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
         override fun onVerificationCompleted(credential: PhoneAuthCredential) {
             // Этот обратный вызов будет вызываться в двух ситуациях:
             // 1 - Мгновенная проверка. В некоторых случаях номер телефона может быть мгновенно
@@ -87,20 +84,17 @@ class AuthService () {
         }
     }
 
-    private fun checkUserIsAuth(): Boolean {
-        val phone: String? = auth.currentUser?.phoneNumber
-        return phone != null
+    public fun checkUserIsAuth(): String? {
+        return auth.currentUser?.phoneNumber
     }
 
 
-    fun startAuth(phone: String) {
-        if (checkUserIsAuth()) {
-            // пользователь есть, отправляем на главный экран
-
-        } else {
-            // пользователя нет, просим войти / зарег-ся
+    fun startAuth(userLogin: User) {
+        user = userLogin
+        if (user!!.phone != null ){
+            // подтверждение номера телефона
             val options = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(phone)       // Phone number to verify
+                .setPhoneNumber(user!!.phone!!)       // Phone number to verify
                 .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
                 .setActivity(activity!!)                 // Activity (for callback binding)
                 .setCallbacks(callbacks)          // OnVerificationStateChangedCallbacks
@@ -110,37 +104,41 @@ class AuthService () {
     }
 
     fun checkCredential(code: String) {
-        storedVerificationId?.let {
-            PhoneAuthProvider.getCredential(it, code)
-        }?.let {
-            auth.signInWithCredential(it)
+        val credential = storedVerificationId?.let { PhoneAuthProvider.getCredential(it, code) }
+        if (credential != null) {
+            signInWithPhoneAuthCredential(credential)
         }
     }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential).addOnCompleteListener { task ->
             if (task.isSuccessful) {
-                val userPhone = task.result?.user?.phoneNumber
-                listenerAuth?.login(
-                    User(
-                        id = System.currentTimeMillis(),
-                        enabled = true,
-                        phone = userPhone,
-                        email = "",
-                        userType = UserType(),
-                        userClass = UserClass()
-                    )
-                )
+                if (registration){
+                    listenerAuth?.registered(user!!)
+                }else{
+                    listenerAuth?.login(user!!)
+                }
             }
         }.addOnFailureListener {
             it.printStackTrace()
         }
     }
 
-    fun startRegistering(user: User) {
-        user.phone?.let {
-            startAuth(it)
-            listenerAuth?.registered(user)
+    fun startRegistering(newUser: User) {
+        registration = true
+        user = newUser
+        newUser.phone?.let {
+            user = newUser
+            startAuth(user!!)
+            listenerAuth?.registered(user!!)
         }
+    }
+
+    fun setUserLogin(userLogin: User) {
+        user = userLogin
+    }
+
+    fun currentUser(): User? {
+        return user
     }
 }

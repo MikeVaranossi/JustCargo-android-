@@ -1,16 +1,15 @@
 package com.uzlov.valitova.justcargo.ui.fragments.registration
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.databinding.FragmentWelcomeScreenBinding
-import com.uzlov.valitova.justcargo.repo.usecases.UsersUseCase
+import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.UsersViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
@@ -24,6 +23,8 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
     lateinit var factoryViewModel: ViewModelFactory
     private lateinit var model: UsersViewModel
 
+    @Inject
+    lateinit var authService: AuthService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,14 +35,16 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
-        model = factoryViewModel.create(UsersViewModel::class.java)
-
-        val userPhone = FirebaseAuth.getInstance().currentUser?.phoneNumber ?: ""
-        Log.e(javaClass.simpleName, "onViewCreated userPhone: $userPhone")
-        model.getUser(userPhone)?.observe(this, {
-            Log.e(javaClass.simpleName, "onViewCreated: $it")
-        })
-
+        val phoneNumber = authService.checkUserIsAuth()
+        if (phoneNumber != null){
+            model = factoryViewModel.create(UsersViewModel::class.java)
+            model.getUser(phoneNumber)?.observe(this, { user ->
+                if (user != null) {
+                    authService.setUserLogin(user)
+                    startActivity(Intent(requireContext(), HostActivity::class.java))
+                }
+            })
+        }
 
         val manager = requireActivity().supportFragmentManager
         viewBinding.btnLogin.setOnClickListener {

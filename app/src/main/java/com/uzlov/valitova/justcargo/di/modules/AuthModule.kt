@@ -6,14 +6,16 @@ import com.uzlov.valitova.justcargo.data.net.UserType
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
+import javax.inject.Inject
 
 @Module
 class AuthModule {
 
-    @Reusable
+
+    /*@Reusable
     @Provides
     fun currentUser(): User = User(phone = "89992008289", userType = UserType(2, "Грузоперевозчик"))
-
+*/
 
     @Provides
     fun authService() : AuthService = AuthService()
