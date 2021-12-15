@@ -56,7 +56,7 @@ class SearchFragment : Fragment() {
                     { _, year, monthOfYear, dayOfMonth ->
                         viewBinding.editTextDate.setText(
                             getString(
-                                R.string.for_date,
+                                R.string.for_date_search,
                                 dayOfMonth,
                                 (monthOfYear + 1),
                                 year

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/bell_action"
+            android:icon="@drawable/ic_icone_bell_outline"
+            android:title="@string/action_bell"
+            app:showAsAction="always" />
+
+    </group>
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/share_action"
+            android:icon="@drawable/ic_icone_share"
+            android:title="@string/action_share"
+            app:showAsAction="always" />
+    </group>
+
+
+</menu>
