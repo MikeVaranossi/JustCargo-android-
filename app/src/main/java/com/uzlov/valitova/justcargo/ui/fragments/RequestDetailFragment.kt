@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailLayoutBinding
 
 import com.uzlov.valitova.justcargo.data.net.Request
@@ -26,6 +27,7 @@ class RequestDetailFragment :
 
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private var request: Request? = null
+    private var requestLocal: FavoriteRequestLocal? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,6 +46,7 @@ class RequestDetailFragment :
 
         arguments?.let {
             request = it.getParcelable(Constant.KEY_REQUESTS_OBJECT)
+            requestLocal = it.getParcelable(Constant.KEY_REQUESTS_LOCAL_OBJECT)
         }
     }
 
@@ -51,11 +54,35 @@ class RequestDetailFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initListeners()
-        updateUI(request)
+        if (request != null) {
+            updateUI(request)
+        } else {
+            updateUI(requestLocal)
+        }
     }
 
-    private fun updateUI(delivery: Request?) {
-        delivery?.let {
+    private fun updateUI(request: Request?) {
+        request?.let {
+            (requireActivity() as AppCompatActivity).supportActionBar?.let {
+                it.title = request.shortInfo
+            }
+            with(viewBinding) {
+                tvCargoName.text = it.shortInfo
+                textViewFromTo.text = "${it.departure} ${it.destination}"
+                tvCommentCargo.text = it.description
+                tvCostDelivery.text = it.cost.toString()
+                tvHeightCargoValue.text = it.height.toString()
+                tvWidthCargoValue.text = it.width.toString()
+                tvLengthCargoValue.text = it.length.toString()
+            }
+        }
+    }
+
+    private fun updateUI(request: FavoriteRequestLocal?) {
+        request?.let {
+            (requireActivity() as AppCompatActivity).supportActionBar?.let {
+                it.title = request.shortInfo
+            }
             with(viewBinding) {
                 tvCargoName.text = it.shortInfo
                 textViewFromTo.text = "${it.departure} ${it.destination}"
@@ -82,7 +109,6 @@ class RequestDetailFragment :
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
-            it.title = request?.shortInfo
             it.setDisplayHomeAsUpEnabled(true)
         }
     }
@@ -147,6 +173,13 @@ class RequestDetailFragment :
             RequestDetailFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(Constant.KEY_REQUESTS_OBJECT, request)
+                }
+            }
+
+        fun newInstance(request: FavoriteRequestLocal) =
+            RequestDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(Constant.KEY_REQUESTS_LOCAL_OBJECT, request)
                 }
             }
     }

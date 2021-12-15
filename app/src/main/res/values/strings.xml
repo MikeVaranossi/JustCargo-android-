@@ -116,9 +116,9 @@
     <string name="my_packages">Мои отправления</string>
     <string name="history_packages">История отправлений</string>
     <string name="you_denied_call_from_app">Вы запретили звонки из приложения!</string>
+    <string name="favourites">Избранное</string>
     <string name="for_date">%1$s - %2$s</string>
     <string name="label_home_carrier_fragment">Грузы</string>
     <string name="action_bell">Уведомления</string>
     <string name="action_share">Поделиться</string>
-
 </resources>

@@ -8,15 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
-import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
-import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
-import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
-import com.uzlov.valitova.justcargo.repo.net.IUserRepository
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.RequestDetailFragment
+import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
 
@@ -27,22 +24,22 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var model: RequestsViewModel
+    lateinit var modelRequests: RequestsViewModel
+    lateinit var modelFavorites: FavoritesRequestsViewModel
 
-    @Inject
-    lateinit var requestRepository: IRequestsLocalDataSource
 
     private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
         override fun click(request: Request) {
             openFragment(RequestDetailFragment.newInstance(request))
+            
         }
 
         override fun addToFavorite(request: Request) {
-            requestRepository.putRequest(request.toFavoriteRequestLocal())
+            modelFavorites.putRequest(request.toFavoriteRequestLocal())
         }
 
         override fun removeFromFavorite(request: Request) {
-            requestRepository.removeRequest(request.toFavoriteRequestLocal())
+            modelFavorites.removeRequest(request.toFavoriteRequestLocal())
         }
     }
 
@@ -59,7 +56,8 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     override fun onCreate(savedInstanceState: Bundle?) {
         requireContext().appComponent.inject(this)
         super.onCreate(savedInstanceState)
-        model = viewModelFactory.create(RequestsViewModel::class.java)
+        modelRequests = viewModelFactory.create(RequestsViewModel::class.java)
+        modelFavorites = viewModelFactory.create(FavoritesRequestsViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -81,7 +79,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     }
 
     private fun loadRequests() {
-        model.getRequests()?.observe(this, {
+        modelRequests.getRequests()?.observe(this, {
             updateUI(it)
         })
     }

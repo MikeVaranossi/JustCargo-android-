@@ -26,16 +26,17 @@ fun String.lastToPower(): SpannableStringBuilder =
 
 fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
     return FavoriteRequestLocal(
-        id=this.id,
-        requestTime=this.requestTime,
-        cost=this.cost,
-        departure=this.departure,
-        destination=this.destination,
-        shortInfo=this.shortInfo,
-        weight=this.weight,
+        id = this.id,
+        requestTime = this.requestTime,
+        cost = this.cost,
+        departure = this.departure,
+        destination = this.destination,
+        description = this.description,
+        shortInfo = this.shortInfo,
+        weight = this.weight,
         length = this.length,
         width = this.width,
-        height=this.height,
+        height = this.height,
         status = this.status?.name
     )
 }
