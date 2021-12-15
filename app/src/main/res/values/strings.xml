@@ -112,9 +112,5 @@
     <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
     <string name="login">Войти</string>
     <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
-    <string name="label_cost_text">Стоимость отправления груза в рублях</string>
-    <string name="hint_add_cost">Введите сумму</string>
-    <string name="label_home_carrier_fragment">Грузы</string>
-    <string name="action_bell">Уведомления</string>
-    <string name="action_share">Отправить</string>
+
 </resources>
