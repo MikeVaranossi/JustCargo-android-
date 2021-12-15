@@ -7,16 +7,22 @@ import androidx.lifecycle.viewModelScope
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import javax.inject.Inject
 
 // ViewModel для взаимодествия с данными из БД (заявками добавленным ив избранное)
 class FavoritesRequestsViewModel @Inject constructor(var favIRequestsRepository: IRequestsLocalDataSource) : BaseViewModel() {
 
-    fun getRequests() : LiveData<List<FavoriteRequestLocal>> {
-        return favIRequestsRepository.getRequests()
+    fun getRequests() : LiveData<List<FavoriteRequestLocal>> = runBlocking{
+        val mDeferredResult = async {
+            favIRequestsRepository.getRequests()
+        }
+            mDeferredResult.await()
     }
+
     fun putRequest(request: FavoriteRequestLocal) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
