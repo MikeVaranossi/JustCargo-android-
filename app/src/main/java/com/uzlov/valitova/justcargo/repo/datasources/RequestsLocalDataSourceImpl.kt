@@ -20,15 +20,15 @@ class RequestsLocalDataSourceImpl @Inject constructor(var dao: FavoriteRequestDa
         return dao.getFavoriteRequest(id)
     }
 
-    override fun removeRequest(request: FavoriteRequestLocal) {
+    override suspend fun removeRequest(request: FavoriteRequestLocal) {
         dao.removeRequest(request)
     }
 
-    override fun putRequest(request: FavoriteRequestLocal) {
+    override suspend fun putRequest(request: FavoriteRequestLocal) {
         dao.insertRequest(request)
     }
 
-    override fun updateRequest(request: FavoriteRequestLocal) {
+    override suspend fun updateRequest(request: FavoriteRequestLocal) {
         dao.updateRequest(request)
     }
 }

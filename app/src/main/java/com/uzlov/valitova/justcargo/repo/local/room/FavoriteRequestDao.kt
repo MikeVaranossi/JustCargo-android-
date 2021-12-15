@@ -13,17 +13,17 @@ interface FavoriteRequestDao {
     fun getFavoriteRequest(id: Long): LiveData<FavoriteRequestLocal?>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertRequest(favoriteRequests: FavoriteRequestLocal)
+    suspend fun insertRequest(favoriteRequests: FavoriteRequestLocal)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertRequest(favoriteRequests: List<FavoriteRequestLocal>)
+    suspend fun insertRequest(favoriteRequests: List<FavoriteRequestLocal>)
 
     @Insert
-    fun insertRequest(vararg favoriteRequests: FavoriteRequestLocal)
+    suspend fun insertRequest(vararg favoriteRequests: FavoriteRequestLocal)
 
     @Delete
-    fun removeRequest(favoriteRequests: FavoriteRequestLocal)
+    suspend fun removeRequest(favoriteRequests: FavoriteRequestLocal)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateRequest(favoriteRequests: FavoriteRequestLocal)
+    suspend fun updateRequest(favoriteRequests: FavoriteRequestLocal)
 }
