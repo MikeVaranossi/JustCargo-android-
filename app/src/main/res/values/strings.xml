@@ -84,7 +84,7 @@
     <string name="text_button_find_cargo">Найти груз</string>
     <string name="text_sort_button">По уменьшению стоимости</string>
     <string name="text_button_filters">Фильтры</string>
-    <string name="text_label_find_cargo">Найдено грузов: %D</string>
+    <string name="text_label_find_cargo">Найдено грузов: %d</string>
     <string name="for_date_search">%1$d.%2$d.%3$d</string>
     <string name="search_cargo">Поиск грузов</string>
     <string name="label_order_step_one">Заявка Шаг1</string>
