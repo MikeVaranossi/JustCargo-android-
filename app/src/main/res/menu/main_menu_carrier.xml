@@ -4,26 +4,17 @@
 
     <item
         android:id="@+id/main_action"
-        android:title="Главная"
+        android:title="@string/main_page"
         android:icon="@drawable/menu_main_drawable"/>
 
     <item
-        android:id="@+id/search_action"
-        android:title="Поиск"
-        android:icon="@drawable/menu_search_drawable"/>
-
-    <item
         android:id="@+id/delivery_action"
-        android:title="Доставки"
+        android:title="@string/packages"
         android:icon="@drawable/menu_delivery_drawable"/>
 
     <item
-        android:id="@+id/favorite_action"
-        android:title="Избранное"
-        android:icon="@drawable/menu_favorite_drawable"/>
-    <item
         android:id="@+id/profile_action"
-        android:title="профиль"
+        android:title="@string/profile_page"
         android:icon="@drawable/menu_profile_drawable"/>
 
 </menu>

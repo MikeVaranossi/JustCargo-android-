@@ -36,16 +36,18 @@ class HostActivity : AppCompatActivity() {
             it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
             it.setNavigationIconTint(resources.getColor(R.color.white_color))
         }
+        bottomNavigation = findViewById(R.id.bottom_navigation)
+        bottomNavigation?.itemIconTintList = null
 
         if (authService.currentUser()?.userType?.id == 1L) {
             setFragment(HomeSenderFragment.newInstance())
+            bottomNavigation?.inflateMenu(R.menu.main_sender_menu)
         } else {
             setFragment(HomeCarrierFragment.newInstance())
+            bottomNavigation?.inflateMenu(R.menu.main_menu_carrier)
 
         }
 
-        bottomNavigation = findViewById(R.id.bottom_navigation)
-        bottomNavigation?.itemIconTintList = null
 
         bottomNavigation?.setOnItemSelectedListener {
             when (it.itemId) {

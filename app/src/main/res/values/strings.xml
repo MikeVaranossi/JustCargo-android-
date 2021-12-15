@@ -124,4 +124,10 @@
     <string name="phone_format">Телефон (+7)</string>
     <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
     <string name="incorrect_number">Некорректные цифры</string>
+    <string name="main_page">Главная</string>
+    <string name="search_page">Поиск</string>
+    <string name="deliveries_page">Доставки</string>
+    <string name="favourites_page">Избранное</string>
+    <string name="profile_page">Профиль</string>
+    <string name="packages">Отправления</string>
 </resources>
