@@ -5,6 +5,7 @@ import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
@@ -38,4 +39,5 @@ interface AppComponent {
     fun inject(authService: AuthService)
     fun inject(registrationSmsFragment: RegistrationSmsFragment)
     fun inject(personalDataFragment: PersonalDataFragment)
+    fun inject(homeCarrierFragment: HomeCarrierFragment)
 }

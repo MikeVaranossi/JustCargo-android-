@@ -3,23 +3,53 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/layout_find_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/primary_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/text_view_find_cargo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.appcompat.widget.AppCompatButton
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_sort"
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:background="@color/primary_color"
+            android:drawableStart="@drawable/ic_icone_sorter_white"
+            android:paddingStart="@dimen/m_margin"
+            android:paddingEnd="@dimen/m_margin"
+            android:text="@string/text_sort_button"
+            android:textColor="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_filters"
+            style="@style/StandartText"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_weight="2"
+            android:background="@color/primary_color"
+            android:drawableStart="@drawable/ic_icone_filter_white"
+            android:paddingStart="@dimen/m_margin"
+            android:paddingEnd="@dimen/m_margin"
+            android:text="@string/text_button_filters"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_find_cargo"
-        style="@style/MyStyleButton"
+        style="@style/MyFABStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/m_margin"
-        android:drawableEnd="@drawable/ic_search"
-        android:paddingStart="@dimen/icon_button_padding"
-        android:paddingTop="@dimen/s_margin"
-        android:paddingEnd="@dimen/icon_button_padding"
-        android:paddingBottom="@dimen/s_margin"
-        android:text="@string/button_label_search_cargo"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view_home_carrier"
+        android:layout_margin="@dimen/l_margin"
+        app:tint="@color/white"
+        android:src="@drawable/ic_search"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/tex_view_label_empty"
@@ -29,9 +59,21 @@
         android:gravity="center"
         android:layout_marginTop="@dimen/l_margin"
         app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/image_view_carrier_home_empty"
         android:text="@string/label_empty_home_carrier" />
 
+    <TextView
+        android:id="@+id/text_view_find_cargo"
+        style="@style/StandartText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/m_margin"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:gravity="center"
+        android:text="@string/text_label_find_cargo"
+        app:layout_constraintBottom_toTopOf="@id/recycler_view_home_carrier"
+        app:layout_constraintTop_toBottomOf="@+id/layout_find_buttons" />
     <ImageView
         android:id="@+id/image_view_carrier_home_empty"
         android:layout_width="match_parent"
@@ -44,9 +86,8 @@
         android:id="@+id/recycler_view_home_carrier"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/m_margin"
         android:background="@drawable/background_recycler_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_find_cargo" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_find_cargo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -90,5 +90,9 @@
         <item name="android:popupBackground">@drawable/background_popup</item>
     </style>
 
+    <style name="MyFABStyle" parent="Widget.Design.FloatingActionButton">
+        <item name="android:backgroundTint">@color/primary_second_color</item>
+    </style>
+
 
 </resources>

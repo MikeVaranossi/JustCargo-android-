@@ -84,8 +84,8 @@
     <string name="text_button_find_cargo">Найти груз</string>
     <string name="text_sort_button">По уменьшению стоимости</string>
     <string name="text_button_filters">Фильтры</string>
-    <string name="text_label_find_cargo">Найдено грузов: 0</string>
-    <string name="for_date">%1$d.%2$d.%3$d</string>
+    <string name="text_label_find_cargo">Найдено грузов: %D</string>
+    <string name="for_date_search">%1$d.%2$d.%3$d</string>
     <string name="search_cargo">Поиск грузов</string>
     <string name="label_order_step_one">Заявка Шаг1</string>
     <string name="label_order_step_two">Заявка Шаг2</string>
@@ -117,4 +117,8 @@
     <string name="history_packages">История отправлений</string>
     <string name="you_denied_call_from_app">Вы запретили звонки из приложения!</string>
     <string name="favourites">Избранное</string>
+    <string name="for_date">%1$s - %2$s</string>
+    <string name="label_home_carrier_fragment">Грузы</string>
+    <string name="action_bell">Уведомления</string>
+    <string name="action_share">Поделиться</string>
 </resources>
