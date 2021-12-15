@@ -121,4 +121,7 @@
     <string name="label_home_carrier_fragment">Грузы</string>
     <string name="action_bell">Уведомления</string>
     <string name="action_share">Поделиться</string>
+    <string name="phone_format">Телефон (+7)</string>
+    <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
+    <string name="incorrect_number">Некорректные цифры</string>
 </resources>
