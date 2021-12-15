@@ -31,29 +31,20 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:text="@tools:sample/full_names"/>
 
-    <TextView
-        android:id="@+id/tvLabelPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/phone"
-        android:textColor="@color/dark_primary_color"
-        android:layout_marginTop="@dimen/margin_top_profile"
-        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
-        app:layout_constraintTop_toBottomOf="@id/ivProfile" />
-
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
         app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
         app:layout_constraintLeft_toLeftOf="@id/ivProfile"
         app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/tvLabelPhone"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -61,21 +52,11 @@
             android:inputType="phone"
             android:drawableEnd="@drawable/ic_baseline_create"
             app:drawableTint="@color/accent_color"
-            android:hint="@string/template_phone"
+            android:hint="@string/phone_format"
             android:enabled="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tvLabelEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/e_mail"
-        android:textColor="@color/dark_primary_color"
-        android:layout_marginTop="@dimen/margin_top_into_profile"
-        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
-        app:layout_constraintTop_toBottomOf="@id/tiLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutEmail"
@@ -83,13 +64,14 @@
         android:layout_height="wrap_content"
         android:elevation="16dp"
         app:boxStrokeColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
         app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
         app:layout_constraintLeft_toLeftOf="@id/ivProfile"
         app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/tvLabelEmail"
+        app:layout_constraintTop_toBottomOf="@id/tiLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -97,21 +79,10 @@
             android:inputType="textEmailAddress"
             android:drawableEnd="@drawable/ic_baseline_create"
             app:drawableTint="@color/accent_color"
-            android:hint="@string/template_email"
+            android:hint="@string/e_mail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
     </com.google.android.material.textfield.TextInputLayout>
-
-
-    <TextView
-        android:id="@+id/tvLabelDriverDocument"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/driver_document_number"
-        android:textColor="@color/dark_primary_color"
-        android:layout_marginTop="@dimen/margin_top_into_profile"
-        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
-        app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutDriverDocument"
@@ -119,13 +90,15 @@
         android:layout_height="wrap_content"
         android:elevation="16dp"
         app:boxStrokeColor="@color/dark_primary_color"
+        android:hint="@string/driver_document_number"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
         app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
         app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
         app:layout_constraintLeft_toLeftOf="@id/ivProfile"
         app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/tvLabelDriverDocument"
+        app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText

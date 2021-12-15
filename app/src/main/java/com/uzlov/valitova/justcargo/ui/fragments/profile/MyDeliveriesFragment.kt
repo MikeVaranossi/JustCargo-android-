@@ -3,8 +3,10 @@ package com.uzlov.valitova.justcargo.ui.fragments.profile
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.data.net.Delivery
@@ -16,14 +18,16 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
     MyDeliveriesProfileLayoutBinding::inflate){
 
     private val TAG: String = javaClass.simpleName
-
+    private var isFromHostActivity = true
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: DeliveryViewModel
 
     companion object {
-        fun newInstance(): MyDeliveriesFragment {
-            return MyDeliveriesFragment()
+        fun newInstance(isFromHostActivity: Boolean = true): MyDeliveriesFragment {
+            return MyDeliveriesFragment().apply {
+                arguments = bundleOf(Constant.KEY_FROM_HOST_ACTIVITY to isFromHostActivity)
+            }
         }
     }
 
@@ -37,7 +41,7 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = getString(R.string.my_deliveries)
-            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayHomeAsUpEnabled(!isFromHostActivity)
         }
         initListeners()
         loadData()

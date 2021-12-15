@@ -46,6 +46,7 @@ class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
 
     private fun updateUI(currentUser: User?) {
         currentUser?.let {
+            if (it.userType?.id == 1L) viewBinding.tiLayoutDriverDocument.visibility = View.GONE
             viewBinding.tvProfileFullName.text = it.name
             viewBinding.etEmailProfile.setText(it.email)
             viewBinding.etPhoneProfile.setText(it.phone)
@@ -60,11 +61,9 @@ class PersonalDataFragment : BaseFragment<FragmentPersonalDataLayoutBinding>(
 
     inner class EmailTextChecker : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
         }
 
         override fun afterTextChanged(p0: Editable?) {

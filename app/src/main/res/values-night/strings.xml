@@ -12,6 +12,7 @@
     <string name="self_data_personal">Личные данные</string>
     <string name="my_profile">Мой профиль</string>
 
+
     <string name="add_cargo_text">ДОБАВЬТЕ ГРУЗ С УКАЗАНИЕМ ВСЕХ ЕГО ОСНОВНЫХ ПАРАМЕТРОВ</string>
     <string name="button_add_cargo_text">Добавить груз</string>
     <string name="text_add_name_cargo">Введите название груза</string>
@@ -21,7 +22,7 @@
     <string name="text_address_to">Адрес, куда следует доставить груз</string>
     <string name="hint_address_to">Ставрополь, ул. Советская, д. 1</string>
     <string name="text_button_next_step">Следующий шаг</string>
-    <string name="text_choose_date">Выберите дату отправления груза</string>
+    <string name="text_choose_date">Дата/даты отправления груза</string>
     <string name="text_add_weight">Введите вес</string>
     <string name="hint_weight">Вес груза</string>
     <string name="text_kilograms">кг.</string>
@@ -37,6 +38,7 @@
     <string name="text_great">Отлично!</string>
     <string name="text_success">Ваша заявка создана и находится в разделе отправления</string>
     <string name="text_can_edit">Вы можете ее редактировать</string>
+
 
     <string name="title_activity_registration">Регистрация</string>
     <string name="text_entrance">Вход</string>
@@ -58,8 +60,56 @@
     <string name="invite_friends">Пригласить друзей</string>
     <string name="you_does_not_available_deliveries">У вас нет доступных доставок</string>
     <string name="favourites_request_is_missing">Избранных заявок пока нет</string>
-    <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
-    <string name="incorrect_number">Некорректные цифры</string>
+    <string name="find_cargo">Найденные грузы</string>
+    <string name="button_label_search_cargo">Найти груз</string>
+    <string name="label_empty_home_carrier">НАШ СЕРВИС В СТАДИИ РАЗРАБОТКИ \n СКОРО НА ЭТОЙ СТРАНИЦЕ БУДУТ ДОСТУПНЫ ГРУЗЫ</string>
+    <string name="label_more">ПОДРОБНЕЕ</string>
+    <string name="text_from">Откуда</string>
+    <string name="hint_edit_text_from">Москва</string>
+    <string name="text_radius">Радиус, км.</string>
+    <string name="hint_edit_text_radius">200</string>
+    <string name="text_to">Куда</string>
+    <string name="hint_edit_text_to">Ставрополь</string>
+    <string name="text_date_upload">Дата/даты загрузки</string>
+    <string name="hint_date">25.10.2021</string>
+    <string name="text_switch_off">кг.</string>
+    <string name="text_switch_on">т.</string>
+    <string name="text_volume">Объем в м3</string>
+    <string name="text_length_red">Длина в м</string>
+    <string name="text_width_red">Ширина в м</string>
+    <string name="text_height_red">Высота в м</string>
+    <string name="hint_up_to_10">до 10</string>
+    <string name="hint_up_to_3">до 3</string>
+    <string name="hint_up_to_2">до 2</string>
+    <string name="text_button_find_cargo">Найти груз</string>
+    <string name="text_sort_button">По уменьшению стоимости</string>
+    <string name="text_button_filters">Фильтры</string>
+    <string name="text_label_find_cargo">Найдено грузов: %d</string>
+    <string name="for_date_search">%1$d.%2$d.%3$d</string>
+    <string name="search_cargo">Поиск грузов</string>
+    <string name="label_order_step_one">Заявка Шаг1</string>
+    <string name="label_order_step_two">Заявка Шаг2</string>
+    <string name="label_sort_decrease">По уменьшению стоимости</string>
+    <string name="label_sort_increase">По увеличению стоимости</string>
+    <string name="label_sort_update">По обновлению</string>
+    <string name="label_sort_date">По дате</string>
+    <string name="privacy_policy">Высылая код вы принимаете условия пользовательского соглашения и политику конфиденциальности</string>
+    <string name="send_sms_with_code">Выслать SMS с кодом</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="register_now">Зарегистрироваться</string>
+    <string name="fio">ФИО</string>
+    <string name="select_profile">Выберите профиль</string>
+    <string name="hint_fio">Иванов Иван Иванович</string>
+    <string name="activity_profile">Профиль деятельности</string>
+    <string name="hint_phone">+7</string>
+    <string name="drivers_license">Водительское удостоверение №</string>
+    <string name="hint_documents">№</string>
+    <string name="text_complete_registration">Вы зарегистрированы! \n Для вас будет действовать \n бесплатный период</string>
+    <string name="text_free_period">1 месяц</string>
+    <string name="text_kod_sms">Ввести код из sms</string>
+    <string name="send_again">прислать ещё раз</string>
+    <string name="text_welcome">Перевозка грузов по самым низким ценам</string>
+    <string name="login">Войти</string>
     <string name="cargo_is_added_into_cart">Данный груз добавлен в избранное</string>
     <string name="label_cost_text">Стоимость отправления груза в рублях</string>
     <string name="hint_add_cost">Введите сумму</string>
@@ -67,4 +117,17 @@
     <string name="history_packages">История отправлений</string>
     <string name="you_denied_call_from_app">Вы запретили звонки из приложения!</string>
     <string name="favourites">Избранное</string>
+    <string name="for_date">%1$s - %2$s</string>
+    <string name="label_home_carrier_fragment">Грузы</string>
+    <string name="action_bell">Уведомления</string>
+    <string name="action_share">Поделиться</string>
+    <string name="phone_format">Телефон (+7)</string>
+    <string name="check_correct_input_param">Проверьте корректность ввода данных</string>
+    <string name="incorrect_number">Некорректные цифры</string>
+    <string name="main_page">Главная</string>
+    <string name="search_page">Поиск</string>
+    <string name="deliveries_page">Доставки</string>
+    <string name="favourites_page">Избранное</string>
+    <string name="profile_page">Профиль</string>
+    <string name="packages">Отправления</string>
 </resources>

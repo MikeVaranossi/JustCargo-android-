@@ -123,7 +123,7 @@
         android:layout_height="wrap_content"
         android:text="Ширина"
         android:textColor="@color/dark_primary_color"
-        app:drawableTopCompat="@drawable/ic_icone_shipping_box_height"
+        app:drawableTopCompat="@drawable/ic_icone_shipping_box_width"
         app:layout_constraintLeft_toRightOf="@+id/tvHeightCargo"
         app:layout_constraintRight_toLeftOf="@+id/tvLengthCargo"
         app:layout_constraintTop_toTopOf="@+id/tvHeightCargo" />
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:text="Длина"
         android:textColor="@color/dark_primary_color"
-        app:drawableTopCompat="@drawable/ic_icone_shipping_box_height"
+        app:drawableTopCompat="@drawable/ic_icone_shipping_box_width"
         app:layout_constraintRight_toLeftOf="@id/tvLengthCargoValue"
         app:layout_constraintTop_toTopOf="@+id/tvWidthCargo" />
 
