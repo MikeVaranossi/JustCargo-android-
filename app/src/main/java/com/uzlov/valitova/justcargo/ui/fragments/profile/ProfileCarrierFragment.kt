@@ -27,7 +27,7 @@ class ProfileCarrierFragment : BaseFragment<FragmentProfileCarrierLayoutBinding>
 
             tvMyDeliveries.setOnClickListener {
                 parentFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, MyRequestsFragment.newInstance())
+                    .replace(R.id.fragment_container, MyDeliveriesFragment.newInstance(false))
                     .addToBackStack(null).commit()
             }
 

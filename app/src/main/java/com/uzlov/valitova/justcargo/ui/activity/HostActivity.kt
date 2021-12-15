@@ -65,7 +65,7 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.delivery_action -> {
-                    setFragment(MyDeliveriesFragment.newInstance())
+                    setFragment(MyDeliveriesFragment.newInstance(true))
                     true
                 }
                 R.id.favorite_action -> {
