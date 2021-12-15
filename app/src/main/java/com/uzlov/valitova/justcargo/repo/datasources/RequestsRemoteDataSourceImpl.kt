@@ -56,6 +56,44 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return resultAll
     }
 
+    override fun getRequestsWithPhone(phone: String): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.orderByChild("owner/phone").equalTo(phone).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // send data
+                val lis = snapshot.children.map {
+                    it.getValue<Request>()!!
+                }
+                mutableLiveData.postValue(lis)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
+
+        return mutableLiveData
+    }
+
+    override fun getRequestsWithUserID(id: Int): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.orderByChild("id").equalTo(id.toDouble()).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // send data
+                val lis = snapshot.children.map {
+                    it.getValue<Request>()!!
+                }
+                mutableLiveData.postValue(lis)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
+
+        return mutableLiveData
+    }
+
     override fun getRequest(id: Int): LiveData<Request?> {
         reqReference.child(id.toString()).get().addOnSuccessListener {
             resultRequest.value = it.getValue<Request>()

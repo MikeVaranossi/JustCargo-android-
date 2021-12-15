@@ -10,18 +10,6 @@ import com.uzlov.valitova.justcargo.di.modules.AppModule
 class App : Application() {
     lateinit var appComponent: AppComponent
 
-    init {
-        instance = this
-    }
-
-    companion object {
-        private var instance: App? = null
-
-        fun applicationContext() : Context {
-            return instance!!.applicationContext
-        }
-    }
-
     override fun onCreate() {
         super.onCreate()
         FirebaseApp.initializeApp(this)
