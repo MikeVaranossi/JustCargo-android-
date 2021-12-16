@@ -16,7 +16,6 @@
         <activity
             android:name=".ui.activity.RegistrationActivity"
             android:exported="true"
-            android:label="@string/title_activity_registration"
             android:theme="@style/Theme.JustCargo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
