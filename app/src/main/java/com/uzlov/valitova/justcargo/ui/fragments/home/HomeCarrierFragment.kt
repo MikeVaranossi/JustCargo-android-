@@ -6,15 +6,19 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeCarrierBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
+import com.uzlov.valitova.justcargo.ui.fragments.RequestDetailFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
+import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
 
@@ -26,12 +30,31 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var model: RequestsViewModel
-    private val adapter = RVHomeCarrierAdapter()
+    lateinit var modelFavorites: FavoritesRequestsViewModel
+    private val adapter by lazy {
+        RVHomeCarrierAdapter(listenerOnClickCargoItem)
+    }
+
+    private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
+        override fun click(request: Request) {
+            openFragment(RequestDetailFragment.newInstance(request))
+
+        }
+
+        override fun addToFavorite(request: Request) {
+            modelFavorites.putRequest(request.toFavoriteRequestLocal())
+        }
+
+        override fun removeFromFavorite(request: Request) {
+            modelFavorites.removeRequest(request.toFavoriteRequestLocal())
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requireContext().appComponent.inject(this)
         super.onCreate(savedInstanceState)
         model = viewModelFactory.create(RequestsViewModel::class.java)
+        modelFavorites = viewModelFactory.create(FavoritesRequestsViewModel::class.java)
         setHasOptionsMenu(true)
     }
 
@@ -134,6 +157,13 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
                 .load(image)
                 .into(container)
         }
+    }
+
+    private fun openFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     companion object {
