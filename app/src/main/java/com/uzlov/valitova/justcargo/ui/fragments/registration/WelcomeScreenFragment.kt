@@ -37,6 +37,7 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
 
         val phoneNumber = authService.checkUserIsAuth()
         if (phoneNumber != null){
+            viewBinding.progressBar.visibility = View.VISIBLE
             model = factoryViewModel.create(UsersViewModel::class.java)
             model.getUser(phoneNumber)?.observe(this, { user ->
                 if (user != null) {
@@ -44,6 +45,8 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
                     startActivity(Intent(requireContext(), HostActivity::class.java))
                 }
             })
+        }else{
+            showButtons()
         }
 
         val manager = requireActivity().supportFragmentManager
@@ -68,4 +71,8 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
         }
     }
 
+    private fun showButtons() {
+        viewBinding.btnRegistration.visibility = View.VISIBLE
+        viewBinding.btnLogin.visibility = View.VISIBLE
+    }
 }
