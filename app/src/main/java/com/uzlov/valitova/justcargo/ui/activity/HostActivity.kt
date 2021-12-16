@@ -2,6 +2,7 @@ package com.uzlov.valitova.justcargo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -34,17 +35,17 @@ class HostActivity : AppCompatActivity() {
         findViewById<MaterialToolbar>(R.id.rootToolbar).let {
             setSupportActionBar(it)
             it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
-            it.setNavigationIconTint(resources.getColor(R.color.white_color))
+            it.setNavigationIconTint(ContextCompat.getColor(applicationContext, R.color.white_color))
         }
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
 
         if (authService.currentUser()?.userType?.id == 1L) {
             setFragment(HomeSenderFragment.newInstance())
-            bottomNavigation?.inflateMenu(R.menu.main_sender_menu)
+            bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
             setFragment(HomeCarrierFragment.newInstance())
-            bottomNavigation?.inflateMenu(R.menu.main_menu_carrier)
+            bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 
         }
 
