@@ -18,19 +18,19 @@ import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.UsersViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
 import javax.inject.Inject
+import android.os.CountDownTimer
+
 
 class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
     FragmentRegistrationSmsBinding::inflate) {
 
+    private var cTimer: CountDownTimer? = null
     @Inject
     lateinit var factoryViewModel: ViewModelFactory
     private lateinit var model: UsersViewModel
-
     private val TAG: String = javaClass.simpleName
-
     @Inject
     lateinit var authService: AuthService
-
     @Inject
     lateinit var userRepository: IUserRepository
 
@@ -67,7 +67,10 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
             it.title = ""
             it.setDisplayHomeAsUpEnabled(true)
         }
-
+        viewBinding.btnRepeatPin.setOnClickListener {
+            startPhoneNumberVerification()
+            viewBinding.btnRepeatPin.isEnabled = false
+        }
         authService.setStateAuthListener(stateListener)
         authService.setActivity(requireActivity())
         addTextChangedListener()
@@ -97,6 +100,7 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
                         //пользователь есть значит можно запрашивать код подтверждения
                         if (user != null) {
                             authService.startAuth(user)
+                            startTimer()
                         }
                     })
                 }
@@ -116,6 +120,22 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
         super.onDestroyView()
         authService.removeStateAuthListener()
         authService.removeActivity()
+        cTimer?.cancel()
+    }
+
+    private fun startTimer() {
+        cTimer = object : CountDownTimer(62000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val seconds = (millisUntilFinished/1000)%60;
+                val minutes = ((millisUntilFinished-seconds)/1000)/60;
+
+                viewBinding.textviewTime.text = String.format("%02d:%02d", minutes, seconds)
+            }
+            override fun onFinish() {
+                viewBinding.btnRepeatPin.isEnabled = true
+            }
+        }
+        (cTimer as CountDownTimer).start()
     }
 
     companion object {
