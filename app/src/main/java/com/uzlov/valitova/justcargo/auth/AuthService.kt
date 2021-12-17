@@ -10,6 +10,8 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.data.net.User
 import java.util.concurrent.TimeUnit
+import com.google.firebase.auth.PhoneAuthProvider
+
 
 class AuthService () {
 

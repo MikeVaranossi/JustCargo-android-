@@ -51,7 +51,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
     }
 
     private fun sendSmsClicked(){
-        // TODO: добавить проверки на валидный телефон и почту
         val phone = formatWatcher?.mask?.toUnformattedString().toString()
         val manager = requireActivity().supportFragmentManager
         if(phone != null)
