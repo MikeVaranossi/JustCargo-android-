@@ -3,31 +3,37 @@ package com.uzlov.valitova.justcargo.ui.fragments.registration
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.appcompat.app.AppCompatActivity
-import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.data.net.UserClass
 import com.uzlov.valitova.justcargo.data.net.UserType
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import ru.tinkoff.decoro.MaskImpl
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
+import ru.tinkoff.decoro.watchers.FormatWatcher
+import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.widget.EditText
+import com.uzlov.valitova.justcargo.R
+import ru.tinkoff.decoro.slots.PredefinedSlots
+
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
     FragmentRegistrationBinding::inflate) {
 
     //пока оставим здесь в дальнейшем будем получать с сервера
     private val items = listOf("Грузоотправитель", "Грузоперевозчик" )
+    var formatWatcher: MaskFormatWatcher? = null
 
     private fun sendSmsClicked(){
-
         val newUser = User(1, "", "", true,
             name = viewBinding.textInputFio.text.toString(),
             "",
-            phone = viewBinding.textInputPhone.text.toString(),
+            phone = formatWatcher?.mask?.toUnformattedString().toString(),
             email = viewBinding.textInputEmail.text.toString(),
             userType = UserType(
                 items.indexOf(viewBinding.textfieldActivityProfile.editText?.text.toString()) + 1L,
@@ -56,7 +62,7 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
         }
 
         addTextChangedListener()
-
+        setDecorPhone()
         val adapter = ArrayAdapter(requireContext(), R.layout.list_item_activity_profile, items)
         (viewBinding.textfieldActivityProfile.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
@@ -86,14 +92,30 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
                         viewBinding.textInputDriverDoc.text.isNullOrEmpty()))
 
         if (viewBinding.textfieldActivityProfile.editText?.text.toString()  == "Грузоперевозчик"){
-            viewBinding?.textfieldDriverDoc?.visibility = View.VISIBLE
-            viewBinding?.textViewDriverDoc?.visibility = View.VISIBLE
+            viewBinding.textfieldDriverDoc.visibility = View.VISIBLE
+            viewBinding.textViewDriverDoc.visibility = View.VISIBLE
         }else{
-            viewBinding?.textfieldDriverDoc?.visibility = View.INVISIBLE
-            viewBinding?.textViewDriverDoc?.visibility = View.INVISIBLE
+            viewBinding.textfieldDriverDoc.visibility = View.INVISIBLE
+            viewBinding.textViewDriverDoc.visibility = View.INVISIBLE
         }
 
         viewBinding.btnSendSms.isEnabled = buttonEnable
+    }
+
+    private fun setDecorPhone(){
+        val inputField = viewBinding.textInputPhone as EditText
+        inputField.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+            if (hasFocus)
+                if (inputField.text.toString() == "")
+                    inputField.setText("+")
+        }
+
+        inputField.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        formatWatcher = MaskFormatWatcher(
+            MaskImpl.createTerminated(PredefinedSlots.RUS_PHONE_NUMBER)
+        )
+
+        formatWatcher!!.installOn(inputField)
     }
 
 }
