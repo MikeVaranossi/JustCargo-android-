@@ -130,4 +130,5 @@
     <string name="favourites_page">Избранное</string>
     <string name="profile_page">Профиль</string>
     <string name="packages">Отправления</string>
+    <string name="phone_is_incorrect">Неверный номер телефона</string>
 </resources>

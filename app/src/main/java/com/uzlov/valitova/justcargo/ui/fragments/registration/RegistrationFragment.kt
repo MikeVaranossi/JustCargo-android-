@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui.fragments.registration
 
+import android.R.attr
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,9 +18,13 @@ import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 import ru.tinkoff.decoro.watchers.FormatWatcher
 import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.text.TextUtils
+import android.util.Patterns
 import android.widget.EditText
 import com.uzlov.valitova.justcargo.R
 import ru.tinkoff.decoro.slots.PredefinedSlots
+import android.R.attr.phoneNumber
+import android.telephony.PhoneNumberUtils
 
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
@@ -76,15 +81,15 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
     }
 
     inner class TextFieldValidation : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {}
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        override fun afterTextChanged(s: Editable?) {
             verifyEmptyEditText()
         }
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
     }
 
     private fun verifyEmptyEditText() {
-        val buttonEnable = !(viewBinding.textInputFio.text.isNullOrEmpty() ||
+        var buttonEnable = !(viewBinding.textInputFio.text.isNullOrEmpty() ||
                 viewBinding.productCategoryDropdown.text.isNullOrEmpty() ||
                 viewBinding.textInputPhone.text.isNullOrEmpty() ||
                 viewBinding.textInputEmail.text.isNullOrEmpty() ||
@@ -97,6 +102,11 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
         }else{
             viewBinding.textfieldDriverDoc.visibility = View.INVISIBLE
             viewBinding.textViewDriverDoc.visibility = View.INVISIBLE
+        }
+        val emailCorrected = isEmailValid()
+        val phoneCorrected = isPhoneValid()
+        if (!buttonEnable || !emailCorrected || !phoneCorrected) {
+            buttonEnable = false
         }
 
         viewBinding.btnSendSms.isEnabled = buttonEnable
@@ -116,6 +126,30 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
         )
 
         formatWatcher!!.installOn(inputField)
+    }
+
+    private fun isEmailValid():Boolean {
+        if (!TextUtils.isEmpty(viewBinding.textInputEmail.text) &&
+            Patterns.EMAIL_ADDRESS.matcher(viewBinding.textInputEmail.text.toString()).matches()
+        ) {
+            viewBinding.textInputEmail.error = null
+            return true
+        } else {
+            viewBinding.textInputEmail.error = getString(R.string.email_is_incorrect)
+            return false
+        }
+    }
+
+    private fun isPhoneValid():Boolean {
+        val phone = formatWatcher?.mask?.toUnformattedString().toString()
+
+        if (PhoneNumberUtils.formatNumberToE164(phone, "RU")==null){
+            viewBinding.textInputPhone.error = getString(R.string.phone_is_incorrect)
+            return false
+        }else{
+            viewBinding.textInputPhone.error = null
+            return true
+        }
     }
 
 }

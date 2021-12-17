@@ -2,6 +2,7 @@ package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -63,11 +64,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private fun addTextChangedListener(){
         viewBinding.textInputPhone.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                viewBinding.btnSendSms.isEnabled = !viewBinding.textInputPhone.text.isNullOrEmpty()
+            override fun afterTextChanged(s: Editable) {
+                viewBinding.btnSendSms.isEnabled = isPhoneValid()
             }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         })
     }
 
@@ -88,5 +89,16 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         formatWatcher!!.installOn(inputField)
     }
 
+    private fun isPhoneValid():Boolean {
+        val phone = formatWatcher?.mask?.toUnformattedString().toString()
+
+        if (PhoneNumberUtils.formatNumberToE164(phone, "RU")==null){
+            viewBinding.textInputPhone.error = getString(R.string.phone_is_incorrect)
+            return false
+        }else{
+            viewBinding.textInputPhone.error = null
+            return true
+        }
+    }
 
 }
