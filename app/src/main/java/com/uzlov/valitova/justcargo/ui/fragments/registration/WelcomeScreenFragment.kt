@@ -10,6 +10,7 @@ import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.databinding.FragmentWelcomeScreenBinding
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
+import com.uzlov.valitova.justcargo.ui.activity.RegistrationActivity
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.UsersViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
@@ -43,6 +44,7 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
                 if (user != null) {
                     authService.setUserLogin(user)
                     startActivity(Intent(requireContext(), HostActivity::class.java))
+                    activity?.finish()
                 }
             })
         }else{

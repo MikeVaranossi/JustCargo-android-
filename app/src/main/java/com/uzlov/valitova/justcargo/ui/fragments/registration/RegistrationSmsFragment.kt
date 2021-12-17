@@ -49,6 +49,7 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
         override fun login(user: User) {
             // можем редиректить на hostactivity
             startActivity(Intent(requireContext(), HostActivity::class.java))
+            activity?.finish()
             Log.e(TAG, "success login: $user")
         }
 
