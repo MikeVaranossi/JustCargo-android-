@@ -16,7 +16,6 @@
         <activity
             android:name=".ui.activity.RegistrationActivity"
             android:exported="true"
-            android:label="@string/title_activity_registration"
             android:theme="@style/Theme.JustCargo.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +27,8 @@
             android:name=".ui.activity.HostActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor">
+            android:screenOrientation="fullSensor"
+            android:windowSoftInputMode="adjustResize">
 
 
         </activity>
