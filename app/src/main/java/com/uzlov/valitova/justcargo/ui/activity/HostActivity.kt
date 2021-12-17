@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
@@ -14,6 +15,7 @@ import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
+import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileSenderFragment
 import javax.inject.Inject
@@ -49,38 +51,46 @@ class HostActivity : AppCompatActivity() {
 
         }
 
-
         bottomNavigation?.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.main_action -> {
-                    if (authService.currentUser()?.userType?.id == 1L) {
+                    if (authService.currentUser()?.userType?.id == Constant.SENDER) {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
-                    } else {
+                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
                         setFragment(HomeCarrierFragment.newInstance())
                         return@setOnItemSelectedListener true
                     }
+                    return@setOnItemSelectedListener false
                 }
                 R.id.search_action -> {
                     setFragment(SearchFragment.newInstance())
                     true
                 }
                 R.id.delivery_action -> {
-                    setFragment(MyDeliveriesFragment.newInstance(true))
-                    true
+                    if (authService.currentUser()?.userType?.id == Constant.SENDER){
+                        setFragment(MyRequestsFragment.newInstance())
+                        return@setOnItemSelectedListener true
+                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
+                        setFragment(MyDeliveriesFragment.newInstance(true))
+                        return@setOnItemSelectedListener true
+                    }
+
+                    false
                 }
                 R.id.favorite_action -> {
                     setFragment(FavoritesRequestsFragment.newInstance())
                     true
                 }
                 R.id.profile_action -> {
-                    if (authService.currentUser()?.userType?.id == 1L) {
+                    if (authService.currentUser()?.userType?.id == Constant.SENDER) {
                         setFragment(ProfileSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
-                    } else {
+                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
                         setFragment(ProfileCarrierFragment.newInstance())
                         return@setOnItemSelectedListener true
                     }
+                    return@setOnItemSelectedListener false
                 }
                 else -> false
             }

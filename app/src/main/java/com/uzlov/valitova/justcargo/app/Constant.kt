@@ -10,6 +10,10 @@ class Constant {
         const val VEHICLES = "vehicles" // хранит Vehicle.kt
         const val DELIVERY = "delvery" // хранит Delivery.kt
 
+        // type user
+        const val SENDER = 1L
+        const val CARRIER = 2L
+
         //        KEYS
         const val KEY_DELIVERY_OBJECT = "delivery_key"
         const val KEY_REQUESTS_OBJECT = "request_key"
