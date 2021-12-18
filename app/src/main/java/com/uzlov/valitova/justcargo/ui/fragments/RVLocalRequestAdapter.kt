@@ -9,24 +9,22 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 
-class RVLocalRequestAdapter(private var itemClickListener: OnItemClickListener? = null) :
-    RecyclerView.Adapter<RVLocalRequestAdapter.RecyclerItemViewHolder>() {
+class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener: OnItemClickListener<T>? = null) :
+    RecyclerView.Adapter<RVLocalRequestAdapter<T>.RecyclerItemViewHolder>() {
 
-    private var data: List<FavoriteRequestLocal> = arrayListOf()
+    private var data: List<T> = arrayListOf()
 
-    interface OnItemClickListener {
-        fun click(request: FavoriteRequestLocal)
-        fun addToFavorite(request: FavoriteRequestLocal)
-        fun removeFromFavorite(request: FavoriteRequestLocal)
+    interface OnItemClickListener<T> {
+        fun click(request: T)
+        fun addToFavorite(request: T)
+        fun removeFromFavorite(request: T)
     }
 
-    fun setData(data: List<FavoriteRequestLocal>) {
+    fun setData(data: List<T>) {
         this.data = data
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
         return RecyclerItemViewHolder(
@@ -35,31 +33,32 @@ class RVLocalRequestAdapter(private var itemClickListener: OnItemClickListener? 
         )
     }
 
-    override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) =
         holder.bind(data[position])
-    }
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
+    override fun getItemCount(): Int = data.size
 
     inner class RecyclerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(data: FavoriteRequestLocal) {
+        private val tvNameCargo = view.findViewById<TextView>(R.id.text_view_name_cargo)
+        private val tvRequestDate = view.findViewById<TextView>(R.id.text_view_date)
+        private val tvCostCargo = view.findViewById<TextView>(R.id.text_view_cost)
+        private val tvTrackCargo = view.findViewById<TextView>(R.id.text_view_from_to)
+        private val tvDetailCargo = view.findViewById<TextView>(R.id.text_view_to_details)
+        private val cbFavouriteCargo = view.findViewById<CheckBox>(R.id.checkbox_favourite)
+
+        fun bind(item: T) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 itemView.apply {
-                    findViewById<TextView>(R.id.text_view_name_cargo).text =
-                        data.shortInfo
-                    findViewById<TextView>(R.id.text_view_date).text =
-                        data.requestTime.toString()
-                    findViewById<TextView>(R.id.text_view_cost).text =
-                        "${data.cost} ₽"
-                    findViewById<TextView>(R.id.text_view_from_to).text =
-                        data.departure + " - " + data.destination
-                    findViewById<TextView>(R.id.text_view_to_details).setOnClickListener {
-                        itemClickListener?.click(data)
+                    tvNameCargo.text = item.getShortInfoItem()
+                    tvRequestDate.text = item.getRequestTimeItem().toString()
+                    tvCostCargo.text = "${item.getCostItem()} ₽"
+                    tvTrackCargo.text =  " ${item.getDepartureItem()}  -  ${item.getDestinationItem()} "
+                    tvDetailCargo.setOnClickListener {
+                        itemClickListener?.click(item)
                     }
-                    findViewById<CheckBox>(R.id.checkbox_favourite).setOnCheckedChangeListener { _, isChecked ->
+
+                    cbFavouriteCargo.setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             Snackbar.make(
                                 itemView,
@@ -69,9 +68,9 @@ class RVLocalRequestAdapter(private var itemClickListener: OnItemClickListener? 
                                 .setBackgroundTint(ContextCompat.getColor(context,
                                     R.color.dark_primary_color))
                                 .show()
-                            itemClickListener?.addToFavorite(data)
+                            itemClickListener?.addToFavorite(item)
                         } else {
-                            itemClickListener?.removeFromFavorite(data)
+                            itemClickListener?.removeFromFavorite(item)
                         }
                     }
                 }
