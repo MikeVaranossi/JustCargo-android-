@@ -8,12 +8,9 @@ import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
-import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
-import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
-import com.uzlov.valitova.justcargo.ui.fragments.profile.PersonalDataFragment
+import com.uzlov.valitova.justcargo.ui.fragments.profile.*
 import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
-import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -31,7 +28,6 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(hostActivity: HostActivity)
-    fun inject(hostActivity: WelcomeScreenFragment)
     fun inject(hostActivity: MyDeliveriesFragment)
     fun inject(favoritesRequestsFragment: FavoritesRequestsFragment)
     fun inject(orderStepTwoFragment: OrderStepTwoFragment)
@@ -41,5 +37,7 @@ interface AppComponent {
     fun inject(registrationSmsFragment: RegistrationSmsFragment)
     fun inject(personalDataFragment: PersonalDataFragment)
     fun inject(homeCarrierFragment: HomeCarrierFragment)
-    abstract fun inject(splashActivity: SplashActivity)
+    fun inject(splashActivity: SplashActivity)
+    fun inject(profileCarrierFragment: ProfileCarrierFragment)
+    fun inject(profileSenderFragment: ProfileSenderFragment)
 }
