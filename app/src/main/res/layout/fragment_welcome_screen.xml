@@ -33,25 +33,21 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_registration"
         style="@style/MyStyleButton"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_registration"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         tools:layout_editor_absoluteX="10dp"
-        tools:visibility = "visible"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
         style="@style/MyStyleButton"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp"
-        tools:visibility = "visible"
         />
 
 
