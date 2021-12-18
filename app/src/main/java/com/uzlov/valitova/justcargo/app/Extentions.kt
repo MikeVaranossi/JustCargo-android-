@@ -28,6 +28,7 @@ fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
     return FavoriteRequestLocal(
         id = this.id,
         requestTime = this.requestTime,
+        deliveryTime = this.deliveryTime,
         cost = this.cost,
         departure = this.departure,
         destination = this.destination,
