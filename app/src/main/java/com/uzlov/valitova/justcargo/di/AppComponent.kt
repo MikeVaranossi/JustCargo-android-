@@ -10,6 +10,7 @@ import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
+import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.PersonalDataFragment
 import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment
@@ -25,7 +26,8 @@ import javax.inject.Singleton
         AuthModule::class,
         LocalModule::class,
         RepositoriesModule::class,
-        ViewModelModule::class
+        ViewModelModule::class,
+        GeoModule::class
     ]
 )
 interface AppComponent {
@@ -40,4 +42,5 @@ interface AppComponent {
     fun inject(registrationSmsFragment: RegistrationSmsFragment)
     fun inject(personalDataFragment: PersonalDataFragment)
     fun inject(homeCarrierFragment: HomeCarrierFragment)
+    fun inject(selectMapPositionsFragment: SelectMapPositionsFragment)
 }

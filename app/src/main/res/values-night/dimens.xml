@@ -5,4 +5,5 @@
     <dimen name="corner_radius_edittext">10dp</dimen>
     <dimen name="margin_top_into_profile">16dp</dimen>
     <dimen name="drawable_tv_padding">16dp</dimen>
+    <dimen name="picker_size_map">40dp</dimen>
 </resources>
