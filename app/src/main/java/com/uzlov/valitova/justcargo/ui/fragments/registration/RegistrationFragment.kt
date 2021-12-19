@@ -98,10 +98,8 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
 
         if (viewBinding.textfieldActivityProfile.editText?.text.toString()  == "Грузоперевозчик"){
             viewBinding.textfieldDriverDoc.visibility = View.VISIBLE
-            viewBinding.textViewDriverDoc.visibility = View.VISIBLE
         }else{
             viewBinding.textfieldDriverDoc.visibility = View.INVISIBLE
-            viewBinding.textViewDriverDoc.visibility = View.INVISIBLE
         }
         val emailCorrected = isEmailValid()
         val phoneCorrected = isPhoneValid()

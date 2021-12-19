@@ -20,10 +20,13 @@
 
     <TextView
         android:id="@+id/textview"
-        style="@style/StandartText"
-        android:layout_width="wrap_content"
+        style="@style/SubheaderText"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:layout_marginStart="@dimen/xl_margin"
+        android:layout_marginEnd="@dimen/xl_margin"
+        android:layout_marginBottom="@dimen/l_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_registration"
@@ -33,39 +36,23 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_registration"
         style="@style/MyStyleButton"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text_registration"
         app:layout_constraintBottom_toTopOf="@+id/btn_login"
         tools:layout_editor_absoluteX="10dp"
-        tools:visibility = "visible"
         />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_login"
-        style="@style/MyStyleButton"
-        android:visibility="invisible"
+        style="@style/MyStyleButtonTransparent"
+        android:textColor="@color/primary_second_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp"
-        tools:visibility = "visible"
         />
-
-
-    <ProgressBar
-        android:layout_gravity="center"
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/btn_login"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility = "visible"/>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
