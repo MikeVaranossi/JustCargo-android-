@@ -12,12 +12,6 @@ abstract class ViewModelModule {
     @Binds
     abstract fun viewModelFactory(factory: ViewModelFactory) : ViewModelProvider.Factory
 
-    // TODO(Вылетает, надо чинить)
-//    @Binds
-//    @IntoMap
-//    @ViewModelKey(MainHomeViewModel::class)
-//    abstract fun homeViewModel(mainHomeViewModel: MainHomeViewModel) : ViewModel
-
     @Binds
     @IntoMap
     @ViewModelKey(DeliveryViewModel::class)
@@ -37,4 +31,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(FavoritesRequestsViewModel::class)
     abstract fun favoritesRequestsViewModel(favoritesRequestsViewModel: FavoritesRequestsViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GeocodingViewModel::class)
+    abstract fun geoViewModel(geoViewModel: GeocodingViewModel) : ViewModel
 }

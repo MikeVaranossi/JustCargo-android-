@@ -3,6 +3,7 @@ package com.uzlov.valitova.justcargo.app
 class Constant {
 
     companion object {
+
         //        FIREBASE
         const val REQUESTS = "requests" // хранит Request.kt
 
@@ -19,6 +20,7 @@ class Constant {
         const val KEY_REQUESTS_OBJECT = "request_key"
         const val KEY_REQUESTS_LOCAL_OBJECT = "request_local_key"
         const val KEY_FROM_HOST_ACTIVITY = "from_host_activity_key"
+        const val KEY_TITLE = "key_title"
 
         //        PERMISSIONS
         const val MY_PERMISSIONS_REQUEST_CALL_PHONE: Int = 1001
