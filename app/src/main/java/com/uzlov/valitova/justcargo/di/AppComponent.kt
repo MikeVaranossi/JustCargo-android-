@@ -31,7 +31,6 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(hostActivity: HostActivity)
-    fun inject(hostActivity: WelcomeScreenFragment)
     fun inject(hostActivity: MyDeliveriesFragment)
     fun inject(favoritesRequestsFragment: FavoritesRequestsFragment)
     fun inject(orderStepTwoFragment: OrderStepTwoFragment)
