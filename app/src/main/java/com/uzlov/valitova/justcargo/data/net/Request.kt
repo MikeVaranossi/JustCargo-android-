@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
+import com.uzlov.valitova.justcargo.ui.fragments.IViewItemAdapter
 import kotlinx.parcelize.Parcelize
 
 // файл запрос на перевозку от грузоотправителя
@@ -21,4 +22,14 @@ data class Request(
     var height: Int? = 0,
     var owner: User? = null,
     var status: RequestStatus? = RequestStatus(1, "Открыта"),
-) : Parcelable
+) : Parcelable, IViewItemAdapter {
+    override fun getShortInfoItem() = shortInfo
+
+    override fun getDeliveryTimeItem() = deliveryTime
+
+    override fun getCostItem() = cost
+
+    override fun getDepartureItem() = departure
+
+    override fun getDestinationItem() = destination
+}

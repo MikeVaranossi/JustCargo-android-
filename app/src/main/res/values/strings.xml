@@ -131,5 +131,8 @@
     <string name="profile_page">Профиль</string>
     <string name="packages">Отправления</string>
     <string name="phone_is_incorrect">Неверный номер телефона</string>
+    <string name="select_address_departure">Выберите адрес отправки</string>
+    <string name="select_geopositions">Выберите местоположение</string>
+    <string name="select_action_str">Выбрать</string>
     <string name="exit_account">Выйти из аккаунта</string>
 </resources>
