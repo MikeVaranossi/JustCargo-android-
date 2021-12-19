@@ -95,6 +95,28 @@
         app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
         app:layout_constraintTop_toBottomOf="@id/tvSendEmailUs" />
 
+    <View
+        android:id="@+id/dividerView2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/secondary_color"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintEnd_toEndOf="@id/tvHistoryData"
+        app:layout_constraintTop_toBottomOf="@id/tvInviteFrineds"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvExitAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_left"
+        app:drawableStartCompat="@drawable/ic_outline_exit_to_app_24"
+        app:drawableTint="@color/dark_primary_color"
+        android:drawablePadding="@dimen/drawable_tv_padding"
+        android:text="@string/exit_account"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintStart_toStartOf="@+id/tvMyDeliveries"
+        app:layout_constraintTop_toBottomOf="@id/dividerView2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

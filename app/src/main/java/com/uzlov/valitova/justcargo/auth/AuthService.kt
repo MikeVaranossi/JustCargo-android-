@@ -105,6 +105,10 @@ class AuthService () {
         }
     }
 
+    fun signOut() {
+        auth.signOut();
+    }
+
     fun checkCredential(code: String) {
         val credential = storedVerificationId?.let { PhoneAuthProvider.getCredential(it, code) }
         if (credential != null) {

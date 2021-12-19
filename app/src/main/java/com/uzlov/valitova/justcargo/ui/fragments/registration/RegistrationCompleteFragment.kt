@@ -26,5 +26,6 @@ class RegistrationCompleteFragment : BaseFragment<FragmentRegistrationCompleteBi
 
     private fun btnNextClicked(){
         startActivity(Intent(requireContext(), HostActivity::class.java))
+        activity?.finish()
     }
 }
