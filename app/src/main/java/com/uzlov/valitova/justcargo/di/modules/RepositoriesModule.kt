@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.di.modules
 
 import com.uzlov.valitova.justcargo.repo.datasources.*
+import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
 import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
 import com.uzlov.valitova.justcargo.repo.net.IUserRepository
@@ -44,6 +45,6 @@ class RepositoriesModule {
     fun provideRequestRepository(remoteDataSource: IRequestsRemoteDataSource) : IRequestsRepository = RequestRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideRequestsUseCase(requestsRepository: IRequestsRepository) : RequestsUseCases = RequestsUseCases(requestsRepository)
+    fun provideRequestsUseCase(requestsRepository: IRequestsRepository, localRepository: ILocalRepository) : RequestsUseCases = RequestsUseCases(requestsRepository, localRepository)
 
 }

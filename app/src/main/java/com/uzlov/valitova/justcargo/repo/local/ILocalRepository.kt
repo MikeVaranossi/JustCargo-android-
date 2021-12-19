@@ -6,6 +6,7 @@ import com.uzlov.valitova.justcargo.data.net.Request
 
 interface ILocalRepository {
     suspend fun getRequests() : LiveData<List<FavoriteRequestLocal>>
+    suspend fun getIDList(): List<Long>
     suspend fun getRequest(id: Long) : LiveData<FavoriteRequestLocal?>
     suspend fun removeRequest(request: FavoriteRequestLocal)
     suspend fun putRequest(request: FavoriteRequestLocal)

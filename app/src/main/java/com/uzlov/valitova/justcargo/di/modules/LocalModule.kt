@@ -5,8 +5,11 @@ import android.content.SharedPreferences
 import androidx.room.Room
 import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import com.uzlov.valitova.justcargo.repo.datasources.RequestsLocalDataSourceImpl
+import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
 import com.uzlov.valitova.justcargo.repo.local.room.FavoriteRequestDao
 import com.uzlov.valitova.justcargo.repo.local.room.RoomFavoritesRequestDB
+import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
+import com.uzlov.valitova.justcargo.repo.repositories.LocalRequestRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -31,10 +34,13 @@ class LocalModule {
 
     @Singleton
     @Provides
-    fun provideDAO(db: RoomFavoritesRequestDB) = db.favoriteRequestDao
+    fun provideDAO(db: RoomFavoritesRequestDB): FavoriteRequestDao = db.favoriteRequestDao
 
     @Singleton
     @Provides
     fun provideRequestLocalDataSources(dao : FavoriteRequestDao): IRequestsLocalDataSource = RequestsLocalDataSourceImpl(dao)
 
+    @Singleton
+    @Provides
+    fun provideRequestLocalRepository(dataSource: IRequestsLocalDataSource): ILocalRepository = LocalRequestRepositoryImpl(dataSource)
 }
