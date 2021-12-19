@@ -8,17 +8,6 @@
     tools:context=".LoginFragment">
 
 
-
-    <TextView
-        android:id="@+id/text_view_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
-        android:text="@string/phone"
-        app:layout_constraintBottom_toTopOf="@id/textfield_phone"
-        />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_phone"
         style="@style/MyOutlinedBoxStyle"
@@ -26,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/l_margin"
         app:layout_constraintBottom_toTopOf="@id/textview_agreement"
-        app:hintEnabled="false"
+        android:hint="@string/phone"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -34,10 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="@string/hint_phone"/>
+            />
     </com.google.android.material.textfield.TextInputLayout>
-
-
 
     <TextView
         android:id="@+id/textview_agreement"
