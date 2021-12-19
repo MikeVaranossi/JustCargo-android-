@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentProfileCarrierLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragment
 
 class ProfileCarrierFragment : BaseFragment<FragmentProfileCarrierLayoutBinding>(
     FragmentProfileCarrierLayoutBinding::inflate) {

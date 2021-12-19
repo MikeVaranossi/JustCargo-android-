@@ -134,4 +134,9 @@
     <string name="select_address_departure">Выберите адрес отправки</string>
     <string name="select_geopositions">Выберите местоположение</string>
     <string name="select_action_str">Выбрать</string>
+    <string name="take_cargo">Взять груз</string>
+    <string name="text_edit_cargo">Редактировать</string>
+    <string name="height">Высота</string>
+    <string name="width">Ширина</string>
+    <string name="length">Длина</string>
 </resources>
