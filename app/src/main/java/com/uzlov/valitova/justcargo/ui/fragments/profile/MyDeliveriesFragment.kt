@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
@@ -15,10 +16,12 @@ import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import javax.inject.Inject
 
 class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
-    MyDeliveriesProfileLayoutBinding::inflate){
+    MyDeliveriesProfileLayoutBinding::inflate) {
 
     private val TAG: String = javaClass.simpleName
     private var isFromHostActivity = true
+    @Inject
+    lateinit var authService: AuthService
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: DeliveryViewModel
@@ -73,9 +76,11 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
     }
 
     private fun filterData(data: List<Delivery>): List<Delivery> {
-        val phone = "89992001122" // для тестов
-        return data.filter {
-            it.trip?.carrier?.phone == phone
+        authService.currentUser()?.phone?.let { phone->
+            return data.filter {
+                it.trip?.carrier?.phone == phone
+            }
         }
+        return emptyList()
     }
 }

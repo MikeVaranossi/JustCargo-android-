@@ -1,16 +1,13 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
-import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
-import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FavouritesRequestsLayoutBinding
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import javax.inject.Inject
@@ -22,7 +19,7 @@ class FavoritesRequestsFragment : BaseFragment<FavouritesRequestsLayoutBinding>(
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: FavoritesRequestsViewModel
 
-    private val listenerOnClickCargoItem = object : RVLocalRequestAdapter.OnItemClickListener {
+    private val listenerOnClickCargoItem = object : RVLocalRequestAdapter.OnItemClickListener<FavoriteRequestLocal> {
         override fun click(request: FavoriteRequestLocal) {
             openFragment(RequestDetailFragment.newInstance(request))
 

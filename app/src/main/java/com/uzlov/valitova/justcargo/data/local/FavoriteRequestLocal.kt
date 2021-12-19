@@ -4,14 +4,12 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.uzlov.valitova.justcargo.data.net.RequestStatus
 import com.uzlov.valitova.justcargo.ui.fragments.IViewItemAdapter
 import kotlinx.parcelize.Parcelize
-import java.time.OffsetTime
 
 @Entity
 @Parcelize
-data class FavoriteRequestLocal (
+data class FavoriteRequestLocal(
     @PrimaryKey var id: Long? = 0,
     @ColumnInfo(name = "requestTime") var requestTime: Long? = 0,
     @ColumnInfo(name = "deliveryTime") var deliveryTime: Long? = 0,
@@ -27,6 +25,7 @@ data class FavoriteRequestLocal (
     @ColumnInfo(name = "status") var status: String? = null,
 ) : Parcelable, IViewItemAdapter {
     override fun getShortInfoItem() = shortInfo
+    override fun getRequestTimeItem() = requestTime
 
     override fun getDeliveryTimeItem() = deliveryTime
 

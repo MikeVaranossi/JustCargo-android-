@@ -4,7 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 
-@Database(entities = [FavoriteRequestLocal::class], version = 2)
+@Database(entities = [FavoriteRequestLocal::class], version = 3)
 abstract class RoomFavoritesRequestDB : RoomDatabase() {
     abstract val favoriteRequestDao: FavoriteRequestDao
 }

@@ -24,6 +24,7 @@ data class Request(
     var status: RequestStatus? = RequestStatus(1, "Открыта"),
 ) : Parcelable, IViewItemAdapter {
     override fun getShortInfoItem() = shortInfo
+    override fun getRequestTimeItem() = requestTime
 
     override fun getDeliveryTimeItem() = deliveryTime
 
