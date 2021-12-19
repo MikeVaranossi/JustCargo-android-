@@ -4,10 +4,8 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.uzlov.valitova.justcargo.data.net.RequestStatus
 import com.uzlov.valitova.justcargo.ui.fragments.IViewItemAdapter
 import kotlinx.parcelize.Parcelize
-import java.time.OffsetTime
 
 @Entity
 @Parcelize
