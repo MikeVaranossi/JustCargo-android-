@@ -16,7 +16,7 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeCarrierBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
-import com.uzlov.valitova.justcargo.ui.fragments.RequestDetailFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
@@ -37,7 +37,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
 
     private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
         override fun click(request: Request) {
-            openFragment(RequestDetailFragment.newInstance(request))
+            openFragment(RequestDetailCarrierFragment.newInstance(request))
 
         }
 

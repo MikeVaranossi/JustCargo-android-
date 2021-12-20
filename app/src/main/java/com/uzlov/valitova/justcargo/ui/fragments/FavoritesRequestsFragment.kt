@@ -9,6 +9,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.databinding.FavouritesRequestsLayoutBinding
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import javax.inject.Inject
 
@@ -21,7 +22,7 @@ class FavoritesRequestsFragment : BaseFragment<FavouritesRequestsLayoutBinding>(
 
     private val listenerOnClickCargoItem = object : RVLocalRequestAdapter.OnItemClickListener<FavoriteRequestLocal> {
         override fun click(request: FavoriteRequestLocal) {
-            openFragment(RequestDetailFragment.newInstance(request))
+            openFragment(RequestDetailCarrierFragment.newInstance(request))
 
         }
 

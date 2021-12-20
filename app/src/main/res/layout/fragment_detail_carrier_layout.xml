@@ -196,6 +196,18 @@
         android:layout_height="wrap_content"
         tools:text="Важно забрать вечером"/>
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_take_cargo"
+        style="@style/MyStyleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/m_margin"
+        android:layout_marginStart="@dimen/m_margin"
+        android:layout_marginEnd="@dimen/m_margin"
+        android:text="@string/take_cargo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
