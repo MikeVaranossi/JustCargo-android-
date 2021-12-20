@@ -5,6 +5,7 @@ import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 
 interface IRequestsLocalDataSource {
     fun getRequests() : LiveData<List<FavoriteRequestLocal>>
+    fun getIDsRequests() : List<Long>
     fun getRequest(id: Long) : LiveData<FavoriteRequestLocal?>
     suspend fun removeRequest(request: FavoriteRequestLocal)
     suspend fun putRequest(request: FavoriteRequestLocal)
