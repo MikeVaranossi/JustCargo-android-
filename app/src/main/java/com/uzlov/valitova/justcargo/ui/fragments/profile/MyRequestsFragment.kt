@@ -20,8 +20,6 @@ import javax.inject.Inject
 class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     MyRequestsProfileLayoutBinding::inflate) {
 
-    private val TAG: String = javaClass.simpleName
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var modelRequests: RequestsViewModel

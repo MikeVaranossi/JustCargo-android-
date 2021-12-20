@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit
 import com.google.firebase.auth.PhoneAuthProvider
 
 
-class AuthService () {
+class AuthService {
 
     private var auth: FirebaseAuth = Firebase.auth
     private var storedVerificationId: String? = null
@@ -106,7 +106,7 @@ class AuthService () {
     }
 
     fun signOut() {
-        auth.signOut();
+        auth.signOut()
     }
 
     fun checkCredential(code: String) {

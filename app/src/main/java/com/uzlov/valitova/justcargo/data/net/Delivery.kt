@@ -2,7 +2,6 @@ package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.OffsetTime
 
 // сущность самой сделки (при принятии заявки) по завершению выставляется время заврешения и в requests
 @Parcelize

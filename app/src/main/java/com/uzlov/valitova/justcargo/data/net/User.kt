@@ -15,5 +15,4 @@ data class User(
     var email: String? = "",
     var userType: UserType? = null,
     var userClass: UserClass? = null,
-) : Parcelable {
-}
+) : Parcelable

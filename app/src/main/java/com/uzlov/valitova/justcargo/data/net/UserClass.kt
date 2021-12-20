@@ -8,6 +8,4 @@ import kotlinx.parcelize.Parcelize
 data class UserClass(
    var id: Long? = 0,
    var name: String? = "",
-) : Parcelable {
-
-}
+) : Parcelable

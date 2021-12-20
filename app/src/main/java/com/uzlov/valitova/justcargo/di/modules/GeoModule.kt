@@ -18,7 +18,7 @@ class GeoModule {
     fun baseUrl() = "https://nominatim.openstreetmap.org/"
 
     @Provides
-    fun gson() = GsonConverterFactory.create()
+    fun gson(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     fun provideService() : Retrofit = Retrofit.Builder()

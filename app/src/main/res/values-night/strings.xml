@@ -140,4 +140,6 @@
     <string name="height">Высота</string>
     <string name="width">Ширина</string>
     <string name="length">Длина</string>
+    <string name="continue_str">Продолжить</string>
+    <string name="placeholder_sms_code">******</string>
 </resources>

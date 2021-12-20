@@ -2,7 +2,6 @@ package com.uzlov.valitova.justcargo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.appbar.MaterialToolbar
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.ActivityRegistrationBinding
 import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment

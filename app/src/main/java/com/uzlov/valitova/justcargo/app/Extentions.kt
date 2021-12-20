@@ -1,6 +1,5 @@
 package com.uzlov.valitova.justcargo.app
 
-import android.app.DownloadManager
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan

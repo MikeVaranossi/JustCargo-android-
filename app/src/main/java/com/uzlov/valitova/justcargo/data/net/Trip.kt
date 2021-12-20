@@ -2,7 +2,6 @@ package com.uzlov.valitova.justcargo.data.net
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.OffsetTime
 
 // аналог реквест от грузоперевозчиука
 @Parcelize

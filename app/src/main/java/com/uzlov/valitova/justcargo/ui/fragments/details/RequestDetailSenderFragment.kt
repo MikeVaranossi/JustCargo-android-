@@ -83,9 +83,7 @@ class RequestDetailSenderFragment :
                     Toast.LENGTH_SHORT).show()
             }
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-        }
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun callToUser() {

@@ -113,9 +113,7 @@ class RequestDetailCarrierFragment :
             }
         }
 
-        (requireActivity() as AppCompatActivity).supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-        }
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun continueCall() {
