@@ -24,14 +24,12 @@ data class FavoriteRequestLocal(
     @ColumnInfo(name = "height") var height: Int? = 0,
     @ColumnInfo(name = "status") var status: String? = null,
 ) : Parcelable, IViewItemAdapter {
+
     override fun getShortInfoItem() = shortInfo
     override fun getRequestTimeItem() = requestTime
-
     override fun getDeliveryTimeItem() = deliveryTime
-
     override fun getCostItem() = cost
-
     override fun getDepartureItem() = departure
-
     override fun getDestinationItem() = destination
+    override fun getIsFavourites() = true
 }

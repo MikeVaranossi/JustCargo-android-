@@ -4,10 +4,16 @@ import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 
-class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource):ILocalRepository {
+class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource) : ILocalRepository {
     override suspend fun getRequests(): LiveData<List<FavoriteRequestLocal>> {
         return localDataSource.getRequests()
+    }
+
+    override suspend fun getIDsRequests(): List<Long> {
+        return localDataSource.getIDsRequests()
     }
 
     override suspend fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {

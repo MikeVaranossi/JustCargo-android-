@@ -7,4 +7,5 @@ interface IViewItemAdapter {
     fun getCostItem() : Int?
     fun getDepartureItem() : String?
     fun getDestinationItem() : String?
+    fun getIsFavourites() : Boolean?
 }

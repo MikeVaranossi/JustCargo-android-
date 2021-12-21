@@ -54,10 +54,11 @@ class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener:
                     tvRequestDate.text = item.getRequestTimeItem().toString()
                     tvCostCargo.text = "${item.getCostItem()} ₽"
                     tvTrackCargo.text =  " ${item.getDepartureItem()}  -  ${item.getDestinationItem()} "
+                    cbFavouriteCargo.isChecked = item.getIsFavourites()!!
+
                     tvDetailCargo.setOnClickListener {
                         itemClickListener?.click(item)
                     }
-
                     cbFavouriteCargo.setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             Snackbar.make(
