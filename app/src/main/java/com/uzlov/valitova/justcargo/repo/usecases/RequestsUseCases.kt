@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.repo.usecases
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository

@@ -17,6 +17,7 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<Request> = arrayListOf()
+    private var idList: List<Long> = arrayListOf()
 
     interface OnItemClickListener {
         fun click(request: Request)
@@ -26,6 +27,11 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
 
     fun setData(data: List<Request>) {
         this.data = data
+        notifyDataSetChanged()
+    }
+
+    fun setIDs(idList: List<Long>) {
+        this.idList = idList
         notifyDataSetChanged()
     }
 
@@ -62,6 +68,7 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
                     findViewById<TextView>(R.id.text_view_to_details).setOnClickListener {
                         itemClickListener?.click(data)
                     }
+                    findViewById<CheckBox>(R.id.checkbox_favourite).isChecked = idList.contains(data.id)
                     findViewById<CheckBox>(R.id.checkbox_favourite).setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             Snackbar.make(

@@ -31,6 +31,8 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var model: RequestsViewModel
     lateinit var modelFavorites: FavoritesRequestsViewModel
+    private var requests: MutableList<Request> = mutableListOf()
+
     private val adapter by lazy {
         RVHomeCarrierAdapter(listenerOnClickCargoItem)
     }
@@ -103,6 +105,9 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
     private fun loadData() {
         model.getRequests()?.observe(this, {
             checkRV(it)
+        })
+        modelFavorites.getIDList().observe(this,{
+            adapter.setIDs(it)
         })
     }
 

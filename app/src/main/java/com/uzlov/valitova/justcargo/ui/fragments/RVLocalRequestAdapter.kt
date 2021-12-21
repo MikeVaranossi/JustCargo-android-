@@ -59,7 +59,6 @@ class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener:
                     tvDetailCargo.setOnClickListener {
                         itemClickListener?.click(item)
                     }
-
                     cbFavouriteCargo.setOnCheckedChangeListener { _, isChecked ->
                         if (isChecked) {
                             Snackbar.make(
