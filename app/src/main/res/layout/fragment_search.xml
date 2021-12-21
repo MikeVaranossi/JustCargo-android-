@@ -14,13 +14,14 @@
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/text_view_from"
         style="@style/StandartText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
         android:text="@string/text_from"
+        android:layout_marginTop="@dimen/m_margin"
         app:layout_constraintBottom_toTopOf="@+id/edit_text_from"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatEditText
@@ -31,18 +32,19 @@
         android:layout_marginEnd="@dimen/m_margin"
         android:hint="@string/hint_edit_text_from"
         app:layout_constraintBottom_toTopOf="@id/text_view_to"
-        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/edit_text_from_radius"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_from" />
 
     <TextView
         android:id="@+id/text_view_from_radius"
         style="@style/StandartText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/s_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:text="@string/text_radius"
+        android:layout_marginTop="@dimen/m_margin"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/edit_text_from_radius"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toTopOf="parent" />
@@ -54,15 +56,16 @@
         android:layout_marginEnd="@dimen/l_margin"
         android:hint="@string/hint_edit_text_radius"
         android:inputType="number"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/text_view_to_radius"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toBottomOf="@id/text_view_from" />
+        app:layout_constraintTop_toBottomOf="@id/text_view_from_radius" />
 
     <TextView
         android:id="@+id/text_view_to"
         style="@style/StandartText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:text="@string/text_to"
@@ -78,17 +81,18 @@
         android:layout_marginEnd="@dimen/m_margin"
         android:hint="@string/hint_edit_text_to"
         app:layout_constraintBottom_toTopOf="@id/text_view_date"
-        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        app:layout_constraintEnd_toStartOf="@id/edit_text_to_radius"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_to" />
 
     <TextView
         android:id="@+id/text_view_to_radius"
         style="@style/StandartText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/l_margin"
         android:text="@string/text_radius"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/edit_text_to_radius"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/edit_text_from_radius" />
@@ -100,6 +104,7 @@
         android:layout_marginEnd="@dimen/l_margin"
         android:hint="@string/hint_edit_text_radius"
         android:inputType="number"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/text_view_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline1"
@@ -109,7 +114,7 @@
     <TextView
         android:id="@+id/text_view_date"
         style="@style/StandartText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:text="@string/text_date_upload"
@@ -137,8 +142,19 @@
         android:layout_marginTop="@dimen/s_margin"
         android:background="@drawable/ic_icon_calendar"
         app:layout_constraintStart_toEndOf="@id/edit_text_date"
-        app:layout_constraintTop_toBottomOf="@id/text_view_date" />
+        app:layout_constraintTop_toTopOf="@id/edit_text_date" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_advanced_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/advanced_search"
+        android:layout_marginTop="@dimen/m_margin"
+        style="@style/SubheaderText"
+        android:textColor="@color/primary_color"
+        app:layout_constraintTop_toBottomOf="@id/edit_text_date"/>
     <Switch
         android:id="@+id/switch_kg_t"
         android:layout_width="wrap_content"
@@ -149,6 +165,7 @@
         android:textColor="@color/white"
         android:textOff="@string/text_switch_off"
         android:textOn="@string/text_switch_on"
+        android:visibility="gone"
         android:thumb="@drawable/thumb"
         android:track="@drawable/track"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,6 +180,7 @@
         android:layout_marginTop="@dimen/l_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:valueFrom="10"
+        android:visibility="gone"
         android:valueTo="100"
         app:layout_constraintBottom_toTopOf="@id/text_view_size"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,6 +194,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
         android:text="@string/text_volume"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/slider_m3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/slider_kg_t" />
@@ -189,6 +208,7 @@
         android:layout_marginEnd="@dimen/l_margin"
         android:valueFrom="10"
         android:valueTo="100"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/text_view_label_length"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -200,6 +220,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_length_red"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/edit_text_length"
         app:layout_constraintEnd_toStartOf="@id/text_view_label_width"
         app:layout_constraintStart_toStartOf="parent"
@@ -211,6 +232,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_width_red"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/edit_text_width"
         app:layout_constraintEnd_toStartOf="@id/text_view_label_height"
         app:layout_constraintStart_toEndOf="@+id/text_view_label_length"
@@ -222,6 +244,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_height_red"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/edit_text_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/text_view_label_width"
@@ -236,6 +259,7 @@
         android:layout_marginTop="@dimen/s_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:layout_marginBottom="@dimen/m_margin"
+        android:visibility="gone"
         android:background="@drawable/background_text_card_view"
         android:gravity="center"
         android:hint="@string/hint_up_to_10"
@@ -254,6 +278,7 @@
         android:layout_marginTop="@dimen/s_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:layout_marginBottom="@dimen/m_margin"
+        android:visibility="gone"
         android:background="@drawable/background_text_card_view"
         android:gravity="center"
         android:hint="@string/hint_up_to_3"
@@ -269,6 +294,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/l_margin"
         android:layout_marginStart="@dimen/l_margin"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/s_margin"
         android:layout_marginEnd="@dimen/l_margin"
         android:layout_marginBottom="@dimen/m_margin"
