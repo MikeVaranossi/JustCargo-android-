@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderCreatedBinding
+import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 
 
@@ -31,7 +32,7 @@ class OrderCreatedFragment: Fragment() {
         }
         viewBinding.imageCheck.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, MyDeliveriesFragment.newInstance())
+                .replace(R.id.fragment_container, HomeSenderFragment.newInstance())
                 .commit()
         }
     }

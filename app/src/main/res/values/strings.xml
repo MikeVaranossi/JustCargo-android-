@@ -142,4 +142,5 @@
     <string name="length">Длина</string>
     <string name="continue_str">Продолжить</string>
     <string name="placeholder_sms_code">******</string>
+    <string name="advanced_search">РАСШИРЕННЫЙ ПОИСК</string>
 </resources>

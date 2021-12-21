@@ -81,7 +81,7 @@ class OrderStepTwoFragment :
 
             // возврат на главный экран
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, HomeSenderFragment.newInstance()).commit()
+                .replace(R.id.fragment_container, OrderCreatedFragment.newInstance()).commit()
         }
     }
 
