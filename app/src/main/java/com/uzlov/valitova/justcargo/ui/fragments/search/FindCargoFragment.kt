@@ -2,28 +2,17 @@ package com.uzlov.valitova.justcargo.ui.fragments.search
 
 import android.os.Bundle
 import android.view.ContextThemeWrapper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
-import androidx.fragment.app.Fragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentFindCargoBinding
+import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 
-class FindCargoFragment : Fragment() {
-    private var _viewBinding: FragmentFindCargoBinding? = null
-    private val viewBinding get() = _viewBinding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentFindCargoBinding.inflate(layoutInflater, container, false).also {
-        _viewBinding = it
-    }.root
-
+class FindCargoFragment : BaseFragment<FragmentFindCargoBinding>(
+    FragmentFindCargoBinding::inflate
+) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -35,11 +24,6 @@ class FindCargoFragment : Fragment() {
         viewBinding.buttonSort.setOnClickListener {
             showPopUp(it)
         }
-    }
-
-    override fun onDestroyView() {
-        _viewBinding = null
-        super.onDestroyView()
     }
 
     private fun showPopUp(view: View) {
