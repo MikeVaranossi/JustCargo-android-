@@ -12,16 +12,8 @@ class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource) 
         return localDataSource.getRequests()
     }
 
-    override suspend fun getIDList() : List<Long> = runBlocking {
-        val mDeferredResult = async {
-            val idList: MutableList<Long> = mutableListOf()
-            val dataSource = localDataSource.getRequests()
-            for (data in dataSource.value!!) {
-                idList.add(data.id!!)
-            }
-            idList
-        }
-        mDeferredResult.await()
+    override suspend fun getIDsRequests(): List<Long> {
+        return localDataSource.getIDsRequests()
     }
 
     override suspend fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {

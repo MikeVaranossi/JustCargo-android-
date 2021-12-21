@@ -11,6 +11,10 @@ class RequestsLocalDataSourceImpl @Inject constructor(var dao: FavoriteRequestDa
         return dao.getFavoriteRequests()
     }
 
+    override fun getIDsRequests(): List<Long> {
+        return dao.getIDsFavoriteRequests()
+    }
+
     override fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {
         return dao.getFavoriteRequest(id)
     }

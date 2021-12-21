@@ -9,6 +9,9 @@ interface FavoriteRequestDao {
     @Query("SELECT * FROM FavoriteRequestLocal")
     fun getFavoriteRequests():  LiveData<List<FavoriteRequestLocal>>
 
+    @Query("SELECT id FROM FavoriteRequestLocal")
+    fun getIDsFavoriteRequests():  List<Long>
+
     @Query("SELECT * FROM FavoriteRequestLocal WHERE id LIKE :id")
     fun getFavoriteRequest(id: Long): LiveData<FavoriteRequestLocal?>
 
