@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationSmsFragment">
+    tools:context=".ui.activity.RegistrationActivity">
 
     <TextView
         android:id="@+id/textview_header"
@@ -23,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/textview_time"
-        android:hint="******"
+        android:hint="@string/placeholder_sms_code"
         android:inputType="numberPassword"
         android:maxLength="6"
         android:textAlignment="center"

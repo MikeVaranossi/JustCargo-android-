@@ -6,20 +6,15 @@ import android.telephony.PhoneNumberUtils
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.FragmentLoginBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
-import ru.tinkoff.decoro.watchers.FormatWatcher
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher
-
-import android.view.View.OnFocusChangeListener
-import ru.tinkoff.decoro.Mask
 import ru.tinkoff.decoro.slots.PredefinedSlots
-import ru.tinkoff.decoro.slots.Slot
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(
@@ -74,7 +69,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
 
     private fun setDecorPhone(){
         val inputField = viewBinding.textInputPhone as EditText
-        inputField.onFocusChangeListener = View.OnFocusChangeListener { _, hasFocus ->
+        inputField.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             if (hasFocus)
                 if (inputField.text.toString() == "")
                     inputField.setText("+")

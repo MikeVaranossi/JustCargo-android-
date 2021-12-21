@@ -18,7 +18,6 @@ import javax.inject.Inject
 class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
     MyDeliveriesProfileLayoutBinding::inflate) {
 
-    private val TAG: String = javaClass.simpleName
     private var isFromHostActivity = true
     @Inject
     lateinit var authService: AuthService

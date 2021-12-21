@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationCompleteFragment">
+    tools:context=".ui.activity.RegistrationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_complete"
@@ -63,15 +63,12 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_next"
         style="@style/MyStyleButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Продолжить"
+        android:text="@string/continue_str"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:layout_editor_absoluteX="10dp"
         />

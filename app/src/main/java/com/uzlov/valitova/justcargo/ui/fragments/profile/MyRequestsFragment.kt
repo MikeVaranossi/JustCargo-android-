@@ -12,15 +12,13 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
-import com.uzlov.valitova.justcargo.ui.fragments.RequestDetailFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
 
 class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     MyRequestsProfileLayoutBinding::inflate) {
-
-    private val TAG: String = javaClass.simpleName
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -30,7 +28,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
 
     private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
         override fun click(request: Request) {
-            openFragment(RequestDetailFragment.newInstance(request))
+            openFragment(RequestDetailCarrierFragment.newInstance(request))
             
         }
 

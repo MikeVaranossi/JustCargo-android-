@@ -5,25 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegistrationFragment">
+    tools:context=".ui.activity.RegistrationActivity">
 
 
-    <TextView
-        android:id="@+id/text_view_fio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/l_margin"
-        android:layout_marginStart="@dimen/l_margin"
-        android:text="@string/fio"
-        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_fio"
         style="@style/MyOutlinedBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hintEnabled="false"
-        app:layout_constraintTop_toBottomOf="@id/text_view_fio"
+        android:layout_marginTop="@dimen/l_margin"
+        android:hint="@string/fio"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -31,26 +25,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:hint="@string/hint_fio"/>
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/text_view_activity_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
-        android:text="@string/select_profile"
-        app:layout_constraintTop_toBottomOf="@id/textfield_fio"
-        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_activity_profile"
         style="@style/MyExposedDropdownMenuStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:hintEnabled="false"
-        app:layout_constraintTop_toBottomOf="@id/text_view_activity_profile"
+        android:hint="@string/select_profile"
+        android:layout_marginTop="@dimen/s_margin"
+        app:layout_constraintTop_toBottomOf="@id/textfield_fio"
         app:endIconMode="dropdown_menu"
        >
 
@@ -64,27 +50,18 @@
             android:paddingEnd="10dp"
             android:paddingRight="10dp"
             android:textCursorDrawable="@null"
-            android:hint="@string/activity_profile"/>
+            />
 
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text_view_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
-        android:text="@string/phone"
-        app:layout_constraintTop_toBottomOf="@id/textfield_activity_profile"
-        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_phone"
         style="@style/MyOutlinedBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_view_phone"
-        app:hintEnabled="false"
+        android:layout_marginTop="@dimen/s_margin"
+        app:layout_constraintTop_toBottomOf="@id/textfield_activity_profile"
+        android:hint="@string/phone"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -92,26 +69,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="phone"
-            android:hint="@string/hint_phone" />
+            />
     </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/text_view_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
-        android:text="@string/e_mail"
-        app:layout_constraintTop_toBottomOf="@id/textfield_phone"
-        />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_email"
         style="@style/MyOutlinedBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/text_view_email"
-        app:hintEnabled="false"
+        android:layout_marginTop="@dimen/s_margin"
+        app:layout_constraintTop_toBottomOf="@id/textfield_phone"
+        android:hint="@string/e_mail"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -122,24 +90,16 @@
             android:hint="@string/e_mail"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/text_view_driver_doc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/l_margin"
-        android:layout_marginTop="@dimen/s_margin"
-        android:text="@string/drivers_license"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/textfield_email"/>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textfield_driver_doc"
         style="@style/MyOutlinedBoxStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/text_view_driver_doc"
-        app:hintEnabled="false"
+        android:layout_marginTop="@dimen/s_margin"
+        app:layout_constraintTop_toBottomOf="@id/textfield_email"
+        android:hint="@string/drivers_license"
+        tools:visibility="visible"
         >
 
         <com.google.android.material.textfield.TextInputEditText
@@ -147,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"
-            android:hint="@string/hint_documents"/>
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
 

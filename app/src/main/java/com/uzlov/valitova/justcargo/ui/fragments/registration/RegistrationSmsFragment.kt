@@ -49,6 +49,7 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
         override fun login(user: User) {
             // можем редиректить на hostactivity
             startActivity(Intent(requireContext(), HostActivity::class.java))
+            activity?.finish()
             Log.e(TAG, "success login: $user")
         }
 
@@ -126,8 +127,8 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
     private fun startTimer() {
         cTimer = object : CountDownTimer(62000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
-                val seconds = (millisUntilFinished/1000)%60;
-                val minutes = ((millisUntilFinished-seconds)/1000)/60;
+                val seconds = (millisUntilFinished/1000)%60
+                val minutes = ((millisUntilFinished-seconds)/1000)/60
 
                 viewBinding.textviewTime.text = String.format("%02d:%02d", minutes, seconds)
             }

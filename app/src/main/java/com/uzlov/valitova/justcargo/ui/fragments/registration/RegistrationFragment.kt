@@ -1,30 +1,26 @@
 package com.uzlov.valitova.justcargo.ui.fragments.registration
 
-import android.R.attr
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.telephony.PhoneNumberUtils
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
+import android.util.Patterns
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.data.net.UserClass
 import com.uzlov.valitova.justcargo.data.net.UserType
 import com.uzlov.valitova.justcargo.databinding.FragmentRegistrationBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import ru.tinkoff.decoro.MaskImpl
-import ru.tinkoff.decoro.watchers.MaskFormatWatcher
-import ru.tinkoff.decoro.watchers.FormatWatcher
-import ru.tinkoff.decoro.parser.UnderscoreDigitSlotsParser
-import android.telephony.PhoneNumberFormattingTextWatcher
-import android.text.TextUtils
-import android.util.Patterns
-import android.widget.EditText
-import com.uzlov.valitova.justcargo.R
 import ru.tinkoff.decoro.slots.PredefinedSlots
-import android.R.attr.phoneNumber
-import android.telephony.PhoneNumberUtils
+import ru.tinkoff.decoro.watchers.MaskFormatWatcher
 
 
 class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
@@ -98,10 +94,8 @@ class RegistrationFragment : BaseFragment<FragmentRegistrationBinding>(
 
         if (viewBinding.textfieldActivityProfile.editText?.text.toString()  == "Грузоперевозчик"){
             viewBinding.textfieldDriverDoc.visibility = View.VISIBLE
-            viewBinding.textViewDriverDoc.visibility = View.VISIBLE
         }else{
             viewBinding.textfieldDriverDoc.visibility = View.INVISIBLE
-            viewBinding.textViewDriverDoc.visibility = View.INVISIBLE
         }
         val emailCorrected = isEmailValid()
         val phoneCorrected = isPhoneValid()

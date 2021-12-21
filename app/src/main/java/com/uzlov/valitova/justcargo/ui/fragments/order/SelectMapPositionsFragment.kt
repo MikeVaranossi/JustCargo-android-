@@ -13,6 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.uzlov.valitova.justcargo.R
@@ -30,7 +31,7 @@ class SelectMapPositionsFragment private constructor() :
     BaseFragment<FragmentMapsBinding>(
         FragmentMapsBinding::inflate) {
 
-    val TAG = javaClass.simpleName
+    val TAG: String = javaClass.simpleName
 
     interface ActionListener {
         fun select(address: Address?, latitude: String, longitude: String)
@@ -79,15 +80,7 @@ class SelectMapPositionsFragment private constructor() :
 
     private val callback = OnMapReadyCallback { googleMap ->
 
-        if (ActivityCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requirePermissionsLocation()
-        } else {
-            googleMap.isMyLocationEnabled = true
-        }
+        enableSelfPositions(googleMap)
 
         googleMap.setOnCameraMoveStartedListener {
             upperMovePositionPicker()
@@ -112,6 +105,19 @@ class SelectMapPositionsFragment private constructor() :
             startGetLocation()
         } else {
             requirePermissionsLocation()
+        }
+    }
+
+    private fun enableSelfPositions(googleMap: GoogleMap) {
+        if (ActivityCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requirePermissionsLocation()
+            return
+        } else {
+            googleMap.isMyLocationEnabled = true
         }
     }
 
