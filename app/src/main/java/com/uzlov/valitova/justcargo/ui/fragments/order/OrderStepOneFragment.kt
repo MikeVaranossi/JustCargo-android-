@@ -10,19 +10,28 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.net.Request
-import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import java.lang.NumberFormatException
 import java.util.*
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 
 class OrderStepOneFragment :
     BaseFragment<FragmentOrderStepOneBinding>(FragmentOrderStepOneBinding::inflate) {
+    @Inject
+    lateinit var authService: AuthService
 
     private var request: Request = Request()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireContext().appComponent.inject(this)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -89,9 +98,8 @@ class OrderStepOneFragment :
                     request.cost = 0
                         Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT).show()
                 }
+request.owner = authService.currentUser()
 
-                request.owner =
-                    User(phone = "89992008289") // здесь будет браться реальная информация
             }
 
             parentFragmentManager.beginTransaction()
