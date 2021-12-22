@@ -23,10 +23,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = getString(R.string.search_cargo)
+            it.setDisplayHomeAsUpEnabled(false)
         }
         viewBinding.buttonFindCargo.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, FindCargoFragment.newInstance())
+                .addToBackStack(null)
                 .commit()
         }
         viewBinding.imageButtonCalendar.setOnClickListener {
