@@ -1,24 +1,26 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
+import com.uzlov.valitova.justcargo.databinding.ItemCardCargoBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
 class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? = null) :
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {
 
-    private var data: List<Request> = arrayListOf()
+    private var requests: List<Request> = arrayListOf()
     private var idList: List<Long> = arrayListOf()
 
+    private var _viewBinding: ItemCardCargoBinding? = null
+    private val viewBinding get() = _viewBinding!!
+
+    private val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
     interface OnItemClickListener {
         fun click(request: Request)
         fun addToFavorite(request: Request)
@@ -26,57 +28,53 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
     }
 
     fun setData(data: List<Request>) {
-        this.data = data
+        requests = data
         notifyDataSetChanged()
     }
 
-    fun setIDs(idList: List<Long>) {
-        this.idList = idList
+    fun setIDs(_idList: List<Long>) {
+        idList = _idList
         notifyDataSetChanged()
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerItemViewHolder {
-        return RecyclerItemViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_card_cargo, parent, false) as View
-        )
+        val inflater = LayoutInflater.from(parent.context)
+        _viewBinding = ItemCardCargoBinding.inflate(inflater, parent, false)
+        return RecyclerItemViewHolder(viewBinding)
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(requests[position])
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return requests.size
     }
 
-    inner class RecyclerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class RecyclerItemViewHolder(private val binding: ItemCardCargoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Request) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
-                itemView.apply {
-                    findViewById<TextView>(R.id.text_view_name_cargo).text =
-                        data.shortInfo
-                    val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-                    findViewById<TextView>(R.id.text_view_date).text =
-                        simpleFormat.format(data.deliveryTime).toString()
-                    findViewById<TextView>(R.id.text_view_cost).text =
-                        "${data.cost} ₽"
-                    findViewById<TextView>(R.id.text_view_from_to).text =
-                        data.departure + " - " + data.destination
-                    findViewById<TextView>(R.id.text_view_to_details).setOnClickListener {
+                with(viewBinding) {
+                    textViewNameCargo.text = data.getShortInfoItem()
+                    textViewDate.text = simpleFormat.format(data.getRequestTimeItem()).toString()
+                    textViewCost.text = "${data.getCostItem()} ₽"
+                    textViewFromTo.text =
+                        " ${data.getDepartureItem()}  -  ${data.getDestinationItem()} "
+                    textViewToDetails.setOnClickListener {
                         itemClickListener?.click(data)
                     }
-                    findViewById<CheckBox>(R.id.checkbox_favourite).isChecked = idList.contains(data.id)
-                    findViewById<CheckBox>(R.id.checkbox_favourite).setOnCheckedChangeListener { _, isChecked ->
-                        if (isChecked) {
+                    checkboxFavourite.isChecked = idList.contains(data.id)
+                    checkboxFavourite.setOnClickListener {
+
+                        if (checkboxFavourite.isChecked) {
                             Snackbar.make(
-                                itemView,
-                                context.getString(R.string.cargo_is_added_into_cart),
+                                binding.root,
+                                binding.root.context.getString(R.string.cargo_is_added_into_cart),
                                 Snackbar.LENGTH_LONG
                             )
-                                .setBackgroundTint(ContextCompat.getColor(context,
+                                .setBackgroundTint(ContextCompat.getColor(binding.root.context,
                                     R.color.dark_primary_color))
                                 .show()
                             itemClickListener?.addToFavorite(data)

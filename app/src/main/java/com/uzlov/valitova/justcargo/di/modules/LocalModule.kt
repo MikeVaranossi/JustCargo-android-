@@ -28,7 +28,6 @@ class LocalModule {
     @Singleton
     @Provides
     fun database(app: Context): RoomFavoritesRequestDB = Room.databaseBuilder(app, RoomFavoritesRequestDB::class.java, getLocalName())
-        .allowMainThreadQueries()
         .fallbackToDestructiveMigration() // TODO: need migrations!
         .build()
 

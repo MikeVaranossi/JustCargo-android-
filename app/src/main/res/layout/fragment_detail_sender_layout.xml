@@ -9,20 +9,41 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/text_view_from_to"
         style="@style/SubheaderText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:textStyle="bold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginEnd="@dimen/l_margin"
         android:layout_marginTop="@dimen/l_margin"
         android:background="@drawable/background_text_card_view"
         android:gravity="center"
         android:paddingTop="@dimen/xs_padding"
         android:paddingBottom="@dimen/xs_padding"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/fabStartChat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Москва - Воронеж" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabStartChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_outline_mode_comment"
+        android:layout_marginEnd="@dimen/l_margin"
+        app:backgroundTint="@color/primary_second_color"
+        app:layout_constraintTop_toTopOf="@+id/text_view_from_to"
+        app:layout_constraintRight_toRightOf="parent"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabCall"
+        app:srcCompat="@drawable/ic_outline_call_24"
+        app:backgroundTint="@color/primary_second_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/l_margin"
+        android:layout_marginTop="@dimen/margin_detail_screen"
+        app:layout_constraintTop_toBottomOf="@id/fabStartChat"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <TextView
         android:id="@+id/tvLabelCostDelivery"
