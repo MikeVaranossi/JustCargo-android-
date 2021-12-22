@@ -89,6 +89,9 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
 
         }
         viewBinding.recyclerViewHomeCarrier.adapter = adapter
+        viewBinding.recyclerViewHomeCarrier.setHasFixedSize(true)
+        viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(10)
+
         loadData()
         viewBinding.buttonSort.setOnClickListener {
             showPopUp(it)
