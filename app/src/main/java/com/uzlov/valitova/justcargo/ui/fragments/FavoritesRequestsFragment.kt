@@ -44,7 +44,9 @@ class FavoritesRequestsFragment : BaseFragment<FavouritesRequestsLayoutBinding>(
     }
 
     private val favouriteAdapter by lazy {
-        RVLocalRequestAdapter(listenerOnClickCargoItem)
+        RVLocalRequestAdapter(listenerOnClickCargoItem).apply {
+            setVisibilityFavouritesIcon(true)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -51,7 +51,9 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         }
 
     private val requestsAdapter by lazy {
-        RVLocalRequestAdapter(listenerOnClickCargoItem)
+        RVLocalRequestAdapter(listenerOnClickCargoItem).apply {
+            setVisibilityFavouritesIcon(false)
+        }
     }
 
     companion object {
