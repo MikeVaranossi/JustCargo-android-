@@ -24,6 +24,7 @@ data class Request(
     var status: RequestStatus? = RequestStatus(1, "Открыта"),
     var isFavourites: Boolean = false,
 ) : Parcelable, IViewItemAdapter {
+    override fun getIdRequest() = id
     override fun getShortInfoItem() = shortInfo
     override fun getRequestTimeItem() = requestTime
     override fun getDeliveryTimeItem() = deliveryTime
