@@ -5,7 +5,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.SuperscriptSpan
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
-import com.uzlov.valitova.justcargo.data.net.Request
+import com.uzlov.valitova.justcargo.data.net.*
 
 
 fun String.lastToPower(): SpannableStringBuilder =
@@ -38,5 +38,37 @@ fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
         width = this.width,
         height = this.height,
         status = this.status?.name
+    )
+}
+
+/*
+*   "Доставка" создается при отправке бронирования заявки
+*   В случае успешного бронирования, в request меняется статус
+*   В случае отказа бронирования - "Доставка удаляется"
+*
+*   p.s. Об изменении статуса присылать notification
+* */
+fun Delivery.create(user: User, request: Request): Delivery {
+    return Delivery(
+        id = System.currentTimeMillis(),
+        request = request.copy(),
+        trip = Trip(
+            id = this.id,
+            startTime = this.startTime,
+            endTime = this.endTime,
+            departure = request.departure,
+            destination = request.destination,
+            carrier = user.copy(),
+            vehicle = Vehicle(id = 101,
+                name = "Личное авто",
+                owner = user.copy(),
+                type = VehicleType(1, "Грузовик")
+            ),
+            trailer = Vehicle(id = 102,
+                name = "Прицеп",
+                owner = user.copy(),
+                type = VehicleType(2, "Прицеп")
+            )
+        )
     )
 }
