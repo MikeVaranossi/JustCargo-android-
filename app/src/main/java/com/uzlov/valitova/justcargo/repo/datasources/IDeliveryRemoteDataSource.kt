@@ -8,4 +8,6 @@ interface IDeliveryRemoteDataSource {
     fun getDelivery(id: Int) : LiveData<Delivery?>
     fun putDelivery(delivery: Delivery)
     fun removeDelivery(id: Int)
+    fun getDelivery(id: Long, phone: String): LiveData<Delivery?>
+    fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>>
 }
