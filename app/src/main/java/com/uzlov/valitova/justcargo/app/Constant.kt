@@ -24,5 +24,13 @@ class Constant {
 
         //        PERMISSIONS
         const val MY_PERMISSIONS_REQUEST_CALL_PHONE: Int = 1001
+
+        // STATES REQUESTS
+        const val STATE_OPEN = 200
+        const val STATE_IN_PROGRESS = 201
+        const val STATE_COMPLETE = 202
+        const val STATE_NOT_COMPLETED = 203
+        const val STATE_CANCELLED = 204
+
     }
 }
