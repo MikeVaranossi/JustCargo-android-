@@ -9,7 +9,7 @@ class Constant {
 
         const val USERS = "users" // хранит User.kt
         const val VEHICLES = "vehicles" // хранит Vehicle.kt
-        const val DELIVERY = "delvery" // хранит Delivery.kt
+        const val DELIVERY = "deliveries" // хранит Delivery.kt
 
         // type user
         const val SENDER = 1L

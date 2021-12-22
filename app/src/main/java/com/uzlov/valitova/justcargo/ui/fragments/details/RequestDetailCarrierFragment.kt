@@ -12,13 +12,22 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModel
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.app.create
+import com.uzlov.valitova.justcargo.app.toRequestRemote
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailCarrierLayoutBinding
 
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
+import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
+import javax.inject.Inject
 
 /*
 * Фрагмент отображает детальную информацию о заявке на перевозку груза.
@@ -30,20 +39,33 @@ class RequestDetailCarrierFragment :
     private var request: Request? = null
     private var requestLocal: FavoriteRequestLocal? = null
 
+    @Inject
+    lateinit var modelFactory: ViewModelFactory
+    lateinit var deliveryViewModel: DeliveryViewModel
+
+    @Inject
+    lateinit var authService: AuthService
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         requestPermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                if (isGranted){
+                if (isGranted) {
                     callToUser()
                 } else {
-                    Toast.makeText(requireContext(), getString(R.string.you_denied_call_from_app), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(),
+                        getString(R.string.you_denied_call_from_app),
+                        Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // set dependencies
+        requireContext().appComponent.inject(this)
+        deliveryViewModel = modelFactory.create(DeliveryViewModel::class.java)
 
         arguments?.let {
             request = it.getParcelable(Constant.KEY_REQUESTS_OBJECT)
@@ -57,7 +79,7 @@ class RequestDetailCarrierFragment :
         initListeners()
         if (request != null) {
             updateUI(request)
-        } else {
+        } else if (requestLocal != null) {
             updateUI(requestLocal)
         }
     }
@@ -109,13 +131,26 @@ class RequestDetailCarrierFragment :
             }
 
             buttonTakeCargo.setOnClickListener {
-
+                startBookingRequest()
             }
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    // создание "Доставки", отправка её на бэк /
+    private fun startBookingRequest() {
+        authService.currentUser()?.let { user ->
+            if (request != null) {
+                deliveryViewModel.addDelivery(Delivery().create(user, request!!))
+            } else {
+                deliveryViewModel.addDelivery(Delivery().create(user, requestLocal?.toRequestRemote()!!))
+            }
+        }
+    }
+
+
+    // начало звонка
     private fun continueCall() {
         request?.owner?.phone?.let {
             if (it.trim().isEmpty()) {
@@ -134,6 +169,7 @@ class RequestDetailCarrierFragment :
         }
     }
 
+    // звонок пользователю
     private fun callToUser() {
         request?.owner?.phone?.let {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
@@ -141,8 +177,10 @@ class RequestDetailCarrierFragment :
         }
     }
 
+    // проверка разрешений
     private fun checkCallToPhonePermissions(): Boolean {
-        return if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE)
+        return if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CALL_PHONE)
             != PackageManager.PERMISSION_GRANTED
         ) {
             requirePermissionsCallToPhone()
