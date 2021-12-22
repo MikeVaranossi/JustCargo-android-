@@ -41,6 +41,25 @@ fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
     )
 }
 
+// обратный маппинг для отправки на сервер
+fun FavoriteRequestLocal.toRequestRemote(): Request {
+    return Request(
+        id = this.id,
+        requestTime = this.requestTime,
+        deliveryTime = this.deliveryTime,
+        cost = this.cost,
+        departure = this.departure,
+        destination = this.destination,
+        description = this.description,
+        shortInfo = this.shortInfo,
+        weight = this.weight,
+        length = this.length,
+        width = this.width,
+        height = this.height,
+        status = RequestStatus(0,this.status)
+    )
+}
+
 /*
 *   "Доставка" создается при отправке бронирования заявки
 *   В случае успешного бронирования, в request меняется статус
