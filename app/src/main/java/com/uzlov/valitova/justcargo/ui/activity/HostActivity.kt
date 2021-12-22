@@ -69,7 +69,7 @@ class HostActivity : AppCompatActivity() {
                 }
                 R.id.delivery_action -> {
                     if (authService.currentUser()?.userType?.id == Constant.SENDER){
-                        setFragment(MyRequestsFragment.newInstance())
+                        setFragment(MyRequestsFragment.newInstance(true))
                         return@setOnItemSelectedListener true
                     } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
                         setFragment(MyDeliveriesFragment.newInstance(true))

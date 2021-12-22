@@ -3,15 +3,18 @@ package com.uzlov.valitova.justcargo.ui.fragments.profile
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
+import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
+import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
@@ -20,34 +23,42 @@ import javax.inject.Inject
 class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     MyRequestsProfileLayoutBinding::inflate) {
 
+    private var isFromHostActivity: Boolean = true
+    private lateinit var modelRequests: RequestsViewModel
+    private lateinit var modelFavorites: FavoritesRequestsViewModel
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    lateinit var modelRequests: RequestsViewModel
-    lateinit var modelFavorites: FavoritesRequestsViewModel
+
+    @Inject
+    lateinit var authService: AuthService
 
 
-    private val listenerOnClickCargoItem = object : RVHomeCarrierAdapter.OnItemClickListener {
-        override fun click(request: Request) {
-            openFragment(RequestDetailCarrierFragment.newInstance(request))
-            
+    private val listenerOnClickCargoItem =
+        object : RVLocalRequestAdapter.OnItemClickListener<Request> {
+            override fun click(request: Request) {
+                openFragment(RequestDetailCarrierFragment.newInstance(request))
+
+            }
+
+            override fun addToFavorite(request: Request) {
+                modelFavorites.putRequest(request.toFavoriteRequestLocal())
+            }
+
+            override fun removeFromFavorite(request: Request) {
+                modelFavorites.removeRequest(request.toFavoriteRequestLocal())
+            }
         }
-
-        override fun addToFavorite(request: Request) {
-            modelFavorites.putRequest(request.toFavoriteRequestLocal())
-        }
-
-        override fun removeFromFavorite(request: Request) {
-            modelFavorites.removeRequest(request.toFavoriteRequestLocal())
-        }
-    }
 
     private val requestsAdapter by lazy {
-        RVHomeCarrierAdapter(listenerOnClickCargoItem)
+        RVLocalRequestAdapter(listenerOnClickCargoItem)
     }
 
     companion object {
-        fun newInstance(): MyRequestsFragment {
-            return MyRequestsFragment()
+        fun newInstance(isFromHostActivity: Boolean): MyRequestsFragment {
+            return MyRequestsFragment().apply {
+                arguments = bundleOf(Constant.KEY_FROM_HOST_ACTIVITY to isFromHostActivity)
+            }
         }
     }
 
@@ -56,15 +67,21 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         super.onCreate(savedInstanceState)
         modelRequests = viewModelFactory.create(RequestsViewModel::class.java)
         modelFavorites = viewModelFactory.create(FavoritesRequestsViewModel::class.java)
+
+        arguments?.let {
+            isFromHostActivity = it.getBoolean(Constant.KEY_FROM_HOST_ACTIVITY)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = getString(R.string.my_packages)
-            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayHomeAsUpEnabled(!isFromHostActivity)
         }
         initListeners()
+        viewBinding.rvRequests.adapter = requestsAdapter
+
         showLoading()
         loadRequests()
     }
@@ -77,9 +94,12 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     }
 
     private fun loadRequests() {
-        modelRequests.getRequests()?.observe(this, {
-            updateUI(it)
-        })
+        authService.currentUser()?.let { user ->
+            modelRequests.getRequestsWithPhone(user.phone ?: "")?.observe(this, {
+                updateUI(it)
+            })
+        }
+
     }
 
     private fun updateUI(result: List<Request>?) {
@@ -87,7 +107,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
             hideLoading()
             setVisibilityContent(it.isEmpty())
 
-            viewBinding.rvRequests.adapter = requestsAdapter
+
             requestsAdapter.setData(it)
         }
     }
