@@ -8,7 +8,7 @@ import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
 import javax.inject.Inject
 
 class RequestsUseCases @Inject constructor(
-   private var requestRepository: IRequestsRepository,
+    private var requestRepository: IRequestsRepository,
     private var localRequestRepository: ILocalRepository,
 ) {
 
@@ -21,13 +21,33 @@ class RequestsUseCases @Inject constructor(
     fun getRequestsWithPhone(phone: String) = requestRepository.getRequestsWithPhone(phone)
     fun getRequestsWithUserID(id: Int) = requestRepository.getRequestsWithUserID(id)
 
-//    for local requests
-    suspend fun getFavouritesRequests() : LiveData<List<FavoriteRequestLocal>> = localRequestRepository.getRequests()
-    suspend fun getFavouriteRequest(id: Long) : LiveData<FavoriteRequestLocal?> = localRequestRepository.getRequest(id)
-    suspend fun removeFavouriteRequest(request: FavoriteRequestLocal) = localRequestRepository.removeRequest(request)
-    suspend fun putFavouriteRequest(request: FavoriteRequestLocal) = localRequestRepository.putRequest(request)
-    suspend fun updateFavouriteRequest(request: FavoriteRequestLocal) = localRequestRepository.updateRequest(request)
+    //    for local requests
+    suspend fun getFavouritesRequests(): LiveData<List<FavoriteRequestLocal>> =
+        localRequestRepository.getRequests()
+
+    suspend fun getFavouriteRequest(id: Long): LiveData<FavoriteRequestLocal?> =
+        localRequestRepository.getRequest(id)
+
+    suspend fun removeFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.removeRequest(request)
+
+    suspend fun putFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.putRequest(request)
+
+    suspend fun updateFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.updateRequest(request)
 
     // возвращает множество ID-ков избранных заявок
-    suspend fun getFavouritesIDs()  : List<Long> = localRequestRepository.getIDsRequests()
+    suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getIDsRequests()
+    fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+        dateTimeEnd: Long,
+    ): LiveData<List<Request>> = requestRepository.searchRequest(
+        from,
+        to,
+        dateTimeStart,
+        dateTimeEnd
+    )
 }

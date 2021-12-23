@@ -11,4 +11,10 @@ interface IRequestsRemoteDataSource {
     fun getRequestsWithStatus(id: Int): LiveData<List<Request>>
     fun getRequestsWithPhone(phone: String): LiveData<List<Request>>
     fun getRequestsWithUserID(id: Int): LiveData<List<Request>>
+    fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+        dateTimeEnd: Long,
+    ): LiveData<List<Request>>
 }
