@@ -1,15 +1,18 @@
 package com.uzlov.valitova.justcargo.viemodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class RequestsViewModel @Inject constructor(private var requestsUseCases: RequestsUseCases?)  : BaseViewModel() {
+class RequestsViewModel @Inject constructor(private var requestsUseCases: RequestsUseCases?) :
+    BaseViewModel() {
 
     // возвращает все заявки
-    fun getRequests() = runBlocking{
+    fun getRequests() = runBlocking {
         val mDeferredResult = async {
             requestsUseCases?.getRequests()
         }
@@ -33,4 +36,14 @@ class RequestsViewModel @Inject constructor(private var requestsUseCases: Reques
 
     // возвращает все заявки с указанным id пользователя (создателя)
     fun getRequestsWithUserID(id: Int) = requestsUseCases?.getRequestsWithUserID(id)
+
+    fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+        dateTimeEnd: Long,
+    ): LiveData<List<Request>> {
+        val result = MutableLiveData<List<Request>>()
+        return result
+    }
 }
