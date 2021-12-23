@@ -143,4 +143,5 @@
     <string name="continue_str">Продолжить</string>
     <string name="placeholder_sms_code">******</string>
     <string name="advanced_search">РАСШИРЕННЫЙ ПОИСК</string>
+    <string name="user_not_found">Пользователь с данным номером не найден</string>
 </resources>

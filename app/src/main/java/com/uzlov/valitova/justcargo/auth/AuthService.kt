@@ -26,7 +26,7 @@ class AuthService {
     interface IStateAuth {
         fun registered(user: User)
         fun login(user: User)
-        fun logout()
+        fun logout(msg: String)
     }
 
     private var listenerAuth: IStateAuth? = null
@@ -65,8 +65,10 @@ class AuthService {
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Неверный запрос
+                listenerAuth?.logout("Неверный запрос")
             } else if (e is FirebaseTooManyRequestsException) {
                 //Превышена квота SMS для проекта
+                listenerAuth?.logout("Превышена квота SMS для проекта")
             }
             // Show a message and update the UI
         }

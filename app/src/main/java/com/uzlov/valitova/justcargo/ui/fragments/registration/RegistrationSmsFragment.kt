@@ -19,6 +19,7 @@ import com.uzlov.valitova.justcargo.viemodels.UsersViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
 import javax.inject.Inject
 import android.os.CountDownTimer
+import android.widget.Toast
 
 
 class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
@@ -53,7 +54,8 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
             Log.e(TAG, "success login: $user")
         }
 
-        override fun logout() {
+        override fun logout(msg: String) {
+            Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
             // показать ошибку, или откинуть пользователя назад
             Log.e(TAG, "success logout: ")
         }
