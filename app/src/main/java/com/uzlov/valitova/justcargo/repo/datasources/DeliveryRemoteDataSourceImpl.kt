@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.repo.datasources
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -45,11 +46,54 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
         return resultDelivery
     }
 
+    // получает "доставку" с определенным id заявки и телефоном перевозчиком
+    override fun getDelivery(id: Long, phone: String): LiveData<Delivery?> {
+        val result = MutableLiveData<Delivery?>()
+        deliveryReference.orderByChild("request/id").equalTo(id.toDouble())
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value != null){
+                        result.value = snapshot.children.map {
+                            it.getValue<Delivery>()
+                        }.first {
+                            it?.trip?.carrier?.phone == phone
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    error.toException().printStackTrace()
+                }
+            })
+
+        return result
+    }
+
     override fun putDelivery(delivery: Delivery) {
         deliveryReference.child(delivery.id.toString()).setValue(delivery)
     }
 
     override fun removeDelivery(id: Int) {
         deliveryReference.child(id.toString()).removeValue()
+    }
+
+    override fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>> {
+        val result = MutableLiveData<List<Delivery>>()
+        deliveryReference.orderByChild("trip/carrier/phone").equalTo(phone)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.value != null){
+                        result.value = snapshot.children.map {
+                            it.getValue<Delivery>()!!
+                        }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    error.toException().printStackTrace()
+                }
+            })
+
+        return result
     }
 }

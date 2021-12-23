@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -82,6 +83,21 @@ class RequestDetailCarrierFragment :
         } else if (requestLocal != null) {
             updateUI(requestLocal)
         }
+
+        val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
+
+        // скрываем view со статусом заявки
+        hideStateUI()
+
+        authService.currentUser()?.let {
+            deliveryViewModel.getDeliveryWithParam(idRequest,it.phone ?: "")?.observe(viewLifecycleOwner, {
+                it?.let {
+                    showStateUI()
+                    viewBinding.tvStatusDelivery.text = it.request?.status?.name
+                    viewBinding.buttonTakeCargo.visibility = View.GONE
+                }
+            })
+        }
     }
 
     private fun updateUI(request: Request?) {
@@ -144,11 +160,27 @@ class RequestDetailCarrierFragment :
             if (request != null) {
                 deliveryViewModel.addDelivery(Delivery().create(user, request!!))
             } else {
-                deliveryViewModel.addDelivery(Delivery().create(user, requestLocal?.toRequestRemote()!!))
+                deliveryViewModel.addDelivery(Delivery().create(user,
+                    requestLocal?.toRequestRemote()!!))
             }
+
+            showStateUI()
         }
     }
 
+    private fun showStateUI() {
+        with(viewBinding) {
+            tvLabelStateDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.visibility = View.VISIBLE
+        }
+    }
+
+    private fun hideStateUI() {
+        with(viewBinding) {
+            tvLabelStateDelivery.visibility = View.INVISIBLE
+            tvStatusDelivery.visibility = View.INVISIBLE
+        }
+    }
 
     // начало звонка
     private fun continueCall() {

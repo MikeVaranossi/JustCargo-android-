@@ -143,4 +143,6 @@
     <string name="continue_str">Продолжить</string>
     <string name="placeholder_sms_code">******</string>
     <string name="advanced_search">РАСШИРЕННЫЙ ПОИСК</string>
+    <string name="confirm_str">Подтверждение</string>
+    <string name="str_state_not_confirm">Не подтверждено</string>
 </resources>
