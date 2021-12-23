@@ -10,7 +10,12 @@ data class Request(
     var id: Long? = 0,
     var requestTime: Long? = 0,
     var deliveryTime: Long? = 0,
+    var deliveryTimeSecond: Long? = 0,
     var cost: Int? = 0,
+    var departureLatitude: Double? = 0.0,
+    var departureLongitude: Double? = 0.0,
+    var destinationLatitude: Double? = 0.0,
+    var destinationLongitude: Double? = 0.0,
     var departure: String? = "",
     var destination: String? = "",
     var shortInfo: String? = "",
@@ -32,4 +37,5 @@ data class Request(
     override fun getDepartureItem() = departure
     override fun getDestinationItem() = destination
     override fun getIsFavourites() = isFavourites
+
 }
