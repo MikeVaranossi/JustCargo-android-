@@ -39,6 +39,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
             val manager = requireActivity().supportFragmentManager
             manager.apply {
                 beginTransaction()
+                    .addToBackStack(null)
                     .replace(R.id.container, RegistrationFragment())
                     .commit()
             }
@@ -51,6 +52,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(
         if(phone != null)
             manager.apply {
                 beginTransaction()
+                    .addToBackStack(null)
                     .replace(R.id.container, RegistrationSmsFragment.newInstance(phone))
                     .commit()
             }

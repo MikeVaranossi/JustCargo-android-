@@ -18,6 +18,7 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
 
         val manager = requireActivity().supportFragmentManager
         viewBinding.btnLogin.setOnClickListener {
+            (requireActivity() as AppCompatActivity).supportActionBar?.show()
             manager.apply {
                 beginTransaction()
                     .replace(R.id.container, LoginFragment())
@@ -25,6 +26,7 @@ class WelcomeScreenFragment : BaseFragment<FragmentWelcomeScreenBinding>(
             }
         }
         viewBinding.btnRegistration.setOnClickListener {
+            (requireActivity() as AppCompatActivity).supportActionBar?.show()
             manager.apply {
                 beginTransaction()
                     .replace(R.id.container, RegistrationFragment())
