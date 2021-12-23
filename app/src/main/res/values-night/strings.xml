@@ -144,4 +144,5 @@
     <string name="placeholder_sms_code">******</string>
     <string name="confirm_str">Подтверждение</string>
     <string name="str_state_not_confirm">Не подтверждено</string>
+    <string name="cancel_cargo">Отказаться</string>
 </resources>
