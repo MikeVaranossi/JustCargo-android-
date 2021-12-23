@@ -6,14 +6,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModel
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
@@ -22,9 +20,8 @@ import com.uzlov.valitova.justcargo.app.toRequestRemote
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
-import com.uzlov.valitova.justcargo.databinding.FragmentDetailCarrierLayoutBinding
-
 import com.uzlov.valitova.justcargo.data.net.Request
+import com.uzlov.valitova.justcargo.databinding.FragmentDetailCarrierLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
@@ -46,6 +43,8 @@ class RequestDetailCarrierFragment :
 
     @Inject
     lateinit var authService: AuthService
+
+    private var delivery: Delivery? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -78,6 +77,7 @@ class RequestDetailCarrierFragment :
         super.onViewCreated(view, savedInstanceState)
 
         initListeners()
+
         if (request != null) {
             updateUI(request)
         } else if (requestLocal != null) {
@@ -86,17 +86,18 @@ class RequestDetailCarrierFragment :
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
 
-        // скрываем view со статусом заявки
-        hideStateUI()
-
         authService.currentUser()?.let {
-            deliveryViewModel.getDeliveryWithParam(idRequest,it.phone ?: "")?.observe(viewLifecycleOwner, {
-                it?.let {
-                    showStateUI()
-                    viewBinding.tvStatusDelivery.text = it.request?.status?.name
-                    viewBinding.buttonTakeCargo.visibility = View.GONE
-                }
-            })
+            // скрываем view со статусом заявки
+            hideStateUI()
+
+            deliveryViewModel.getDeliveryWithParam(idRequest, it.phone ?: "")
+                ?.observe(viewLifecycleOwner, {
+                    it?.let {
+                        showStateUI()
+                        delivery = it.copy()
+                        viewBinding.tvStatusDelivery.text = it.request?.status?.name
+                    }
+                })
         }
     }
 
@@ -140,18 +141,25 @@ class RequestDetailCarrierFragment :
                 request?.owner?.phone?.let { continueCall() }
             }
 
-            fabStartChat.setOnClickListener {
-                Toast.makeText(requireContext(),
-                    getString(R.string.where_is_chat),
-                    Toast.LENGTH_SHORT).show()
-            }
-
             buttonTakeCargo.setOnClickListener {
                 startBookingRequest()
+            }
+
+            buttonCancelCargo.setOnClickListener {
+                startRemoveDelivery()
             }
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun startRemoveDelivery() {
+        authService.currentUser()?.let { user ->
+            delivery?.id?.let { id ->
+                deliveryViewModel.removeDelivery(id)
+                hideStateUI()
+            }
+        }
     }
 
     // создание "Доставки", отправка её на бэк /
@@ -168,17 +176,33 @@ class RequestDetailCarrierFragment :
         }
     }
 
+    // срабатывает тогда когда мы отправили бронь на заявку
     private fun showStateUI() {
         with(viewBinding) {
+            // показываем статус брони
             tvLabelStateDelivery.visibility = View.VISIBLE
             tvStatusDelivery.visibility = View.VISIBLE
+
+            // показываем кнопку отказаться
+            buttonCancelCargo.visibility = View.VISIBLE
+
+            // скрываем "взять груз"
+            buttonTakeCargo.visibility = View.GONE
         }
     }
 
+    // срабатывает если мы не отправляли бронирования
     private fun hideStateUI() {
         with(viewBinding) {
+            // скрываем статус бронирования
             tvLabelStateDelivery.visibility = View.INVISIBLE
             tvStatusDelivery.visibility = View.INVISIBLE
+
+            // скрываем кнопку взять груз
+            buttonCancelCargo.visibility = View.GONE
+
+            // показываем кнопку взять груз
+            buttonTakeCargo.visibility = View.VISIBLE
         }
     }
 

@@ -1,6 +1,5 @@
 package com.uzlov.valitova.justcargo.repo.datasources
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.DataSnapshot
@@ -73,7 +72,7 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
         deliveryReference.child(delivery.id.toString()).setValue(delivery)
     }
 
-    override fun removeDelivery(id: Int) {
+    override fun removeDelivery(id: Long) {
         deliveryReference.child(id.toString()).removeValue()
     }
 
