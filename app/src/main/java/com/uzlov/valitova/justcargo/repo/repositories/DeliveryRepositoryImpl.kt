@@ -16,6 +16,7 @@ class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: IDelivery
 
     override fun putDelivery(delivery: Delivery) = remoteDataSource.putDelivery(delivery)
 
-    override fun removeDelivery(id: Int) = remoteDataSource.removeDelivery(id)
-    override fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>> = remoteDataSource.getDeliveriesWithCarrierPhone(phone)
+    override fun removeDelivery(id: Long) = remoteDataSource.removeDelivery(id)
+    override fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>> =
+        remoteDataSource.getDeliveriesWithCarrierPhone(phone)
 }

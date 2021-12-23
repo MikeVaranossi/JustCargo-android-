@@ -1,7 +1,6 @@
 package com.uzlov.valitova.justcargo.repo.usecases
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
@@ -14,9 +13,9 @@ class RequestsUseCases @Inject constructor(
 ) {
 
     // for remote requests
-    fun getRequests(id: Int) = requestRepository.getRequest(id)
+    fun getRequests(id: Long) = requestRepository.getRequest(id)
     fun getRequests() = requestRepository.getRequests()
-    fun removeRequests(id: Int) = requestRepository.removeRequest(id)
+    fun removeRequests(id: Long) = requestRepository.removeRequest(id)
     fun putRequest(request: Request) = requestRepository.putRequest(request)
     fun getRequestsWithStatus(id: Int) = requestRepository.getRequestsWithStatus(id)
     fun getRequestsWithPhone(phone: String) = requestRepository.getRequestsWithPhone(phone)

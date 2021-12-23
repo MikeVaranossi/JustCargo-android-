@@ -5,10 +5,10 @@ import com.uzlov.valitova.justcargo.data.net.Request
 
 interface IRequestsRepository {
     fun getRequests(): LiveData<List<Request>>
-    fun getRequest(id: Int): LiveData<Request?>
+    fun getRequest(id: Long): LiveData<Request?>
     fun getRequestsWithStatus(id: Int): LiveData<List<Request>>
     fun getRequestsWithPhone(phone: String): LiveData<List<Request>>
     fun getRequestsWithUserID(id: Int): LiveData<List<Request>>
-    fun removeRequest(id: Int)
+    fun removeRequest(id: Long)
     fun putRequest(request: Request)
 }
