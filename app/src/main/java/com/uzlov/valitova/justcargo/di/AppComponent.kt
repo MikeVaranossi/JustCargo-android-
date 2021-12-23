@@ -6,6 +6,7 @@ import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
@@ -46,4 +47,5 @@ interface AppComponent {
     fun inject(profileSenderFragment: ProfileSenderFragment)
     fun inject(selectMapPositionsFragment: SelectMapPositionsFragment)
     fun inject(orderStepOneFragment: OrderStepOneFragment)
+    fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
 }
