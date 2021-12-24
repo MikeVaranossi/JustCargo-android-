@@ -91,11 +91,11 @@ class SelectMapPositionsFragment private constructor() :
                 lat = googleMap.cameraPosition.target.latitude.toString(),
                 lng = googleMap.cameraPosition.target.longitude.toString()
             ).observe(viewLifecycleOwner, {
-                actionListener?.select(it.prettyAddress,
+                actionListener?.select(it.getViewAddress(),
                     googleMap.cameraPosition.target.latitude,
                     googleMap.cameraPosition.target.longitude)
 
-                viewBinding.btnSetAddress.text = it.prettyAddress
+                viewBinding.btnSetAddress.text = it.getViewAddress()
             })
         }
 
