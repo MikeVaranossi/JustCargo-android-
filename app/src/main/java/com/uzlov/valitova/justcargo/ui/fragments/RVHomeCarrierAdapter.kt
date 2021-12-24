@@ -70,7 +70,7 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
                     textViewNameCargo.text = data.getShortInfoItem()
-                    textViewDate.text = simpleFormat.format(data.getRequestTimeItem()).toString()
+                    textViewDate.text = simpleFormat.format(data.getDeliveryTimeItem()).toString()
                     textViewCost.text = "${data.getCostItem()} ₽"
                     textViewFromTo.text =
                         " ${data.getDepartureItem()}  -  ${data.getDestinationItem()} "
@@ -102,7 +102,8 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
                     textViewNameCargo.text = request.getShortInfoItem()
-                    textViewDate.text = simpleFormat.format(request.getRequestTimeItem()).toString()
+                    textViewDate.text =
+                        simpleFormat.format(request.getDeliveryTimeItem()).toString()
                     textViewCost.text = "${request.getCostItem()} ₽"
                     textViewFromTo.text =
                         " ${request.getDepartureItem()}  -  ${request.getDestinationItem()} "

@@ -3,13 +3,10 @@ package com.uzlov.valitova.justcargo.ui.fragments
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.uzlov.valitova.justcargo.R
-import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.ItemCardCargoBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -65,7 +62,7 @@ class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener:
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
                     textViewNameCargo.text = data.getShortInfoItem()
-                    textViewDate.text = simpleFormat.format(data.getRequestTimeItem()).toString()
+                    textViewDate.text = simpleFormat.format(data.getDeliveryTimeItem()).toString()
                     textViewCost.text = "${data.getCostItem()} ₽"
                     textViewFromTo.text =
                         " ${data.getDepartureItem()}  -  ${data.getDestinationItem()} "
@@ -97,7 +94,8 @@ class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener:
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
                     textViewNameCargo.text = request.getShortInfoItem()
-                    textViewDate.text = simpleFormat.format(request.getRequestTimeItem()).toString()
+                    textViewDate.text =
+                        simpleFormat.format(request.getDeliveryTimeItem()).toString()
                     textViewCost.text = "${request.getCostItem()} ₽"
                     textViewFromTo.text =
                         " ${request.getDepartureItem()}  -  ${request.getDestinationItem()} "

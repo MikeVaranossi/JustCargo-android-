@@ -13,7 +13,7 @@ class DeliveryViewModel @Inject constructor(private var deliveryUseCases: Delive
 
     fun addDelivery(delivery: Delivery) = deliveryUseCases?.putDelivery(delivery)
 
-    fun removeDelivery(id: Int) = deliveryUseCases?.removeDelivery(id)
+    fun removeDelivery(id: Long) = deliveryUseCases?.removeDelivery(id)
 
     fun getDeliveryWithParam(requestId: Long, phoneCarrier: String) = deliveryUseCases?.getDelivery(requestId, phoneCarrier)
 }

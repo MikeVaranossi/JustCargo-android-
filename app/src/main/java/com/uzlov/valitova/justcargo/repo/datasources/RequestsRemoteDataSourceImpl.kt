@@ -64,7 +64,9 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
                 val lis = snapshot.children.map {
                     it.getValue<Request>()!!
                 }
-                mutableLiveData.postValue(lis)
+                mutableLiveData.value = lis.sortedByDescending {
+                    it.deliveryTime
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -94,14 +96,43 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return mutableLiveData
     }
 
-    override fun getRequest(id: Int): LiveData<Request?> {
+    override fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+        dateTimeEnd: Long,
+    ): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.orderByChild("departure").startAt(from)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    // send data
+                    val lis = snapshot.children.map {
+                        it.getValue<Request>()!!
+                    }
+
+                    lis.filter {
+                        it.description!!.startsWith(to) // TODO: 24.12.2021  пока что на все даты
+                    }
+                    mutableLiveData.postValue(lis)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    error.toException().printStackTrace()
+                }
+            })
+
+        return mutableLiveData
+    }
+
+    override fun getRequest(id: Long): LiveData<Request?> {
         reqReference.child(id.toString()).get().addOnSuccessListener {
             resultRequest.value = it.getValue<Request>()
         }
         return resultRequest
     }
 
-    override fun removeRequest(id: Int) {
+    override fun removeRequest(id: Long) {
         reqReference.child(id.toString()).removeValue()
     }
 
