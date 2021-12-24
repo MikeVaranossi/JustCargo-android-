@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
@@ -87,9 +86,6 @@ class OrderStepOneFragment :
     }
 
 
-
-
-
     private fun initListeners() {
 
         viewBinding.textInputFrom.setOnClickListener {
@@ -98,13 +94,11 @@ class OrderStepOneFragment :
 
         }
         viewBinding.textInputTo.setOnClickListener {
-            viewBinding.textInputFrom.setText(addressFrom)
-            openMapFragment()
             setAddressTo()
+            openMapFragment()
 
         }
         viewBinding.textDate.setOnClickListener {
-            viewBinding.textInputTo.setText(addressTo)
             openDatePicker()
 
         }
@@ -143,24 +137,30 @@ class OrderStepOneFragment :
 
         }
     }
-private fun setAddressFrom(){
-    fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
-        override fun select(address: String, latitude: Double, longitude: Double) {
-            addressFrom = address
-        }
-    })
-    viewBinding.textInputFrom.setText(addressFrom)
-}
-    private fun setAddressTo(){
+
+    private fun setAddressFrom() {
         fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
             override fun select(address: String, latitude: Double, longitude: Double) {
-                addressTo = address
+                addressFrom = address
+                viewBinding.textInputFrom.setText(addressFrom)
             }
         })
     }
+
+    private fun setAddressTo() {
+        fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
+            override fun select(address: String, latitude: Double, longitude: Double) {
+                addressTo = address
+                viewBinding.textInputTo.setText(addressTo)
+            }
+        })
+    }
+
     private fun openMapFragment() {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .hide(this)
+            .add(R.id.fragment_container, fragment, "")
+            .show(fragment)
             .addToBackStack(null)
             .commit()
 
