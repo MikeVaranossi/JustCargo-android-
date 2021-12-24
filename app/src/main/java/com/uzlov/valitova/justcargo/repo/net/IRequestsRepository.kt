@@ -11,4 +11,10 @@ interface IRequestsRepository {
     fun getRequestsWithUserID(id: Int): LiveData<List<Request>>
     fun removeRequest(id: Long)
     fun putRequest(request: Request)
+    fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+        dateTimeEnd: Long,
+    ): LiveData<List<Request>>
 }
