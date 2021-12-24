@@ -64,7 +64,9 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
                 val lis = snapshot.children.map {
                     it.getValue<Request>()!!
                 }
-                mutableLiveData.postValue(lis)
+                mutableLiveData.value = lis.sortedByDescending {
+                    it.deliveryTime
+                }
             }
 
             override fun onCancelled(error: DatabaseError) {
