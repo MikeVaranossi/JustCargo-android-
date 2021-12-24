@@ -15,9 +15,8 @@ import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import java.lang.NumberFormatException
-import java.util.*
 import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -94,11 +93,12 @@ class OrderStepOneFragment :
                 request.destination = textInputTo.text.toString()
                 try {
                     request.cost = textInputCost.text.toString().toInt()
-                } catch (e: NumberFormatException){
+                } catch (e: NumberFormatException) {
                     request.cost = 0
-                        Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT)
+                        .show()
                 }
-request.owner = authService.currentUser()
+                request.owner = authService.currentUser()
 
             }
 
@@ -139,14 +139,15 @@ request.owner = authService.currentUser()
                 Date((selectedDates?.first as Long)),
                 Date((selectedDates.second as Long))
             )
-            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
             viewBinding.textDate.setText(getString(
-                    R.string.for_date,
-                    simpleFormat.format(startDate).toString(),
-                    simpleFormat.format(endDate).toString()
-                ))
+                R.string.for_date,
+                simpleFormat.format(startDate).toString(),
+                simpleFormat.format(endDate).toString()
+            ))
             // в request теперь непонятно как добавлять - в лонг не запихнешь, пока оставила первую дату
-            request.deliveryTime = Date((selectedDates.first as Long)).time
+            request.deliveryTime = startDate.time
+            request.deliveryTimeSecond = endDate.time
         }
 
     }
