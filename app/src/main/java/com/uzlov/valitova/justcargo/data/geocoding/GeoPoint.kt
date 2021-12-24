@@ -11,6 +11,28 @@ data class GeoPoint(
     val osm_type: String?,
     val place_id: String?
 ) {
-    val prettyAddress get() = "${address?.country ?: ""}, ${address?.city ?: address?.state ?: ""}, ${address?.road ?: ""}, ${address?.house_number ?: ""}"
-    val addressStr get() = address
+    fun getViewAddress(): String {
+        var result = ""
+
+        if (address == null) {
+            result = ""
+            return result
+        }
+
+        if (!address.city.isNullOrEmpty()) {
+            result += address.city
+        } else if (!address.state.isNullOrEmpty()) {
+            result += address.state
+        }
+
+        if (!address.road.isNullOrEmpty()) {
+            result += ", ${address.road}"
+        }
+
+        if (!address.house_number.isNullOrEmpty()) {
+            result += ", ${address.house_number}"
+        }
+
+        return result
+    }
 }
