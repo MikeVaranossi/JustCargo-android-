@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
@@ -27,7 +28,9 @@ class OrderStepOneFragment :
     lateinit var authService: AuthService
 
     private var request: Request = Request()
-
+    private var addressFrom = String()
+    private var addressTo = String()
+    val fragment = SelectMapPositionsFragment.newInstance("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireContext().appComponent.inject(this)
@@ -39,8 +42,10 @@ class OrderStepOneFragment :
             it.title = getString(R.string.label_order_step_one)
             it.setDisplayHomeAsUpEnabled(true)
         }
+
         addTextWatchers()
         initListeners()
+
     }
 
     private fun addTextWatchers() {
@@ -81,9 +86,27 @@ class OrderStepOneFragment :
         })
     }
 
+
+
+
+
     private fun initListeners() {
+
+        viewBinding.textInputFrom.setOnClickListener {
+            openMapFragment()
+            setAddressFrom()
+
+        }
+        viewBinding.textInputTo.setOnClickListener {
+            viewBinding.textInputFrom.setText(addressFrom)
+            openMapFragment()
+            setAddressTo()
+
+        }
         viewBinding.textDate.setOnClickListener {
+            viewBinding.textInputTo.setText(addressTo)
             openDatePicker()
+
         }
         viewBinding.buttonNextStep.setOnClickListener {
 
@@ -94,11 +117,12 @@ class OrderStepOneFragment :
                 request.destination = textInputTo.text.toString()
                 try {
                     request.cost = textInputCost.text.toString().toInt()
-                } catch (e: NumberFormatException){
+                } catch (e: NumberFormatException) {
                     request.cost = 0
-                        Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT)
+                        .show()
                 }
-request.owner = authService.currentUser()
+                request.owner = authService.currentUser()
 
             }
 
@@ -118,6 +142,28 @@ request.owner = authService.currentUser()
                     !textInputCost.text.isNullOrEmpty()
 
         }
+    }
+private fun setAddressFrom(){
+    fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
+        override fun select(address: String, latitude: Double, longitude: Double) {
+            addressFrom = address
+        }
+    })
+    viewBinding.textInputFrom.setText(addressFrom)
+}
+    private fun setAddressTo(){
+        fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
+            override fun select(address: String, latitude: Double, longitude: Double) {
+                addressTo = address
+            }
+        })
+    }
+    private fun openMapFragment() {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+
     }
 
     private fun openDatePicker() {
@@ -140,17 +186,18 @@ request.owner = authService.currentUser()
                 Date((selectedDates.second as Long))
             )
             val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-            viewBinding.textDate.setText(getString(
+            viewBinding.textDate.setText(
+                getString(
                     R.string.for_date,
                     simpleFormat.format(startDate).toString(),
                     simpleFormat.format(endDate).toString()
-                ))
+                )
+            )
             // в request теперь непонятно как добавлять - в лонг не запихнешь, пока оставила первую дату
             request.deliveryTime = Date((selectedDates.first as Long)).time
         }
 
     }
-
 
     companion object {
         fun newInstance() = OrderStepOneFragment().apply {
