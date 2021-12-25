@@ -24,6 +24,7 @@ data class FavoriteRequestLocal(
     @ColumnInfo(name = "height") var height: Int? = 0,
     @ColumnInfo(name = "status") var status: String? = null,
 ) : Parcelable, IViewItemAdapter {
+    override fun getIdRequest(): Long? = id
 
     override fun getShortInfoItem() = shortInfo
     override fun getRequestTimeItem() = requestTime
