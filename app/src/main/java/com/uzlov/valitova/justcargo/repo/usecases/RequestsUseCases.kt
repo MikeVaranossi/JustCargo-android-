@@ -43,11 +43,9 @@ class RequestsUseCases @Inject constructor(
         from: String,
         to: String,
         dateTimeStart: Long,
-        dateTimeEnd: Long,
     ): LiveData<List<Request>> = requestRepository.searchRequest(
         from,
         to,
-        dateTimeStart,
-        dateTimeEnd
+        dateTimeStart
     )
 }

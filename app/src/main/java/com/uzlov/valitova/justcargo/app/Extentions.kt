@@ -23,8 +23,8 @@ fun String.lastToPower(): SpannableStringBuilder =
         }
     }
 
-fun Request.inDateTimeRange(start: Long, end: Long): Boolean {
-    return true // TODO: 24.12.2021 Заглушка пока что
+fun Request.inDateTimeInRange(dateRequest: Long): Boolean {
+    return dateRequest >= deliveryTime ?: 0 && dateRequest <= deliveryTimeSecond ?: 0
 }
 
 fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {

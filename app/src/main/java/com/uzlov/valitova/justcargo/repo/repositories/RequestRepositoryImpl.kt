@@ -26,13 +26,11 @@ class RequestRepositoryImpl @Inject constructor(var remoteDataSource: IRequestsR
         from: String,
         to: String,
         dateTimeStart: Long,
-        dateTimeEnd: Long,
     ): LiveData<List<Request>> {
         return remoteDataSource.searchRequest(
             from,
             to,
-            dateTimeStart,
-            dateTimeEnd
+            dateTimeStart
         )
     }
 }

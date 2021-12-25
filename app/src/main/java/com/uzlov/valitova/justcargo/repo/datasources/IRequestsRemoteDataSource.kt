@@ -15,6 +15,5 @@ interface IRequestsRemoteDataSource {
         from: String,
         to: String,
         dateTimeStart: Long,
-        dateTimeEnd: Long,
     ): LiveData<List<Request>>
 }
