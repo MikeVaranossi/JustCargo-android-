@@ -1,15 +1,17 @@
 package com.uzlov.valitova.justcargo.viemodels
 
+import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import kotlinx.coroutines.async
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class RequestsViewModel @Inject constructor(private var requestsUseCases: RequestsUseCases?)  : BaseViewModel() {
+class RequestsViewModel @Inject constructor(private var requestsUseCases: RequestsUseCases?) :
+    BaseViewModel() {
 
     // возвращает все заявки
-    fun getRequests() = runBlocking{
+    fun getRequests() = runBlocking {
         val mDeferredResult = async {
             requestsUseCases?.getRequests()
         }
@@ -17,13 +19,13 @@ class RequestsViewModel @Inject constructor(private var requestsUseCases: Reques
     }
 
     // возвращает заявку с указанным ID
-    fun getRequest(id: Int) = requestsUseCases?.getRequests(id)
+    fun getRequest(id: Long) = requestsUseCases?.getRequests(id)
 
     // добавляет заявку
     fun addRequest(request: Request) = requestsUseCases?.putRequest(request)
 
     // удаляет заявку
-    fun removeRequest(id: Int) = requestsUseCases?.removeRequests(id)
+    fun removeRequest(id: Long) = requestsUseCases?.removeRequests(id)
 
     // возвращает все заявки с указанным статусом
     fun getRequestsWithStatus(status: Int) = requestsUseCases?.getRequestsWithStatus(status)
@@ -33,4 +35,14 @@ class RequestsViewModel @Inject constructor(private var requestsUseCases: Reques
 
     // возвращает все заявки с указанным id пользователя (создателя)
     fun getRequestsWithUserID(id: Int) = requestsUseCases?.getRequestsWithUserID(id)
+
+    fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+    ): LiveData<List<Request>>? = requestsUseCases?.searchRequest(
+        from,
+        to,
+        dateTimeStart
+    )
 }

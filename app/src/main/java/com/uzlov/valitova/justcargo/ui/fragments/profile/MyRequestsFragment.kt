@@ -73,6 +73,8 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         arguments?.let {
             isFromHostActivity = it.getBoolean(Constant.KEY_FROM_HOST_ACTIVITY)
         }
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +97,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         }
     }
 
+    // загружаем только свои заявки
     private fun loadRequests() {
         authService.currentUser()?.let { user ->
             modelRequests.getRequestsWithPhone(user.phone ?: "")?.observe(this, {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
@@ -11,7 +12,10 @@ import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.data.net.Delivery
+import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import javax.inject.Inject
 
@@ -24,6 +28,26 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: DeliveryViewModel
+
+    private val callback = object : RVLocalRequestAdapter.OnItemClickListener<Request>{
+        override fun click(request: Request) {
+            openFragment(RequestDetailCarrierFragment.newInstance(request))
+        }
+
+        override fun addToFavorite(request: Request) {
+
+        }
+
+        override fun removeFromFavorite(request: Request) {
+
+        }
+    }
+
+    private val adapter by lazy {
+        RVLocalRequestAdapter<Request>(callback).apply {
+            setVisibilityFavouritesIcon(false)
+        }
+    }
 
     companion object {
         fun newInstance(isFromHostActivity: Boolean = true): MyDeliveriesFragment {
@@ -45,6 +69,7 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
             it.title = getString(R.string.my_deliveries)
             it.setDisplayHomeAsUpEnabled(!isFromHostActivity)
         }
+        viewBinding.rvDeliveries.adapter = adapter
         initListeners()
         loadData()
     }
@@ -56,15 +81,29 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
         }
     }
 
+    private fun openFragment(fragment: Fragment) {
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
     private fun loadData() {
-        model.getDeliveries()?.observe(this, {
-            updateUI(it)
-        })
+        authService.currentUser()?.phone?.let { phone ->
+            model.getDeliveriesWithCarrierPhone(phone)?.observe(this, {
+                val list = it.map { delivery->
+                    delivery.request!!
+                }
+                adapter.setData(list)
+                updateUI(it)
+            })
+
+        }
+
     }
 
     private fun updateUI(data: List<Delivery>) {
-        val filteredData = filterData(data)
-        if (filteredData.isEmpty()) {
+        if (data.isEmpty()) {
             viewBinding.tvNotAvailableDeliveries.visibility = View.VISIBLE
             viewBinding.rvDeliveries.visibility = View.GONE
         } else {
@@ -72,14 +111,5 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
             viewBinding.rvDeliveries.visibility = View.VISIBLE
         }
         viewBinding.refreshDataLayout.isRefreshing = false
-    }
-
-    private fun filterData(data: List<Delivery>): List<Delivery> {
-        authService.currentUser()?.phone?.let { phone->
-            return data.filter {
-                it.trip?.carrier?.phone == phone
-            }
-        }
-        return emptyList()
     }
 }

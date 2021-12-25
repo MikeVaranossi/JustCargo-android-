@@ -25,6 +25,10 @@ fun String.lastToPower(): SpannableStringBuilder =
         }
     }
 
+fun Request.inDateTimeInRange(dateRequest: Long): Boolean {
+    return dateRequest >= deliveryTime ?: 0 && dateRequest <= deliveryTimeSecond ?: 0
+}
+
 fun Request.toFavoriteRequestLocal(): FavoriteRequestLocal {
     return FavoriteRequestLocal(
         id = this.id,

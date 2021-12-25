@@ -6,8 +6,10 @@ import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
+import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragment
@@ -48,4 +50,6 @@ interface AppComponent {
     fun inject(selectMapPositionsFragment: SelectMapPositionsFragment)
     fun inject(orderStepOneFragment: OrderStepOneFragment)
     abstract fun inject(loginFragment: LoginFragment)
+    fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
+    fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
 }

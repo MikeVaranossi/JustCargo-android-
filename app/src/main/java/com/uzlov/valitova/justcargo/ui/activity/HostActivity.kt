@@ -12,8 +12,8 @@ import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
-import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
+import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileCarrierFragment
@@ -37,7 +37,12 @@ class HostActivity : AppCompatActivity() {
         findViewById<MaterialToolbar>(R.id.rootToolbar).let {
             setSupportActionBar(it)
             it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
-            it.setNavigationIconTint(ContextCompat.getColor(applicationContext, R.color.white_color))
+            it.setNavigationIconTint(
+                ContextCompat.getColor(
+                    applicationContext,
+                    R.color.white_color
+                )
+            )
         }
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
@@ -46,7 +51,7 @@ class HostActivity : AppCompatActivity() {
             setFragment(HomeSenderFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
-            setFragment(HomeCarrierFragment.newInstance())
+            setFragment(MapDeliveriesFragment.newInstance("NameFinder"))
             bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 
         }
@@ -57,8 +62,8 @@ class HostActivity : AppCompatActivity() {
                     if (authService.currentUser()?.userType?.id == Constant.SENDER) {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
-                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
-                        setFragment(HomeCarrierFragment.newInstance())
+                    } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
+                        setFragment(MapDeliveriesFragment.newInstance(""))
                         return@setOnItemSelectedListener true
                     }
                     return@setOnItemSelectedListener false
@@ -68,10 +73,10 @@ class HostActivity : AppCompatActivity() {
                     true
                 }
                 R.id.delivery_action -> {
-                    if (authService.currentUser()?.userType?.id == Constant.SENDER){
+                    if (authService.currentUser()?.userType?.id == Constant.SENDER) {
                         setFragment(MyRequestsFragment.newInstance(true))
                         return@setOnItemSelectedListener true
-                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
+                    } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
                         setFragment(MyDeliveriesFragment.newInstance(true))
                         return@setOnItemSelectedListener true
                     }
@@ -86,7 +91,7 @@ class HostActivity : AppCompatActivity() {
                     if (authService.currentUser()?.userType?.id == Constant.SENDER) {
                         setFragment(ProfileSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
-                    } else if(authService.currentUser()?.userType?.id == Constant.CARRIER) {
+                    } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
                         setFragment(ProfileCarrierFragment.newInstance())
                         return@setOnItemSelectedListener true
                     }

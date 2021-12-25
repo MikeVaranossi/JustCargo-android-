@@ -27,7 +27,7 @@ class GeocodingViewModel @Inject constructor(private var geoRepository: IGeocodi
             withContext(Dispatchers.Main) {
                 if (response != null && response.isSuccessful) {
                     response.body()?.let {
-                        result.postValue(it)
+                        result.value = it
                     }
                 } else {
                     Log.e(javaClass.simpleName, "fetchGeocoding: ERROR")

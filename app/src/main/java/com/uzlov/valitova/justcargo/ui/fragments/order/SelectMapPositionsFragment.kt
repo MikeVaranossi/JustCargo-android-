@@ -19,7 +19,6 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
-import com.uzlov.valitova.justcargo.data.geocoding.Address
 import com.uzlov.valitova.justcargo.databinding.FragmentMapsBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.viemodels.GeocodingViewModel
@@ -34,7 +33,7 @@ class SelectMapPositionsFragment private constructor() :
     val TAG: String = javaClass.simpleName
 
     interface ActionListener {
-        fun select(address: Address?, latitude: String, longitude: String)
+        fun select(address: String, latitude: Double, longitude: Double)
     }
 
     companion object {
@@ -92,11 +91,11 @@ class SelectMapPositionsFragment private constructor() :
                 lat = googleMap.cameraPosition.target.latitude.toString(),
                 lng = googleMap.cameraPosition.target.longitude.toString()
             ).observe(viewLifecycleOwner, {
-                actionListener?.select(it.address,
-                    googleMap.cameraPosition.target.latitude.toString(),
-                    googleMap.cameraPosition.target.longitude.toString())
+                actionListener?.select(it.getViewAddress(),
+                    googleMap.cameraPosition.target.latitude,
+                    googleMap.cameraPosition.target.longitude)
 
-                viewBinding.btnSetAddress.text = it.prettyAddress
+                viewBinding.btnSetAddress.text = it.getViewAddress()
             })
         }
 

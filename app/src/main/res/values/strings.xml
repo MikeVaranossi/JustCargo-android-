@@ -144,4 +144,7 @@
     <string name="placeholder_sms_code">******</string>
     <string name="advanced_search">РАСШИРЕННЫЙ ПОИСК</string>
     <string name="user_not_found">Пользователь с данным номером не найден</string>
+    <string name="confirm_str">Подтверждение</string>
+    <string name="str_state_not_confirm">Не подтверждено</string>
+    <string name="cancel_cargo">Отказаться</string>
 </resources>

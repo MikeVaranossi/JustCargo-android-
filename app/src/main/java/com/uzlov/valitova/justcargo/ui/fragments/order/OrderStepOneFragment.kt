@@ -15,9 +15,8 @@ import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepOneBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import java.lang.NumberFormatException
-import java.util.*
 import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 
@@ -27,7 +26,9 @@ class OrderStepOneFragment :
     lateinit var authService: AuthService
 
     private var request: Request = Request()
-
+    private var addressFrom = String()
+    private var addressTo = String()
+    val fragment = SelectMapPositionsFragment.newInstance("")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requireContext().appComponent.inject(this)
@@ -39,8 +40,10 @@ class OrderStepOneFragment :
             it.title = getString(R.string.label_order_step_one)
             it.setDisplayHomeAsUpEnabled(true)
         }
+
         addTextWatchers()
         initListeners()
+
     }
 
     private fun addTextWatchers() {
@@ -81,9 +84,22 @@ class OrderStepOneFragment :
         })
     }
 
+
     private fun initListeners() {
+
+        viewBinding.textInputFrom.setOnClickListener {
+            openMapFragment()
+            setAddressFrom()
+
+        }
+        viewBinding.textInputTo.setOnClickListener {
+            setAddressTo()
+            openMapFragment()
+
+        }
         viewBinding.textDate.setOnClickListener {
             openDatePicker()
+
         }
         viewBinding.buttonNextStep.setOnClickListener {
 
@@ -94,11 +110,12 @@ class OrderStepOneFragment :
                 request.destination = textInputTo.text.toString()
                 try {
                     request.cost = textInputCost.text.toString().toInt()
-                } catch (e: NumberFormatException){
+                } catch (e: NumberFormatException) {
                     request.cost = 0
-                        Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Неверный формат ввода суммы", Toast.LENGTH_SHORT)
+                        .show()
                 }
-request.owner = authService.currentUser()
+                request.owner = authService.currentUser()
 
             }
 
@@ -120,6 +137,34 @@ request.owner = authService.currentUser()
         }
     }
 
+    private fun setAddressFrom() {
+        fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
+            override fun select(address: String, latitude: Double, longitude: Double) {
+                addressFrom = address
+                viewBinding.textInputFrom.setText(addressFrom)
+            }
+        })
+    }
+
+    private fun setAddressTo() {
+        fragment.setActionListener(object : SelectMapPositionsFragment.ActionListener {
+            override fun select(address: String, latitude: Double, longitude: Double) {
+                addressTo = address
+                viewBinding.textInputTo.setText(addressTo)
+            }
+        })
+    }
+
+    private fun openMapFragment() {
+        parentFragmentManager.beginTransaction()
+            .hide(this)
+            .add(R.id.fragment_container, fragment, "")
+            .show(fragment)
+            .addToBackStack(null)
+            .commit()
+
+    }
+
     private fun openDatePicker() {
         val today = MaterialDatePicker.todayInUtcMilliseconds()
         val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
@@ -139,18 +184,19 @@ request.owner = authService.currentUser()
                 Date((selectedDates?.first as Long)),
                 Date((selectedDates.second as Long))
             )
-            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
+
+            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
             viewBinding.textDate.setText(getString(
-                    R.string.for_date,
-                    simpleFormat.format(startDate).toString(),
-                    simpleFormat.format(endDate).toString()
-                ))
+                R.string.for_date,
+                simpleFormat.format(startDate).toString(),
+                simpleFormat.format(endDate).toString()
+            ))
             // в request теперь непонятно как добавлять - в лонг не запихнешь, пока оставила первую дату
-            request.deliveryTime = Date((selectedDates.first as Long)).time
+            request.deliveryTime = startDate.time
+            request.deliveryTimeSecond = endDate.time
         }
 
     }
-
 
     companion object {
         fun newInstance() = OrderStepOneFragment().apply {
