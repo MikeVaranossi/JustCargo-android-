@@ -7,7 +7,7 @@ import javax.inject.Inject
 class DeliveryUseCases @Inject constructor(var deliveryRepository: IDeliveryRepository) {
     fun getDelivery() = deliveryRepository.getDelivery()
     fun getDelivery(id: Int) = deliveryRepository.getDelivery(id)
-    fun removeDelivery(id: Int) = deliveryRepository.removeDelivery(id)
+    fun removeDelivery(id: Long) = deliveryRepository.removeDelivery(id)
     fun putDelivery(delivery: Delivery) = deliveryRepository.putDelivery(delivery)
     fun getDelivery(requestId: Long, phoneCarrier: String) = deliveryRepository.getDeliveryWithParam(requestId, phoneCarrier)
     fun getDeliveriesWithCarrierPhone(phone: String) = deliveryRepository.getDeliveriesWithCarrierPhone(phone)

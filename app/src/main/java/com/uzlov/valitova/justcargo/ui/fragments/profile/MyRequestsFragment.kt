@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.ui.fragments.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
@@ -73,6 +74,10 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         arguments?.let {
             isFromHostActivity = it.getBoolean(Constant.KEY_FROM_HOST_ACTIVITY)
         }
+
+        modelRequests.searchRequest("москва", "саратов", 0, 0)?.observe(this, {
+            Log.e(javaClass.simpleName, "onCreateFIND: $it")
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,6 +100,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
         }
     }
 
+    // загружаем только свои заявки
     private fun loadRequests() {
         authService.currentUser()?.let { user ->
             modelRequests.getRequestsWithPhone(user.phone ?: "")?.observe(this, {

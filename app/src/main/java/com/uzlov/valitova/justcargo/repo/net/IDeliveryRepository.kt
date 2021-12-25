@@ -8,6 +8,6 @@ interface IDeliveryRepository {
     fun getDelivery(id: Int) : LiveData<Delivery?>
     fun getDeliveryWithParam(id: Long, phone: String) : LiveData<Delivery?>
     fun putDelivery(delivery: Delivery)
-    fun removeDelivery(id: Int)
+    fun removeDelivery(id: Long)
     fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>>
 }
