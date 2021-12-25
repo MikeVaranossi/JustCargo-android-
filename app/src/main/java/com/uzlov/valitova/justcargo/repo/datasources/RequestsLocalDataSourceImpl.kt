@@ -2,32 +2,25 @@ package com.uzlov.valitova.justcargo.repo.datasources
 
 import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
 import com.uzlov.valitova.justcargo.repo.local.room.FavoriteRequestDao
+import com.uzlov.valitova.justcargo.repo.local.room.MyRequestDao
 import javax.inject.Inject
 
-class RequestsLocalDataSourceImpl @Inject constructor(var dao: FavoriteRequestDao): IRequestsLocalDataSource {
+class RequestsLocalDataSourceImpl @Inject constructor(var daoFavourite: FavoriteRequestDao, var daoLocal: MyRequestDao): IRequestsLocalDataSource {
 
-    override fun getRequests(): LiveData<List<FavoriteRequestLocal>> {
-        return dao.getFavoriteRequests()
-    }
+    // Работа с избранными заявками
+    override fun getFavRequests(): LiveData<List<FavoriteRequestLocal>> = daoFavourite.getFavoriteRequests()
+    override fun getFavIDsRequests(): List<Long> = daoFavourite.getIDsFavoriteRequests()
+    override fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> = daoFavourite.getFavoriteRequest(id)
+    override suspend fun removeFavRequest(request: FavoriteRequestLocal) = daoFavourite.removeRequest(request)
+    override suspend fun putFavRequest(request: FavoriteRequestLocal) = daoFavourite.insertRequest(request)
+    override suspend fun updateFavRequest(request: FavoriteRequestLocal) = daoFavourite.updateRequest(request)
 
-    override fun getIDsRequests(): List<Long> {
-        return dao.getIDsFavoriteRequests()
-    }
-
-    override fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {
-        return dao.getFavoriteRequest(id)
-    }
-
-    override suspend fun removeRequest(request: FavoriteRequestLocal) {
-        dao.removeRequest(request)
-    }
-
-    override suspend fun putRequest(request: FavoriteRequestLocal) {
-        dao.insertRequest(request)
-    }
-
-    override suspend fun updateRequest(request: FavoriteRequestLocal) {
-        dao.updateRequest(request)
-    }
+    // Работа с моими заявками
+    override fun getMyRequests(): LiveData<List<MyRequestLocal>> = daoLocal.getMyRequests()
+    override fun getMyRequest(id: Long): LiveData<MyRequestLocal?> = daoLocal.getMyRequest(id)
+    override suspend fun removeMyRequest(request: MyRequestLocal) = daoLocal.removeMyRequest(request)
+    override suspend fun putMyRequest(request: MyRequestLocal) = daoLocal.insertMyRequest(request)
+    override suspend fun updateMyRequest(request: MyRequestLocal) =daoLocal.updateMyRequest(request)
 }

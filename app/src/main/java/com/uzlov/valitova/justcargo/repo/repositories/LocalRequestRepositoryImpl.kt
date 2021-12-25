@@ -2,34 +2,35 @@ package com.uzlov.valitova.justcargo.repo.repositories
 
 import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
 import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
 
 class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource) : ILocalRepository {
-    override suspend fun getRequests(): LiveData<List<FavoriteRequestLocal>> {
-        return localDataSource.getRequests()
-    }
 
-    override suspend fun getIDsRequests(): List<Long> {
-        return localDataSource.getIDsRequests()
-    }
+    // Работа с избранными заявками
+    override suspend fun getFavRequests(): LiveData<List<FavoriteRequestLocal>> =
+        localDataSource.getFavRequests()
+    override suspend fun getFavIDsRequests(): List<Long> = localDataSource.getFavIDsRequests()
+    override suspend fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> =
+        localDataSource.getFavRequest(id)
+    override suspend fun removeFavRequest(request: FavoriteRequestLocal) =
+        localDataSource.removeFavRequest(request)
+    override suspend fun putFavRequest(request: FavoriteRequestLocal) =
+        localDataSource.putFavRequest(request)
+    override suspend fun updateFavRequest(request: FavoriteRequestLocal) =
+        localDataSource.updateFavRequest(request)
 
-    override suspend fun getRequest(id: Long): LiveData<FavoriteRequestLocal?> {
-        return localDataSource.getRequest(id)
-    }
 
-    override suspend fun removeRequest(request: FavoriteRequestLocal) {
-        localDataSource.removeRequest(request)
-    }
-
-    override suspend fun putRequest(request: FavoriteRequestLocal) {
-        localDataSource.putRequest(request)
-    }
-
-    override suspend fun updateRequest(request: FavoriteRequestLocal) {
-        localDataSource.updateRequest(request)
-    }
-
+    // Работа с моими заявками
+    override suspend fun getMyRequests(): LiveData<List<MyRequestLocal>> =
+        localDataSource.getMyRequests()
+    override suspend fun getMyRequest(id: Long): LiveData<MyRequestLocal?> =
+        localDataSource.getMyRequest(id)
+    override suspend fun removeMyRequest(request: MyRequestLocal) =
+        localDataSource.removeMyRequest(request)
+    override suspend fun putMyRequest(request: MyRequestLocal) =
+        localDataSource.putMyRequest(request)
+    override suspend fun updateMyRequest(request: MyRequestLocal) =
+        localDataSource.updateMyRequest(request)
 }

@@ -7,6 +7,7 @@ import com.uzlov.valitova.justcargo.repo.datasources.IRequestsLocalDataSource
 import com.uzlov.valitova.justcargo.repo.datasources.RequestsLocalDataSourceImpl
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
 import com.uzlov.valitova.justcargo.repo.local.room.FavoriteRequestDao
+import com.uzlov.valitova.justcargo.repo.local.room.MyRequestDao
 import com.uzlov.valitova.justcargo.repo.local.room.RoomFavoritesRequestDB
 import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
 import com.uzlov.valitova.justcargo.repo.repositories.LocalRequestRepositoryImpl
@@ -33,11 +34,15 @@ class LocalModule {
 
     @Singleton
     @Provides
-    fun provideDAO(db: RoomFavoritesRequestDB): FavoriteRequestDao = db.favoriteRequestDao
+    fun provideFavouriteDAO(db: RoomFavoritesRequestDB): FavoriteRequestDao = db.favoriteRequestDao
 
     @Singleton
     @Provides
-    fun provideRequestLocalDataSources(dao : FavoriteRequestDao): IRequestsLocalDataSource = RequestsLocalDataSourceImpl(dao)
+    fun provideMyDAO(db: RoomFavoritesRequestDB): MyRequestDao = db.myRequestDao
+
+    @Singleton
+    @Provides
+    fun provideRequestLocalDataSources(daoFavourite : FavoriteRequestDao, daoMy: MyRequestDao): IRequestsLocalDataSource = RequestsLocalDataSourceImpl(daoFavourite, daoMy)
 
     @Singleton
     @Provides

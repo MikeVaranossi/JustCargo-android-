@@ -23,22 +23,22 @@ class RequestsUseCases @Inject constructor(
 
     //    for local requests
     suspend fun getFavouritesRequests(): LiveData<List<FavoriteRequestLocal>> =
-        localRequestRepository.getRequests()
+        localRequestRepository.getFavRequests()
 
     suspend fun getFavouriteRequest(id: Long): LiveData<FavoriteRequestLocal?> =
-        localRequestRepository.getRequest(id)
+        localRequestRepository.getFavRequest(id)
 
     suspend fun removeFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.removeRequest(request)
+        localRequestRepository.removeFavRequest(request)
 
     suspend fun putFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.putRequest(request)
+        localRequestRepository.putFavRequest(request)
 
     suspend fun updateFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.updateRequest(request)
+        localRequestRepository.updateFavRequest(request)
 
     // возвращает множество ID-ков избранных заявок
-    suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getIDsRequests()
+    suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getFavIDsRequests()
     fun searchRequest(
         from: String,
         to: String,
