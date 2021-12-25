@@ -11,10 +11,11 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.core.app.NotificationCompat
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 
 class NotificationHelper(
     private val context: Context,
-    private val idUser: String,
+    private val title: String,
     private val contentText: String,
 ) {
 
@@ -27,7 +28,9 @@ class NotificationHelper(
     private val PRIMARY_CHANNEL_ID = "primary_notification_channel"
 
     // Notification ID.
-    private val NOTIFICATION_ID = 0
+    companion object {
+        private var NOTIFICATION_ID = 0
+    }
 
     private val mNotifyManager: NotificationManager by lazy {
         context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -59,23 +62,20 @@ class NotificationHelper(
 
         // Set up the pending intent that is delivered when the notification
         // is clicked.
-//        val notificationIntent = Intent(context, ClientActivity::class.java).apply {
-//            putExtra("nameKey", idUser.split("_")[0])
-//            putExtra("idKey", idUser)
-//        }
+        val notificationIntent = Intent(context, SplashActivity::class.java)
 
-//        val notificationPendingIntent = PendingIntent.getActivity(
-//            context, NOTIFICATION_ID, notificationIntent,
-//            PendingIntent.FLAG_UPDATE_CURRENT
-//        )
+        val notificationPendingIntent = PendingIntent.getActivity(
+            context, NOTIFICATION_ID, notificationIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
 
         // Build the notification with all of the parameters.
         return NotificationCompat.Builder(context, PRIMARY_CHANNEL_ID)
-            .setContentTitle("Новый клиент: ${idUser.split("_")[0]}")
+            .setContentTitle(title)
             .setContentText(contentText)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setAutoCancel(true)
-//            .setContentIntent(notificationPendingIntent)
+            .setContentIntent(notificationPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setDefaults(NotificationCompat.DEFAULT_ALL)
     }
@@ -102,6 +102,8 @@ class NotificationHelper(
         // Enable the update and cancel buttons but disables the "Notify
         // Me!" button.
         //setNotificationButtonState(false, true, true)
+
+        NOTIFICATION_ID++
     }
 
     inner class NotificationReceiver : BroadcastReceiver() {
