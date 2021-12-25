@@ -8,6 +8,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.app.inDateTimeInRange
 import com.uzlov.valitova.justcargo.data.net.Request
 
 class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
@@ -38,81 +39,55 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return resultAll
     }
 
-    override fun getRequestsWithStatus(id: Int) : LiveData<List<Request>> {
-        reqReference.orderByChild("status/id").equalTo(id.toDouble()).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // send data
-                val lis = snapshot.children.map {
-                    it.getValue<Request>()!!
-                }
-                resultAll.postValue(lis)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                error.toException().printStackTrace()
-            }
-        })
-
-        return resultAll
-    }
-
-    override fun getRequestsWithPhone(phone: String): LiveData<List<Request>> {
-        val mutableLiveData = MutableLiveData<List<Request>>()
-        reqReference.orderByChild("owner/phone").equalTo(phone).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // send data
-                val lis = snapshot.children.map {
-                    it.getValue<Request>()!!
-                }
-                mutableLiveData.value = lis.sortedByDescending {
-                    it.deliveryTime
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                error.toException().printStackTrace()
-            }
-        })
-
-        return mutableLiveData
-    }
-
-    override fun getRequestsWithUserID(id: Int): LiveData<List<Request>> {
-        val mutableLiveData = MutableLiveData<List<Request>>()
-        reqReference.orderByChild("id").equalTo(id.toDouble()).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                // send data
-                val lis = snapshot.children.map {
-                    it.getValue<Request>()!!
-                }
-                mutableLiveData.postValue(lis)
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                error.toException().printStackTrace()
-            }
-        })
-
-        return mutableLiveData
-    }
-
-    override fun searchRequest(
-        from: String,
-        to: String,
-        dateTimeStart: Long,
-        dateTimeEnd: Long,
-    ): LiveData<List<Request>> {
-        val mutableLiveData = MutableLiveData<List<Request>>()
-        reqReference.orderByChild("departure").startAt(from)
+    override fun getRequestsWithStatus(id: Int): LiveData<List<Request>> {
+        reqReference.orderByChild("status/id").equalTo(id.toDouble())
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     // send data
                     val lis = snapshot.children.map {
                         it.getValue<Request>()!!
                     }
+                    resultAll.postValue(lis)
+                }
 
-                    lis.filter {
-                        it.description!!.startsWith(to) // TODO: 24.12.2021  пока что на все даты
+                override fun onCancelled(error: DatabaseError) {
+                    error.toException().printStackTrace()
+                }
+            })
+
+        return resultAll
+    }
+
+    override fun getRequestsWithPhone(phone: String): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.orderByChild("owner/phone").equalTo(phone)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    // send data
+                    val lis = snapshot.children.map {
+                        it.getValue<Request>()!!
+                    }
+                    mutableLiveData.value = lis.sortedByDescending {
+                        it.deliveryTime
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    error.toException().printStackTrace()
+                }
+            })
+
+        return mutableLiveData
+    }
+
+    override fun getRequestsWithUserID(id: Int): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.orderByChild("id").equalTo(id.toDouble())
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    // send data
+                    val lis = snapshot.children.map {
+                        it.getValue<Request>()!!
                     }
                     mutableLiveData.postValue(lis)
                 }
@@ -121,6 +96,32 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
                     error.toException().printStackTrace()
                 }
             })
+
+        return mutableLiveData
+    }
+
+    override fun searchRequest(
+        from: String,
+        to: String,
+        dateTimeStart: Long,
+    ): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // send data
+                mutableLiveData.value = snapshot.children.map {
+                    it.getValue<Request>()!!
+                }.filter {
+                    it.departure!!.startsWith(from, ignoreCase = true) &&
+                            it.destination!!.startsWith(to, ignoreCase = true) &&
+                            it.inDateTimeInRange(dateTimeStart)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
 
         return mutableLiveData
     }
