@@ -12,8 +12,6 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentOrderStepTwoBinding
 import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
-import java.lang.NumberFormatException
 import javax.inject.Inject
 
 class OrderStepTwoFragment :
@@ -112,6 +110,7 @@ class OrderStepTwoFragment :
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 verifyEmptyEditText()
+
             }
         })
         viewBinding.buttonCreateRequest.setOnClickListener {
@@ -123,12 +122,31 @@ class OrderStepTwoFragment :
     }
 
     private fun verifyEmptyEditText() {
-       with(viewBinding){
-           buttonCreateRequest.isEnabled = !textInputWeight.text.isNullOrEmpty() &&
-                   !textInputLength.text.isNullOrEmpty() &&
-                   !textInputWidth.text.isNullOrEmpty()  &&
-                   !textInputHeight.text.isNullOrEmpty()
-       }
+        with(viewBinding) {
+            buttonCreateRequest.isEnabled = !textInputWeight.text.isNullOrEmpty() &&
+                    !textInputLength.text.isNullOrEmpty() &&
+                    !textInputWidth.text.isNullOrEmpty() &&
+                    !textInputHeight.text.isNullOrEmpty()
+
+            if (!isInteger(textInputWidth.text.toString())) {
+                textInputWidth.error = "Введите целое число"
+                buttonCreateRequest.isEnabled = false
+            }
+            if (!isInteger(textInputLength.text.toString())) {
+                textInputLength.error = "Введите целое число"
+                buttonCreateRequest.isEnabled = false
+            }
+            if (!isInteger(textInputHeight.text.toString())) {
+                textInputHeight.error = "Введите целое число"
+                buttonCreateRequest.isEnabled = false
+            }
+        }
+
+    }
+
+    private fun isInteger(input: String): Boolean {
+        val integerChars = '0'..'9'
+        return input.all { it in integerChars }
     }
 
     companion object {
