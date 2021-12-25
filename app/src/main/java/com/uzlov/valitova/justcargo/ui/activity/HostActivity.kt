@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,6 +11,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
+import com.uzlov.valitova.justcargo.service.BookingRequestStateService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
@@ -44,6 +46,9 @@ class HostActivity : AppCompatActivity() {
                 )
             )
         }
+
+        startService(Intent(this, BookingRequestStateService::class.java))
+
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
 

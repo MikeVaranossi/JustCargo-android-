@@ -146,4 +146,7 @@
     <string name="confirm_str">Подтверждение</string>
     <string name="str_state_not_confirm">Не подтверждено</string>
     <string name="cancel_cargo">Отказаться</string>
+    <string name="search_other_cargo">Найдите другой груз...</string>
+    <string name="your_request_delivery_reject">Ваша заявка на перевозку отклонена</string>
+    <string name="delivery_status_updated">Обновлен статус заявки</string>
 </resources>
