@@ -1,6 +1,7 @@
 package com.uzlov.valitova.justcargo.ui.fragments.registration
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -20,6 +21,8 @@ import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
 import javax.inject.Inject
 import android.os.CountDownTimer
 import android.widget.Toast
+import com.google.gson.Gson
+import com.uzlov.valitova.justcargo.app.USER_SHARED_PREFERENCES
 
 
 class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
@@ -34,11 +37,14 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
     lateinit var authService: AuthService
     @Inject
     lateinit var userRepository: IUserRepository
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     private val stateListener = object : AuthService.IStateAuth {
         override fun registered(user: User) {
             //регистрация успешна, записываем пользователя в базу и открываем следующий экран
             userRepository.putUser(user)
+            saveUserInSharedPreferences(user)
             val manager = requireActivity().supportFragmentManager
             manager.apply {
                 beginTransaction()
@@ -49,6 +55,7 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
 
         override fun login(user: User) {
             // можем редиректить на hostactivity
+            saveUserInSharedPreferences(user)
             startActivity(Intent(requireContext(), HostActivity::class.java))
             activity?.finish()
             Log.e(TAG, "success login: $user")
@@ -139,6 +146,13 @@ class RegistrationSmsFragment : BaseFragment<FragmentRegistrationSmsBinding>(
             }
         }
         (cTimer as CountDownTimer).start()
+    }
+
+     private fun saveUserInSharedPreferences(user: User) {
+      val userJson: String = Gson().toJson(user)
+      sharedPreferences.edit()
+          .putString(USER_SHARED_PREFERENCES, userJson)
+          .apply()
     }
 
     companion object {
