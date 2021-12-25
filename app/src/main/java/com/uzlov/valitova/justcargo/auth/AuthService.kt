@@ -2,6 +2,7 @@ package com.uzlov.valitova.justcargo.auth
 
 import android.app.Activity
 import android.content.ContentValues
+import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -11,6 +12,9 @@ import com.google.firebase.ktx.Firebase
 import com.uzlov.valitova.justcargo.data.net.User
 import java.util.concurrent.TimeUnit
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.gson.Gson
+import com.uzlov.valitova.justcargo.app.appComponent
+import javax.inject.Inject
 
 
 class AuthService {
@@ -23,10 +27,11 @@ class AuthService {
     private var registration: Boolean = false
     private var user: User? = null
 
+
     interface IStateAuth {
         fun registered(user: User)
         fun login(user: User)
-        fun logout()
+        fun logout(msg: String)
     }
 
     private var listenerAuth: IStateAuth? = null
@@ -65,8 +70,10 @@ class AuthService {
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Неверный запрос
+                listenerAuth?.logout("Неверный запрос")
             } else if (e is FirebaseTooManyRequestsException) {
                 //Превышена квота SMS для проекта
+                listenerAuth?.logout("Превышена квота SMS для проекта")
             }
             // Show a message and update the UI
         }
@@ -147,4 +154,8 @@ class AuthService {
     fun currentUser(): User? {
         return user
     }
+
+
 }
+
+

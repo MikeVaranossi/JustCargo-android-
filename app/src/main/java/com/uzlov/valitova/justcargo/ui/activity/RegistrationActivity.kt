@@ -2,6 +2,8 @@ package com.uzlov.valitova.justcargo.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.google.android.material.appbar.MaterialToolbar
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.databinding.ActivityRegistrationBinding
 import com.uzlov.valitova.justcargo.ui.fragments.registration.WelcomeScreenFragment
@@ -21,19 +23,15 @@ class RegistrationActivity : AppCompatActivity() {
 
         viewBinding.toolbar.let {
             setSupportActionBar(it)
-            it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
+            it.setNavigationOnClickListener {
+                supportFragmentManager.popBackStack()
+            }
             it.setNavigationIconTint(resources.getColor(R.color.white_color))
         }
 
-        /*findViewById<MaterialToolbar>(R.id.rootToolbar).let {
-            setSupportActionBar(it)
-            it.setNavigationOnClickListener { supportFragmentManager.popBackStack() }
-            it.setNavigationIconTint(resources.getColor(R.color.white_color))
-
-        }*/
-
         supportFragmentManager.apply {
             beginTransaction()
+                .addToBackStack(null)
                 .replace(R.id.container, WelcomeScreenFragment())
                 .commit()
         }

@@ -8,6 +8,8 @@ import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.*
 
 
+const val USER_SHARED_PREFERENCES = "USER"
+
 fun String.lastToPower(): SpannableStringBuilder =
     if (length < 1) {
         SpannableStringBuilder()
