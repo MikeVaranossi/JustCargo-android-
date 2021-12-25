@@ -22,7 +22,8 @@
 
         <activity
             android:name=".ui.activity.SplashActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -33,6 +34,7 @@
             android:name=".ui.activity.RegistrationActivity"
             android:exported="true"
             android:label="@string/title_activity_registration"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.JustCargo.NoActionBar">
 
         </activity>
@@ -40,11 +42,12 @@
             android:name=".ui.activity.HostActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="fullSensor"
-            android:windowSoftInputMode="adjustResize">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
-
-        </activity>
+        <service
+            android:name=".service.BookingRequestStateService"
+            android:enabled="true" />
 
         <meta-data
             android:name="preloaded_fonts"
