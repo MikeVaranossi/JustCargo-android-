@@ -9,10 +9,13 @@ class DeliveryViewModel @Inject constructor(private var deliveryUseCases: Delive
     BaseViewModel() {
 
     fun getDeliveries() = deliveryUseCases?.getDelivery()
+
     fun getDeliveriesWithCarrierPhone(phone: String) =
         deliveryUseCases?.getDeliveriesWithCarrierPhone(phone)
 
     fun getDelivery(id: Int) = deliveryUseCases?.getDelivery(id)
+
+    fun getDeliveriesWithRequestID(id: Long) = deliveryUseCases?.getDeliveriesWithRequestID(id)
 
     fun addDelivery(delivery: Delivery) = deliveryUseCases?.putDelivery(delivery)
 
