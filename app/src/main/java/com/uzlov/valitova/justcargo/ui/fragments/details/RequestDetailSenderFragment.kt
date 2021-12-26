@@ -4,24 +4,19 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS_MESSAGE
 import com.uzlov.valitova.justcargo.app.appComponent
-import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.Request
-import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailSenderLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
-import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.RVUsersRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.profile.DetailsProfileCarrierFragment
-import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
 import javax.inject.Inject
@@ -41,19 +36,21 @@ class RequestDetailSenderFragment :
 
     private var deliverys: List<Delivery>? = null
 
-    private val callback = object : RVUsersRequestAdapter.OnItemClickListener{
+    private val callback = object : RVUsersRequestAdapter.OnItemClickListener {
         override fun click(request: Delivery) {
             val manager = requireActivity().supportFragmentManager
             manager.apply {
                 beginTransaction()
                     .addToBackStack(null)
-                    .replace(R.id.fragment_container, DetailsProfileCarrierFragment.newInstance(request.trip?.carrier))
+                    .replace(R.id.fragment_container,
+                        DetailsProfileCarrierFragment.newInstance(request.trip?.carrier))
                     .commit()
             }
         }
 
         override fun reject(request: Delivery) {
-            request.id?.let { it -> deliveryViewModel.removeDelivery(it)
+            request.id?.let { it ->
+                deliveryViewModel.removeDelivery(it)
                 hideStateUI()
             }
         }
@@ -65,9 +62,7 @@ class RequestDetailSenderFragment :
             showProfileCarrierUI()
 
             deliverys?.forEach { item ->
-                if (item == request)
-                    return@forEach
-                item.id?.let { it -> deliveryViewModel.removeDelivery(it)}
+                if (item != request) item.id?.let { it -> deliveryViewModel.removeDelivery(it) }
             }
         }
     }
@@ -100,12 +95,13 @@ class RequestDetailSenderFragment :
         viewBinding.rvDeliveries.adapter = adapter
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
+
         deliveryViewModel.getDeliveriesWithRequestID(idRequest)
             ?.observe(viewLifecycleOwner, {
                 it?.let {
 
                     adapter.setDelivery(it)
-                    showStateUI()
+                    showStateUI(it)
 
                     deliverys = it
                     //TODO в зависимости от статусов доделать показ
@@ -156,16 +152,11 @@ class RequestDetailSenderFragment :
     }
 
     private fun initListeners() {
-        viewBinding.buttonEditCargo.setOnClickListener {
-            Toast.makeText(requireContext(),
-                getString(R.string.where_is_chat),
-                Toast.LENGTH_SHORT).show()
-        }
-
         //Отменить
         viewBinding.btnCancel.setOnClickListener {
-                deliverys?.get(0)!!.id?.let { it1 -> deliveryViewModel.removeDelivery(it1)
-                    hideStateUI()
+            deliverys?.get(0)!!.id?.let { it1 ->
+                deliveryViewModel.removeDelivery(it1)
+                hideStateUI()
             }
         }
 
@@ -180,19 +171,19 @@ class RequestDetailSenderFragment :
     }
 
     // срабатывает тогда когда отправлена бронь на заявку
-    private fun showStateUI() {
+    private fun showStateUI(list: List<Delivery>) {
         with(viewBinding) {
-            tvLabelStateDelivery.visibility = View.VISIBLE
-            tvStatusDelivery.visibility = View.VISIBLE
-            tvStatusDelivery.text = getString(R.string.wait_delivery_cargo)
-
-            tvLabelStateDelivery.visibility = View.GONE
-            tvStatusDelivery.visibility = View.GONE
-            // показываем нужные кнопки
-            btnComplete.visibility = View.GONE
-            btnCancel.visibility = View.GONE
-
-            buttonEditCargo.visibility = View.GONE
+            if (list.isNullOrEmpty()) {
+                // заявок на бронирование нет, пишем что перевозчик не найден
+                tvLabelStateDelivery.visibility = View.VISIBLE
+                tvStatusDelivery.visibility = View.VISIBLE
+                tvStatusDelivery.text = getString(R.string.not_found)
+            } else {
+                // рисуем список заявок
+                tvLabelStateDelivery.visibility = View.GONE
+                tvStatusDelivery.visibility = View.GONE
+                rvDeliveries.visibility = View.VISIBLE
+            }
         }
     }
 
@@ -203,8 +194,6 @@ class RequestDetailSenderFragment :
             // показываем нужные кнопки
             btnComplete.visibility = View.VISIBLE
             btnCancel.visibility = View.VISIBLE
-
-            buttonEditCargo.visibility = View.GONE
         }
     }
 
@@ -219,7 +208,6 @@ class RequestDetailSenderFragment :
             btnComplete.visibility = View.GONE
             btnCancel.visibility = View.GONE
             rvDeliveries.visibility = View.GONE
-            buttonEditCargo.visibility = View.VISIBLE
         }
     }
 

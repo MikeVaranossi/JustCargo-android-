@@ -88,11 +88,10 @@ class RequestDetailCarrierFragment :
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
 
         authService.currentUser()?.phone?.let { phone ->
-
-            if (phone.isNullOrEmpty() || phone.isBlank()) return@let
-
             // скрываем view со статусом заявки
             hideStateUI()
+
+            if (phone.isNullOrEmpty() || phone.isBlank()) return@let
 
             deliveryViewModel.getDeliveryWithParam(idRequest, phone)
                 ?.observe(viewLifecycleOwner, {
@@ -107,7 +106,6 @@ class RequestDetailCarrierFragment :
                 ?.observe(viewLifecycleOwner, {
                     Log.e(javaClass.simpleName, "WithRequest: $it")
                 })
-
         }
     }
 

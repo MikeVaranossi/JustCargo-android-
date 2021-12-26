@@ -218,13 +218,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDeliveries"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/item_carrier_request_layout"/>
+                app:layout_constraintEnd_toEndOf="@+id/fabCall"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelCommentCargo"
+                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
+                tools:listitem="@layout/item_carrier_request_layout" />
 
             <TextView
                 android:id="@+id/tvLabelStateDelivery"
