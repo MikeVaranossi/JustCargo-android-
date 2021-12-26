@@ -327,6 +327,7 @@
         android:paddingStart="110dp"
         android:paddingEnd="110dp"
         android:text="@string/text_button_find_cargo"
+        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

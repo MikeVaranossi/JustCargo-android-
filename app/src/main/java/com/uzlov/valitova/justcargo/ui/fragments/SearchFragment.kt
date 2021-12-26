@@ -2,6 +2,8 @@ package com.uzlov.valitova.justcargo.ui.fragments
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
@@ -11,6 +13,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentSearchBinding
 import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
+import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -27,14 +30,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
             it.title = getString(R.string.search_cargo)
             it.setDisplayHomeAsUpEnabled(false)
         }
+
+        addTextWatchers()
+        initListeners()
+    }
+
+    private fun initListeners() {
         viewBinding.buttonFindCargo.setOnClickListener {
             with(viewBinding) {
                 try {
                     searchRequest.departure = editTextFrom.text.toString().trim()
                     searchRequest.destination = editTextTo.text.toString().trim()
 
-
-                } catch (e: NumberFormatException) {
+                } catch (e: NullPointerException) {
                     return@setOnClickListener
                 }
             }
@@ -71,6 +79,38 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
                 simpleFormat.format(selectedDate).toString()
             )
             searchRequest.deliveryTime = selectedDate
+        }
+    }
+
+    private fun addTextWatchers() {
+        viewBinding.editTextFrom.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+        viewBinding.editTextTo.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+        viewBinding.editTextDate.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+    }
+
+    private fun verifyEmptyEditText() {
+        with(viewBinding) {
+            buttonFindCargo.isEnabled = !editTextFrom.text.isNullOrEmpty() &&
+                    !editTextTo.text.isNullOrEmpty() &&
+                    !editTextDate.text.isNullOrEmpty()
         }
     }
 
