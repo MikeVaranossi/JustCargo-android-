@@ -77,15 +77,16 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
 
     override fun getDeliveriesWithCarrierPhone(phone: String): LiveData<List<Delivery>> {
         val result = MutableLiveData<List<Delivery>>()
-        deliveryReference.orderByChild("trip/carrier/phone").equalTo(phone)
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.value != null){
-                        result.value = snapshot.children.map {
-                            it.getValue<Delivery>()!!
-                        }
+        deliveryReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.value != null) {
+                    result.value = snapshot.children.map {
+                        it.getValue<Delivery>()!!
+                    }.filter {
+                        it.trip?.carrier?.phone == phone
                     }
                 }
+            }
 
                 override fun onCancelled(error: DatabaseError) {
                     error.toException().printStackTrace()
