@@ -9,9 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailSenderLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
+import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
+import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
+import javax.inject.Inject
 
 /*
 * Фрагмент отображает детальную информацию о заявке на перевозку груза.
@@ -22,8 +26,17 @@ class RequestDetailSenderFragment :
     private var request: Request? = null
     private var requestLocal: FavoriteRequestLocal? = null
 
+    @Inject
+    lateinit var modelFactory: ViewModelFactory
+    lateinit var deliveryViewModel: DeliveryViewModel
+
+    private var delivery: Delivery? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        deliveryViewModel = modelFactory.create(DeliveryViewModel::class.java)
 
         arguments?.let {
             request = it.getParcelable(Constant.KEY_REQUESTS_OBJECT)
@@ -40,6 +53,16 @@ class RequestDetailSenderFragment :
         } else {
             updateUI(requestLocal)
         }
+
+        val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
+        deliveryViewModel.getDeliveryWithParam(idRequest, "")
+            ?.observe(viewLifecycleOwner, {
+                it?.let {
+                    showStateUI()
+                    delivery = it.copy()
+                    viewBinding.tvStatusDelivery.text = it.request?.status?.name
+                }
+            })
     }
 
     private fun updateUI(request: Request?) {
@@ -90,6 +113,59 @@ class RequestDetailSenderFragment :
         request?.owner?.phone?.let {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
             startActivity(intent)
+        }
+    }
+
+    // срабатывает тогда когда отправлена бронь на заявку
+    private fun showStateUI() {
+        with(viewBinding) {
+            // показываем статус брони
+            tvLabelStateDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.visibility = View.VISIBLE
+            tvLinkProfile.visibility = View.VISIBLE
+
+            // показываем нужные кнопки
+            btnComplete.visibility = View.GONE
+            btnCancel.visibility = View.GONE
+
+            btnConfirm.visibility = View.VISIBLE
+            btnDeny.visibility = View.VISIBLE
+
+            buttonEditCargo.visibility = View.GONE
+        }
+    }
+
+    // срабатывает когда бронь подтвердили
+    private fun showProfileCarrierUI() {
+        with(viewBinding) {
+            tvLabelStateDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.visibility = View.VISIBLE
+            tvLinkProfile.visibility = View.INVISIBLE
+
+            // показываем нужные кнопки
+            btnComplete.visibility = View.VISIBLE
+            btnCancel.visibility = View.VISIBLE
+
+            btnConfirm.visibility = View.GONE
+            btnDeny.visibility = View.GONE
+
+            buttonEditCargo.visibility = View.GONE
+        }
+    }
+
+    // срабатывает когда отказали в бронировании
+    private fun hideStateUI() {
+        with(viewBinding) {
+            // возврашаем к значениям по умолчанию
+            tvLabelStateDelivery.visibility = View.GONE
+            tvStatusDelivery.visibility = View.GONE
+            tvLinkProfile.visibility = View.GONE
+            btnComplete.visibility = View.GONE
+            btnCancel.visibility = View.GONE
+            btnConfirm.visibility = View.GONE
+            btnDeny.visibility = View.GONE
+
+            buttonEditCargo.visibility = View.VISIBLE
         }
     }
 
