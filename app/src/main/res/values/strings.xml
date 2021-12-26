@@ -150,4 +150,5 @@
     <string name="search_other_cargo">Найдите другой груз...</string>
     <string name="your_request_delivery_reject">Ваша заявка на перевозку отклонена</string>
     <string name="delivery_status_updated">Обновлен статус заявки</string>
+    <string name="your_denied_location">Вы запретили доступ к геолокации</string>
 </resources>
