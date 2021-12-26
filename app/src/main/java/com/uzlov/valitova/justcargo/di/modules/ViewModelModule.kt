@@ -34,6 +34,11 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
+    @ViewModelKey(MyRequestsViewModel::class)
+    abstract fun myRequestsViewModel(myRequestsViewModel: MyRequestsViewModel) : ViewModel
+
+    @Binds
+    @IntoMap
     @ViewModelKey(GeocodingViewModel::class)
     abstract fun geoViewModel(geoViewModel: GeocodingViewModel) : ViewModel
 }

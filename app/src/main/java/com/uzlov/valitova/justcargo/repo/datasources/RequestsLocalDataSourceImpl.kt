@@ -21,6 +21,6 @@ class RequestsLocalDataSourceImpl @Inject constructor(var daoFavourite: Favorite
     override fun getMyRequests(): LiveData<List<MyRequestLocal>> = daoLocal.getMyRequests()
     override fun getMyRequest(id: Long): LiveData<MyRequestLocal?> = daoLocal.getMyRequest(id)
     override suspend fun removeMyRequest(request: MyRequestLocal) = daoLocal.removeMyRequest(request)
-    override suspend fun putMyRequest(request: MyRequestLocal) = daoLocal.insertMyRequest(request)
+    override suspend fun putMyRequest(requests: List<MyRequestLocal>) = daoLocal.insertMyRequest(requests)
     override suspend fun updateMyRequest(request: MyRequestLocal) =daoLocal.updateMyRequest(request)
 }
