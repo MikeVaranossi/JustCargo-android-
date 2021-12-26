@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class FavoriteRequestLocal(
+data class MyRequestLocal(
     @PrimaryKey var id: Long? = 0,
     @ColumnInfo(name = "requestTime") var requestTime: Long? = 0,
     @ColumnInfo(name = "deliveryTime") var deliveryTime: Long? = 0,

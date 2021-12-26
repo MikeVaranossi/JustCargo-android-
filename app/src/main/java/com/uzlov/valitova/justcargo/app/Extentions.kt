@@ -5,6 +5,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
 import android.text.style.SuperscriptSpan
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
 import com.uzlov.valitova.justcargo.data.net.*
 
 
@@ -63,6 +64,42 @@ fun FavoriteRequestLocal.toRequestRemote(): Request {
         width = this.width,
         height = this.height,
         status = RequestStatus(0,this.status)
+    )
+}
+
+fun Request.toMyRequestLocal(): MyRequestLocal {
+    return MyRequestLocal(
+        id = this.id,
+        requestTime = this.requestTime,
+        deliveryTime = this.deliveryTime,
+        cost = this.cost,
+        departure = this.departure,
+        destination = this.destination,
+        description = this.description,
+        shortInfo = this.shortInfo,
+        weight = this.weight,
+        length = this.length,
+        width = this.width,
+        height = this.height,
+        status = this.status?.name
+    )
+}
+
+fun MyRequestLocal.toFavoriteRequestLocal(): FavoriteRequestLocal {
+    return FavoriteRequestLocal(
+        id = this.id,
+        requestTime = this.requestTime,
+        deliveryTime = this.deliveryTime,
+        cost = this.cost,
+        departure = this.departure,
+        destination = this.destination,
+        description = this.description,
+        shortInfo = this.shortInfo,
+        weight = this.weight,
+        length = this.length,
+        width = this.width,
+        height = this.height,
+        status = this.status,
     )
 }
 

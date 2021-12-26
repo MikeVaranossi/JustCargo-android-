@@ -1,7 +1,10 @@
 package com.uzlov.valitova.justcargo.repo.usecases
 
 import androidx.lifecycle.LiveData
+import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
+import com.uzlov.valitova.justcargo.app.toMyRequestLocal
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
+import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.repo.local.ILocalRepository
 import com.uzlov.valitova.justcargo.repo.net.IRequestsRepository
@@ -21,25 +24,6 @@ class RequestsUseCases @Inject constructor(
     fun getRequestsWithPhone(phone: String) = requestRepository.getRequestsWithPhone(phone)
     fun getRequestsWithUserID(id: Int) = requestRepository.getRequestsWithUserID(id)
 
-    //    for local requests
-    suspend fun getFavouritesRequests(): LiveData<List<FavoriteRequestLocal>> =
-        localRequestRepository.getRequests()
-
-    suspend fun getFavouriteRequest(id: Long): LiveData<FavoriteRequestLocal?> =
-        localRequestRepository.getRequest(id)
-
-    suspend fun removeFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.removeRequest(request)
-
-    suspend fun putFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.putRequest(request)
-
-    suspend fun updateFavouriteRequest(request: FavoriteRequestLocal) =
-        localRequestRepository.updateRequest(request)
-
-    // возвращает множество ID-ков избранных заявок
-    suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getIDsRequests()
-
     fun searchRequest(
         from: String,
         to: String,
@@ -57,4 +41,28 @@ class RequestsUseCases @Inject constructor(
         from,
         to
     )
+
+
+    //    for local favourite requests
+    suspend fun getFavouritesRequests(): LiveData<List<FavoriteRequestLocal>> =
+        localRequestRepository.getFavRequests()
+    suspend fun getFavouriteRequest(id: Long): LiveData<FavoriteRequestLocal?> =
+        localRequestRepository.getFavRequest(id)
+    suspend fun removeFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.removeFavRequest(request)
+    suspend fun putFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.putFavRequest(request)
+    suspend fun updateFavouriteRequest(request: FavoriteRequestLocal) =
+        localRequestRepository.updateFavRequest(request)
+    suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getFavIDsRequests()
+
+
+    //     for local my requests
+    suspend fun getMyRequests(): LiveData<List<MyRequestLocal>> =
+        localRequestRepository.getMyRequests()
+
+     suspend fun putMyRequest(requests: List<Request>) {
+         val list = requests.map { request -> request.toMyRequestLocal() }
+         localRequestRepository.putMyRequest(list)
+     }
 }
