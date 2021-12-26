@@ -193,14 +193,15 @@ xmlns:android="http://schemas.android.com/apk/res/android"
 
             <TextView
                 android:id="@+id/tvCommentCargo"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/l_margin"
                 android:layout_marginTop="@dimen/margin_detail_screen"
                 android:text="@string/comments"
                 android:textColor="@color/dark_primary_color"
                 android:textSize="19sp"
+                app:layout_constraintEnd_toEndOf="@+id/text_view_from_to"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelCommentCargo"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelCommentCargo"
                 tools:text="Важно забрать вечером" />
 
