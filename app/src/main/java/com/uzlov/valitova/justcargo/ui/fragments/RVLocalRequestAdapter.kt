@@ -35,18 +35,29 @@ class RVLocalRequestAdapter<T : IViewItemAdapter>(private var itemClickListener:
         notifyDataSetChanged()
     }
 
+    fun setIDs(_idList: List<Long>) {
+        idList = _idList
+        notifyDataSetChanged()
+    }
+
     fun setVisibilityFavouritesIcon(enable: Boolean) {
         isEnableFavouriteIcon = enable
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVLocalRequestAdapter<T>.RecyclerItemViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int,
+    ): RVLocalRequestAdapter<T>.RecyclerItemViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         _viewBinding = ItemCardCargoBinding.inflate(inflater, parent, false)
         return RecyclerItemViewHolder(viewBinding)
     }
 
-    override fun onBindViewHolder(holder: RVLocalRequestAdapter<T>.RecyclerItemViewHolder, position: Int) {
-        if (isEnableFavouriteIcon){
+    override fun onBindViewHolder(
+        holder: RVLocalRequestAdapter<T>.RecyclerItemViewHolder,
+        position: Int,
+    ) {
+        if (isEnableFavouriteIcon) {
             holder.bind(requests[position])
         } else {
             holder.bindWithFavouritesIcon(requests[position])
