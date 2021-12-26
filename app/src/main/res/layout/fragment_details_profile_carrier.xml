@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.activity.HostActivity">
-
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.fragments.profile.detailsProfileCarrierFragment">
 
     <ImageView
         android:id="@+id/ivProfile"
@@ -32,6 +31,18 @@
         app:layout_constraintRight_toRightOf="parent"
         tools:text="@tools:sample/full_names"/>
 
+    <TextView
+        android:id="@+id/tvCompletedCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/full_names"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayout"
@@ -45,7 +56,8 @@
         app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
         app:layout_constraintLeft_toLeftOf="@id/ivProfile"
         app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+        app:layout_constraintTop_toBottomOf="@id/tvCompletedCount"
+        android:enabled="false"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -56,34 +68,11 @@
             android:hint="@string/phone_format"
             android:enabled="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            />
+
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiLayoutEmail"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:elevation="16dp"
-        app:boxStrokeColor="@color/dark_primary_color"
-        android:layout_marginTop="@dimen/margin_top_into_profile"
-        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
-        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
-        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
-        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
-        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
-        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/tiLayout"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etEmailProfile"
-            android:inputType="textEmailAddress"
-            android:drawableEnd="@drawable/ic_baseline_create"
-            app:drawableTint="@color/accent_color"
-            android:hint="@string/e_mail"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutDriverDocument"
@@ -99,7 +88,8 @@
         app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
         app:layout_constraintLeft_toLeftOf="@id/ivProfile"
         app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
-        app:layout_constraintTop_toBottomOf="@id/tiLayoutEmail"
+        app:layout_constraintTop_toBottomOf="@id/tiLayout"
+        android:enabled="false"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         <com.google.android.material.textfield.TextInputEditText

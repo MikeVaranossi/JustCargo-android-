@@ -43,8 +43,8 @@
     <string name="title_activity_registration">Регистрация</string>
     <string name="text_entrance">Вход</string>
     <string name="text_registration">Регистрация</string>
-    <string name="Carrier">Грузоперевозчик</string>
-    <string name="Shipper">Грузоотправитель</string>
+    <string name="Carrier">Перевозчик</string>
+    <string name="Shipper">Отправитель</string>
     <string name="cost_delivery">Стоимость перевозки</string>
     <string name="cargo">Груз</string>
     <string name="additional_param_cargo">Дополнительные параметры груза</string>
@@ -151,6 +151,9 @@
     <string name="your_request_delivery_reject">Ваша заявка на перевозку отклонена</string>
     <string name="delivery_status_updated">Обновлен статус заявки</string>
     <string name="your_denied_location">Вы запретили доступ к геолокации</string>
+    <string name="open_profile_carrier">Посмотреть профиль перевозчика</string>
+    <string name="not_found">Пока не найден</string>
+    <string name="wait_delivery_cargo">Подтверждён. Ждите доставки груза</string>
     <string name="new_request">Новый запрос!</string>
     <string name="booking_is_rejected">Бронирование отменено!</string>
 </resources>

@@ -10,6 +10,7 @@ import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
@@ -59,4 +60,5 @@ interface AppComponent {
     fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
     fun inject(findCargoFragment: FindCargoFragment)
     fun inject(lookRequestStateService: LookRequestStateService)
+    fun inject(requestDetailSenderFragment: RequestDetailSenderFragment)
 }
