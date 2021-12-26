@@ -11,4 +11,5 @@ data class Delivery(
     var trip: Trip? = null,
     var startTime: Long? = 0,
     var endTime: Long? = 0,
+    var status: RequestStatus? = null,
 ) : Parcelable

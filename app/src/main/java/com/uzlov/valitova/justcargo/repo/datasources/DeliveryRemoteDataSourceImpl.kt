@@ -1,14 +1,13 @@
 package com.uzlov.valitova.justcargo.repo.datasources
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.data.net.Delivery
+import com.uzlov.valitova.justcargo.service.BookingRequestStateService
 
 class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
 
@@ -94,5 +93,33 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
             })
 
         return result
+    }
+
+    override fun observeDeliveries(
+        phone: String,
+        listener: BookingRequestStateService.BookingStateListener,
+    ) {
+        deliveryReference.orderByChild("trip/carrier/phone").equalTo(phone)
+            .addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                    listener.accept(snapshot.getValue<Delivery>()!!)
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    listener.reject(snapshot.getValue<Delivery>()!!)
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(javaClass.simpleName, "onCancelled: ")
+                }
+            })
     }
 }
