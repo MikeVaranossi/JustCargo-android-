@@ -56,12 +56,17 @@ class RequestDetailSenderFragment :
         }
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
-        deliveryViewModel.getDeliveryWithParam(idRequest, "89122001463")
+        deliveryViewModel.getDeliveriesWithRequestID(idRequest)
             ?.observe(viewLifecycleOwner, {
                 it?.let {
-                    showStateUI()
-                    delivery = it.copy()
-                    viewBinding.tvStatusDelivery.text = it.request?.status?.name
+                    delivery = it[0].copy()
+                    val status = it[0].request?.status?.name
+                    if (status == "Открыта"){
+                        showStateUI()
+                    }
+                    if (status == "Подтверждён"){
+                        showProfileCarrierUI()
+                    }
                 }
             })
     }
@@ -101,11 +106,49 @@ class RequestDetailSenderFragment :
     }
 
     private fun initListeners() {
-            viewBinding.buttonEditCargo.setOnClickListener {
-                Toast.makeText(requireContext(),
-                    getString(R.string.where_is_chat),
-                    Toast.LENGTH_SHORT).show()
+        viewBinding.buttonEditCargo.setOnClickListener {
+            Toast.makeText(requireContext(),
+                getString(R.string.where_is_chat),
+                Toast.LENGTH_SHORT).show()
+        }
+
+        viewBinding.btnConfirm.setOnClickListener {
+            if (delivery != null){
+                delivery!!.request?.status?.name = "Подтверждён"
+                deliveryViewModel.addDelivery(delivery!!)
+                showProfileCarrierUI()
             }
+        }
+
+        //Отказать грузоперевозчику
+        viewBinding.btnDeny.setOnClickListener {
+            if (delivery != null){
+                delivery!!.id?.let { it1 -> deliveryViewModel.removeDelivery(it1)
+                    hideStateUI()
+                }
+            }
+        }
+
+        //Отменить
+        viewBinding.btnCancel.setOnClickListener {
+            if (delivery != null){
+                delivery!!.id?.let { it1 -> deliveryViewModel.removeDelivery(it1)
+                    hideStateUI()
+                }
+            }
+        }
+
+        //просмотр профиля
+        viewBinding.tvLinkProfile.setOnClickListener {
+            if (delivery != null) {
+                delivery!!.trip?.carrier?.let { it1 ->
+                    /*parentFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit()*/
+                }
+            }
+        }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
@@ -120,6 +163,7 @@ class RequestDetailSenderFragment :
     // срабатывает тогда когда отправлена бронь на заявку
     private fun showStateUI() {
         with(viewBinding) {
+            tvStatusDelivery.text = "Груз забронирован"
             // показываем статус брони
             tvLabelStateDelivery.visibility = View.VISIBLE
             tvStatusDelivery.visibility = View.VISIBLE
@@ -139,6 +183,7 @@ class RequestDetailSenderFragment :
     // срабатывает когда бронь подтвердили
     private fun showProfileCarrierUI() {
         with(viewBinding) {
+            tvStatusDelivery.text = "Подтверждён. Ждите доставки груза"
             tvLabelStateDelivery.visibility = View.VISIBLE
             tvStatusDelivery.visibility = View.VISIBLE
             tvLinkProfile.visibility = View.INVISIBLE
