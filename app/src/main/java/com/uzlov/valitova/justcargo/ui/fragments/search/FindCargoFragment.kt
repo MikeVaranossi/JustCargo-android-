@@ -103,7 +103,7 @@ class FindCargoFragment : BaseFragment<FragmentFindCargoBinding>(
                     }
                 }
                 if (requests.isNotEmpty()) {
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 15))
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(),50,50, 15))
                     addMarkers(googleMap)
                 }
 
