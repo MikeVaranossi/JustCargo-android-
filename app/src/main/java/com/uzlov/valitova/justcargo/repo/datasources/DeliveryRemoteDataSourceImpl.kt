@@ -55,10 +55,13 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     if (snapshot.value != null && snapshot.hasChildren()) {
-                        result.value = snapshot.children.map {
+                        val delivery = snapshot.children.map {
                             it.getValue<Delivery>()
-                        }.first {
-                            it?.trip?.carrier?.phone == phone
+                        }
+                        if (!delivery.isNullOrEmpty()) {
+                            result.value = delivery.firstOrNull {
+                                it?.trip?.carrier?.phone == phone
+                            }
                         }
                     }
                 }
