@@ -47,8 +47,6 @@ class HostActivity : AppCompatActivity() {
             )
         }
 
-        startService(Intent(this, BookingRequestStateService::class.java))
-
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
 
@@ -56,6 +54,7 @@ class HostActivity : AppCompatActivity() {
             setFragment(HomeSenderFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
+            startService(Intent(this, BookingRequestStateService::class.java))
             setFragment(MapDeliveriesFragment.newInstance(null))
             bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 

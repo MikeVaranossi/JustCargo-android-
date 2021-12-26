@@ -9,14 +9,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
+import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.auth.AuthService
-import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.Request
+import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
+import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import javax.inject.Inject
 
 class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
@@ -28,6 +30,7 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     lateinit var model: DeliveryViewModel
+    lateinit var favouritesVModel: FavoritesRequestsViewModel
 
     private val callback = object : RVLocalRequestAdapter.OnItemClickListener<Request>{
         override fun click(request: Request) {
@@ -35,17 +38,17 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
         }
 
         override fun addToFavorite(request: Request) {
-
+            favouritesVModel.putRequest(request.toFavoriteRequestLocal())
         }
 
         override fun removeFromFavorite(request: Request) {
-
+            favouritesVModel.removeRequest(request.toFavoriteRequestLocal())
         }
     }
 
     private val adapter by lazy {
-        RVLocalRequestAdapter<Request>(callback).apply {
-            setVisibilityFavouritesIcon(false)
+        RVLocalRequestAdapter(callback).apply {
+            setVisibilityFavouritesIcon(true)
         }
     }
 
@@ -61,6 +64,11 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
         requireContext().appComponent.inject(this)
         super.onCreate(savedInstanceState)
         model = viewModelFactory.create(DeliveryViewModel::class.java)
+        favouritesVModel = viewModelFactory.create(FavoritesRequestsViewModel::class.java)
+
+        arguments?.let {
+            isFromHostActivity = it.getBoolean(Constant.KEY_FROM_HOST_ACTIVITY)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,16 +98,18 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
 
     private fun loadData() {
         authService.currentUser()?.phone?.let { phone ->
+            // загружаем тех кто в "Избранное"
+            favouritesVModel.getIDList().observe(viewLifecycleOwner, {
+                adapter.setIDs(it)
+            })
             model.getDeliveriesWithCarrierPhone(phone)?.observe(this, {
-                val list = it.map { delivery->
+                val list = it.map { delivery ->
                     delivery.request!!
                 }
                 adapter.setData(list)
                 updateUI(it)
             })
-
         }
-
     }
 
     private fun updateUI(data: List<Delivery>) {
