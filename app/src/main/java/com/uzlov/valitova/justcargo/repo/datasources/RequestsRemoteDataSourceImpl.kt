@@ -126,6 +126,27 @@ class RequestsRemoteDataSourceImpl : IRequestsRemoteDataSource {
         return mutableLiveData
     }
 
+    override fun searchRequest(from: String, to: String): LiveData<List<Request>> {
+        val mutableLiveData = MutableLiveData<List<Request>>()
+        reqReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                // send data
+                mutableLiveData.value = snapshot.children.map {
+                    it.getValue<Request>()!!
+                }.filter {
+                    it.departure!!.startsWith(from, ignoreCase = true) &&
+                            it.destination!!.startsWith(to, ignoreCase = true)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
+
+        return mutableLiveData
+    }
+
     override fun getRequest(id: Long): LiveData<Request?> {
         reqReference.child(id.toString()).get().addOnSuccessListener {
             resultRequest.value = it.getValue<Request>()
