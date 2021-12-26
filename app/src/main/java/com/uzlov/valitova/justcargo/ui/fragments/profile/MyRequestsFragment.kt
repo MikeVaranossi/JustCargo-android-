@@ -16,6 +16,7 @@ import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailSenderFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
@@ -37,7 +38,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     private val listenerOnClickCargoItem =
         object : RVLocalRequestAdapter.OnItemClickListener<Request> {
             override fun click(request: Request) {
-                openFragment(RequestDetailCarrierFragment.newInstance(request))
+                openFragment(RequestDetailSenderFragment.newInstance(request))
 
             }
 

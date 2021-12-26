@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.Request
@@ -35,7 +36,7 @@ class RequestDetailSenderFragment :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
+        requireContext().appComponent.inject(this)
         deliveryViewModel = modelFactory.create(DeliveryViewModel::class.java)
 
         arguments?.let {
@@ -55,7 +56,7 @@ class RequestDetailSenderFragment :
         }
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
-        deliveryViewModel.getDeliveryWithParam(idRequest, "")
+        deliveryViewModel.getDeliveryWithParam(idRequest, "89122001463")
             ?.observe(viewLifecycleOwner, {
                 it?.let {
                     showStateUI()

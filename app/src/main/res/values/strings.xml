@@ -151,4 +151,5 @@
     <string name="your_request_delivery_reject">Ваша заявка на перевозку отклонена</string>
     <string name="delivery_status_updated">Обновлен статус заявки</string>
     <string name="your_denied_location">Вы запретили доступ к геолокации</string>
+    <string name="open_profile_carrier">Посмотреть профиль перевозчика</string>
 </resources>

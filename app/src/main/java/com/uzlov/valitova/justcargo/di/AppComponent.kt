@@ -9,6 +9,7 @@ import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
@@ -51,10 +52,11 @@ interface AppComponent {
     fun inject(profileSenderFragment: ProfileSenderFragment)
     fun inject(selectMapPositionsFragment: SelectMapPositionsFragment)
     fun inject(orderStepOneFragment: OrderStepOneFragment)
-    abstract fun inject(loginFragment: LoginFragment)
+    fun inject(loginFragment: LoginFragment)
     fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
     fun inject(searchFragment: SearchFragment)
     fun inject(bookingRequestStateService: BookingRequestStateService)
     fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
     fun inject(findCargoFragment: FindCargoFragment)
+    fun inject(requestDetailSenderFragment: RequestDetailSenderFragment)
 }

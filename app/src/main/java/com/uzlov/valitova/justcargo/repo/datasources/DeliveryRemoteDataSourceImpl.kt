@@ -53,7 +53,7 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
                     if (snapshot.value != null){
                         result.value = snapshot.children.map {
                             it.getValue<Delivery>()
-                        }.first {
+                        }.first() {
                             it?.trip?.carrier?.phone == phone
                         }
                     }
