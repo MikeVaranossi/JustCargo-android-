@@ -12,7 +12,6 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentSearchBinding
-import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 import java.lang.NullPointerException
 import java.text.SimpleDateFormat
@@ -48,7 +47,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
                 }
             }
             parentFragmentManager.beginTransaction()
-  //              .replace(R.id.fragment_container, MapDeliveriesFragment.newInstance(searchRequest))
                 .replace(R.id.fragment_container, FindCargoFragment.newInstance(searchRequest))
                 .addToBackStack(null)
                 .commit()
@@ -99,20 +97,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
                 verifyEmptyEditText()
             }
         })
-        viewBinding.editTextDate.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-                verifyEmptyEditText()
-            }
-        })
     }
 
     private fun verifyEmptyEditText() {
         with(viewBinding) {
             buttonFindCargo.isEnabled = !editTextFrom.text.isNullOrEmpty() &&
-                    !editTextTo.text.isNullOrEmpty() &&
-                    !editTextDate.text.isNullOrEmpty()
+                    !editTextTo.text.isNullOrEmpty()
         }
     }
 
