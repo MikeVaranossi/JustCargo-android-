@@ -13,6 +13,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentSearchBinding
 import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
+import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -47,7 +48,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
                 }
             }
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, MapDeliveriesFragment.newInstance(searchRequest))
+  //              .replace(R.id.fragment_container, MapDeliveriesFragment.newInstance(searchRequest))
+                .replace(R.id.fragment_container, FindCargoFragment.newInstance(searchRequest))
                 .addToBackStack(null)
                 .commit()
         }

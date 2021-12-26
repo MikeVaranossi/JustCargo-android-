@@ -16,6 +16,7 @@ import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragmen
 import com.uzlov.valitova.justcargo.ui.fragments.profile.PersonalDataFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.*
 import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -50,4 +51,5 @@ interface AppComponent {
     fun inject(orderStepOneFragment: OrderStepOneFragment)
     fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
     fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
+    fun inject(findCargoFragment: FindCargoFragment)
 }
