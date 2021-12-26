@@ -118,4 +118,8 @@
     </style>
 
     <dimen name="custom_peek_height">550dp</dimen>
+
+    <style name="SwitchTextAppearance" parent="@android:style/TextAppearance.Holo.Small">
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

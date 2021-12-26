@@ -47,8 +47,6 @@ class HostActivity : AppCompatActivity() {
             )
         }
 
-        startService(Intent(this, BookingRequestStateService::class.java))
-
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
 
@@ -56,7 +54,8 @@ class HostActivity : AppCompatActivity() {
             setFragment(HomeSenderFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
-            setFragment(MapDeliveriesFragment.newInstance("NameFinder"))
+            startService(Intent(this, BookingRequestStateService::class.java))
+            setFragment(MapDeliveriesFragment.newInstance(null))
             bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 
         }
@@ -68,7 +67,7 @@ class HostActivity : AppCompatActivity() {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
                     } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
-                        setFragment(MapDeliveriesFragment.newInstance(""))
+                        setFragment(MapDeliveriesFragment.newInstance(null))
                         return@setOnItemSelectedListener true
                     }
                     return@setOnItemSelectedListener false

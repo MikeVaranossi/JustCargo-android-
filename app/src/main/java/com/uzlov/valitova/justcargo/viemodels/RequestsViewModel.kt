@@ -45,4 +45,11 @@ class RequestsViewModel @Inject constructor(private var requestsUseCases: Reques
         to,
         dateTimeStart
     )
+
+    fun searchRequest(
+        from: String,
+        to: String,
+    ): LiveData<List<Request>>? = requestsUseCases?.searchRequest(
+        from,
+        to)
 }

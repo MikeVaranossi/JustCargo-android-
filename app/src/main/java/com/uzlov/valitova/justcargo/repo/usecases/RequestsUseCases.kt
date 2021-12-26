@@ -39,6 +39,7 @@ class RequestsUseCases @Inject constructor(
 
     // возвращает множество ID-ков избранных заявок
     suspend fun getFavouritesIDs(): List<Long> = localRequestRepository.getIDsRequests()
+
     fun searchRequest(
         from: String,
         to: String,
@@ -47,5 +48,13 @@ class RequestsUseCases @Inject constructor(
         from,
         to,
         dateTimeStart
+    )
+
+    fun searchRequest(
+        from: String,
+        to: String,
+    ): LiveData<List<Request>> = requestRepository.searchRequest(
+        from,
+        to
     )
 }

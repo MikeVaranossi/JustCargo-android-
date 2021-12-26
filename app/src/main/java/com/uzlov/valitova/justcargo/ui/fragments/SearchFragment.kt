@@ -2,21 +2,27 @@ package com.uzlov.valitova.justcargo.ui.fragments
 
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentSearchBinding
+import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
+import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SearchFragment : BaseFragment<FragmentSearchBinding>(
     FragmentSearchBinding::inflate
 ) {
+
+    private var searchRequest: Request = Request()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -25,17 +31,33 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
             it.title = getString(R.string.search_cargo)
             it.setDisplayHomeAsUpEnabled(false)
         }
+
+        addTextWatchers()
+        initListeners()
+    }
+
+    private fun initListeners() {
         viewBinding.buttonFindCargo.setOnClickListener {
+            with(viewBinding) {
+                try {
+                    searchRequest.departure = editTextFrom.text.toString().trim()
+                    searchRequest.destination = editTextTo.text.toString().trim()
+
+                } catch (e: NullPointerException) {
+                    return@setOnClickListener
+                }
+            }
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, FindCargoFragment.newInstance())
+  //              .replace(R.id.fragment_container, MapDeliveriesFragment.newInstance(searchRequest))
+                .replace(R.id.fragment_container, FindCargoFragment.newInstance(searchRequest))
                 .addToBackStack(null)
                 .commit()
         }
-        viewBinding.imageButtonCalendar.setOnClickListener {
+        viewBinding.editTextDate.setOnClickListener {
             openDatePicker()
         }
-        viewBinding.tvAdvancedSearch.setOnClickListener {
-            Toast.makeText(context, "Данная функция будет доступна совсем скоро. Следите за обновлениями!", Toast.LENGTH_SHORT).show()
+        viewBinding.imageButtonCalendar.setOnClickListener {
+            openDatePicker()
         }
     }
 
@@ -46,26 +68,52 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
         val constraintsBuilder =
             CalendarConstraints.Builder()
                 .setValidator(DateValidatorPointForward.now())
-        val dateRangePicker =
-            MaterialDatePicker.Builder.dateRangePicker()
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
                 .setTitleText(getString(R.string.text_choose_date))
                 .setCalendarConstraints(constraintsBuilder.build())
                 .build()
-        dateRangePicker.show(parentFragmentManager, "tag")
-        dateRangePicker.addOnPositiveButtonClickListener {
-            val selectedDates: androidx.core.util.Pair<Long, Long>? = dateRangePicker.selection
-            val (startDate, endDate) = Pair(
-                Date((selectedDates?.first as Long)),
-                Date((selectedDates.second as Long))
+        datePicker.show(parentFragmentManager, "tag")
+        datePicker.addOnPositiveButtonClickListener {
+            val selectedDate: Long? = datePicker.selection
+            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            viewBinding.editTextDate.setText(
+                simpleFormat.format(selectedDate).toString()
             )
-            val simpleFormat = SimpleDateFormat("dd.MM.yyyy", Locale.US)
-            viewBinding.editTextDate.setText(getString(
-                R.string.for_date,
-                simpleFormat.format(startDate).toString(),
-                simpleFormat.format(endDate).toString()
-            ))
+            searchRequest.deliveryTime = selectedDate
         }
+    }
 
+    private fun addTextWatchers() {
+        viewBinding.editTextFrom.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+        viewBinding.editTextTo.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+        viewBinding.editTextDate.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                verifyEmptyEditText()
+            }
+        })
+    }
+
+    private fun verifyEmptyEditText() {
+        with(viewBinding) {
+            buttonFindCargo.isEnabled = !editTextFrom.text.isNullOrEmpty() &&
+                    !editTextTo.text.isNullOrEmpty() &&
+                    !editTextDate.text.isNullOrEmpty()
+        }
     }
 
     companion object {

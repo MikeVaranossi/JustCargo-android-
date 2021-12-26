@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -37,12 +36,13 @@ class MapDeliveriesFragment private constructor() :
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var model: RequestsViewModel
     private var requests: List<Request> = arrayListOf()
+    private var searchRequest: Request = Request()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requireContext().appComponent.inject(this)
         super.onCreate(savedInstanceState)
         model = viewModelFactory.create(RequestsViewModel::class.java)
-        getLatLng()
+
     }
 
 
@@ -51,9 +51,22 @@ class MapDeliveriesFragment private constructor() :
 
         (requireActivity() as AppCompatActivity).supportActionBar?.let {
             it.title = getString(R.string.label_home_carrier_fragment)
-            it.setDisplayHomeAsUpEnabled(true)
+            it.setDisplayHomeAsUpEnabled(false)
         }
-
+        arguments?.let {
+            it.getParcelable<Request>(Constant.KEY_REQUESTS_OBJECT)?.let { _request ->
+                searchRequest = _request.copy()
+            }
+        }
+        if (searchRequest.departure.isNullOrEmpty() && searchRequest.destination.isNullOrEmpty()) {
+            getLatLng()
+        } else {
+            getSearchLatLng(
+                searchRequest.departure!!,
+                searchRequest.destination!!,
+                searchRequest.deliveryTime!!
+            )
+        }
         val mapFragment = childFragmentManager.findFragmentById(
             R.id.map_fragment_carrier
         ) as? SupportMapFragment
@@ -71,8 +84,11 @@ class MapDeliveriesFragment private constructor() :
                         )
                     }
                 }
-                googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(), 20))
-                addMarkers(googleMap)
+                if (requests.isNotEmpty()) {
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds.build(),50,50, 15))
+                    addMarkers(googleMap)
+                }
+
             }
             googleMap.setOnMarkerClickListener { marker ->
                 openFragment(RequestDetailCarrierFragment.newInstance(requests[marker.zIndex.toInt()]))
@@ -96,6 +112,14 @@ class MapDeliveriesFragment private constructor() :
 
     private fun getLatLng() {
         model.getRequests()?.observe(this, {
+            requests = it
+
+        })
+    }
+
+    private fun getSearchLatLng(from: String, to: String, time: Long) {
+
+        model.searchRequest(from, to, time)?.observe(this, {
             requests = it
 
         })
@@ -135,13 +159,12 @@ class MapDeliveriesFragment private constructor() :
         }
         return true
     }
-    companion object {
-        fun newInstance(title: String): MapDeliveriesFragment {
 
-            val fragment = MapDeliveriesFragment().apply {
-                arguments = bundleOf(Constant.KEY_TITLE to title)
+    companion object {
+        fun newInstance(searchRequest: Request?) = MapDeliveriesFragment().apply {
+            arguments = Bundle().apply {
+                putParcelable(Constant.KEY_REQUESTS_OBJECT, searchRequest)
             }
-            return fragment
         }
     }
 }
