@@ -47,10 +47,13 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
     // получает "доставку" с определенным id заявки и телефоном перевозчиком
     override fun getDelivery(id: Long, phone: String): LiveData<Delivery?> {
         val result = MutableLiveData<Delivery?>()
+
+        if (phone.isEmpty() || phone.isBlank()) return result
+
         deliveryReference.orderByChild("request/id").equalTo(id.toDouble())
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if (snapshot.value != null){
+                    if (snapshot.value != null && snapshot.hasChildren()) {
                         result.value = snapshot.children.map {
                             it.getValue<Delivery>()
                         }.first {
