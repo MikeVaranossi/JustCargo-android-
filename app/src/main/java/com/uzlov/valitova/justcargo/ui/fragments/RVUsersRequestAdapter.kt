@@ -2,7 +2,11 @@ package com.uzlov.valitova.justcargo.ui.fragments
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import com.uzlov.valitova.justcargo.R
+import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.User
 import com.uzlov.valitova.justcargo.databinding.ItemCarrierRequestLayoutBinding
 
@@ -10,19 +14,19 @@ import com.uzlov.valitova.justcargo.databinding.ItemCarrierRequestLayoutBinding
 class RVUsersRequestAdapter(private var itemClickListener: OnItemClickListener? = null) :
     RecyclerView.Adapter<RVUsersRequestAdapter.RecyclerItemViewHolder>() {
 
-    private var users: List<User> = arrayListOf()
+    private var delivery: List<Delivery> = arrayListOf()
 
     private var _viewBinding: ItemCarrierRequestLayoutBinding? = null
     private val viewBinding get() = _viewBinding!!
 
     interface OnItemClickListener {
-        fun click(request: User)
-        fun reject(request: User)
-        fun accept(request: User)
+        fun click(request: Delivery)
+        fun reject(request: Delivery)
+        fun accept(request: Delivery)
     }
 
-    fun setUsers(data: List<User>) {
-        this.users = data
+    fun setDelivery(data: List<Delivery>) {
+        delivery = data
         notifyDataSetChanged()
     }
 
@@ -43,17 +47,23 @@ class RVUsersRequestAdapter(private var itemClickListener: OnItemClickListener? 
     override fun onBindViewHolder(
         holder: RecyclerItemViewHolder,
         position: Int,
-    ) = holder.bind(users[position])
+    ) = holder.bind(delivery[position])
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = delivery.size
 
     inner class RecyclerItemViewHolder(private val binding: ItemCarrierRequestLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(user: User) {
+        fun bind(delivery: Delivery) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
-
+                    textView.text = delivery.trip?.carrier?.phone ?: ""
+                    btnAcceptRequest.setOnClickListener {
+                        itemClickListener?.accept(delivery)
+                    }
+                    btnRejectRequest.setOnClickListener {
+                        itemClickListener?.reject(delivery)
+                    }
                 }
             }
         }

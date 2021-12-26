@@ -152,4 +152,6 @@
     <string name="delivery_status_updated">Обновлен статус заявки</string>
     <string name="your_denied_location">Вы запретили доступ к геолокации</string>
     <string name="open_profile_carrier">Посмотреть профиль перевозчика</string>
+    <string name="not_found">Пока не найден</string>
+    <string name="wait_delivery_cargo">Подтверждён. Ждите доставки груза</string>
 </resources>

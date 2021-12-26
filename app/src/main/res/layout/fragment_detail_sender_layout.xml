@@ -214,6 +214,15 @@
                 android:layout_height="wrap_content"
                 tools:text="Важно забрать вечером"/>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDeliveries"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
+                tools:listitem="@layout/item_carrier_request_layout"/>
 
             <TextView
                 android:id="@+id/tvLabelStateDelivery"
@@ -243,21 +252,6 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelStateDelivery"
                 tools:text="@string/confirm_str"
-                tools:visibility="visible"/>
-
-            <TextView
-                android:id="@+id/tvLinkProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/l_margin"
-                android:layout_marginTop="@dimen/margin_detail_screen"
-                android:text="@string/open_profile_carrier"
-                android:textColor="@color/primary_second_color"
-                android:textSize="@dimen/text_standart"
-                android:textStyle="bold"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvStatusDelivery"
                 tools:visibility="visible"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -296,37 +290,6 @@
             android:layout_marginEnd="@dimen/m_margin"
             android:layout_marginBottom="@dimen/m_margin"
             android:text="Отменить"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_confirm"
-            style="@style/MyStyleButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/m_margin"
-            android:layout_marginEnd="@dimen/m_margin"
-            android:layout_marginBottom="@dimen/margin_top_into_profile"
-            android:text="Подтвердить бронирование"
-            android:visibility="gone"
-            app:layout_constraintBottom_toTopOf="@id/btn_deny"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_deny"
-            style="@style/MyStyleButtonTransparent"
-            android:textColor="@color/primary_second_color"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/m_margin"
-            android:layout_marginEnd="@dimen/m_margin"
-            android:layout_marginBottom="@dimen/m_margin"
-            android:text="Отказать грузоперевозчику"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
