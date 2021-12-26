@@ -8,6 +8,7 @@ import com.google.firebase.database.ktx.getValue
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 
 class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
 
@@ -112,14 +113,15 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
                 }
             }
 
-                override fun onCancelled(error: DatabaseError) {
-                    error.toException().printStackTrace()
-                }
-            })
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
 
         return result
     }
 
+    // наблюдает для перевозчика за статусами его бронирований
     override fun observeDeliveries(
         phone: String,
         listener: BookingRequestStateService.BookingStateListener,
@@ -136,6 +138,35 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
                     listener.reject(snapshot.getValue<Delivery>()!!)
+                }
+
+                override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e(javaClass.simpleName, "onCancelled: ")
+                }
+            })
+    }
+
+    // наблюдает для отправителя за статусами его отправлений
+    override fun observeSelfRequests(
+        phone: String,
+        bookingCallback: LookRequestStateService.RequestStateListener,
+    ) {
+        deliveryReference.orderByChild("request/owner/phone").equalTo(phone)
+            .addChildEventListener(object : ChildEventListener {
+                override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                    bookingCallback.booking(snapshot.getValue<Delivery>()!!)
+                }
+
+                override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+
+                }
+
+                override fun onChildRemoved(snapshot: DataSnapshot) {
+                    bookingCallback.rejectBooking(snapshot.getValue<Delivery>()!!)
                 }
 
                 override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {

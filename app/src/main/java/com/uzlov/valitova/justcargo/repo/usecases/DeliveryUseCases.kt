@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 import javax.inject.Inject
 
 class DeliveryUseCases @Inject constructor(var deliveryRepository: IDeliveryRepository) {
@@ -24,4 +25,9 @@ class DeliveryUseCases @Inject constructor(var deliveryRepository: IDeliveryRepo
 
     fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>> =
         deliveryRepository.getDeliveriesWithRequestID(id)
+
+    fun observeSelfRequests(
+        phone: String,
+        bookingCallback: LookRequestStateService.RequestStateListener,
+    ) = deliveryRepository.observeSelfRequests(phone, bookingCallback)
 }
