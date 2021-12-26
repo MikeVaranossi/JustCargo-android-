@@ -15,4 +15,6 @@ interface IDeliveryRemoteDataSource {
         phone: String,
         listener: BookingRequestStateService.BookingStateListener,
     )
+
+    fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>>
 }

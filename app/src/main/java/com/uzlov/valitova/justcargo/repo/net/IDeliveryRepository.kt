@@ -15,4 +15,6 @@ interface IDeliveryRepository {
         phone: String,
         listener: BookingRequestStateService.BookingStateListener,
     )
+
+    fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>>
 }
