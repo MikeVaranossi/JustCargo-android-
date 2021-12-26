@@ -16,4 +16,9 @@ interface IRequestsRemoteDataSource {
         to: String,
         dateTimeStart: Long,
     ): LiveData<List<Request>>
+
+    fun searchRequest(
+        from: String,
+        to: String,
+    ): LiveData<List<Request>>
 }

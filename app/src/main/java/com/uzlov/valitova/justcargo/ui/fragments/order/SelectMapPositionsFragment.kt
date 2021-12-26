@@ -64,8 +64,9 @@ class SelectMapPositionsFragment private constructor() :
                 if (isGranted) {
                     startGetLocation()
                 } else {
+                    requirePermissionsLocation()
                     Toast.makeText(requireContext(),
-                        getString(R.string.you_denied_call_from_app),
+                        getString(R.string.your_denied_location),
                         Toast.LENGTH_SHORT).show()
                 }
             }

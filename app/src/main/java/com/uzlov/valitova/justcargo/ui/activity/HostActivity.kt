@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -10,6 +11,7 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
+import com.uzlov.valitova.justcargo.service.BookingRequestStateService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
@@ -44,6 +46,7 @@ class HostActivity : AppCompatActivity() {
                 )
             )
         }
+
         bottomNavigation = findViewById(R.id.bottom_navigation)
         bottomNavigation?.itemIconTintList = null
 
@@ -51,7 +54,8 @@ class HostActivity : AppCompatActivity() {
             setFragment(HomeSenderFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
-            setFragment(MapDeliveriesFragment.newInstance("NameFinder"))
+            startService(Intent(this, BookingRequestStateService::class.java))
+            setFragment(MapDeliveriesFragment.newInstance(null))
             bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 
         }
@@ -63,7 +67,7 @@ class HostActivity : AppCompatActivity() {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
                     } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
-                        setFragment(MapDeliveriesFragment.newInstance(""))
+                        setFragment(MapDeliveriesFragment.newInstance(null))
                         return@setOnItemSelectedListener true
                     }
                     return@setOnItemSelectedListener false

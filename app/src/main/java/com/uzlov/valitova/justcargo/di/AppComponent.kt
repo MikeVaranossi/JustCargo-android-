@@ -3,9 +3,11 @@ package com.uzlov.valitova.justcargo.di
 
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.di.modules.*
+import com.uzlov.valitova.justcargo.service.BookingRequestStateService
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
@@ -13,10 +15,10 @@ import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragment
-import com.uzlov.valitova.justcargo.ui.fragments.profile.PersonalDataFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.*
 import com.uzlov.valitova.justcargo.ui.fragments.registration.LoginFragment
 import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
+import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -51,5 +53,8 @@ interface AppComponent {
     fun inject(orderStepOneFragment: OrderStepOneFragment)
     abstract fun inject(loginFragment: LoginFragment)
     fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
+    fun inject(searchFragment: SearchFragment)
+    fun inject(bookingRequestStateService: BookingRequestStateService)
     fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
+    fun inject(findCargoFragment: FindCargoFragment)
 }

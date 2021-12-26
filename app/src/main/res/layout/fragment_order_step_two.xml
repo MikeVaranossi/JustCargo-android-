@@ -42,6 +42,7 @@
                 android:checked="true"
                 android:showText="true"
                 android:textOff="@string/text_kilograms"
+                android:switchTextAppearance="@style/SwitchTextAppearance"
                 android:textOn="@string/text_tonne"
                 android:thumb="@drawable/thumb"
                 android:track="@drawable/track" />

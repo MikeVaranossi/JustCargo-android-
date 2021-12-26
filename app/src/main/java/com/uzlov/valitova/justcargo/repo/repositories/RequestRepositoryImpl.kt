@@ -33,4 +33,14 @@ class RequestRepositoryImpl @Inject constructor(var remoteDataSource: IRequestsR
             dateTimeStart
         )
     }
+
+    override fun searchRequest(
+        from: String,
+        to: String,
+    ): LiveData<List<Request>> {
+        return remoteDataSource.searchRequest(
+            from,
+            to
+        )
+    }
 }

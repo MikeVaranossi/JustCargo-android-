@@ -142,6 +142,8 @@ class OrderStepOneFragment :
             override fun select(address: String, latitude: Double, longitude: Double) {
                 addressFrom = address
                 viewBinding.textInputFrom.setText(addressFrom)
+                request.departureLatitude = latitude
+                request.departureLongitude = longitude
             }
         })
     }
@@ -151,6 +153,8 @@ class OrderStepOneFragment :
             override fun select(address: String, latitude: Double, longitude: Double) {
                 addressTo = address
                 viewBinding.textInputTo.setText(addressTo)
+                request.destinationLatitude = latitude
+                request.destinationLongitude = longitude
             }
         })
     }
