@@ -5,6 +5,7 @@ import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.repo.datasources.IDeliveryRemoteDataSource
 import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 import javax.inject.Inject
 
 class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: IDeliveryRemoteDataSource) :
@@ -31,4 +32,9 @@ class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: IDelivery
 
     override fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>> =
         remoteDataSource.getDeliveriesWithRequestID(id)
+
+    override fun observeSelfRequests(
+        phone: String,
+        bookingCallback: LookRequestStateService.RequestStateListener,
+    ) = remoteDataSource.observeSelfRequests(phone, bookingCallback)
 }

@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -86,11 +87,14 @@ class RequestDetailCarrierFragment :
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
 
-        authService.currentUser()?.let {
+        authService.currentUser()?.phone?.let { phone ->
+
+            if (phone.isNullOrEmpty() || phone.isBlank()) return@let
+
             // скрываем view со статусом заявки
             hideStateUI()
 
-            deliveryViewModel.getDeliveryWithParam(idRequest, it.phone ?: "")
+            deliveryViewModel.getDeliveryWithParam(idRequest, phone)
                 ?.observe(viewLifecycleOwner, {
                     it?.let {
                         showStateUI()
@@ -98,6 +102,12 @@ class RequestDetailCarrierFragment :
                         viewBinding.tvStatusDelivery.text = it.request?.status?.name
                     }
                 })
+
+            deliveryViewModel.getDeliveriesWithRequestID(idRequest)
+                ?.observe(viewLifecycleOwner, {
+                    Log.e(javaClass.simpleName, "WithRequest: $it")
+                })
+
         }
     }
 
