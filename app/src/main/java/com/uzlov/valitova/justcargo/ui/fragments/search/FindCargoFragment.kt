@@ -129,10 +129,18 @@ class FindCargoFragment : BaseFragment<FragmentFindCargoBinding>(
 
 
     private fun getSearchLatLng(from: String, to: String, time: Long) {
-        model.searchRequest(from, to, time)?.observe(this, {
-            requests = it
-            checkRV(it)
-        })
+        if (time == 0L){
+            model.searchRequest(from, to)?.observe(this, {
+                requests = it
+                checkRV(it)
+            })
+        } else {
+            model.searchRequest(from, to, time)?.observe(this, {
+                requests = it
+                checkRV(it)
+            })
+        }
+
         modelFavorites.getIDList().observe(this, {
             adapter.setIDs(it)
         })
