@@ -12,6 +12,7 @@ import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
@@ -51,6 +52,7 @@ class HostActivity : AppCompatActivity() {
         bottomNavigation?.itemIconTintList = null
 
         if (authService.currentUser()?.userType?.id == 1L) {
+            startService(Intent(this, LookRequestStateService::class.java))
             setFragment(HomeSenderFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {

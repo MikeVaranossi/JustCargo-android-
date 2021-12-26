@@ -4,6 +4,7 @@ package com.uzlov.valitova.justcargo.di
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.di.modules.*
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 import com.uzlov.valitova.justcargo.ui.activity.HostActivity
 import com.uzlov.valitova.justcargo.ui.activity.SplashActivity
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
@@ -58,5 +59,6 @@ interface AppComponent {
     fun inject(bookingRequestStateService: BookingRequestStateService)
     fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
     fun inject(findCargoFragment: FindCargoFragment)
+    fun inject(lookRequestStateService: LookRequestStateService)
     fun inject(requestDetailSenderFragment: RequestDetailSenderFragment)
 }

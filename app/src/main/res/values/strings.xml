@@ -154,4 +154,6 @@
     <string name="open_profile_carrier">Посмотреть профиль перевозчика</string>
     <string name="not_found">Пока не найден</string>
     <string name="wait_delivery_cargo">Подтверждён. Ждите доставки груза</string>
+    <string name="new_request">Новый запрос!</string>
+    <string name="booking_is_rejected">Бронирование отменено!</string>
 </resources>
