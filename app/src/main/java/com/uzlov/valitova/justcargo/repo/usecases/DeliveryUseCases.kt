@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.repo.usecases
 
+import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.repo.net.IDeliveryRepository
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
@@ -20,4 +21,7 @@ class DeliveryUseCases @Inject constructor(var deliveryRepository: IDeliveryRepo
         phone: String,
         listener: BookingRequestStateService.BookingStateListener,
     ) = deliveryRepository.observeDeliveries(phone, listener)
+
+    fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>> =
+        deliveryRepository.getDeliveriesWithRequestID(id)
 }

@@ -28,4 +28,7 @@ class DeliveryRepositoryImpl @Inject constructor(var remoteDataSource: IDelivery
     ) {
         remoteDataSource.observeDeliveries(phone, listener)
     }
+
+    override fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>> =
+        remoteDataSource.getDeliveriesWithRequestID(id)
 }

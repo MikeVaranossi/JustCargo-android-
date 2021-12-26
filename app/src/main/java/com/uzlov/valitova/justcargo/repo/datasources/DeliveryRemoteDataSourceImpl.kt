@@ -67,6 +67,27 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
         return result
     }
 
+    override fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>> {
+        val result = MutableLiveData<List<Delivery>>()
+        deliveryReference.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.value != null) {
+                    result.value = snapshot.children.map {
+                        it.getValue<Delivery>()!!
+                    }.filter {
+                        it.request?.id == id
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                error.toException().printStackTrace()
+            }
+        })
+
+        return result
+    }
+
     override fun putDelivery(delivery: Delivery) {
         deliveryReference.child(delivery.id.toString()).setValue(delivery)
     }
