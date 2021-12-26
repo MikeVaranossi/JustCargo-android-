@@ -64,6 +64,10 @@ class RVUsersRequestAdapter(private var itemClickListener: OnItemClickListener? 
                     btnRejectRequest.setOnClickListener {
                         itemClickListener?.reject(delivery)
                     }
+                    itemCarrier.setOnClickListener {
+                        itemClickListener?.click(delivery)
+                    }
+
                 }
             }
         }

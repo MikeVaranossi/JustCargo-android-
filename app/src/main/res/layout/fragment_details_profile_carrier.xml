@@ -1,14 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragments.profile.detailsProfileCarrierFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".ui.fragments.profile.detailsProfileCarrierFragment">
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/ivProfile"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:srcCompat="@drawable/ic_account_big"
+        android:layout_marginTop="@dimen/margin_top_profile"
+        android:layout_marginStart="@dimen/margin_top_left"
+        android:layout_width="@dimen/size_user_photo_profile"
+        android:layout_height="@dimen/size_user_photo_profile"/>
+
+    <TextView
+        android:id="@+id/tvProfileFullName"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintTop_toTopOf="@id/ivProfile"
+        app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+        app:layout_constraintLeft_toRightOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="@tools:sample/full_names"/>
+
+    <TextView
+        android:id="@+id/tvCompletedCount"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        app:layout_constraintTop_toBottomOf="@id/ivProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/full_names"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tvCompletedCount"
+        android:enabled="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneProfile"
+            android:inputType="phone"
+            android:drawableEnd="@drawable/ic_baseline_create"
+            app:drawableTint="@color/accent_color"
+            android:hint="@string/phone_format"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiLayoutDriverDocument"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="16dp"
+        app:boxStrokeColor="@color/dark_primary_color"
+        android:hint="@string/driver_document_number"
+        android:layout_marginTop="@dimen/margin_top_into_profile"
+        app:boxCornerRadiusBottomEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusBottomStart="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopEnd="@dimen/corner_radius_edittext"
+        app:boxCornerRadiusTopStart="@dimen/corner_radius_edittext"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tiLayout"
+        android:enabled="false"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etDriverDocProfile"
+            android:inputType="number"
+            android:drawableEnd="@drawable/ic_baseline_create"
+            app:drawableTint="@color/accent_color"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

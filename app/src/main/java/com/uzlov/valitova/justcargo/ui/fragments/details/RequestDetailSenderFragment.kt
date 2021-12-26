@@ -20,6 +20,8 @@ import com.uzlov.valitova.justcargo.databinding.FragmentDetailSenderLayoutBindin
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.RVUsersRequestAdapter
+import com.uzlov.valitova.justcargo.ui.fragments.profile.DetailsProfileCarrierFragment
+import com.uzlov.valitova.justcargo.ui.fragments.registration.RegistrationSmsFragment
 import com.uzlov.valitova.justcargo.viemodels.DeliveryViewModel
 import com.uzlov.valitova.justcargo.viemodels.ViewModelFactory
 import javax.inject.Inject
@@ -37,30 +39,36 @@ class RequestDetailSenderFragment :
     lateinit var modelFactory: ViewModelFactory
     lateinit var deliveryViewModel: DeliveryViewModel
 
-    private var delivery: Delivery? = null
+    private var deliverys: List<Delivery>? = null
 
     private val callback = object : RVUsersRequestAdapter.OnItemClickListener{
         override fun click(request: Delivery) {
-            //openFragment(RequestDetailCarrierFragment.newInstance(request))
+            val manager = requireActivity().supportFragmentManager
+            manager.apply {
+                beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.fragment_container, DetailsProfileCarrierFragment.newInstance(request.trip?.carrier))
+                    .commit()
+            }
         }
 
         override fun reject(request: Delivery) {
-
             request.id?.let { it -> deliveryViewModel.removeDelivery(it)
                 hideStateUI()
             }
-
-            //favouritesVModel.putRequest(request.toFavoriteRequestLocal())
         }
 
         override fun accept(request: Delivery) {
-
             request.request?.status?.id = STATE_IN_PROGRESS
             request.request?.status?.name = STATE_IN_PROGRESS_MESSAGE
             deliveryViewModel.addDelivery(request)
             showProfileCarrierUI()
 
-            //favouritesVModel.removeRequest(request.toFavoriteRequestLocal())
+            deliverys?.forEach { item ->
+                if (item == request)
+                    return@forEach
+                item.id?.let { it -> deliveryViewModel.removeDelivery(it)}
+            }
         }
     }
 
@@ -99,7 +107,8 @@ class RequestDetailSenderFragment :
                     adapter.setDelivery(it)
                     showStateUI()
 
-
+                    deliverys = it
+                    //TODO в зависимости от статусов доделать показ
                     /*delivery = it[0].copy()
                     val status = it[0].request?.status?.name
                     if (status == "Открыта"){
@@ -155,10 +164,8 @@ class RequestDetailSenderFragment :
 
         //Отменить
         viewBinding.btnCancel.setOnClickListener {
-            if (delivery != null){
-                delivery!!.id?.let { it1 -> deliveryViewModel.removeDelivery(it1)
+                deliverys?.get(0)!!.id?.let { it1 -> deliveryViewModel.removeDelivery(it1)
                     hideStateUI()
-                }
             }
         }
 
