@@ -63,6 +63,10 @@
             android:name=".service.BookingRequestStateService"
             android:enabled="true" />
 
+        <service
+            android:name=".service.LookRequestStateService"
+            android:enabled="true" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

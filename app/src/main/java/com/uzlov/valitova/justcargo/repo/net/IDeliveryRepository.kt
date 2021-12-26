@@ -3,6 +3,7 @@ package com.uzlov.valitova.justcargo.repo.net
 import androidx.lifecycle.LiveData
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.service.BookingRequestStateService
+import com.uzlov.valitova.justcargo.service.LookRequestStateService
 
 interface IDeliveryRepository {
     fun getDelivery(): LiveData<List<Delivery>>
@@ -17,4 +18,8 @@ interface IDeliveryRepository {
     )
 
     fun getDeliveriesWithRequestID(id: Long): LiveData<List<Delivery>>
+    fun observeSelfRequests(
+        phone: String,
+        bookingCallback: LookRequestStateService.RequestStateListener,
+    )
 }

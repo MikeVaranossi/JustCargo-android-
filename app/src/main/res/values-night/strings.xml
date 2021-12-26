@@ -149,4 +149,6 @@
     <string name="your_request_delivery_reject">Ваша заявка на перевозку отклонена</string>
     <string name="delivery_status_updated">Обновлен статус заявки</string>
     <string name="your_denied_location">Вы запретили доступ к геолокации</string>
+    <string name="new_request">Новый запрос!</string>
+    <string name="booking_is_rejected">Бронирование отменено!</string>
 </resources>
