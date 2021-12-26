@@ -245,7 +245,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@id/button_take_cargo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_take_cargo"
@@ -259,5 +260,6 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:text="@string/take_cargo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
