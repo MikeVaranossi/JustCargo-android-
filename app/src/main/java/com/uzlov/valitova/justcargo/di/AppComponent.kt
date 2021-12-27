@@ -13,7 +13,6 @@ import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFra
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailSenderFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
-import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepOneFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.OrderStepTwoFragment
 import com.uzlov.valitova.justcargo.ui.fragments.order.SelectMapPositionsFragment
@@ -57,7 +56,6 @@ interface AppComponent {
     fun inject(requestDetailCarrierFragment: RequestDetailCarrierFragment)
     fun inject(searchFragment: SearchFragment)
     fun inject(bookingRequestStateService: BookingRequestStateService)
-    fun inject(mapDeliveriesFragment: MapDeliveriesFragment)
     fun inject(findCargoFragment: FindCargoFragment)
     fun inject(lookRequestStateService: LookRequestStateService)
     fun inject(requestDetailSenderFragment: RequestDetailSenderFragment)
