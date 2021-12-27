@@ -43,6 +43,11 @@ class ProfileCarrierFragment : BaseFragment<FragmentProfileCarrierLayoutBinding>
                     .replace(R.id.fragment_container, MyDeliveriesFragment.newInstance(false))
                     .addToBackStack(null).commit()
             }
+            tvHistoryData.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, MyDeliveriesFragment.newInstance(false))
+                    .addToBackStack(null).commit()
+            }
 
             tvExitAccount.setOnClickListener {
                 authService.signOut()
