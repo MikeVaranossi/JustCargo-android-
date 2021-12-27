@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.app.Constant.Companion.SENDER
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
 import com.uzlov.valitova.justcargo.auth.AuthService
@@ -15,6 +16,8 @@ import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
 import com.uzlov.valitova.justcargo.databinding.MyRequestsProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment_MembersInjector
 import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailSenderFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.MyRequestsViewModel
@@ -39,8 +42,10 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     private val listenerOnClickCargoItem =
         object : RVLocalRequestAdapter.OnItemClickListener<MyRequestLocal> {
             override fun click(request: MyRequestLocal) {
-                openFragment(RequestDetailSenderFragment.newInstance(request.toFavoriteRequestLocal()))
-
+                if (authService.currentUser()?.userType?.id == SENDER)
+                    openFragment(RequestDetailSenderFragment.newInstance(request.toFavoriteRequestLocal()))
+                else
+                    openFragment(RequestDetailCarrierFragment.newInstance(request.toFavoriteRequestLocal()))
             }
 
             override fun addToFavorite(request: MyRequestLocal) {
