@@ -156,4 +156,5 @@
     <string name="wait_delivery_cargo">Подтверждён. Ждите доставки груза</string>
     <string name="new_request">Новый запрос!</string>
     <string name="booking_is_rejected">Бронирование отменено!</string>
+    <string name="reject_request">Отменить</string>
 </resources>

@@ -203,27 +203,28 @@
 
             <TextView
                 android:id="@+id/tvCommentCargo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_detail_screen"
                 android:text="@string/comments"
                 android:textColor="@color/dark_primary_color"
                 android:textSize="19sp"
-                android:layout_marginStart="@dimen/l_margin"
-                android:layout_marginTop="@dimen/margin_detail_screen"
+                app:layout_constraintEnd_toEndOf="@+id/fabCall"
                 app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelCommentCargo"
                 app:layout_constraintTop_toBottomOf="@+id/tvLabelCommentCargo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="Важно забрать вечером"/>
+                tools:text="Важно забрать вечером" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvDeliveries"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
                 app:layout_constraintBottom_toBottomOf="parent"
-                tools:listitem="@layout/item_carrier_request_layout"/>
+                app:layout_constraintEnd_toEndOf="@+id/fabCall"
+                app:layout_constraintStart_toStartOf="@+id/tvLabelCommentCargo"
+                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
+                tools:listitem="@layout/item_carrier_request_layout" />
 
             <TextView
                 android:id="@+id/tvLabelStateDelivery"
@@ -290,23 +291,7 @@
             android:layout_marginStart="@dimen/m_margin"
             android:layout_marginEnd="@dimen/m_margin"
             android:layout_marginBottom="@dimen/m_margin"
-            android:text="Отменить"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/button_edit_cargo"
-            android:text="@string/text_edit_cargo"
-            android:textColor="@color/primary_second_color"
-            app:strokeColor="@color/primary_second_color"
-            android:layout_marginBottom="@dimen/m_margin"
-            android:layout_marginStart="@dimen/m_margin"
-            android:layout_marginEnd="@dimen/m_margin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/reject_request"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
