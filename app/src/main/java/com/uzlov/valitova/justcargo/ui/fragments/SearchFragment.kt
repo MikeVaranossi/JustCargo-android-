@@ -101,8 +101,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(
 
     private fun verifyEmptyEditText() {
         with(viewBinding) {
-            buttonFindCargo.isEnabled = !editTextFrom.text.isNullOrEmpty() &&
-                    !editTextTo.text.isNullOrEmpty()
+            buttonFindCargo.isEnabled = !editTextFrom.text.isNullOrBlank() &&
+                    !editTextTo.text.isNullOrBlank()
         }
     }
 
