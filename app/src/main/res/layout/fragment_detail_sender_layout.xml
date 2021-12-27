@@ -44,9 +44,11 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/ic_outline_mode_comment"
                 android:layout_marginEnd="@dimen/l_margin"
+                android:visibility="gone"
                 app:backgroundTint="@color/primary_second_color"
                 app:layout_constraintTop_toTopOf="@+id/text_view_from_to"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                tools:visibility="visible"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabCall"
@@ -56,8 +58,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/l_margin"
                 android:layout_marginTop="@dimen/margin_detail_screen"
+                android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/fabStartChat"
-                app:layout_constraintRight_toRightOf="parent"/>
+                app:layout_constraintRight_toRightOf="parent"
+                tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tvLabelCostDelivery"

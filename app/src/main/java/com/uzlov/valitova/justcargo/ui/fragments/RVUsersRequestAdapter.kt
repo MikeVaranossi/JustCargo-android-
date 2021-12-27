@@ -57,7 +57,7 @@ class RVUsersRequestAdapter(private var itemClickListener: OnItemClickListener? 
         fun bind(delivery: Delivery) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 with(viewBinding) {
-                    textView.text = delivery.trip?.carrier?.phone ?: ""
+                    textView.text = delivery.trip?.carrier?.name ?: ""
                     btnAcceptRequest.setOnClickListener {
                         itemClickListener?.accept(delivery)
                     }

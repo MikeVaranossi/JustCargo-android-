@@ -189,6 +189,10 @@ class RequestDetailSenderFragment :
     private fun showProfileCarrierUI() {
 
         with(viewBinding) {
+            //показываем кнопки звонка и чата
+            fabStartChat.visibility = View.VISIBLE
+            fabCall.visibility = View.VISIBLE
+
             tvLabelStateDelivery.visibility = View.VISIBLE
             tvStatusDelivery.visibility = View.VISIBLE
             tvStatusDelivery.text = getString(R.string.wait_delivery_cargo)
