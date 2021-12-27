@@ -197,6 +197,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
             viewBinding.texViewLabelEmpty.visibility = View.GONE
             viewBinding.recyclerViewHomeCarrier.visibility = View.VISIBLE
             viewBinding.buttonFindCargo.visibility = View.VISIBLE
+            viewBinding.textViewFindCargo.visibility = View.VISIBLE
             viewBinding.textViewFindCargo.text =
                 getString(R.string.text_label_find_cargo, data.size)
         }

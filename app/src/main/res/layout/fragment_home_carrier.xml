@@ -63,6 +63,7 @@
         android:layout_marginBottom="@dimen/m_margin"
         android:gravity="center"
         android:text="@string/text_label_find_cargo"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/toggle_group" />
     <ImageView
         android:id="@+id/image_view_carrier_home_empty"
