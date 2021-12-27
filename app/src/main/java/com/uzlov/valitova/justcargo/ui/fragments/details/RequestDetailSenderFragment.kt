@@ -58,6 +58,7 @@ class RequestDetailSenderFragment :
         override fun accept(request: Delivery) {
             request.request?.status?.id = STATE_IN_PROGRESS
             request.request?.status?.name = STATE_IN_PROGRESS_MESSAGE
+            request.status?.id = STATE_IN_PROGRESS
             deliveryViewModel.addDelivery(request)
             showProfileCarrierUI()
 
@@ -95,24 +96,23 @@ class RequestDetailSenderFragment :
         viewBinding.rvDeliveries.adapter = adapter
 
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
+        //val statusRequest = request?.status?.id ?: requestLocal?.status.id? ?: 0L
+        hideStateUI()
 
         deliveryViewModel.getDeliveriesWithRequestID(idRequest)
             ?.observe(viewLifecycleOwner, {
                 it?.let {
-
+                    //если в данный код не попали значит перевозчик не найден
                     adapter.setDelivery(it)
                     showStateUI(it)
 
-                    deliverys = it
-                    //TODO в зависимости от статусов доделать показ
-                    /*delivery = it[0].copy()
-                    val status = it[0].request?.status?.name
-                    if (status == "Открыта"){
-
+                    //если на первой заявке статус STATE_IN_PROGRESS значит бронь подтверждена
+                    if (it.size == 1){
+                        val status = it[0].request?.status?.id
+                        if (status == STATE_IN_PROGRESS)
+                            showProfileCarrierUI()
                     }
-                    if (status == "Подтверждён"){
-                        showProfileCarrierUI()
-                    }*/
+                    deliverys = it
                 }
             })
     }
@@ -175,12 +175,10 @@ class RequestDetailSenderFragment :
         with(viewBinding) {
             if (list.isNullOrEmpty()) {
                 // заявок на бронирование нет, пишем что перевозчик не найден
-                tvLabelStateDelivery.visibility = View.VISIBLE
                 tvStatusDelivery.visibility = View.VISIBLE
                 tvStatusDelivery.text = getString(R.string.not_found)
             } else {
                 // рисуем список заявок
-                tvLabelStateDelivery.visibility = View.GONE
                 tvStatusDelivery.visibility = View.GONE
                 rvDeliveries.visibility = View.VISIBLE
             }
@@ -189,7 +187,12 @@ class RequestDetailSenderFragment :
 
     // срабатывает когда бронь подтвердили
     private fun showProfileCarrierUI() {
+
         with(viewBinding) {
+            tvLabelStateDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.text = getString(R.string.wait_delivery_cargo)
+
             rvDeliveries.visibility = View.GONE
             // показываем нужные кнопки
             btnComplete.visibility = View.VISIBLE
@@ -200,8 +203,7 @@ class RequestDetailSenderFragment :
     // срабатывает когда отказали в бронировании
     private fun hideStateUI() {
         with(viewBinding) {
-            // возврашаем к значениям по умолчанию
-            tvLabelStateDelivery.visibility = View.VISIBLE
+            // возврашаем к значениям по умолчаниюtvLabelStateDelivery
             tvStatusDelivery.visibility = View.VISIBLE
             tvStatusDelivery.text = getString(R.string.not_found)
 
