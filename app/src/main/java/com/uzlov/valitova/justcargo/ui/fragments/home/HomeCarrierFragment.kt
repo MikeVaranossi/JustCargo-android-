@@ -22,8 +22,8 @@ import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentHomeCarrierBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVHomeCarrierAdapter
-import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
+import com.uzlov.valitova.justcargo.ui.fragments.details.RequestDetailCarrierFragment
 import com.uzlov.valitova.justcargo.viemodels.FavoritesRequestsViewModel
 import com.uzlov.valitova.justcargo.viemodels.RequestsViewModel
 import javax.inject.Inject
@@ -97,8 +97,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
 
         }
         viewBinding.recyclerViewHomeCarrier.adapter = adapter
-        viewBinding.recyclerViewHomeCarrier.setHasFixedSize(true)
-        viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(10)
+        viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(100)
         initListeners()
 
 

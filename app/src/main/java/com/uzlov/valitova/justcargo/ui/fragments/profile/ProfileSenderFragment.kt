@@ -44,6 +44,12 @@ class ProfileSenderFragment : BaseFragment<FragmentProfileSenderLayoutBinding>(
                     .addToBackStack(null).commit()
             }
 
+            tvHistoryData.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, MyRequestsFragment.newInstance(false))
+                    .addToBackStack(null).commit()
+            }
+
             tvExitAccount.setOnClickListener {
                 authService.signOut()
                 startActivity(Intent(requireContext(), RegistrationActivity::class.java))

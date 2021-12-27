@@ -1,5 +1,6 @@
 package com.uzlov.valitova.justcargo.ui.fragments
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,8 @@ import java.util.*
 class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? = null) :
     RecyclerView.Adapter<RVHomeCarrierAdapter.RecyclerItemViewHolder>() {
 
-    private var requests: List<Request> = arrayListOf()
-    private var idList: List<Long> = arrayListOf()
+    private var requests: MutableList<Request> = mutableListOf()
+    private var idList: MutableList<Long> = mutableListOf()
 
     private var _viewBinding: ItemCardCargoBinding? = null
     private val viewBinding get() = _viewBinding!!
@@ -32,12 +33,17 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
     }
 
     fun setData(data: List<Request>) {
-        requests = data
+        requests.clear()
+        requests.addAll(data)
+        requests.forEach {
+            Log.e(javaClass.simpleName, "setData: ${it.id}")
+        }
         notifyDataSetChanged()
     }
 
     fun setIDs(_idList: List<Long>) {
-        idList = _idList
+        idList.clear()
+        idList.addAll(_idList)
         notifyDataSetChanged()
     }
 
@@ -48,7 +54,7 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
     }
 
     override fun onBindViewHolder(holder: RecyclerItemViewHolder, position: Int) {
-        if (isEnableFavouriteIcon){
+        if (isEnableFavouriteIcon) {
             holder.bind(requests[position])
         } else {
             holder.bindWithFavouritesIcon(requests[position])
@@ -67,17 +73,18 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Request) {
-            if (layoutPosition != RecyclerView.NO_POSITION) {
-                with(viewBinding) {
-                    textViewNameCargo.text = data.getShortInfoItem()
-                    textViewDate.text = simpleFormat.format(data.getDeliveryTimeItem()).toString()
-                    textViewCost.text = "${data.getCostItem()} ₽"
-                    textViewFromTo.text =
-                        " ${data.getDepartureItem()}  -  ${data.getDestinationItem()} "
-                    textViewToDetails.setOnClickListener {
-                        itemClickListener?.click(data)
-                    }
-                    checkboxFavourite.isChecked = idList.contains(data.id)
+
+            with(viewBinding) {
+                textViewNameCargo.text = data.getShortInfoItem()
+                textViewDate.text = simpleFormat.format(data.getDeliveryTimeItem()).toString()
+                textViewCost.text = "${data.getCostItem()} ₽"
+                textViewFromTo.text =
+                    " ${data.getDepartureItem()}  -  ${data.getDestinationItem()} "
+                textViewToDetails.setOnClickListener {
+                    itemClickListener?.click(data)
+                }
+                checkboxFavourite.isChecked = idList.contains(data.id)
+                if (layoutPosition != RecyclerView.NO_POSITION) {
                     checkboxFavourite.setOnClickListener {
 
                         if (checkboxFavourite.isChecked) {
@@ -99,18 +106,19 @@ class RVHomeCarrierAdapter(private var itemClickListener: OnItemClickListener? =
         }
 
         fun bindWithFavouritesIcon(request: Request) {
-            if (layoutPosition != RecyclerView.NO_POSITION) {
-                with(viewBinding) {
-                    textViewNameCargo.text = request.getShortInfoItem()
-                    textViewDate.text =
-                        simpleFormat.format(request.getDeliveryTimeItem()).toString()
-                    textViewCost.text = "${request.getCostItem()} ₽"
-                    textViewFromTo.text =
-                        " ${request.getDepartureItem()}  -  ${request.getDestinationItem()} "
+
+            with(viewBinding) {
+                textViewNameCargo.text = request.getShortInfoItem()
+                textViewDate.text =
+                    simpleFormat.format(request.getDeliveryTimeItem()).toString()
+                textViewCost.text = "${request.getCostItem()} ₽"
+                textViewFromTo.text =
+                    " ${request.getDepartureItem()}  -  ${request.getDestinationItem()} "
+                checkboxFavourite.visibility = View.GONE
+                if (layoutPosition != RecyclerView.NO_POSITION) {
                     textViewToDetails.setOnClickListener {
                         itemClickListener?.click(request)
                     }
-                    checkboxFavourite.visibility = View.GONE
                 }
             }
         }
