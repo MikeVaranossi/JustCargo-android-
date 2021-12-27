@@ -12,9 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
@@ -132,6 +130,7 @@ class MapDeliveriesFragment private constructor() :
                 googleMap.addMarker(
                     MarkerOptions()
                         .title(it.shortInfo)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_orange))
                         .position(LatLng(it.departureLatitude!!, it.departureLongitude!!))
                         .zIndex(requests.indexOf(it).toFloat())
                 )
