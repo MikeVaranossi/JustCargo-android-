@@ -42,9 +42,96 @@
         app:layout_constraintTop_toBottomOf="@id/ivProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@tools:sample/full_names"/>
+        tools:text="Выполнено перевозок"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+
+    <TextView
+        android:id="@+id/titlePhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_standart"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        android:text="@string/phone"
+        android:layout_marginTop="@dimen/l_margin"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/tvCompletedCount"
+        />
+
+    <TextView
+        android:id="@+id/TVPhone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        android:layout_marginStart="@dimen/l_margin"
+        android:layout_marginTop="@dimen/s_margin"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/titlePhone"
+        tools:text="+79999999999"/>
+
+    <TextView
+        android:id="@+id/titleDriverDoc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_standart"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:layout_marginTop="@dimen/l_margin"
+        android:textColor="@color/dark_primary_color"
+        android:text="@string/driver_document_number"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/TVPhone"
+        />
+
+    <TextView
+        android:id="@+id/TVDriverDoc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_marginEnd="@dimen/margin_top_left"
+        android:textColor="@color/dark_primary_color"
+        android:layout_marginTop="@dimen/s_margin"
+        android:layout_marginStart="@dimen/l_margin"
+        app:layout_constraintLeft_toLeftOf="@id/ivProfile"
+        app:layout_constraintRight_toRightOf="@id/tvProfileFullName"
+        app:layout_constraintTop_toBottomOf="@id/titleDriverDoc"
+        tools:text="9999999999"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/l_margin"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/TVDriverDoc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabStartChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_outline_mode_comment"
+            app:backgroundTint="@color/primary_second_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCall"
+            app:srcCompat="@drawable/ic_outline_call_24"
+            app:backgroundTint="@color/primary_second_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/l_margin"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fabStartChat"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <!--  <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,9 +159,9 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+-->
 
-
-    <com.google.android.material.textfield.TextInputLayout
+    <!--<com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiLayoutDriverDocument"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -99,6 +186,8 @@
             app:drawableTint="@color/accent_color"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>-->
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
