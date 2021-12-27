@@ -3,49 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
-        android:id="@+id/layout_find_buttons"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@color/primary_color"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/text_view_find_cargo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_sort"
-            style="@style/StandartText"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:background="@color/primary_color"
-            android:drawableStart="@drawable/ic_icone_sorter_white"
-            android:paddingStart="@dimen/m_margin"
-            android:paddingEnd="@dimen/m_margin"
-            android:text="@string/text_sort_button"
-            android:textColor="@color/white" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_filters"
-            style="@style/StandartText"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_weight="2"
-            android:background="@color/primary_color"
-            android:drawableStart="@drawable/ic_icone_filter_white"
-            android:paddingStart="@dimen/m_margin"
-            android:paddingEnd="@dimen/m_margin"
-            android:text="@string/text_button_filters"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_find_cargo"
         style="@style/MyFABStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/l_margin"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="@dimen/l_margin"
         app:tint="@color/white"
         android:src="@drawable/ic_search"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,6 +28,32 @@
         app:layout_constraintBottom_toTopOf="@+id/image_view_carrier_home_empty"
         android:text="@string/label_empty_home_carrier" />
 
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggle_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/s_margin"
+        app:checkedButton="@+id/tb_list"
+        app:layout_constraintBottom_toTopOf="@id/text_view_find_cargo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tb_list"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            app:icon="@drawable/ic_list_default" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tb_map"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="52dp"
+            android:layout_height="48dp"
+            app:icon="@drawable/ic_map_default" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
     <TextView
         android:id="@+id/text_view_find_cargo"
         style="@style/StandartText"
@@ -72,8 +63,7 @@
         android:layout_marginBottom="@dimen/m_margin"
         android:gravity="center"
         android:text="@string/text_label_find_cargo"
-        app:layout_constraintBottom_toTopOf="@id/recycler_view_home_carrier"
-        app:layout_constraintTop_toBottomOf="@+id/layout_find_buttons" />
+        app:layout_constraintTop_toBottomOf="@+id/toggle_group" />
     <ImageView
         android:id="@+id/image_view_carrier_home_empty"
         android:layout_width="match_parent"
@@ -86,8 +76,25 @@
         android:id="@+id/recycler_view_home_carrier"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/m_margin"
         android:background="@drawable/background_recycler_view"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_view_find_cargo" />
+
+    <FrameLayout
+        android:id="@+id/home_map_fragment_carrier"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_view_find_cargo">
+
+        <fragment
+            android:id="@+id/home_map_fragment_find"
+            class="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/m_margin" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

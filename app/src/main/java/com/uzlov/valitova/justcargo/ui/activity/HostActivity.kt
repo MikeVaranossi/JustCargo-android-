@@ -15,8 +15,8 @@ import com.uzlov.valitova.justcargo.service.BookingRequestStateService
 import com.uzlov.valitova.justcargo.service.LookRequestStateService
 import com.uzlov.valitova.justcargo.ui.fragments.FavoritesRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.SearchFragment
+import com.uzlov.valitova.justcargo.ui.fragments.home.HomeCarrierFragment
 import com.uzlov.valitova.justcargo.ui.fragments.home.HomeSenderFragment
-import com.uzlov.valitova.justcargo.ui.fragments.home.MapDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyDeliveriesFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.MyRequestsFragment
 import com.uzlov.valitova.justcargo.ui.fragments.profile.ProfileCarrierFragment
@@ -57,7 +57,7 @@ class HostActivity : AppCompatActivity() {
             bottomNavigation?.inflateMenu(R.menu.main_menu_sender)
         } else {
             startService(Intent(this, BookingRequestStateService::class.java))
-            setFragment(MapDeliveriesFragment.newInstance(null))
+            setFragment(HomeCarrierFragment.newInstance())
             bottomNavigation?.inflateMenu(R.menu.main_carrier_menu)
 
         }
@@ -69,7 +69,7 @@ class HostActivity : AppCompatActivity() {
                         setFragment(HomeSenderFragment.newInstance())
                         return@setOnItemSelectedListener true
                     } else if (authService.currentUser()?.userType?.id == Constant.CARRIER) {
-                        setFragment(MapDeliveriesFragment.newInstance(null))
+                        setFragment(HomeCarrierFragment.newInstance())
                         return@setOnItemSelectedListener true
                     }
                     return@setOnItemSelectedListener false

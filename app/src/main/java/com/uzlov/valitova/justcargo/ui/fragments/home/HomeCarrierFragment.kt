@@ -5,10 +5,16 @@ import android.view.*
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
@@ -32,6 +38,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
     private lateinit var model: RequestsViewModel
     lateinit var modelFavorites: FavoritesRequestsViewModel
 
+    private var requests: List<Request> = arrayListOf()
     private val adapter by lazy {
         RVHomeCarrierAdapter(listenerOnClickCargoItem)
     }
@@ -57,6 +64,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
         model = viewModelFactory.create(RequestsViewModel::class.java)
         modelFavorites = viewModelFactory.create(FavoritesRequestsViewModel::class.java)
         setHasOptionsMenu(true)
+        loadData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,26 +99,88 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
         viewBinding.recyclerViewHomeCarrier.adapter = adapter
         viewBinding.recyclerViewHomeCarrier.setHasFixedSize(true)
         viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(10)
+        initListeners()
 
-        loadData()
-        viewBinding.buttonSort.setOnClickListener {
-            showPopUp(it)
-        }
-        viewBinding.buttonFindCargo.setOnClickListener {
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, SearchFragment.newInstance())
-                .commit()
+
+        val mapFragment = childFragmentManager.findFragmentById(
+            R.id.home_map_fragment_find
+        ) as? SupportMapFragment
+        mapFragment?.getMapAsync { googleMap ->
+            googleMap.clear()
+            googleMap.setOnMapLoadedCallback {
+                val bounds = LatLngBounds.builder()
+                requests.forEach {
+                    it.let {
+                        bounds.include(
+                            LatLng(
+                                it.departureLatitude!!,
+                                it.departureLongitude!!
+                            )
+                        )
+                    }
+                }
+                if (requests.isNotEmpty()) {
+                    googleMap.moveCamera(
+                        CameraUpdateFactory.newLatLngBounds(
+                            bounds.build(),
+                            50,
+                            50,
+                            15
+                        )
+                    )
+                    addMarkers(googleMap)
+                }
+
+            }
+            googleMap.setOnMarkerClickListener { marker ->
+                openFragment(RequestDetailCarrierFragment.newInstance(requests[marker.zIndex.toInt()]))
+                return@setOnMarkerClickListener false
+            }
         }
 
     }
 
+    private fun initListeners() {
+        with(viewBinding) {
+            toggleGroup.addOnButtonCheckedListener { _, checkedId, _ ->
+                if (checkedId == R.id.tb_list) {
+                    recyclerViewHomeCarrier.visibility = View.VISIBLE
+                    homeMapFragmentCarrier.visibility = View.GONE
+                } else {
+                    recyclerViewHomeCarrier.visibility = View.GONE
+                    homeMapFragmentCarrier.visibility = View.VISIBLE
+                }
+            }
+            buttonFindCargo.setOnClickListener {
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container, SearchFragment.newInstance())
+                    .commit()
+            }
+        }
+    }
+
     private fun loadData() {
         model.getRequests()?.observe(this, {
+            requests = it
             checkRV(it)
         })
-        modelFavorites.getIDList().observe(this,{
+        modelFavorites.getIDList().observe(this, {
             adapter.setIDs(it)
         })
+    }
+
+    private fun addMarkers(googleMap: GoogleMap) {
+        requests.forEach {
+            it.let {
+                googleMap.addMarker(
+                    MarkerOptions()
+                        .title(it.shortInfo)
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_orange))
+                        .position(LatLng(it.departureLatitude!!, it.departureLongitude!!))
+                        .zIndex(requests.indexOf(it).toFloat())
+                )
+            }
+        }
     }
 
     private fun checkRV(data: List<Request>) {
@@ -132,30 +202,6 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
         }
     }
 
-    private fun showPopUp(view: View) {
-        val wrapper = ContextThemeWrapper(view.context, R.style.MyStyle_PopupMenu)
-        val popupMenu = context?.let { PopupMenu(wrapper, view) }
-        val inflater = popupMenu?.menuInflater
-        inflater?.inflate(R.menu.sort_popup_menu, popupMenu.menu)
-        popupMenu?.show()
-        popupMenu?.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.item1 -> {
-                    Toast.makeText(view.context, it.title, Toast.LENGTH_SHORT).show()
-                }
-                R.id.item2 -> {
-                    Toast.makeText(view.context, it.title, Toast.LENGTH_SHORT).show()
-                }
-                R.id.item3 -> {
-                    Toast.makeText(view.context, it.title, Toast.LENGTH_SHORT).show()
-                }
-                R.id.item4 -> {
-                    Toast.makeText(view.context, it.title, Toast.LENGTH_SHORT).show()
-                }
-            }
-            true
-        }
-    }
 
     private fun loadImage(image: Int, container: ImageView) {
         view?.let {
@@ -168,7 +214,9 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
 
     private fun openFragment(fragment: Fragment) {
         parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
+            .hide(this)
+            .add(R.id.fragment_container, fragment, "")
+            .show(fragment)
             .addToBackStack(null)
             .commit()
     }
