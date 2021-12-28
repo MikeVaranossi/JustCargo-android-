@@ -107,7 +107,7 @@ class MyRequestsFragment : BaseFragment<MyRequestsProfileLayoutBinding>(
     private fun loadRequests() {
         authService.currentUser()?.let { user ->
             modelRequests.getRequestsWithPhone(user.phone ?: "")?.observe(this, {
-            modelMyRequest.putRequest(it)
+                modelMyRequest.updateRequest(it)
             })
         }
 

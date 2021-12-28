@@ -111,7 +111,7 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
                 val list = it.map { delivery ->
                     delivery.request!!
                 }
-                myRequestModel.putRequest(list)
+                myRequestModel.updateRequest(list)
             })
 
             myRequestModel.getMyRequests()?.observe(this, {
