@@ -157,4 +157,5 @@
     <string name="new_request">Новый запрос!</string>
     <string name="booking_is_rejected">Бронирование отменено!</string>
     <string name="reject_request">Отменить</string>
+    <string name="application_completed">Заявка выполнена</string>
 </resources>
