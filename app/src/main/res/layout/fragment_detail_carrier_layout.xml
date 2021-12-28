@@ -215,8 +215,10 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:textColor="@color/primary_second_color"
                 android:textSize="19sp"
                 android:textStyle="bold"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo" />
+                app:layout_constraintTop_toBottomOf="@+id/tvCommentCargo"
+                tools:visibility="visible"/>
 
             <TextView
                 android:id="@+id/tvStatusDelivery"
@@ -227,10 +229,12 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:text="@string/str_state_not_confirm"
                 android:textColor="@color/dark_primary_color"
                 android:textSize="19sp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tvLabelStateDelivery"
-                app:layout_constraintTop_toBottomOf="@+id/tvLabelStateDelivery" />
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelStateDelivery"
+                tools:visibility="visible"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
