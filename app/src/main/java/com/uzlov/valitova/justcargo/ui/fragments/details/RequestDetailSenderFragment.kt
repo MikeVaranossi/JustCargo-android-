@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
+import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_COMPLETE
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS_MESSAGE
+import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_NOT_COMPLETED
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
@@ -116,6 +118,8 @@ class RequestDetailSenderFragment :
                         val status = it[0].request?.status?.id
                         if (status == STATE_IN_PROGRESS)
                             showProfileCarrierUI()
+                        if (status == STATE_COMPLETE)
+                            showProfileCarrierUI()
                     }
                     deliverys = it
                 }
@@ -174,6 +178,16 @@ class RequestDetailSenderFragment :
             }
         }
 
+        viewBinding.btnComplete.setOnClickListener {
+            if (deliverys?.size == 1){
+                deliverys?.get(0)!!.status?.id = STATE_COMPLETE
+                deliverys?.get(0)!!.request?.status?.id = STATE_COMPLETE
+                deliverys?.get(0)!!.request?.status?.name = getString(R.string.application_completed)
+                deliveryViewModel.addDelivery(deliverys!![0])
+                completedDelivery()
+            }
+        }
+
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -228,6 +242,24 @@ class RequestDetailSenderFragment :
             btnComplete.visibility = View.GONE
             btnCancel.visibility = View.VISIBLE
             rvDeliveries.visibility = View.GONE
+        }
+    }
+
+    //заявка выполнена
+    private fun completedDelivery() {
+
+        with(viewBinding) {
+            fabStartChat.visibility = View.GONE
+            fabCall.visibility = View.GONE
+
+            tvLabelStateDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.visibility = View.VISIBLE
+            tvStatusDelivery.text = getString(R.string.application_completed)
+
+            rvDeliveries.visibility = View.GONE
+            // показываем нужные кнопки
+            btnComplete.visibility = View.GONE
+            btnCancel.visibility = View.GONE
         }
     }
 
