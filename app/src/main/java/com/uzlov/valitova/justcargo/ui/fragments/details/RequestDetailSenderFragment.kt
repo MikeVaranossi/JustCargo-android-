@@ -119,7 +119,7 @@ class RequestDetailSenderFragment :
                         if (status == STATE_IN_PROGRESS)
                             showProfileCarrierUI()
                         if (status == STATE_COMPLETE)
-                            showProfileCarrierUI()
+                            completedDelivery()
                     }
                     deliverys = it
                 }
