@@ -61,8 +61,12 @@ class RequestsUseCases @Inject constructor(
     suspend fun getMyRequests(): LiveData<List<MyRequestLocal>> =
         localRequestRepository.getMyRequests()
 
-     suspend fun putMyRequest(requests: List<Request>) {
+    suspend fun putMyRequest(requests: List<Request>) {
          val list = requests.map { request -> request.toMyRequestLocal() }
          localRequestRepository.putMyRequest(list)
      }
+
+    suspend fun removeAllMyRequests() {
+        localRequestRepository.removeAllMyRequests()
+    }
 }

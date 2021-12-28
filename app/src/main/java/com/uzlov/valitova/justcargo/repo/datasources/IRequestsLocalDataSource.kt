@@ -17,6 +17,7 @@ interface IRequestsLocalDataSource {
     //Работа с моими заявками
     fun getMyRequests() : LiveData<List<MyRequestLocal>>
     fun getMyRequest(id: Long) : LiveData<MyRequestLocal?>
+    suspend fun removeAllMyRequests()
     suspend fun removeMyRequest(request: MyRequestLocal)
     suspend fun putMyRequest(requests: List<MyRequestLocal>)
     suspend fun updateMyRequest(request: MyRequestLocal)

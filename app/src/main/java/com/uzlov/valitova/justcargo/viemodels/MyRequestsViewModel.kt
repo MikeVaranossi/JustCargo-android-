@@ -27,4 +27,11 @@ class MyRequestsViewModel @Inject constructor(private var requestsUseCases: Requ
             requestsUseCases?.putMyRequest(requests)
         }
     }
+
+    fun updateRequest(requests: List<Request>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            requestsUseCases?.removeAllMyRequests()
+            requestsUseCases?.putMyRequest(requests)
+        }
+    }
 }
