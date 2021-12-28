@@ -174,12 +174,13 @@ class RequestDetailCarrierFragment :
     private fun startBookingRequest() {
         authService.currentUser()?.let { user ->
             if (request != null) {
-                deliveryViewModel.addDelivery(Delivery().create(user, request!!))
+                delivery = Delivery().create(user, request!!)
+                deliveryViewModel.addDelivery(delivery!!)
             } else {
-                deliveryViewModel.addDelivery(Delivery().create(user,
-                    requestLocal?.toRequestRemote()!!))
+                delivery = Delivery().create(user,
+                    requestLocal?.toRequestRemote()!!)
+                deliveryViewModel.addDelivery(delivery!!)
             }
-
             showStateUI()
         }
     }
