@@ -67,26 +67,6 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
         loadData()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bell_action -> Toast.makeText(
-                context,
-                "Здесь будут доступные уведомления",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.share_action -> Toast.makeText(
-                context,
-                "Здесь можно будет поделиться с кем-нибудь непонятно чем",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        return true
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -196,6 +176,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
             viewBinding.texViewLabelEmpty.visibility = View.GONE
             viewBinding.recyclerViewHomeCarrier.visibility = View.VISIBLE
             viewBinding.buttonFindCargo.visibility = View.VISIBLE
+            viewBinding.textViewFindCargo.visibility = View.VISIBLE
             viewBinding.textViewFindCargo.text =
                 getString(R.string.text_label_find_cargo, data.size)
         }

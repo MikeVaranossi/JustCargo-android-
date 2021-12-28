@@ -120,8 +120,10 @@ class FindCargoFragment : BaseFragment<FragmentFindCargoBinding>(
     private fun checkRV(data: List<Request>) {
         adapter.setData(data)
         if (data.isEmpty()) {
+            viewBinding.textViewFindCargo.visibility = View.VISIBLE
             viewBinding.textViewFindCargo.text = "Ничего не нашлось("
         } else {
+            viewBinding.textViewFindCargo.visibility = View.VISIBLE
             viewBinding.recyclerViewFindCarrier.visibility = View.VISIBLE
             viewBinding.textViewFindCargo.text =
                 getString(R.string.text_label_find_cargo, data.size)
