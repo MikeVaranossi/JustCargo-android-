@@ -67,26 +67,6 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
         loadData()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.bell_action -> Toast.makeText(
-                context,
-                "Здесь будут доступные уведомления",
-                Toast.LENGTH_SHORT
-            ).show()
-            R.id.share_action -> Toast.makeText(
-                context,
-                "Здесь можно будет поделиться с кем-нибудь непонятно чем",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-        return true
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,8 +77,7 @@ class HomeCarrierFragment : BaseFragment<FragmentHomeCarrierBinding>(
 
         }
         viewBinding.recyclerViewHomeCarrier.adapter = adapter
-        viewBinding.recyclerViewHomeCarrier.setHasFixedSize(true)
-        viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(10)
+        viewBinding.recyclerViewHomeCarrier.setItemViewCacheSize(100)
         initListeners()
 
 
