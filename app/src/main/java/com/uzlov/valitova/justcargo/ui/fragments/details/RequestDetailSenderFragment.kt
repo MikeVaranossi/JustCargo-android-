@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS
@@ -14,6 +15,7 @@ import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
 import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.FragmentDetailSenderLayoutBinding
+import com.uzlov.valitova.justcargo.repo.usecases.RequestsUseCases
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVUsersRequestAdapter
 import com.uzlov.valitova.justcargo.ui.fragments.profile.DetailsProfileCarrierFragment
@@ -33,6 +35,9 @@ class RequestDetailSenderFragment :
     @Inject
     lateinit var modelFactory: ViewModelFactory
     lateinit var deliveryViewModel: DeliveryViewModel
+
+    @Inject
+    lateinit var requestsUseCases: RequestsUseCases
 
     private var deliverys: List<Delivery>? = null
 
@@ -154,9 +159,18 @@ class RequestDetailSenderFragment :
     private fun initListeners() {
         //Отменить
         viewBinding.btnCancel.setOnClickListener {
-            deliverys?.get(0)!!.id?.let { it1 ->
-                deliveryViewModel.removeDelivery(it1)
-                hideStateUI()
+            //если нет заявок на перевозку по кнопке отменить происходит удаление заявки
+            //иначе отменяется перевозка
+            if (deliverys ==  null){
+                val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
+                requestsUseCases.removeRequests(idRequest)
+                val fm: FragmentManager = activity!!.supportFragmentManager
+                fm.popBackStack()
+            }else{
+                deliverys?.get(0)!!.id?.let { it1 ->
+                    deliveryViewModel.removeDelivery(it1)
+                    hideStateUI()
+                }
             }
         }
 
@@ -207,12 +221,12 @@ class RequestDetailSenderFragment :
     // срабатывает когда отказали в бронировании
     private fun hideStateUI() {
         with(viewBinding) {
-            // возврашаем к значениям по умолчаниюtvLabelStateDelivery
+            // возврашаем к значениям по умолчанию tvLabelStateDelivery
             tvStatusDelivery.visibility = View.VISIBLE
             tvStatusDelivery.text = getString(R.string.not_found)
 
             btnComplete.visibility = View.GONE
-            btnCancel.visibility = View.GONE
+            btnCancel.visibility = View.VISIBLE
             rvDeliveries.visibility = View.GONE
         }
     }
