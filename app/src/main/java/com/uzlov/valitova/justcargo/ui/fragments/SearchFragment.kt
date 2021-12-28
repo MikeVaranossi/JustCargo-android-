@@ -11,14 +11,14 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.data.net.Request
-import com.uzlov.valitova.justcargo.databinding.FragmentSearchBinding
+import com.uzlov.valitova.justcargo.databinding.SimpleSearchFragmentBinding
 import com.uzlov.valitova.justcargo.ui.fragments.search.FindCargoFragment
 import java.lang.NullPointerException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class SearchFragment : BaseFragment<FragmentSearchBinding>(
-    FragmentSearchBinding::inflate
+class SearchFragment : BaseFragment<SimpleSearchFragmentBinding>(
+    SimpleSearchFragmentBinding::inflate
 ) {
 
     private var searchRequest: Request = Request()
