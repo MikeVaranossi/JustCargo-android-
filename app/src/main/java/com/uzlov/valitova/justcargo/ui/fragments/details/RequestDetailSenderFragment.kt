@@ -6,13 +6,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentManager
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_COMPLETE
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS_MESSAGE
-import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_NOT_COMPLETED
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
