@@ -166,6 +166,7 @@ class RequestDetailCarrierFragment :
             delivery?.let { _delivery ->
                 deliveryViewModel.removeDelivery(_delivery)
                 hideStateUI()
+                parentFragmentManager.popBackStack()
             }
         }
     }
