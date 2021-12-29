@@ -93,14 +93,17 @@ class RequestDetailCarrierFragment :
             if (phone.isNullOrEmpty() || phone.isBlank()) return@let
 
             deliveryViewModel.getDeliveryWithParam(idRequest, phone)
-                ?.observe(viewLifecycleOwner, {
-                    if(it == null){
+                .observe(viewLifecycleOwner, {
+                    if (it == null) {
                         // скрываем view со статусом заявки
                         hideStateUI()
-                    }else{
+                    } else {
                         showStateUI()
                         delivery = it.copy()
                         viewBinding.tvStatusDelivery.text = it.request?.status?.name
+                        if (it.request?.status?.id == Constant.STATE_IN_PROGRESS) {
+                            viewBinding.fabCall.visibility = View.VISIBLE
+                        }
                     }
                 })
 
@@ -148,7 +151,7 @@ class RequestDetailCarrierFragment :
     private fun initListeners() {
         with(viewBinding) {
             fabCall.setOnClickListener {
-                request?.owner?.phone?.let { continueCall() }
+                delivery?.request?.owner?.phone?.let { continueCall() }
             }
 
             buttonTakeCargo.setOnClickListener {
@@ -219,7 +222,7 @@ class RequestDetailCarrierFragment :
 
     // начало звонка
     private fun continueCall() {
-        request?.owner?.phone?.let {
+        delivery?.request?.owner?.phone?.let {
             if (it.trim().isEmpty()) {
                 Toast.makeText(requireContext(),
                     getString(R.string.incorrect_phone_number),
@@ -238,7 +241,7 @@ class RequestDetailCarrierFragment :
 
     // звонок пользователю
     private fun callToUser() {
-        request?.owner?.phone?.let {
+        delivery?.request?.owner?.phone?.let {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
             startActivity(intent)
         }

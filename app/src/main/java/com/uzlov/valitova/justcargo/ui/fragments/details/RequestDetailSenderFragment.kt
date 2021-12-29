@@ -1,11 +1,17 @@
 package com.uzlov.valitova.justcargo.ui.fragments.details
 
+import android.Manifest
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
+import androidx.core.content.ContextCompat
 import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_COMPLETE
@@ -32,6 +38,7 @@ class RequestDetailSenderFragment :
 
     private var request: Request? = null
     private var requestLocal: FavoriteRequestLocal? = null
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
     @Inject
     lateinit var modelFactory: ViewModelFactory
@@ -76,6 +83,20 @@ class RequestDetailSenderFragment :
 
     private val adapter by lazy {
         RVUsersRequestAdapter(callback).apply {}
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (isGranted) {
+                    callToUser()
+                } else {
+                    Toast.makeText(requireContext(),
+                        getString(R.string.you_denied_call_from_app),
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -164,12 +185,11 @@ class RequestDetailSenderFragment :
         viewBinding.btnCancel.setOnClickListener {
             //если нет заявок на перевозку по кнопке отменить происходит удаление заявки
             //иначе отменяется перевозка
-            if (deliverys ==  null){
+            if (deliverys == null) {
                 val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
                 requestsUseCases.removeRequests(idRequest)
-                val fm: FragmentManager = activity!!.supportFragmentManager
-                fm.popBackStack()
-            }else{
+                parentFragmentManager.popBackStack()
+            } else {
                 deliverys?.get(0)?.let { it1 ->
                     deliveryViewModel.removeDelivery(it1)
                     hideStateUI()
@@ -178,22 +198,77 @@ class RequestDetailSenderFragment :
         }
 
         viewBinding.btnComplete.setOnClickListener {
-            if (deliverys?.size == 1){
-                deliverys?.get(0)!!.status?.id = STATE_COMPLETE
-                deliverys?.get(0)!!.request?.status?.id = STATE_COMPLETE
-                deliverys?.get(0)!!.request?.status?.name = getString(R.string.application_completed)
+            if (deliverys?.size == 1) {
+                deliverys?.firstOrNull()?.status?.id = STATE_COMPLETE
+                deliverys?.firstOrNull()?.request?.status?.id = STATE_COMPLETE
+                deliverys?.firstOrNull()?.request?.status?.name =
+                    getString(R.string.application_completed)
                 deliveryViewModel.addDelivery(deliverys!![0])
                 completedDelivery()
             }
+        }
+        viewBinding.fabCall.setOnClickListener {
+            deliverys?.get(0)?.trip?.carrier?.phone?.let { continueCall() }
         }
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
+    private fun continueCall() {
+        deliverys?.get(0)?.trip?.carrier?.phone?.let {
+            if (it.trim().isEmpty()) {
+                Toast.makeText(requireContext(),
+                    getString(R.string.incorrect_phone_number),
+                    Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+
+        if (checkCallToPhonePermissions()) {
+            // Разрешение уже есть, звоним
+            callToUser()
+        } else {
+            requirePermissionsCallToPhone()
+        }
+    }
+
+    // звонок пользователю
     private fun callToUser() {
-        request?.owner?.phone?.let {
+        deliverys?.get(0)?.trip?.carrier?.phone?.let {
             val intent = Intent(Intent.ACTION_CALL, Uri.parse("tel:$it"))
             startActivity(intent)
+        }
+    }
+
+    // проверка разрешений
+    private fun checkCallToPhonePermissions(): Boolean {
+        return if (ContextCompat.checkSelfPermission(requireContext(),
+                Manifest.permission.CALL_PHONE)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            requirePermissionsCallToPhone()
+            false
+        } else {
+            // Разрешение уже есть, звоним
+            true
+        }
+    }
+
+    private fun requirePermissionsCallToPhone() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CALL_PHONE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                callToUser()
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE) -> {
+
+            }
+            else -> {
+                requestPermissionLauncher.launch(
+                    Manifest.permission.CALL_PHONE)
+            }
         }
     }
 
@@ -217,7 +292,6 @@ class RequestDetailSenderFragment :
 
         with(viewBinding) {
             //показываем кнопки звонка и чата
-            fabStartChat.visibility = View.VISIBLE
             fabCall.visibility = View.VISIBLE
 
             tvLabelStateDelivery.visibility = View.VISIBLE
@@ -248,7 +322,6 @@ class RequestDetailSenderFragment :
     private fun completedDelivery() {
 
         with(viewBinding) {
-            fabStartChat.visibility = View.GONE
             fabCall.visibility = View.GONE
 
             tvLabelStateDelivery.visibility = View.VISIBLE
