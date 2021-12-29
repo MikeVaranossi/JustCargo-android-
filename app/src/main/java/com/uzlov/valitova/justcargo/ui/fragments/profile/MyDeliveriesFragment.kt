@@ -10,11 +10,8 @@ import com.uzlov.valitova.justcargo.R
 import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.app.toFavoriteRequestLocal
-import com.uzlov.valitova.justcargo.app.toMyRequestLocal
 import com.uzlov.valitova.justcargo.auth.AuthService
 import com.uzlov.valitova.justcargo.data.local.MyRequestLocal
-import com.uzlov.valitova.justcargo.data.net.Delivery
-import com.uzlov.valitova.justcargo.data.net.Request
 import com.uzlov.valitova.justcargo.databinding.MyDeliveriesProfileLayoutBinding
 import com.uzlov.valitova.justcargo.ui.fragments.BaseFragment
 import com.uzlov.valitova.justcargo.ui.fragments.RVLocalRequestAdapter
@@ -107,7 +104,7 @@ class MyDeliveriesFragment : BaseFragment<MyDeliveriesProfileLayoutBinding>(
             favouritesVModel.getIDList().observe(viewLifecycleOwner, {
                 adapter.setIDs(it)
             })
-            model.getDeliveriesWithCarrierPhone(phone)?.observe(this, {
+            model.getDeliveriesWithCarrierPhone(phone).observe(this, {
                 val list = it.map { delivery ->
                     delivery.request!!
                 }

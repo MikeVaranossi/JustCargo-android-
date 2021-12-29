@@ -11,7 +11,6 @@ import com.uzlov.valitova.justcargo.app.Constant
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_COMPLETE
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS
 import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_IN_PROGRESS_MESSAGE
-import com.uzlov.valitova.justcargo.app.Constant.Companion.STATE_NOT_COMPLETED
 import com.uzlov.valitova.justcargo.app.appComponent
 import com.uzlov.valitova.justcargo.data.local.FavoriteRequestLocal
 import com.uzlov.valitova.justcargo.data.net.Delivery
@@ -56,7 +55,7 @@ class RequestDetailSenderFragment :
         }
 
         override fun reject(request: Delivery) {
-            request.id?.let { it ->
+            request.let { it ->
                 deliveryViewModel.removeDelivery(it)
                 hideStateUI()
             }
@@ -70,7 +69,7 @@ class RequestDetailSenderFragment :
             showProfileCarrierUI()
 
             deliverys?.forEach { item ->
-                if (item != request) item.id?.let { it -> deliveryViewModel.removeDelivery(it) }
+                if (item != request) item.let { it -> deliveryViewModel.removeDelivery(it) }
             }
         }
     }
@@ -107,14 +106,14 @@ class RequestDetailSenderFragment :
         hideStateUI()
 
         deliveryViewModel.getDeliveriesWithRequestID(idRequest)
-            ?.observe(viewLifecycleOwner, {
+            .observe(viewLifecycleOwner, {
                 it?.let {
                     //если в данный код не попали значит перевозчик не найден
                     adapter.setDelivery(it)
                     showStateUI(it)
 
                     //если на первой заявке статус STATE_IN_PROGRESS значит бронь подтверждена
-                    if (it.size == 1){
+                    if (it.size == 1) {
                         val status = it[0].request?.status?.id
                         if (status == STATE_IN_PROGRESS)
                             showProfileCarrierUI()
@@ -171,7 +170,7 @@ class RequestDetailSenderFragment :
                 val fm: FragmentManager = activity!!.supportFragmentManager
                 fm.popBackStack()
             }else{
-                deliverys?.get(0)!!.id?.let { it1 ->
+                deliverys?.get(0)?.let { it1 ->
                     deliveryViewModel.removeDelivery(it1)
                     hideStateUI()
                 }

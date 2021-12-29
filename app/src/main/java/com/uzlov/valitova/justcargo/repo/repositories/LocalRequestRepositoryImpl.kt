@@ -25,12 +25,20 @@ class LocalRequestRepositoryImpl(var localDataSource: IRequestsLocalDataSource) 
     // Работа с моими заявками
     override suspend fun getMyRequests(): LiveData<List<MyRequestLocal>> =
         localDataSource.getMyRequests()
+
     override suspend fun getMyRequest(id: Long): LiveData<MyRequestLocal?> =
         localDataSource.getMyRequest(id)
+
     override suspend fun removeMyRequest(request: MyRequestLocal) =
         localDataSource.removeMyRequest(request)
+
+    override suspend fun removeMyRequest(id: Long) {
+        return localDataSource.removeMyRequest(id)
+    }
+
     override suspend fun putMyRequest(requests: List<MyRequestLocal>) =
         localDataSource.putMyRequest(requests)
+
     override suspend fun updateMyRequest(request: MyRequestLocal) =
         localDataSource.updateMyRequest(request)
     override suspend fun removeAllMyRequests() = localDataSource.removeAllMyRequests()

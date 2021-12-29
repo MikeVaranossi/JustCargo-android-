@@ -17,6 +17,7 @@ interface ILocalRepository {
     suspend fun getMyRequests() : LiveData<List<MyRequestLocal>>
     suspend fun getMyRequest(id: Long) : LiveData<MyRequestLocal?>
     suspend fun removeMyRequest(request: MyRequestLocal)
+    suspend fun removeMyRequest(id: Long)
     suspend fun putMyRequest(requests: List<MyRequestLocal>)
     suspend fun updateMyRequest(request: MyRequestLocal)
     suspend fun removeAllMyRequests()

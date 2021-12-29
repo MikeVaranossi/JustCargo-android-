@@ -105,7 +105,7 @@ class RequestDetailCarrierFragment :
                 })
 
             deliveryViewModel.getDeliveriesWithRequestID(idRequest)
-                ?.observe(viewLifecycleOwner, {
+                .observe(viewLifecycleOwner, {
                     Log.e(javaClass.simpleName, "WithRequest: $it")
                 })
         }
@@ -165,8 +165,8 @@ class RequestDetailCarrierFragment :
 
     private fun startRemoveDelivery() {
         authService.currentUser()?.let { user ->
-            delivery?.id?.let { id ->
-                deliveryViewModel.removeDelivery(id)
+            delivery?.let { _delivery ->
+                deliveryViewModel.removeDelivery(_delivery)
                 hideStateUI()
             }
         }
