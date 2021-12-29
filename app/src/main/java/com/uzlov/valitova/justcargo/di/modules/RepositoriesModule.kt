@@ -35,7 +35,10 @@ class RepositoriesModule {
     fun provideDeliveriesRepository(remoteDataSource: IDeliveryRemoteDataSource) : IDeliveryRepository = DeliveryRepositoryImpl(remoteDataSource)
 
     @Provides
-    fun provideDeliveryUseCase(deliveryRepository: IDeliveryRepository) : DeliveryUseCases = DeliveryUseCases(deliveryRepository)
+    fun provideDeliveryUseCase(
+        deliveryRepository: IDeliveryRepository,
+        localRepository: ILocalRepository,
+    ): DeliveryUseCases = DeliveryUseCases(deliveryRepository, localRepository)
 
     // REQUESTS
     @Provides

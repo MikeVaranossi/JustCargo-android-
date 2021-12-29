@@ -24,6 +24,9 @@ interface MyRequestDao {
     @Delete
     suspend fun removeMyRequest(myRequest: MyRequestLocal)
 
+    @Query("DELETE FROM MyRequestLocal WHERE id = :id")
+    suspend fun removeMyRequest(id: Long)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun updateMyRequest(myRequest: MyRequestLocal)
 }

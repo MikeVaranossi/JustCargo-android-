@@ -94,7 +94,12 @@ class RequestDetailCarrierFragment :
             if (phone.isNullOrEmpty() || phone.isBlank()) return@let
 
             deliveryViewModel.getDeliveryWithParam(idRequest, phone)
-                ?.observe(viewLifecycleOwner, {
+                .observe(viewLifecycleOwner, {
+                    if (it == null) {
+                        Log.e("TAG", "onViewCreated: null")
+                    } else {
+                        Log.e("TAG", "onViewCreated: not null")
+                    }
                     it?.let {
                         showStateUI()
                         delivery = it.copy()
@@ -103,7 +108,7 @@ class RequestDetailCarrierFragment :
                 })
 
             deliveryViewModel.getDeliveriesWithRequestID(idRequest)
-                ?.observe(viewLifecycleOwner, {
+                .observe(viewLifecycleOwner, {
                     Log.e(javaClass.simpleName, "WithRequest: $it")
                 })
         }
@@ -163,8 +168,8 @@ class RequestDetailCarrierFragment :
 
     private fun startRemoveDelivery() {
         authService.currentUser()?.let { user ->
-            delivery?.id?.let { id ->
-                deliveryViewModel.removeDelivery(id)
+            delivery?.let { _delivery ->
+                deliveryViewModel.removeDelivery(_delivery)
                 hideStateUI()
             }
         }

@@ -12,15 +12,29 @@ class RequestsLocalDataSourceImpl @Inject constructor(var daoFavourite: Favorite
     // Работа с избранными заявками
     override fun getFavRequests(): LiveData<List<FavoriteRequestLocal>> = daoFavourite.getFavoriteRequests()
     override fun getFavIDsRequests(): List<Long> = daoFavourite.getIDsFavoriteRequests()
-    override fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> = daoFavourite.getFavoriteRequest(id)
-    override suspend fun removeFavRequest(request: FavoriteRequestLocal) = daoFavourite.removeRequest(request)
-    override suspend fun putFavRequest(request: FavoriteRequestLocal) = daoFavourite.insertRequest(request)
-    override suspend fun updateFavRequest(request: FavoriteRequestLocal) = daoFavourite.updateRequest(request)
+    override fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> =
+        daoFavourite.getFavoriteRequest(id)
+
+    override suspend fun removeFavRequest(request: FavoriteRequestLocal) =
+        daoFavourite.removeRequest(request)
+
+    override suspend fun putFavRequest(request: FavoriteRequestLocal) =
+        daoFavourite.insertRequest(request)
+
+    override suspend fun updateFavRequest(request: FavoriteRequestLocal) =
+        daoFavourite.updateRequest(request)
 
     // Работа с моими заявками
     override fun getMyRequests(): LiveData<List<MyRequestLocal>> = daoLocal.getMyRequests()
     override fun getMyRequest(id: Long): LiveData<MyRequestLocal?> = daoLocal.getMyRequest(id)
-    override suspend fun removeMyRequest(request: MyRequestLocal) = daoLocal.removeMyRequest(request)
-    override suspend fun putMyRequest(requests: List<MyRequestLocal>) = daoLocal.insertMyRequest(requests)
-    override suspend fun updateMyRequest(request: MyRequestLocal) =daoLocal.updateMyRequest(request)
+    override suspend fun removeMyRequest(request: MyRequestLocal) =
+        daoLocal.removeMyRequest(request)
+
+    override suspend fun removeMyRequest(id: Long) = daoLocal.removeMyRequest(id)
+
+    override suspend fun putMyRequest(requests: List<MyRequestLocal>) =
+        daoLocal.insertMyRequest(requests)
+
+    override suspend fun updateMyRequest(request: MyRequestLocal) =
+        daoLocal.updateMyRequest(request)
 }

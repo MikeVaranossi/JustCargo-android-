@@ -62,6 +62,8 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
                             result.value = delivery.firstOrNull {
                                 it?.trip?.carrier?.phone == phone
                             }
+                        } else {
+                            result.value = null
                         }
                     }
                 }

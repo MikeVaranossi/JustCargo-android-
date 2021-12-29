@@ -49,7 +49,7 @@ class RequestDetailSenderFragment :
         }
 
         override fun reject(request: Delivery) {
-            request.id?.let { it ->
+            request.let { it ->
                 deliveryViewModel.removeDelivery(it)
                 hideStateUI()
             }
@@ -63,7 +63,7 @@ class RequestDetailSenderFragment :
             showProfileCarrierUI()
 
             deliverys?.forEach { item ->
-                if (item != request) item.id?.let { it -> deliveryViewModel.removeDelivery(it) }
+                if (item != request) item.let { it -> deliveryViewModel.removeDelivery(it) }
             }
         }
     }
@@ -100,14 +100,14 @@ class RequestDetailSenderFragment :
         hideStateUI()
 
         deliveryViewModel.getDeliveriesWithRequestID(idRequest)
-            ?.observe(viewLifecycleOwner, {
+            .observe(viewLifecycleOwner, {
                 it?.let {
                     //если в данный код не попали значит перевозчик не найден
                     adapter.setDelivery(it)
                     showStateUI(it)
 
                     //если на первой заявке статус STATE_IN_PROGRESS значит бронь подтверждена
-                    if (it.size == 1){
+                    if (it.size == 1) {
                         val status = it[0].request?.status?.id
                         if (status == STATE_IN_PROGRESS)
                             showProfileCarrierUI()
@@ -154,7 +154,7 @@ class RequestDetailSenderFragment :
     private fun initListeners() {
         //Отменить
         viewBinding.btnCancel.setOnClickListener {
-            deliverys?.get(0)!!.id?.let { it1 ->
+            deliverys?.get(0)?.let { it1 ->
                 deliveryViewModel.removeDelivery(it1)
                 hideStateUI()
             }
