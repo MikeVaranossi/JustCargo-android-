@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -93,20 +92,19 @@ class RequestDetailCarrierFragment :
             if (phone.isNullOrEmpty() || phone.isBlank()) return@let
 
             deliveryViewModel.getDeliveryWithParam(idRequest, phone)
-                ?.observe(viewLifecycleOwner, {
-                    if(it == null){
+                .observe(viewLifecycleOwner, {
+                    if (it == null) {
                         // скрываем view со статусом заявки
                         hideStateUI()
-                    }else{
+                    } else {
                         showStateUI()
                         delivery = it.copy()
                         viewBinding.tvStatusDelivery.text = it.request?.status?.name
-                    }
-                })
 
-            deliveryViewModel.getDeliveriesWithRequestID(idRequest)
-                .observe(viewLifecycleOwner, {
-                    Log.e(javaClass.simpleName, "WithRequest: $it")
+                        if (it.request?.status?.id ?: 0 == Constant.STATE_IN_PROGRESS) {
+                            viewBinding.fabCall.visibility = View.VISIBLE
+                        }
+                    }
                 })
         }
     }
