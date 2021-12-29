@@ -12,6 +12,9 @@ interface MyRequestDao {
     @Query("SELECT * FROM MyRequestLocal WHERE id = :id")
     fun getMyRequest(id: Long): LiveData<MyRequestLocal?>
 
+    @Query("DELETE FROM MyRequestLocal")
+    suspend fun removeAllMyRequest()
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMyRequest(myRequest: MyRequestLocal)
 

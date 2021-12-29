@@ -12,17 +12,10 @@ class RequestsLocalDataSourceImpl @Inject constructor(var daoFavourite: Favorite
     // Работа с избранными заявками
     override fun getFavRequests(): LiveData<List<FavoriteRequestLocal>> = daoFavourite.getFavoriteRequests()
     override fun getFavIDsRequests(): List<Long> = daoFavourite.getIDsFavoriteRequests()
-    override fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> =
-        daoFavourite.getFavoriteRequest(id)
-
-    override suspend fun removeFavRequest(request: FavoriteRequestLocal) =
-        daoFavourite.removeRequest(request)
-
-    override suspend fun putFavRequest(request: FavoriteRequestLocal) =
-        daoFavourite.insertRequest(request)
-
-    override suspend fun updateFavRequest(request: FavoriteRequestLocal) =
-        daoFavourite.updateRequest(request)
+    override fun getFavRequest(id: Long): LiveData<FavoriteRequestLocal?> = daoFavourite.getFavoriteRequest(id)
+    override suspend fun removeFavRequest(request: FavoriteRequestLocal) = daoFavourite.removeRequest(request)
+    override suspend fun putFavRequest(request: FavoriteRequestLocal) = daoFavourite.insertRequest(request)
+    override suspend fun updateFavRequest(request: FavoriteRequestLocal) = daoFavourite.updateRequest(request)
 
     // Работа с моими заявками
     override fun getMyRequests(): LiveData<List<MyRequestLocal>> = daoLocal.getMyRequests()

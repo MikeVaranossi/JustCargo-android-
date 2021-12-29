@@ -65,6 +65,8 @@ class DeliveryRemoteDataSourceImpl : IDeliveryRemoteDataSource {
                         } else {
                             result.value = null
                         }
+                    }else{
+                        result.value = null
                     }
                 }
 

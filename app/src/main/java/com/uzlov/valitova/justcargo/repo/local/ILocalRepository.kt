@@ -20,4 +20,5 @@ interface ILocalRepository {
     suspend fun removeMyRequest(id: Long)
     suspend fun putMyRequest(requests: List<MyRequestLocal>)
     suspend fun updateMyRequest(request: MyRequestLocal)
+    suspend fun removeAllMyRequests()
 }

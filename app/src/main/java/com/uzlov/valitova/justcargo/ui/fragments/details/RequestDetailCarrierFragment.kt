@@ -88,19 +88,16 @@ class RequestDetailCarrierFragment :
         val idRequest: Long = request?.id ?: requestLocal?.id ?: 0L
 
         authService.currentUser()?.phone?.let { phone ->
-            // скрываем view со статусом заявки
-            hideStateUI()
+
 
             if (phone.isNullOrEmpty() || phone.isBlank()) return@let
 
             deliveryViewModel.getDeliveryWithParam(idRequest, phone)
-                .observe(viewLifecycleOwner, {
-                    if (it == null) {
-                        Log.e("TAG", "onViewCreated: null")
-                    } else {
-                        Log.e("TAG", "onViewCreated: not null")
-                    }
-                    it?.let {
+                ?.observe(viewLifecycleOwner, {
+                    if(it == null){
+                        // скрываем view со статусом заявки
+                        hideStateUI()
+                    }else{
                         showStateUI()
                         delivery = it.copy()
                         viewBinding.tvStatusDelivery.text = it.request?.status?.name
@@ -212,7 +209,7 @@ class RequestDetailCarrierFragment :
             tvLabelStateDelivery.visibility = View.INVISIBLE
             tvStatusDelivery.visibility = View.INVISIBLE
 
-            // скрываем кнопку взять груз
+            // скрываем кнопку отказаться от груза
             buttonCancelCargo.visibility = View.GONE
 
             // показываем кнопку взять груз
